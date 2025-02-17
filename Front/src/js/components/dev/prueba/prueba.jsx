@@ -1,5 +1,5 @@
-const prueba = () => {
+const Prueba = () => {
   return <h1>Prueba</h1>;
 };
 
-export default prueba;
+export default Prueba;
