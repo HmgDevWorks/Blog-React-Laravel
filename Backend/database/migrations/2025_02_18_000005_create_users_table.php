@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name_user')->nullable(false);
             $table->string('email_user')->unique()->nullable(false);
             $table->string('password_user')->nullable(false);
-            $table->dateTime('register_date')->nullable(false);
             $table->string('name_lastName')->nullable(false);
             $table->string('img_user')->nullable(false)->default('default.jpg');
             $table->text('bio')->nullable();
