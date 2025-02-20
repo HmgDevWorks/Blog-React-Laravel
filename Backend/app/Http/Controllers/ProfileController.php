@@ -22,6 +22,11 @@ class ProfileController extends Controller
         $this->userService = $userService;
     }
 
+    public function index():JsonResponse
+    {
+        return response()->json($this->userService->getAllUser());
+    }
+
     public function store(Request $request):JsonResponse
     {
         return $this->userService->createUser($request);
