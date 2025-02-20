@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -56,5 +57,14 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function store(Request $request){
+        User::create([
+            'name_user'=>$request->username,
+            'email_user'=>'abc@gmail.com',
+            'password_user'=>$request->password,
+            'name_lastName'=>'abcsd',
+        ]);
     }
 }

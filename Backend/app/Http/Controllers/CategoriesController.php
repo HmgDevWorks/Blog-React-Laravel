@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\CategoriesRequest;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Http\Controllers\response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
 class CategoriesController extends Controller
@@ -15,9 +14,9 @@ class CategoriesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(RegisterRequest $request)
+    public function index()
     {
-        
+        return response()->json(Categories::all());
     }
 
     /**
@@ -25,15 +24,18 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoriesRequest $request)
+    public function store(Request $request)
     {
-        //
+        Categories::create([
+            'name'=>$request->username,
+            'description'=>$request->password,
+        ]);
     }
 
     /**
