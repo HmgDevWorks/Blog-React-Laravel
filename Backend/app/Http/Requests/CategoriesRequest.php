@@ -22,15 +22,15 @@ class CategoriesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required', 'string', 'max:100'],
+            'username'=>['required', 'string', 'max:100'],
         ];
     }
 
     public function messages():array{
         return [
-            'name.required'=> 'El nombre es un campo necesario.',
-            'name.string'=> 'El nombre debe ser una cadena de carácteres.',
-            'name.max'=> 'El nombre no puede superar los 100 carácteres.',
+            'username.required'=> 'El nombre es un campo necesario.',
+            'username.string'=> 'El nombre debe ser una cadena de carácteres.',
+            'username.max'=> 'El nombre no puede superar los 100 carácteres.',
         ];
     }
 }

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\CategoriesRequest;
 use App\Models\Categories;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Http\Controllers\response;
 
 
 class CategoriesController extends Controller
@@ -12,9 +15,9 @@ class CategoriesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(RegisterRequest $request)
     {
-        //
+        
     }
 
     /**

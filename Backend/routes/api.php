@@ -4,11 +4,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\PostController;
+use App\Models\User;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 //cambiar cuando lo tengamos hecho
+Route::post('/login', 'index');
 // Route::controller(UserController::class)->group(function () {
 //     Route::get('/users', 'index')->name('users.index');
 //     Route::post('/users', 'store')->name('users.store');

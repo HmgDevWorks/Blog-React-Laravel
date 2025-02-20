@@ -3,12 +3,37 @@ import { Link } from "react-router-dom";
 import Logo from "./../../../../assets/logo_pluma.svg";
 import { Form, Button, Row, Col, Card, Modal } from 'react-bootstrap';
 import './LoginForm.css';
+import axios from 'axios';
 
 const LoginForm = () => {
     const [showModal, setShowModal] = useState(false);
+    const [username, setUsername] = useState("");
+    const [password, setPass] = useState("");
+
+    const usernameHandler = (e) => {
+        setUsername(e.target.value);
+    }
+
+    const passHandler = (e) => {
+        setPass(e.target.value);
+    }
 
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
+
+    const handleSubmit = async (e) => {
+        console.log("HOLA");
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:8000/api/categories', {
+                username,
+                password
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.error('There was an error logging in!', error);
+        }
+    };
 
     return (
         <>
@@ -24,7 +49,7 @@ const LoginForm = () => {
                                 <Form.Label className="formLabel" for="name_user">Usuario:</Form.Label>
                             </Col>
                             <Col xs={8} lg={7}>
-                                <Form.Control type="text" id="name_user" name= "name_user" />
+                                <Form.Control type="text" id="name_user" name= "name_user" onChange={usernameHandler}/>
                             </Col>
                         </Row>
 
@@ -33,7 +58,7 @@ const LoginForm = () => {
                                 <Form.Label className="formLabel" for="password_user">Contraseña:</Form.Label>
                             </Col>
                             <Col xs={7}>
-                                <Form.Control type="password" id="password_user" name= "password_user" />
+                                <Form.Control type="password" id="password_user" name= "password_user" onChange={passHandler} />
                             </Col>
                         </Row>
 
@@ -44,7 +69,7 @@ const LoginForm = () => {
                         </Row>
                         <Row>
                             <Col xs={12} className="d-flex align-items-center justify-content-center">
-                                <Button type="submit" className="botonForm mt-3">
+                                <Button type="submit" className="botonForm mt-3" onClick={handleSubmit}>
                                     Enviar
                                 </Button>
                             </Col>

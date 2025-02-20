@@ -24,6 +24,8 @@ class User extends Authenticatable
     protected $fillable = [ // Cambiamos configuración predeterminada ya que hemos añadido campos a la tabla USERS
         'name_user',
         'email_user',
+        'password_user',
+        'register_date',
         'name_lastName',
         'img_user',
         'bio',
@@ -35,7 +37,6 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'password_user',
         'remember_token',
     ];
 
