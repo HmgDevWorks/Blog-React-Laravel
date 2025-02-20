@@ -21,13 +21,22 @@ const LoginForm = () => {
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
 
+// Get the CSRF token from the meta tag
+const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+// Set the CSRF token as a common header for all Axios requests
+axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
     const handleSubmit = async (e) => {
         console.log("HOLA");
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/categories', {
+            const response = await axios.post('http://localhost:8000/api/users/create', {
                 username,
                 password
+            },{
+                headers:{
+                    'X-CSRF-TOKEN': csrfToken
+                }
             });
             console.log(response.data);
         } catch (error) {
