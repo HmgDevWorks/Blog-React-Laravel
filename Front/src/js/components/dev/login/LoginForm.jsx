@@ -27,10 +27,10 @@ export default function LoginForm() {
 
         request
             .then(response => {
-            console.log('Success:', response.data);
+                console.log('Success:', response.data);
             })
             .catch(error => {
-            console.error('Error:', error);
+                console.error('Error:', error);
             });
     }
 
@@ -47,34 +47,36 @@ export default function LoginForm() {
         setConfirmPassword(e.target.value);
     }
 
+
+
     return (
         <form className="p-4 bg-white shadow-md rounded-lg" onSubmit={handleSubmit}>
-                <div className="text-left img-container">
-                    <img src={logo} alt="Logo" />
-                    <h1 className="text-2xl font-bold">C-Blog</h1>
-                </div>
-                <div className='form-container'>
-                <LoginFormInput id="username" label="Usuario" type="text" placeholder="Usuario" onChange={handleUsernameChange}/>
+            <div className="text-left img-container">
+                <img src={logo} alt="Logo" />
+                <h1 className="text-2xl font-bold">C-Blog</h1>
+            </div>
+            <div className='form-container'>
+                <LoginFormInput id="username" label="Usuario" type="text" placeholder="Usuario" onChange={handleUsernameChange} />
                 <LoginFormInput id="password" label="Contraseña" type="password" placeholder="Contraseña" onChange={handlePasswordChange} />
-                {!login && 
+                {!login &&
                     <><LoginFormInput id="password" label="Confirmar contraseña" type="password" placeholder="Confirmar contraseña" onChange={handleConfirmPasswordChange} />
-                    <LoginFormInput id="email" label="Email" type="text" placeholder="Email" onChange={handleEmailChange} /></>}
+                        <LoginFormInput id="email" label="Email" type="text" placeholder="Email" onChange={handleEmailChange} /></>}
                 {login && <div className="mb-4">
                     <label className="inline-flex items-center">
                         <input type="checkbox" className="form-checkbox checkbox " />
                         <span className="ml-2">Recuerdame</span>
                     </label>
                 </div>}
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                    {login? "Iniciar Sesion" : "Registrarse"}
+                    {login ? "Iniciar Sesion" : "Registrarse"}
                 </button>
-                <hr className="my-4"/>
+                <hr className="my-4" />
                 <p>
-                    Tambien puedes: <button type="button" className="text-blue-500 underline" onClick={() => setLogin(login => !login)}>{login? "Crear una cuenta" : "Iniciar Sesion"}</button>
+                    Tambien puedes: <button type="button" className="text-blue-500 underline" onClick={() => setLogin(login => !login)}>{login ? "Crear una cuenta" : "Iniciar Sesion"}</button>
                 </p>
-                </div>
+            </div>
         </form>
     );
 
@@ -86,11 +88,11 @@ function LoginFormInput({ id, label, type, placeholder, onChange }) {
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={id}>
                 {label}
             </label>
-            <input 
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                id={id} 
-                type={type} 
-                placeholder={placeholder} 
+            <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id={id}
+                type={type}
+                placeholder={placeholder}
                 onChange={onChange}
             />
         </div>
