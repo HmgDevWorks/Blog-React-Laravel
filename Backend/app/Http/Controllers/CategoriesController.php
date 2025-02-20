@@ -22,9 +22,45 @@ class CategoriesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+<<<<<<< HEAD
     public function create()
+=======
+    public function index():JsonResponse
     {
-        
+        return response()->json($this->categoriesService->getAllCategories());
+    }
+
+    /**
+     * Guardamos una nueva categoría en la bbdd.
+     */
+    public function store(CategoriesRequest $request):JsonResponse
+    {
+        return $this->categoriesService->createCategories($request);
+    }
+
+    /**
+     * Mostramos el dato de forma unitaria
+     */
+    public function show(Categories $categories):JsonResponse // Recibimos un request(en este caso el nombre de la categoria) y devolvemos el id especifico
+    {
+        return response()->json($categories);
+    }
+
+    /**
+     * Actualizamos la categoría en la bbdd.
+     */
+    public function update(Request $request, Categories $categories):JsonResponse
+    {
+        return $this->categoriesService->updateCategories($request,$categories);
+    }
+
+    /**
+     * Eliminar categoría de la bbdd.
+     */
+    public function destroy(Categories $categories)
+>>>>>>> aaf2f7c (Categoria finalizada sin middleware)
+    {
+        return $this->categoriesService->destroyCategories($categories);
     }
 
     /**

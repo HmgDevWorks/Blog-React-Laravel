@@ -20,6 +20,5 @@ class userSeeder extends Seeder
             'name_lastName' => 'Botas',
             'bio' => 'bifidus con fibra'
         ]);
-
     }
 }
