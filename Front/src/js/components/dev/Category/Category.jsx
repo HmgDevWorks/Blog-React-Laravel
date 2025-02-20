@@ -1,6 +1,4 @@
-import React from 'react';
 import './Category.css';
-import Title from '../Title/Title';
 
 export default function Category({ title, imageUrl }) {
     return (
