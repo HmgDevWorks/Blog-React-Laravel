@@ -44,5 +44,3 @@ Route::controller(PostController::class)->group(function () {
     Route::put('/posts/update/{post}', 'update')->name('posts.update')->middleware(['auth'])->middleware(['role:administrador']);
     Route::delete('/posts/destroy/{post}', 'destroy')->name('posts.destroy')->middleware(['auth'])->middleware(['role:administrador']);
 });
-
-?>

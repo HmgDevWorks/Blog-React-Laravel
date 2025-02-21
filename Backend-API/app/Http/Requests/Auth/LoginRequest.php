@@ -27,9 +27,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name_user' => ['required', 'string', 'max:100'],
-            'email_user' => ['required', 'string', 'email'],
-            //'rememberMe'=>[''] creo que no hace falta, solo para saber en el controlador
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string'],
         ];
     }
 
@@ -40,12 +39,17 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
-        if (! Auth::attempt($this->only('email', 'password'))) {
+        $this->ensureIsNotRateLimited();
+
+        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+            RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => __('auth.failed'),
             ]);
         }
+
+        RateLimiter::clear($this->throttleKey());
     }
 
     /**
@@ -76,20 +80,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
-    }
-
-    public function messages():array{
-        return [
-            'name_user.required'=> 'El nombre de usuario es un campo necesario.',
-            'name_user.string'=> 'El nombre de usuario debe ser una cadena de carácteres.',
-            'name_user.max'=> 'El nombre de usuario no puede superar los 100 carácteres.',
-
-            'email_user.required'=> 'El correo electrónico es un campo necesario.',
-            'email_user.string'=> 'El correo electrónico debe ser una cadena de carácteres.',
-            'email_user.email'=> 'No has escrito una dirección de correo electrónico.',
-            'email_user.unique'=> 'Esta dirección de correo electrónico ya está siendo utilizada'
-        ];
+        return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
     }
 }
-
