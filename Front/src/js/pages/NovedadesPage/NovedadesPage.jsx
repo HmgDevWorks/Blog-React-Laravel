@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import NewsCarousel from "../../components/dev/carousel/NewsCarousel";
 import "./NovedadesPage.css";
-import axios from 'axios';
 
 const NovedadesPage = () => {
   const [newsItems, setNewsItems] = useState([]);
@@ -19,38 +18,38 @@ const NovedadesPage = () => {
   // }, []);
 
   useEffect(() => {
-      
-      const viewNewsItems = [
-          {
-            title: 'Noticia 1',
-            tags: ['tag1', 'tag2'],
-            // img: 'https://via.placeholder.com/800x400?text=Noticia+1',
-            bodyText: 'Texto de la noticia 1',
-            author: 'Autor 1'
-          },
-          {
-            title: 'Noticia 2',
-            tags: ['tag1', 'tag2'],
-            // img: 'https://via.placeholder.com/800x400?text=Noticia+1',
-            bodyText: 'Texto de la noticia 1',
-            author: 'Autor 2'
-          },
-          {
-            title: 'Noticia 3',
-            tags: ['tag1', 'tag2'],
-            // img: 'https://via.placeholder.com/800x400?text=Noticia+1',
-            bodyText: 'Texto de la noticia 1',
-            author: 'Autor 3'
-          }
-      ];
-      setNewsItems(viewNewsItems);
+
+    const viewNewsItems = [
+      {
+        title: 'Noticia 1',
+        tags: ['tag1', 'tag2'],
+        // img: 'https://via.placeholder.com/800x400?text=Noticia+1',
+        bodyText: 'Texto de la noticia 1',
+        author: 'Autor 1'
+      },
+      {
+        title: 'Noticia 2',
+        tags: ['tag1', 'tag2'],
+        // img: 'https://via.placeholder.com/800x400?text=Noticia+1',
+        bodyText: 'Texto de la noticia 1',
+        author: 'Autor 2'
+      },
+      {
+        title: 'Noticia 3',
+        tags: ['tag1', 'tag2'],
+        // img: 'https://via.placeholder.com/800x400?text=Noticia+1',
+        bodyText: 'Texto de la noticia 1',
+        author: 'Autor 3'
+      }
+    ];
+    setNewsItems(viewNewsItems);
   }, []);
 
   return (
-      <div className='novedades-page'>
-          <h1 className='novedades'>Novedades:</h1>
-          <NewsCarousel className="carousel-news" newsItems={newsItems} />
-      </div>
+    <div className='novedades-page'>
+      <h1 className='novedades'>Novedades:</h1>
+      <NewsCarousel className="carousel-news" newsItems={newsItems} />
+    </div>
   );
 };
 export default NovedadesPage;

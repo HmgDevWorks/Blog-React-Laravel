@@ -10,9 +10,11 @@ const NavigationPC = () => {
             </div>
             <div className="listaPc">
                 <ul>
-                    <li><a href="#home" style={{ color: 'white' }}>Estadisticas de autor</a></li>
-                    <li><a href="#about" style={{ color: 'white' }}>Favoritos</a></li>
-                    <li><a href="#services" style={{ color: 'white' }}>Perfil</a></li>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/novedades">Novedades</a></li>
+                    <li><a href="#about" >Favoritos</a></li>
+                    <li><a href="#services" >Perfil</a></li>
+                    <li><a href="/logIn" >Iniciar Sesion</a></li>
                 </ul>
             </div>
         </div>

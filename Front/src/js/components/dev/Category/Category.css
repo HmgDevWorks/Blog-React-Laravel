@@ -1,21 +1,24 @@
-.category-container img {
-    filter: grayscale(100%);
+.category-Carrousel-container img {
+    filter: grayscale(100%) brightness(75%);
     margin-bottom: 10px !important;
-    filter: brightness(75%);
+    transition: filter 0.3s ease;
 }
-.category-container{
+.category-Carrousel-container{
     object-fit: contain;
     box-sizing: border-box;
     overflow: hidden;
     width: 580px !important;
 }
 
+.category-Carrousel-container img:hover {
+    filter: grayscale(0%) brightness(100%);
+}
 
 .text-custom-color {
     color: #eef0f2;
-    /* Color personalizado para el texto */
+/* Color personalizado para el texto */
     font-size: 2.500rem;
-    /* Tamaño del texto */
+/* Tamaño del texto */
     font-family: 'Abril Fatface';
     background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1));
     /* Gradiente de abajo arriba en el fondo */

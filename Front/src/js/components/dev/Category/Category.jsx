@@ -1,10 +1,8 @@
-import React from 'react';
 import './Category.css';
-import Title from '../Title/Title';
 
 export default function Category({ title, imageUrl }) {
     return (
-        <div className="relative category-container">
+        <div className="relative category-Carrousel-container">
             <a href={`#${title}`}>
                 <img
                     src={imageUrl}
@@ -12,7 +10,7 @@ export default function Category({ title, imageUrl }) {
                     className="grayscale w-full"
                 />
             </a>
-            <div className="absolute bottom-0 left-0 right-0  bg-black bg-opacity-50 text-custom-color text-center p-2">
+            <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-custom-color text-center p-2">
                 {title}
             </div>
         </div>

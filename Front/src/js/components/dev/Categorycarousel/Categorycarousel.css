@@ -6,14 +6,14 @@
     --grisOscuro: #353b3c;
 }
 
-.carousel-item {
+.carousel-item-Category {
     width: 100% !important;
     max-width: 580px;
     height: 180px !important;
     margin-bottom: 10px;
 }
 
-.carousel {
+.carousel-Category {
     height: auto !important;
     max-height: 500px;
     width: 100% !important;

@@ -53,11 +53,13 @@
     font-size: 1.4rem;
     text-decoration: none !important;
     display: inline-block;
+
     transition: transform 0.1s ease;
 }
 
 .listaPc ul li:hover a {
     transform: scale(1.1);
+    color: #eef0f2;
 }
 
 .linksNavMob {

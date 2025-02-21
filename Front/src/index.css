@@ -7,6 +7,21 @@
   font-style: normal;
 }
 
+:root {
+  background-color: var(--grisMeio);
+
+}
+
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
 .special-elite-regular {
   font-family: "Special Elite", serif;
   font-weight: 400;

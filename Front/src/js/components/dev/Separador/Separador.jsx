@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import separador from '../../../../assets/separador.svg'; // Importa el archivo SVG
 import './Separador.css';
 
