@@ -61,4 +61,11 @@ class PostController extends Controller
     {
         return $this->postService->destroyPost($post);
     }
+
+    public function postUser($userId): JsonResponse
+    {
+    return response()->json($this->postService->getPostsByUser($userId)); //Route::get('/posts/user/{id}', [PostController::class, 'getPostsByUser']);
+    }
+
+
 }

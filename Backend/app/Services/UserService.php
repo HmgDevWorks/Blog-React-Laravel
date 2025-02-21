@@ -67,8 +67,7 @@ class UserService {
         }
     }
 
-    public function updateUser($data){    // Esta función recibe los usuario del post actualizado, con los cambios indicados por el usuario, 
-        $user = User::findOrFail($data->id); // si encuentra el id del ususario cambia los datos del antiguo. 
+    public function updateUser($data, $user){    // Esta función actualiza un usuario 
         if ($user) {
             $user->update([
                 'name_user' => $data->name_user,
@@ -78,9 +77,9 @@ class UserService {
                 'bio' => $data->bio,
                 'update_at' => now(),
             ]);
-            return true; 
+            return response()->json(["mensaje"=>"Usuario actualizado correctamente", 200]);; 
         }else {
-            return false; 
+            return response()->json(["mensaje"=>"Error al actualizar el usuario", 200]);; 
         }
     }
 }

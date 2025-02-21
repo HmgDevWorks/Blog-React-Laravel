@@ -32,21 +32,23 @@ class ProfileController extends Controller
         return $this->userService->createUser($request);
     }
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    
+    public function index():JsonResponse // Muestra todos los usuarios
     {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return response()->json($this->userService->getAllUser());
     }
+
+    public function show($id):JsonResponse // Solo muestra un usuario
+    {
+        return response()->json($this->userService->getUserById($id));
+    }
+
+    public function update(Request $request, User $user):JsonResponse // Actualiza un usuario
+    {
+        return response()->json($this->userService->updateUser($request, $user));
+    }
+
+
 
     public function changeRole(Request $request, User $user):JsonResponse
     {
@@ -73,4 +75,7 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+
+
 }

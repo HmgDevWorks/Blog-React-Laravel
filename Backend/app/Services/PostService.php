@@ -30,6 +30,10 @@ class PostService {
         return Post::findOrFail($post->id); 
     }
 
+    public function getPostsByUser($userId) { //function para enseñar los post de cada usuario a traves de su ID
+        return Post::where('user_id', $userId)->latest()->get();
+    }
+
     public function updatePost($data, $post){    // Esta función recibe los datos del post actualizado, con los cambios indicados por el usuario, 
         if ($post) {
             $post->update([
