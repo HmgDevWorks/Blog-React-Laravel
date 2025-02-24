@@ -13,12 +13,14 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('user/register', [ProfileController::class, 'store'])->name('api.user.register');
+
 Route::middleware(['auth:sanctum'])
     ->name('api.')->group(function () {
         Route::controller(AuthUserController::class)
             ->group(function () {
                 Route::prefix('user')->name('user.')->group(function () {
-                    Route::post('register', 'store')->name('register');
+                    Route::post('login', 'login')->name('login')->withoutMiddleware(['auth:sanctum']);
                 });
             });
         Route::controller(ProfileController::class)->group(function () {

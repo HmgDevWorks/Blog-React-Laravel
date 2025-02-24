@@ -20,11 +20,13 @@ class AuthUserController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $validatedData = Arr::only($request->validated(), ['email', 'password']);
+        $validatedData = Arr::only($request->validated(), ['email_user', 'password_user']);
 
-        if (! Auth::attempt($validatedData)) {
-
-            return response()->json(status: 401, data: $validatedData);
+        if (! Auth::attempt([
+            'email_user' => $validatedData['email_user'], // $validatedData['name_user'],  Usamos el campo 'email_user'
+            'password_user' => $validatedData['password_user']  // Usamos el campo 'password_user'
+        ])) {
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
 
         $request->session()->regenerate();

@@ -53,4 +53,26 @@ class User extends Authenticatable
             'password_user' => 'hashed',
         ];
     }
+    
+        /**
+     * Get the name of the column used for authentication.
+     *
+     * @return string
+     */
+    public function getAuthIdentifierName()
+    {
+        return $this->email_user; //e 'email_user' en lugar de 'email'
+    }
+
+    /**
+     * Get the password for the user.
+     *
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->password_user; // Indicamos que use 'password_user' en lugar de 'password'
+    }
+
+
 }
