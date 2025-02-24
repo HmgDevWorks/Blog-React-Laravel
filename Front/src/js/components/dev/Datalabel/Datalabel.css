@@ -1,0 +1,58 @@
+
+/* Fondo del componente */
+.sales-card {
+    background-color: transparent; /* O usa el mismo color de fondo */
+}
+
+/* Fondo de las columnas */
+.sales-chart .column-1 {
+    background-color: #a2999e  ;
+}
+
+.sales-chart .column-2 {
+    background-color: #a2999e;
+}
+
+/* Color de la línea del gráfico */
+.sales-chart .chart-line-1 {
+    stroke: #a2999e;
+}
+
+.sales-chart .chart-line-2 {
+    stroke: #846a6a;
+}
+
+.sales-chart .chart-line-3 {
+    stroke: #353b3c;
+}
+
+/* Estilos del título */
+.sales-title {
+    font-family: "Abril Fatface", "cursive";
+    font-weight: bold;
+    color: #846a6a;
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
+}
+
+/* Ajuste del texto y botones */
+.sales-button {
+    color: #a2999e;
+    cursor: pointer;
+}
+
+.sales-button:hover {
+    color: #846a6a;
+}
+
+.sales-link {
+    color: #846a6a;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sales-link:hover {
+    color: #846a6a;
+    text-decoration: underline;
+}

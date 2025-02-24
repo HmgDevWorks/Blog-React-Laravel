@@ -16,9 +16,9 @@ class userSeeder extends Seeder
         User::create([
             'name_user' => 'Pepe',
             'email_user' => 'pepe@gmail.com',
-            'password_user' => 'djewrukhkdew3',
+            'password_user' => '123456',
             'name_lastName' => 'Botas',
             'bio' => 'bifidus con fibra'
-        ]);
+        ])->assignRole(['admin']);
     }
 }

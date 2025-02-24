@@ -36,7 +36,8 @@ class PostService {
                     'id_categories' => $data->id_categories,
                     'user_id' => $data->user_id,
                     'title' => $data->title,
-                    'content' => $data->content
+                    'content' => $data->content,
+                    'status' => $data->status? $data->status : "draft"
                 ]
             );
             return response()->json(["mensaje"=>"Post creado con exito", 201]);

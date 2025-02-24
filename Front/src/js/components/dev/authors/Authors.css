@@ -1,0 +1,41 @@
+.autoresCompleto {
+    max-width: 70%;
+    margin: 0 auto;
+  }
+  
+.primerAutor{
+    display:flex;
+}
+
+.tituloAutores{
+    font-family:'Abril Fatface';
+    font-size:1.728rem;
+    color:black;
+    
+}
+
+.autoresCompleto img {
+    filter: grayscale(100%);
+}
+
+.autorActivoNombre{
+    font-family:'Dancing Script';
+    font-size: 1.728rem;
+    color:#846a6a;
+}
+
+.tagAutorActivo{
+    font-family:'Special Elite';
+    text-transform: lowercase;
+    font-size:1rem;
+    font-style:none;
+}
+
+.tagAutorActivo:first-letter {
+    text-transform: uppercase; 
+}
+
+.numeroAutorActivo{
+    font-family: 'Abril Fatface';
+    color:black;
+}

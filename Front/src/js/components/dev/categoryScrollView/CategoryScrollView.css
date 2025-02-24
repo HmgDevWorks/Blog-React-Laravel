@@ -1,0 +1,17 @@
+.category-scroll-view {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Cambiado de overflow-x a overflow-y */
+    height: 200px; /* O la altura que prefieras */
+    padding: 10px;
+    gap: 5px;
+    scrollbar-width: none;
+}
+
+category-scroll-view::-webkit-scrollbar {
+    display: none !important;
+}
+
+.category-scroll-view > * {
+    flex: 0 0 auto;
+}

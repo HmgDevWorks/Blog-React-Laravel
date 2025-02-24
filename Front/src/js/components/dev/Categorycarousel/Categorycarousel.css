@@ -1,0 +1,22 @@
+:root {
+    --grisClaro: #eef0f2;
+    --grisMeio: #c6c7c4;
+    --saturadoClaro: #a2999e; 
+    --saturadoOscuro: #846a6a;
+    --grisOscuro: #353b3c;
+}
+
+.carousel-item-Category {
+    width: 100% !important;
+    max-width: 580px;
+    height: 180px !important;
+    margin-bottom: 10px;
+}
+
+.carousel-Category {
+    height: auto !important;
+    max-height: 500px;
+    width: 100% !important;
+    max-width: 580px;
+    margin: 0 auto;
+}

@@ -1,0 +1,39 @@
+:root{
+    --font-header: 'Abril Fatface', cursive;
+    --font: helvetica, sans-serif;
+    --bg-color: #c6c7c4;
+    --header-bg-color: #353b3c;
+    --header-text-color: #846a6a;
+    --form-bg-color: #eef0f2;
+    --input-bg-color: #eef0f2;
+    --input-font-size: 1.2rem;
+    --input-font-color: black;
+    --btn-bg-color: #846a6a;
+    --btn-font-size: 1rem;
+    --hr-color: #c6c7c4;
+    --p-font-size: 0.833rem;
+    --p-color: black;
+    --th-bg-color: #846a6a ;
+    --th-text-color: #eef0f2 ;
+    --font-th: helvetica, sans-serif;
+    --th-font-size: 1.2rem;
+    --td-font-size: 1rem;
+}
+
+th{
+    background-color: var(--th-bg-color);
+    color: var(--th-text-color);
+    font-family: var(--font-th);
+    font-size: var(--th-font-size);
+    font-weight: bold;
+}
+
+td{
+    font-family: var(--font-th);
+    font-size: var(--td-font-size);
+    background-color: var(--bg-color);
+}
+
+td:nth-child(even){
+    background-color: #a2999e;
+}

@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Http\Controllers\Auth;
@@ -28,19 +27,20 @@ class AuthenticatedSessionController extends Controller
         $user = \App\Models\User::where('email_user', $request->email_user)->first();
 
         // Verificar si el usuario existe y la contraseña es válida
-        if (!$user || !\Hash::check($request->password_user, $user->password_user)) {
+        if (!$user || !Hash::check($request->password_user, $user->password_user)) {
             return response()->json([
                 'message' => 'Invalid credentials'
             ], 401);
         }
 
         // Crear un token de acceso
-        $token = $user->createToken($user->email_user . '_Token')->plainTextToken;
+        //$token = $user->createToken($user->email_user . '_Token')->plainTextToken;
 
         return response()->json([
             'message' => 'Login successful',
             'user' => $user,
-            'token' => $token, // Devolver el token
+            'role' => $user->roles()->pluck('name'),
+            //'token' => $token, // Devolver el token
         ], 200);
     }
 
