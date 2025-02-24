@@ -32,7 +32,7 @@ const SearchPage = () => {
     return (
         <div className="container mx-auto p-4 mt-10">
             <div className="p-4 rounded text-center">
-                <h2 className="Titulo">Encuentra el artículo:</h2>
+                <h2 className="titleArticleFinder">Encuentra el artículo:</h2>
             </div>
             <div className='text-center mt-10 '>
                 <label id="buscador_lab" className="input input-bigger">
