@@ -11,10 +11,6 @@
     overflow: hidden;
 }
 
-.likeButton:hover {
-    transform: scale(1.1);
-}
-
 .likeButton img {
     width: 95%;
     height: 95%;

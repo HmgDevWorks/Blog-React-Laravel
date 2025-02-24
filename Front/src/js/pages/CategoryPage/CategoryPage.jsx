@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import CreatePost from "../../components/dev/createPost/createPost";
 import BackToTop from "../../components/dev/BackToTop/BackToTop";
 import ArticleFinder from "../../components/dev/article_finder/ArticleFinder";
-import DetallesBlog from "../../components/dev/DetallesBlog/DetallesBlog";
+import DetallesBlog from "../DetallesBlogPage/DetallesBlogPage";
 import './CategoryPage.css';
 
 const CategoryPage = () => {
