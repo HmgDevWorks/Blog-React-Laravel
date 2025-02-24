@@ -9,15 +9,15 @@
     font-family: "Abril Fatface", serif !important;
 }
 
-.numArticulos{
+.numArticulos {
     background-color: var(--grisClaro);
-        color: #353b3c;
-        text-align: center;
-        font-size: 1.2rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: "Abril Fatface", serif !important;
+    color: #353b3c;
+    text-align: center;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Special Elite", serif !important;
 }
 
 .indiceCategorias {
@@ -33,15 +33,24 @@
 }
 
 .enlaces-lista {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
     padding: 0;
     text-align: center;
 }
 
 .enlace-item {
-    margin-bottom: 0.5rem;
+    margin-top: 1rem;
 }
 
 .enlace {
     color: #353b3c;
     font-size: 1.2rem;
+}
+
+@media (min-width: 768px) {
+    .enlaces-lista {
+        grid-template-columns: 1fr 1fr;
+    }
 }

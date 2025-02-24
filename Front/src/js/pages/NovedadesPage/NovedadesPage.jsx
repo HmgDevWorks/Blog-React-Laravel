@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import NewsCarousel from "../../components/dev/carousel/NewsCarousel";
+import NewsCarousel from "../../components/dev/Newscarousel/NewsCarousel";
 import "./NovedadesPage.css";
 
 const NovedadesPage = () => {

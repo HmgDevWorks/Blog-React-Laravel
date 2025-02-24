@@ -2,42 +2,35 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CreatePost from "../../components/dev/createPost/createPost";
 import BackToTop from "../../components/dev/BackToTop/BackToTop";
-import CategoryPageItem from "../../components/dev/CategoryPageItem/CategoryPageItem";
 import ArticleFinder from "../../components/dev/article_finder/Article_finder_daisy";
+import DetallesBlog from "../../components/dev/DetallesBlog/DetallesBlog";
 import './CategoryPage.css';
 
 const CategoryPage = () => {
   const { id_categoria } = useParams();
   const [numArticulos, setNumArticulos] = useState(0);
-
-  const enlacesDePrueba = [
-    { id: 1, title: 'Enlace 1', url: '/enlace1' },
-    { id: 2, title: 'Enlace 2', url: '/enlace2' },
-    { id: 3, title: 'Enlace 3', url: '/enlace3' },
-    { id: 4, title: 'Enlace 4', url: '/enlace4' },
-    { id: 5, title: 'Enlace 5', url: '/enlace5' },
-    { id: 6, title: 'Enlace 6', url: '/enlace6' },
-    { id: 7, title: 'Enlace 7', url: '/enlace7' },
-    { id: 8, title: 'Enlace 8', url: '/enlace8' },
-    { id: 9, title: 'Enlace 9', url: '/enlace9' },
-    { id: 10, title: 'Enlace 10', url: '/enlace10' },
-  ];
+  const [articulos, setArticulos] = useState([]);
 
   useEffect(() => {
-    // Simulación de llamada a la base de datos para obtener el número de artículos
-    // Reemplaza esto con tu lógica de llamada a la API
-    const fetchNumArticulos = async () => {
-      try {
-        // Simulación de llamada a la API
-        const response = await fetch(`/api/categorias/${id_categoria}/numArticulos`);
-        const data = await response.json();
-        setNumArticulos(data.numArticulos);
-      } catch (error) {
-        console.error('Error al obtener el número de artículos:', error);
-      }
+    // Datos hardcodeados
+    const data = {
+      numArticulos: 10,
+      articulos: [
+        { id: 1, titulo: 'Javascript', contenido: 'Contenido del artículo Javascript', autor: 'Pedro', tag: 'Tag 1', image: 'https://via.placeholder.com/150' },
+        { id: 2, titulo: 'Php', contenido: 'Contenido del artículo PHP', autor: 'Paco', tag: 'Tag 2', image: 'https://via.placeholder.com/150' },
+        { id: 3, titulo: 'Java', contenido: 'Contenido del artículo Java', autor: 'Dolores', tag: 'Tag 3', image: 'https://via.placeholder.com/150' },
+        { id: 4, titulo: 'React', contenido: 'Contenido del artículo React', autor: 'Sabaton', tag: 'Tag 4', image: 'https://via.placeholder.com/150' },
+        { id: 5, titulo: 'Laravel', contenido: 'Contenido del artículo Laravel', autor: 'Autor 5', tag: 'Tag 5', image: 'https://via.placeholder.com/150' },
+        { id: 6, titulo: 'aaaaaa', contenido: 'Contenido del artículo aaaaaa', autor: 'Autor 6', tag: 'Tag 6', image: 'https://via.placeholder.com/150' },
+        { id: 7, titulo: 'WIIIIII', contenido: 'Contenido del artículo WIIIIII', autor: 'Autor 7', tag: 'Tag 7', image: 'https://via.placeholder.com/150' },
+        { id: 8, titulo: 'Artículo 8', contenido: 'Contenido del artículo 8', autor: 'Autor 8', tag: 'Tag 8', image: 'https://via.placeholder.com/150' },
+        { id: 9, titulo: 'Artículo 9', contenido: 'Contenido del artículo 9', autor: 'Autor 9', tag: 'Tag 9', image: 'https://via.placeholder.com/150' },
+        { id: 10, titulo: 'Artículo 10', contenido: 'Contenido del artículo 10', autor: 'Autor 10', tag: 'Tag 10', image: 'https://via.placeholder.com/150' },
+      ],
     };
 
-    fetchNumArticulos();
+    setNumArticulos(data.numArticulos);
+    setArticulos(data.articulos);
   }, [id_categoria]);
 
   return (
@@ -49,18 +42,14 @@ const CategoryPage = () => {
         <p>{numArticulos} artículos</p>
       </div>
       <ArticleFinder />
-      {/* comentado para elegir de que forma hacerlo si con componente 
-      o directamente en la pagina para que sea lo mas facil de conectar con el back
-       */}
-      {/* <CategoryPageItem />  */} 
       <div className="indiceCategorias text-center p-2">
         Indice
       </div>
       <ul className="enlaces-lista">
-        {enlacesDePrueba.map((enlace) => (
-          <li key={enlace.id} className="enlace-item">
-            <a href={enlace.url} className="enlace">
-              {enlace.title}
+        {articulos.map((articulo) => (
+          <li key={articulo.id} className="enlace-item">
+            <a href={`/detallesBlog/${articulo.id}`}>
+              <DetallesBlog blog={articulo} />
             </a>
           </li>
         ))}
