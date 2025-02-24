@@ -37,6 +37,7 @@ class UserService {
             if($user){
                 try{
                     $user->assignRole('reader');
+                    
                 }catch(\Exception $e){
                     return response()->json(["mensaje"=>"Error al asignar el role", 400]);
                 }
@@ -59,16 +60,25 @@ class UserService {
         return(response()->json(["mensaje"=>"Rol asignado con exito"], 200));
     }
 
-    public function deleteUser($id){ // Devuelve V o F, si se le pasa un id de un post que no existe F y si el id existe, el post pasa a estar en estado 'delete'
-        $user = User::findOrFail($id);
-        if ($user && !$user->hasRole('admin')) {
-            $user->delete();
-            return true;
+    public function deleteUser($user){ // Devuelve V o F, si se le pasa un id de un post que no existe F y si el id existe, el post pasa a estar en estado 'delete'
+
+        if (User::softDeleted($user->id)) {
+            return(response()->json(["mensaje"=>"Usuario eliminado con exito"], 200));
+        } else {
+            return(response()->json(["mensaje"=>"Error al borrar el usuario"], 201));
+
         }
+        // PRIMERO VALIDA SI EL USUARIO ES ADMIN ANTES DEL BORRADO
+        // if ($user && !$user->hasRole('admin')) { 
+        //     $user->delete();
+        //     return(response()->json(["mensaje"=>"Usuario eliminado con exito"], 200));
+        // } else {
+        //     return(response()->json(["mensaje"=>"Error al borrar el usuario"], 201));
+
+        // }
     }
 
-    public function updateUser($data){    // Esta función recibe los usuario del post actualizado, con los cambios indicados por el usuario, 
-        $user = User::findOrFail($data->id); // si encuentra el id del ususario cambia los datos del antiguo. 
+    public function updateUser($data, $user){    // Esta función actualiza un usuario 
         if ($user) {
             $user->update([
                 'name_user' => $data->name_user,
@@ -78,9 +88,9 @@ class UserService {
                 'bio' => $data->bio,
                 'update_at' => now(),
             ]);
-            return true; 
+            return response()->json(["mensaje"=>"Usuario actualizado correctamente", 200]);; 
         }else {
-            return false; 
+            return response()->json(["mensaje"=>"Error al actualizar el usuario", 200]);; 
         }
     }
 }

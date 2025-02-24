@@ -18,7 +18,7 @@ class RoleService {
     public function createRole($data){ // Devuelve el role recién creado, la función create recibe un array y va rellenando la BBDD. 
         $role = Role::create(
             [
-                'name' => $data->name,
+                'name' => $data->name
             ]
         );
         if($role)
@@ -26,8 +26,8 @@ class RoleService {
         return response()->json(["mensaje"=>"Error al crear el rol", 400]);
     }
     
-    public function updateRole($data){    // Esta función recibe los datos del role actualizado, con los cambios indicados por el usuario, 
-        $role = Role::findOrFail($data->id); // si encuentra el id del role cambia los datos del antiguo. 
+    public function updateRole($data, $role){    // Esta función recibe los datos del role actualizado, con los cambios indicados por el usuario, 
+        //$role = Role::findOrFail($data->id); // si encuentra el id del role cambia los datos del antiguo. 
         if ($role) {
             $role->update([
                 'name' => $data->name ?? $role->name,

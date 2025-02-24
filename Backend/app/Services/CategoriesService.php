@@ -18,7 +18,8 @@ class CategoriesService {
         $category = Categories::create(
             [
                 'name' => $data->name,
-                'description' => $data->description
+                'description' => $data->description,
+                'img_url' => '../../../../assets/carouselVertical/'.$data->file.'.webp'
             ]
         );
         if($category)
@@ -32,6 +33,7 @@ class CategoriesService {
             $categories->update([
                 'name' => $data->name ?? $categories->name,
                 'description' => $data->description ?? $categories->description,
+                'img_url' => '../../../../assets/carouselVertical/'.$data->file.'.webp;' ?? $categories->file
             ]);
             return response()->json(["mensaje"=>"Categoria actualizada correctamente", 200]);
         }else {

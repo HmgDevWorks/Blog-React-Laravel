@@ -25,34 +25,33 @@ class PostController extends Controller
         return response()->json($this->postService->getLastTenPosts());
     }
 
-    public function showAll():JsonResponse
+    public function show():JsonResponse
     {
         return response()->json($this->postService->getAllPost());
+    }
+
+    public function showOne($id):JsonResponse
+    {
+        return response()->json($this->postService->getPostById($id));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PostRequest $request):JsonResponse
+    public function store(Request $request):JsonResponse
     {
         return $this->postService->createPost($request);
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Post $post):JsonResponse
-    {
-        return response()->json($post);
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(PostRequest $request, Post $post):JsonResponse
+    public function update(Request $request, Post $post):JsonResponse
     {
-        return $this->postService->updatePost($request,$post);
+        return $this->postService->updatePost($request, $post);
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -61,4 +60,11 @@ class PostController extends Controller
     {
         return $this->postService->destroyPost($post);
     }
+
+    public function postUser($userId): JsonResponse
+    {
+    return response()->json($this->postService->getPostsByUser($userId)); //Route::get('/posts/user/{id}', [PostController::class, 'getPostsByUser']);
+    }
+
+
 }
