@@ -1,0 +1,21 @@
+.Titulo_Sin_Fondo {
+    color: var(--saturadoOscuro);
+    padding: 20px;
+    text-align: center;
+    font-size: 1.728rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Abril Fatface", serif !important;
+}
+
+.numArticulos{
+    background-color: var(--grisClaro);
+        color: #353b3c;
+        text-align: center;
+        font-size: 1.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Abril Fatface", serif !important;
+}

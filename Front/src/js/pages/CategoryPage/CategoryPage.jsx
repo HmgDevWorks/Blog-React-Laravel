@@ -1,18 +1,22 @@
 import CreatePost from "../../components/dev/createPost/createPost";
-import Title from "../../components/dev/title/TitleBlog";
 import BackToTop from "../../components/dev/BackToTop/BackToTop";
-const HomePage = () => {
-  const { title } = useLocation().state || { title: "Home Page" };
+import Category from "../../components/dev/CategoryPageItem/CategoryPageItem";
+const CategoryPage = () => {
+  const { title } = useLocation().state || { title: "Categoria" };
 
   return (
     <div>
-      {/* f_size y h_num son opcionales */}
-      <Title texto={title} f_size={40} h_num={1} />
+      <div className="Titulo_Sin_Fondo text-center p-2">
+        {title}
+      </div>
+      <div className="numArticulos">
+        <p></p>
+      </div>
+      <Category />
       <BackToTop />
       <CreatePost />
-      <LikeButton />
     </div>
   );
 };
 
-export default HomePage;
+export default CategoryPage;

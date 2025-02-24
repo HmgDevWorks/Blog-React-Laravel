@@ -4,7 +4,7 @@ import './CategoryItem.css';
 export default function Category({ title, imageUrl, description }) {
     return (
         <div className="relative category-Carrousel-container">
-            <a href={`#${title}`}>
+            <a href={`/CategoryPage/${title}`}>
                 <img
                     src={imageUrl}
                     alt={title}
