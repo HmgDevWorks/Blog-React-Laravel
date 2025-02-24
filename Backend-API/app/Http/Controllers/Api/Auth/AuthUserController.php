@@ -20,7 +20,7 @@ class AuthUserController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $validatedData = Arr::only($request->validated(), ['email', 'password']);
+        $validatedData = Arr::only($request->validated(), ['email_user', 'password_user']);
 
         if (! Auth::attempt($validatedData)) {
 
@@ -32,13 +32,6 @@ class AuthUserController extends Controller
         return response()->noContent();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Handle an incoming registration request.

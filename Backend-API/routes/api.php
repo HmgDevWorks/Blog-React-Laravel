@@ -19,6 +19,7 @@ Route::middleware(['auth:sanctum'])
             ->group(function () {
                 Route::prefix('user')->name('user.')->group(function () {
                     Route::post('register', 'store')->name('register');
+                    Route::post('login', 'login')->name('login');
                 });
             });
         Route::controller(ProfileController::class)->group(function () {
