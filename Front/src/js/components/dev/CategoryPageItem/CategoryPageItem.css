@@ -19,8 +19,8 @@
 }
 
 .enlaces-lista {
-    list-style-type: none;
     padding: 0;
+    text-align: center;
 }
 
 .enlace-item {
@@ -29,7 +29,6 @@
 
 .enlace {
     color: #353b3c;
-    text-decoration: none;
     font-size: 1.2rem;
 }
 

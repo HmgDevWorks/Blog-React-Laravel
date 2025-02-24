@@ -14,7 +14,7 @@ const enlacesDePrueba = [
     { id: 10, title: 'Enlace 10', url: '/enlace10' },
 ];
 
-function Category() {
+export default function CategoryPageItem() {
     return (
         <div>
             <div className="indiceCategorias text-center p-2">
@@ -32,5 +32,3 @@ function Category() {
         </div>
     );
 }
-
-export default Category;

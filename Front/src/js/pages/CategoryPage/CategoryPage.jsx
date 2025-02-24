@@ -1,18 +1,24 @@
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import CreatePost from "../../components/dev/createPost/createPost";
 import BackToTop from "../../components/dev/BackToTop/BackToTop";
-import Category from "../../components/dev/CategoryPageItem/CategoryPageItem";
+import CategoryPageItem from "../../components/dev/CategoryPageItem/CategoryPageItem";
+import ArticleFinder from "../../components/dev/article_finder/Article_finder_daisy";
+import './CategoryPage.css';
+
 const CategoryPage = () => {
-  const { title } = useLocation().state || { title: "Categoria" };
+  const { id_categoria } = useParams();
 
   return (
     <div>
       <div className="Titulo_Sin_Fondo text-center p-2">
-        {title}
+        {id_categoria}
       </div>
       <div className="numArticulos">
-        <p></p>
+        <p>10 artículos</p>
       </div>
-      <Category />
+      <ArticleFinder />
+      <CategoryPageItem />
       <BackToTop />
       <CreatePost />
     </div>
