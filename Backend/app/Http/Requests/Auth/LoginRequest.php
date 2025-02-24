@@ -27,8 +27,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name_user' => ['required', 'string', 'max:100'],
             'email_user' => ['required', 'string', 'email'],
+            'password_user' => ['required', 'string'],
             //'rememberMe'=>[''] creo que no hace falta, solo para saber en el controlador
         ];
     }
@@ -40,10 +40,10 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
-        if (! Auth::attempt($this->only('email', 'password'))) {
+        if (! Auth::attempt($this->only('email_user', 'password_user'))) {
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email_user' => trans('auth.failed'),
             ]);
         }
     }
@@ -64,7 +64,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'email_user' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),

@@ -27,7 +27,7 @@ class UserService {
                 return response()->json(['message' => 'El nombre de ususario ya esta registrado'], 409); // 409, codigo de error de conflicto de datos
             }
             
-                $user = User::create([
+            $user = User::create([
                 'name_user' => $data->name_user,
                 'email_user' => $data->email_user,
                 'password_user' => $data->password_user,

@@ -23,8 +23,8 @@ class NewPasswordController extends Controller
     {
         $request->validate([
             'token' => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'email_user' => ['required', 'email'],
+            'password_user' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         // Here we will attempt to reset the user's password. If it is successful we
@@ -34,7 +34,7 @@ class NewPasswordController extends Controller
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user) use ($request) {
                 $user->forceFill([
-                    'password' => Hash::make($request->string('password')),
+                    'password_user' => Hash::make($request->string('password')),
                     'remember_token' => Str::random(60),
                 ])->save();
 
@@ -44,7 +44,7 @@ class NewPasswordController extends Controller
 
         if ($status != Password::PASSWORD_RESET) {
             throw ValidationException::withMessages([
-                'email' => [__($status)],
+                'email_user' => [__($status)],
             ]);
         }
 

@@ -34,13 +34,6 @@ class AuthUserController extends Controller
         return response()->noContent();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Handle an incoming registration request.

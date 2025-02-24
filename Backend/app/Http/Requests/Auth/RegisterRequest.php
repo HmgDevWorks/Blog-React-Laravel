@@ -29,7 +29,7 @@ class RegisterRequest extends FormRequest
         return [
             'name_user'=>['required','string','max:100'],
             'email_user' => ['required', 'string', 'email', 'unique:users'],
-            'password_user' => ['required', 'string','min:6','confirmed'],
+            'password_user' => ['required', 'string','min:6'],
             'terms'=>['required']
         ];
     }
@@ -43,11 +43,11 @@ class RegisterRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (! Auth::attempt($this->only('email_user', 'password_user'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email_user' => trans('auth.failed'),
             ]);
         }
 
@@ -70,7 +70,7 @@ class RegisterRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'email_user' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),

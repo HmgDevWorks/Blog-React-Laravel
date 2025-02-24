@@ -6,8 +6,8 @@ test('users can authenticate using the login screen', function () {
     $user = User::factory()->create();
 
     $response = $this->post('/login', [
-        'email' => $user->email,
-        'password' => 'password',
+        'email_user' => $user->email,
+        'password_user' => 'password_user',
     ]);
 
     $this->assertAuthenticated();
@@ -18,8 +18,8 @@ test('users can not authenticate with invalid password', function () {
     $user = User::factory()->create();
 
     $this->post('/login', [
-        'email' => $user->email,
-        'password' => 'wrong-password',
+        'email_user' => $user->email,
+        'password_user' => 'wrong-password',
     ]);
 
     $this->assertGuest();
