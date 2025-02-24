@@ -15,6 +15,7 @@
 .navbar {
     border-radius: 0px !important;
     padding-right: 0px !important;
+    min-height: 70px !important;
 }
 
 .brand {

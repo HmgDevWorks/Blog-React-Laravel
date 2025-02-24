@@ -13,24 +13,25 @@ class PostController extends Controller
 
     protected $postService;
 
-    public function __construct(PostService $postService) {
+    public function __construct(PostService $postService)
+    {
         $this->postService = $postService;
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index():JsonResponse
+    public function index(): JsonResponse
     {
         return response()->json($this->postService->getLastTenPosts());
     }
 
-    public function show():JsonResponse
+    public function show(): JsonResponse
     {
         return response()->json($this->postService->getAllPost());
     }
 
-    public function showOne(Post $post):JsonResponse
+    public function showOne(Post $post): JsonResponse
     {
         return response()->json($post);
     }
@@ -38,7 +39,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):JsonResponse
+    public function store(Request $request): JsonResponse
     {
         return $this->postService->createPost($request);
     }
@@ -46,7 +47,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post):JsonResponse
+    public function update(Request $request, Post $post): JsonResponse
     {
         return $this->postService->updatePost($request, $post);
     }
@@ -54,14 +55,27 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post):JsonResponse
+    public function destroy(Post $post): JsonResponse
     {
         return $this->postService->destroyPost($post);
     }
 
     public function postUser($userId): JsonResponse
     {
-    return response()->json($this->postService->getPostsByUser($userId)); //Route::get('/posts/user/{id}', [PostController::class, 'getPostsByUser']);
+        return response()->json($this->postService->getPostsByUser($userId)); //Route::get('/posts/user/{id}', [PostController::class, 'getPostsByUser']);
+    }
+
+    public function postSearch(Request $request): JsonResponse // FALTA resultados
+    {
+
+        // Obtener el término de búsqueda desde el menú
+        $searchTerm = $request->query('search');
+
+        // Buscar en el contenido de los posts
+        $posts = $this->postService->searchPosts($searchTerm);
+
+        // Pasar los resultados a la vista
+        return response()->json($posts);
     }
 
 

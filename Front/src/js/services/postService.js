@@ -8,27 +8,20 @@ class PostService {
         })
     }
 
-    /* Post by Id */
-    getOnePost(id) {
-        return this.api.get(`/`, id)
+    getOnePost(blog_id) {
+        return this.api.get(`/show/${blog_id}`)
     }
     /* All posts */
     getPosts() {
         return this.api.get('/showAll')
     }
-    /* User posts */
-    getPosts(id) {
-        return this.api.get(`/user/${id}`)
-    }
+
     /* Publicar */
     createPost(data) {
         return this.api.post('/store', data)
     }
 
-    /* Show post */
-    getOnePost(id) {
-        return this.api.get(`/posts/show/${id}`)
-    }
+
 
     /* Editar post */
     editPost(id, data) {
@@ -41,4 +34,5 @@ class PostService {
     }
 }
 const postService = new PostService();
+
 export default postService;
