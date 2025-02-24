@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('title')->nullable(false);
             $table->text('content')->nullable(false);
             $table->enum('status', ['draft', 'published', 'deleted'])->default('draft'); // Enum para crear borrador, activo, y eliminado
+            $table->unsignedBigInteger('views')->default(0);            
             $table->timestamps();
         });
         Schema::table('posts', function (Blueprint $table) {

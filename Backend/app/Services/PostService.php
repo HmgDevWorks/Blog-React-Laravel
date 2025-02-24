@@ -14,14 +14,15 @@ class PostService
         return Post::all();
     }
 
-    public function getLastTenPosts()
-    {
-        // Ordena los posts por created_at en orden descendente y toma los 10 primeros
-        return Post::orderBy('created_at', 'desc')->take(10)->get();
-    }
+    public function getLastTenPosts() {   // Ordena los posts por created_at en orden descendente (últimos primero)
 
-    public function getPostById($id)
-    {    // Devuelve el post con el ID especificado, o lanza un error 404 si no existe
+        return Post::orderBy('created_at', 'desc')
+            ->take(10)  
+            ->get();
+    }
+    
+
+    public function getPostById($id){    // Devuelve el post con el ID especificado, o lanza un error 404 si no existe
         return Post::findOrFail($id);
     }
 
@@ -106,7 +107,7 @@ class PostService
     public function getPaginatedPosts($perPage = 10)
     { //function para enseñar los post de 10 en 10 en la pagina
         return Post::latest()->paginate($perPage);
-    }
+    }    
 
 }
 
