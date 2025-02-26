@@ -5,6 +5,7 @@ import './NavigationMobile.css'
 import logoPluma from '../../../../assets/logo_pluma.svg';
 
 function NavigationMobile() {
+
   return (
 
     <div className="navbar bg-base-300 rounded-box">

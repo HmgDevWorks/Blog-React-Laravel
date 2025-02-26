@@ -1,4 +1,5 @@
 const DetallesBlogPC = ({ blog }) => {
+
     return (
         <div className="detallesBlogPC">
             <h3>{blog.titulo}</h3>

@@ -3,6 +3,7 @@ import './NavigationPC.css';
 import LogoPrincipal from '../../../../assets/Logo-principal.png';
 
 const NavigationPC = () => {
+
     return (
         <div className="navigatorPc" style={{ backgroundColor: 'black', color: 'white' }}>
             <div className='logoDiv'>

@@ -2,6 +2,7 @@ import './DetallesBlog.css'
 import { useState, useEffect } from 'react';
 
 
+
 const DetallesBlog = ({ blog }) => {
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -37,6 +38,7 @@ const DetallesBlog = ({ blog }) => {
         PrimerosCaracteresIndex = findNearestSpace(blog.contenido, 90);
         restoIndex = findNearestSpace(blog.contenido, 90);
     }
+
 
     let PrimerosCaracteres = blog.contenido.substring(0, PrimerosCaracteresIndex);
     let resto = blog.contenido.substring(restoIndex, blog.contenido.length);
