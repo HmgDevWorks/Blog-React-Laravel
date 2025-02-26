@@ -1,0 +1,26 @@
+.graphiCircle{
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    width: 70% ;
+}
+
+
+.articulosMasLeidos{
+    font-family: "Abril Fatface", "cursive";
+    color: #846a6a;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    background-color: transparent!important;
+}
+
+.popoveRandom{
+    background-color: red !important;
+}
+
+@media(min-width: 768px){
+    .graphiCircle{
+        width: 45%;
+    }
+}

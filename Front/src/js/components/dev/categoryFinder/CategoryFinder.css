@@ -1,3 +1,11 @@
+:root {
+    --grisClaro: #eef0f2;
+    --grisMeio: #c6c7c4;
+    --saturadoClaro: #a2999e;
+    --saturadoOscuro: #846a6a;
+    --grisOscuro: #353b3c;
+}
+
 #buscador_lab{
     background-color: #eef0f2 !important;
 }
@@ -10,16 +18,15 @@
     color: #846a6a !important;
 }
 
-.btn {
+.btn-articulo {
     background-color: transparent !important;
     border: none !important;
     color: #353b3c !important;
     font-family: "Special Elite", serif !important;
     box-shadow: none !important;
-
 }
 
-.btn:hover {
+.btn-articulo:hover {
     background-color: transparent !important;
     color: #846a6a !important;
     font-family: "Special Elite", serif !important;
@@ -32,4 +39,16 @@
 
 .input-bigger {
     transform: scale(1.3); /* Hace la caja más o menos grande */
+}
+
+.titleArticleFinder {
+    background-color: var(--grisClaro);
+    color: var(--saturadoOscuro);
+    padding: 20px;
+    text-align: center;
+    font-size: 1.728rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Abril Fatface", serif !important;
 }

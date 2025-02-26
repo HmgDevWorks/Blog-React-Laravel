@@ -9,13 +9,6 @@
     justify-content: center;
     cursor: pointer;
     overflow: hidden;
-    position: fixed;
-    bottom: 5%;
-    right: 5%;
-}
-
-.likeButton:hover {
-    transform: scale(1.1);
 }
 
 .likeButton img {

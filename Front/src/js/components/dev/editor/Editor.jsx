@@ -1,5 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import postService from "../../../services/postService";
+import servicioCategorias from "../../../services/categoriesService";
 
 import { html } from '@yoopta/exports';
 import YooptaEditor, { createYooptaEditor } from "@yoopta/editor";
@@ -44,10 +46,17 @@ const TOOLS = {
   },
 };
 
-export default function Editor() {
+export default function Editor( { isEditable = true, postTitle = "", postText = "" } ) {
   const editor = useMemo(() => createYooptaEditor(), []);
-  const [value, setValue] = useState();
-  const [isPreview, setIsPreview] = useState(false);
+  const [value, setValue] = useState(postText);
+  // const [isPreview, setIsPreview] = useState(false);
+  const [title, setTitle] = useState(postTitle);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  function changeTitle(event) {
+    setTitle(event.target.value);
+  }
 
   const onChange = (value, options) => {
     setValue(value);
@@ -69,32 +78,84 @@ export default function Editor() {
     return htmlString;
   };
 
-  const handlePreview = () => {
-    setIsPreview(isPreview => !isPreview);
-  };
+  // const handlePreview = () => {
+  //   setIsPreview(isPreview => !isPreview);
+  // };
 
   const handlePublish = async () => {
     serializeHTML();
-    // try {
-    //   const response = await axios.post('/api/publish', { content: value });
-    //   console.log('Published:', response.data);
-    // } catch (error) {
-    //   console.error('Error publishing:', error);
-    // }
+    const userId = localStorage.getItem('userId');
+    const data = { id_categories: selectedCategory, user_id: userId, title: title, content: serializeHTML(), status:"published" };
+    const request = postService.createPost(data);
+
+    request
+      .then(response => {
+        console.log('Published:', response.data);
+      })
+      .catch(error => {
+        console.error('Error publishing:', error);
+      });
   };
 
   const handleSave = async () => {
     serializeHTML();
-    // try {
-    //   const response = await axios.post('/api/save', { content: value });
-    //   console.log('Saved:', response.data);
-    // } catch (error) {
-    //   console.error('Error saving:', error);
-    // }
+    const userId = localStorage.getItem('userId');
+    const data = { id_categories: selectedCategory, user_id: userId, title: title, content: serializeHTML() };
+    const request = postService.createPost(data);
+
+    request
+      .then(response => {
+        console.log('Published:', response.data);
+      })
+      .catch(error => {
+        console.error('Error publishing:', error);
+      });
+  };
+
+  useEffect(() => {
+    const request = servicioCategorias.getCategorias();
+
+    request
+      .then(response => {
+        setCategories(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching categories:', error);
+
+      });
+  }, []);
+
+
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
   };
 
   return (
     <>
+      <div className="editor-title">
+        <label htmlFor="post-title">Title:</label>
+        <input
+          type="text"
+          id="post-title"
+          defaultValue={value?.title || ''}
+          onChange={(e) => changeTitle(e)}
+        />
+      <div className="categorie-dropdown">
+      <label className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">Escoge categoria</span>
+          </div>
+          <select className="select select-bordered" onChange={handleCategoryChange}>
+            <option disabled selected>Elige una categoria</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      </div>
       <div className="editor">
         <YooptaEditor
           editor={editor}
@@ -106,12 +167,13 @@ export default function Editor() {
           marks={MARKS}
         />
       </div>
+      {isEditable && (
       <div className="editor-btns">
         <button className="btn" onClick={handlePublish}>Publicar</button>
         <button className="btn" onClick={handleSave}>Guardar</button>
-        <button className="btn" onClick={handlePreview}>Previsualizar</button>
-      </div>
-      {isPreview && (serializeHTML())}
+        {/* <button className="btn" onClick={handlePreview}>Previsualizar</button> */}
+      </div>)}
+      {/* {isPreview && (serializeHTML())} */}
     </>
   );
 }

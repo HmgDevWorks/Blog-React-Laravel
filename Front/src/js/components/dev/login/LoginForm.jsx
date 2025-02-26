@@ -22,12 +22,14 @@ export default function LoginForm() {
             return;
         }
 
-        const data = login ? { username, password } : { username, password, email };
+        const data = login ? { email_user: username, password_user: password } : { name_user:username, email_user: email, password_user: password };
         const request = login ? userService.getOneUser(data) : userService.createUser(data);
 
         request
             .then(response => {
-            console.log('Success:', response.data);
+                localStorage.setItem('userId', response.data.user.id);
+                localStorage.setItem('userRole', response.data.role[0]);
+                window.location.href = '/';
             })
             .catch(error => {
             console.error('Error:', error);

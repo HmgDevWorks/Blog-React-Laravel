@@ -32,4 +32,6 @@ class ServicioCategorias {
 
 }
 
-export default ServicioCategorias;
+const servicioCategorias = new ServicioCategorias();
+
+export default servicioCategorias;
