@@ -1,0 +1,28 @@
+:root {
+    --grisClaro: #eef0f2;
+    --grisMeio: #c6c7c4;
+    --saturadoClaro: #a2999e;
+    --saturadoOscuro: #846a6a;
+    --grisOscuro: #353b3c;
+}
+
+.admin-users {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  max-height: 80vh; /* Ajusta el valor según tus necesidades */
+  overflow-y: auto; /* Permite el desplazamiento si el contenido excede la altura máxima */
+}
+
+.Titulo_Admin_Page {
+    color: var(--saturadoOscuro);
+    padding: 20px;
+    text-align: center;
+    font-size: 1.728rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Abril Fatface", serif !important;
+}
