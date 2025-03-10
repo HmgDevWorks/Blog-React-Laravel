@@ -37,6 +37,7 @@ class UserService {
             if($user){
                 try{
                     $user->assignRole('reader');
+                    
                 }catch(\Exception $e){
                     return response()->json(["mensaje"=>"Error al asignar el role", 400]);
                 }
@@ -47,7 +48,7 @@ class UserService {
         }
     }
 
-    public function assignRoleUser($request, $user){
+    public function assignRoleUser($request, $user){ // Esta función, hace un shoftDelete de un usuario, devuelve mesaje OK o mensaje KO
         if($user->hasRole('admin'))
             return(response()->json(["mensaje"=>"Error no se puede modificar el rol al usuario administrador"], 400));
         if($request->role == 'admin')
@@ -59,11 +60,13 @@ class UserService {
         return(response()->json(["mensaje"=>"Rol asignado con exito"], 200));
     }
 
-    public function deleteUser($id){ // Devuelve V o F, si se le pasa un id de un post que no existe F y si el id existe, el post pasa a estar en estado 'delete'
-        $user = User::findOrFail($id);
+    public function deleteUser($user){ // Esta función, hace un shoftDelete de un usuario, devuelve mesaje OK o mensaje KO
         if ($user && !$user->hasRole('admin')) {
             $user->delete();
-            return true;
+            return(response()->json(["mensaje"=>"Usuario eliminado con exito"], 200));
+        } else {
+            return(response()->json(["mensaje"=>"Error al borrar el usuario"], 201));
+
         }
     }
 

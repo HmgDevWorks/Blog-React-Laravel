@@ -1,47 +1,59 @@
+
 <?php
 
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use Laravel\Sanctum\HasApiTokens;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
-    public function create(): View
+
+    public function store(Request $request)
     {
-        return view('auth.login');
-    }
+        $request->validate([
+            'email_user' => 'required|email',
+            'password_user' => 'required',
+        ]);
 
-    /**
-     * Handle an incoming authentication request.
-     */
-    public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+        // Buscar el usuario por email
+        $user = \App\Models\User::where('email_user', $request->email_user)->first();
 
-        $request->session()->regenerate();
+        // Verificar si el usuario existe y la contraseña es válida
+        if (!$user || !\Hash::check($request->password_user, $user->password_user)) {
+            return response()->json([
+                'message' => 'Invalid credentials'
+            ], 401);
+        }
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Crear un token de acceso
+        $token = $user->createToken($user->email_user . '_Token')->plainTextToken;
+
+        return response()->json([
+            'message' => 'Login successful',
+            'user' => $user,
+            'token' => $token, // Devolver el token
+        ], 200);
     }
 
     /**
      * Destroy an authenticated session.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request)
     {
-        Auth::guard('web')->logout();
+        // Invalidar el token
+        Auth::user()->tokens->each(function ($token) {
+            $token->delete();
+        });
 
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/');
+        return response()->json(['message' => 'Sesión cerrada correctamente.']);
     }
 }

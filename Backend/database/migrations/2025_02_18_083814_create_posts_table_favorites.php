@@ -17,10 +17,7 @@ return new class extends Migration
             $table->foreign('id_categories')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('user_id')->nullable(false);  
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('title')->nullable(false);
-            $table->text('content')->nullable(false);
-            $table->enum('status', ['draft', 'published', 'deleted'])->default('draft'); // Enum para crear borrador, activo, y eliminado
-            $table->unsignedBigInteger('views')->default(0);            
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
         Schema::table('posts', function (Blueprint $table) {

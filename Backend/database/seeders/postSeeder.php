@@ -96,5 +96,70 @@ class postSeeder extends Seeder
             'content' => 'El Real Madrid siempre ha estado rodeado de controversia. Con una historia de éxitos, el equipo ha sido criticado por sus decisiones arbitrales y por cómo ha manejado situaciones dentro y fuera del campo. Algunos creen que sus victorias no siempre han sido justas.',
         ]);
 
+        Post::create([
+            'id_categories' => '2',
+            'user_id' => '1',
+            'title' => 'La rivalidad entre Barcelona y Real Madrid',
+            'content' => 'La rivalidad entre el Barcelona y el Real Madrid es una de las más intensas en el fútbol mundial. La pasión que despierta este enfrentamiento es incomparable, con una historia que ha marcado el rumbo del deporte en España.',
+        ]);
+        
+        Post::create([
+            'id_categories' => '2',
+            'user_id' => '1',
+            'title' => 'La importancia de la cantera en el fútbol',
+            'content' => 'La cantera es esencial para el futuro de muchos equipos de fútbol. Formar jóvenes talentos desde temprana edad permite a los clubes no solo obtener jugadores de calidad, sino también asegurar un legado duradero.',
+        ]);
+        
+        Post::create([
+            'id_categories' => '2',
+            'user_id' => '1',
+            'title' => 'La revolución táctica de Guardiola',
+            'content' => 'La influencia de Pep Guardiola en el fútbol moderno es indiscutible. Su forma de jugar, basada en el control del balón y la presión alta, ha marcado una nueva era en la historia del deporte.',
+        ]);
+        
+        Post::create([
+            'id_categories' => '2',
+            'user_id' => '1',
+            'title' => 'La influencia de Messi en el Barcelona',
+            'content' => 'La llegada de Lionel Messi al Barcelona transformó al club de una manera única. Con su magia en el campo, logró consolidarse como el mejor jugador de la historia del club, llevando al equipo a éxitos internacionales.',
+        ]);
+        
+        Post::create([
+            'id_categories' => '2',
+            'user_id' => '1',
+            'title' => 'La importancia de la psicología en el deporte',
+            'content' => 'La psicología juega un papel fundamental en el rendimiento de los atletas. Desde manejar la presión hasta superar las adversidades, la mente es una herramienta crucial para lograr el éxito en el deporte.',
+        ]);
+        
+        Post::create([
+            'id_categories' => '2',
+            'user_id' => '1',
+            'title' => 'La evolución de los estadios modernos',
+            'content' => 'Los estadios de fútbol han pasado de ser simples lugares de encuentro a impresionantes colosos arquitectónicos. Con mejoras en la infraestructura, comodidad y tecnología, se busca ofrecer la mejor experiencia al espectador.',
+        ]);
+        
+        Post::create([
+            'id_categories' => '2',
+            'user_id' => '1',
+            'title' => 'La historia de la Copa del Mundo',
+            'content' => 'La Copa del Mundo es el torneo de fútbol más prestigioso a nivel internacional. Cada edición ha dejado momentos inolvidables, con selecciones de todo el mundo luchando por la gloria mundial.',
+        ]);
+        
+        Post::create([
+            'id_categories' => '2',
+            'user_id' => '1',
+            'title' => 'La recuperación física de los futbolistas',
+            'content' => 'La recuperación es esencial para los futbolistas, especialmente después de lesiones o partidos intensos. Con el avance de la medicina deportiva, los jugadores ahora tienen mejores herramientas para recuperarse más rápido y con menos riesgos.',
+        ]);
+
+        Post::create([
+            'id_categories' => '2',
+            'user_id' => '1',
+            'title' => 'La recuperación física de los futbolistas que no toman anabolizantes',
+            'content' => 'La recuperación es esencial para los futbolistas, especialmente después de lesiones o partidos intensos. Con el avance de la medicina deportiva, los jugadores ahora tienen mejores herramientas para recuperarse más rápido y con menos riesgos. Este es el mejor post que hemos subido.',
+        ]);
+        
+        
+
     }
 }

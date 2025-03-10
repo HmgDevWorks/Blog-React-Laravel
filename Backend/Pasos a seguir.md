@@ -3,26 +3,26 @@
 
 # hacer base de datos
 
--pull
--composer update
--abrir workbench
--cambiar .env
--descomentar desde la 24 (las 5 lineas)
--cambiar conexion a mysql
--poner contraseña
--crear base de datos en workbench
--cambiar laravel por el nombre que se le ha puesto a la base de datos
--php artisan migrate
--php artisan db:seed
-(si por lo que sea se rompe la base de datos, quieres reiniciar los datos o algo por el estilo hacer este comando)
-*-php artisan migrate:fresh --seed
--Cargamos laravel/spatie ->>> composer require spatie/laravel-permission
--Cargamos laravel/breeze ->>> composer require laravel/breeze 
--Para cargar la tabla permisos del spaite ->>> php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider
--En la carpeta database/migrations se crean los modelos de las tablas que vamos a migrar a nuestra base de datos
--php artisan make:model Category-mcr (crea un archivo en migration, y en app-controllers y en model)
--Una vez creada todas las migraciones de las tablas -> php artisan migrate:fresh (hace un reset de las tablas de datos creadas y vuelve a migrarlas)
--Con las migraciones creadas dentro de la carpeta app en la subcarpeta model creamos 3 archivos que se corresponden a las tablas principales, dentro de ellas crearemos las clases para que nuestra tabla  sepa que datos son rellenables tanto por el usuario por nosotros
+-pull  
+-composer update  
+-abrir workbench  
+-cambiar .env  
+-descomentar desde la 24 (las 5 lineas)  
+-cambiar conexion a mysql  
+-poner contraseña  
+-crear base de datos en workbench  
+-cambiar laravel por el nombre que se le ha puesto a la base de datos  
+-php artisan migrate  
+-php artisan db:seed  
+(si por lo que sea se rompe la base de datos, quieres reiniciar los datos o algo por el estilo hacer este comando)  
+*-php artisan migrate:fresh --seed  
+-Cargamos laravel/spatie ->>> composer require spatie/laravel-permission  
+-Cargamos laravel/breeze ->>> composer require laravel/breeze   
+-Para cargar la tabla permisos del spaite ->>> php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider  
+-En la carpeta database/migrations se crean los modelos de las tablas que vamos a migrar a nuestra base de datos  
+-php artisan make:model Category-mcr (crea un archivo en migration, y en app-controllers y en model)  
+-Una vez creada todas las migraciones de las tablas -> php artisan migrate:fresh (hace un reset de las tablas de datos creadas y vuelve a migrarlas)  
+-Con las migraciones creadas dentro de la carpeta app en la subcarpeta model creamos 3 archivos que se corresponden a las tablas principales, dentro de ellas crearemos las clases para que nuestra tabla  sepa que datos son rellenables tanto por el usuario por nosotros  
 -Los modelos de las tabla ROL y PERMISOS los crea spatie por defecto y no se deberian tocar (se encuentran en la carpeta vendor)
 -Hacemos los seeders para comprobar que todas las tablas funcionan y que los datos que introducimos son los que queremos/correctos
     -Para crearlos se crean nuevos archivos que los llamaremos como las tablas+Seeder.php donde ahi introduciremos los datos
@@ -36,11 +36,11 @@
 -QUEDA POR PONER COSAS DE LAS AUTORIZACIONES, ROLES Y PERMISOS QUE YO NPI
 # hacer que funcione(?)
 
--php artisan key:generate
--php artisan serve
+-php artisan key:generate  
+-php artisan serve  
 
 
 # cors
 (en principio no hace falta, si no funciona prueba a poner esto)
--php artisan config:publish cors   <!-- puede que no haga falta -->
--php artisan install:api
+-php artisan config:publish cors   <!-- puede que no haga falta -->  
+-php artisan install:api  

@@ -38,14 +38,12 @@ class ProfileController extends Controller
         return response()->json($this->userService->getUserById($id));
     }
 
-    public function update(Request $request, User $user):JsonResponse // Actualiza un usuario
+    public function update(Request $request, User $user):JsonResponse // Actualiza un usuario 
     {
         return response()->json($this->userService->updateUser($request, $user));
     }
 
-
-
-    public function changeRole(Request $request, User $user):JsonResponse
+    public function changeRole(Request $request, User $user):JsonResponse // Falta prueba
     {
         return $this->userService->assignRoleUser($request, $user);
     }
@@ -53,22 +51,28 @@ class ProfileController extends Controller
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
+    //      POR DEFECTO, CREAMOS UNA NUEVA PARA HACER DESTROY
+    // public function destroy(Request $request): RedirectResponse
+    // {
+    //     $request->validateWithBag('userDeletion', [
+    //         'password' => ['required', 'current_password'],
+    //     ]);
+
+    //     $user = $request->user();
+
+    //     Auth::logout();
+
+    //     $user->delete();
+
+    //     $request->session()->invalidate();
+    //     $request->session()->regenerateToken();
+
+    //     return Redirect::to('/');
+    // }
+
+    public function destroy(User $user):JsonResponse
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-
-        $user = $request->user();
-
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        return response()->json($this->userService->deleteUser($user));
     }
 
 
