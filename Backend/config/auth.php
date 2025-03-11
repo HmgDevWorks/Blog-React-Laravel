@@ -41,8 +41,8 @@ return [
             'provider' => 'users',
         ],
         'api' => [
-        'driver' => 'passport',
-        'provider' => 'users',
+            'driver' => 'jwt',
+            'provider' => 'users',
         ],
     ],
 
@@ -63,17 +63,21 @@ return [
     |
     */
 
-    'providers' => [
+   'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
-        ],
+            'model' => App\Models\User::class,
+            'table' => 'users',
+            'email' => 'email_user',
+            'password_column' => 'password_user', // Aquí usamos el Custom Provider
+    ],
 
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------

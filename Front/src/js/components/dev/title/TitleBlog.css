@@ -1,0 +1,28 @@
+:root {
+    --grisClaro: #eef0f2;
+    --grisMeio: #c6c7c4;
+    --saturadoClaro: #a2999e;
+    --saturadoOscuro: #846a6a;
+    --grisOscuro: #353b3c;
+}
+
+.title-container {
+    background-color: var(--grisClaro);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#titulo {
+    color: var(--saturadoOscuro);
+    font-family: 'Abril Fatface';
+}
+
+.highlight {
+    color: var(--saturadoClaro);
+}
+.descripcion-blog{
+    font-weight: bold;
+}

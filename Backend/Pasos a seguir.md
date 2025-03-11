@@ -17,7 +17,10 @@
 (si por lo que sea se rompe la base de datos, quieres reiniciar los datos o algo por el estilo hacer este comando)  
 *-php artisan migrate:fresh --seed  
 -Cargamos laravel/spatie ->>> composer require spatie/laravel-permission  
--Cargamos laravel/breeze ->>> composer require laravel/breeze   
+-Cargamos laravel/breeze ->>> composer require laravel/breeze   -> instalar con api
+-Cargamos el jwt ->>>> composer require tymon/jwt-auth ->>> php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider" ->> php artisan jwt:secret
+- Configurar el moddleware en config/auth.php
+-Env -> JWT_SECRET
 -Para cargar la tabla permisos del spaite ->>> php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider  
 -En la carpeta database/migrations se crean los modelos de las tablas que vamos a migrar a nuestra base de datos  
 -php artisan make:model Category-mcr (crea un archivo en migration, y en app-controllers y en model)  

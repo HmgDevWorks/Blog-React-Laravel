@@ -1,0 +1,140 @@
+/* .containerNav {
+     display: flex;
+     justify-content: space-between;
+     flex-wrap: inherit;
+     align-items: center;
+     width: 100%;
+ } */
+
+/* .navbarMobile {
+     background-color: #353b3c;
+     height: 70px;
+     padding: 0px 0px !important;
+ } */
+
+.navbar {
+    border-radius: 0px !important;
+    padding-right: 0px !important;
+    min-height: 70px !important;
+}
+
+.brand {
+    color: #846a6a !important;
+    font-family: 'Abril Fatface', serif;
+    font-weight: 500;
+    font-size: 3rem !important;
+    height: 50px;
+    align-items: center;
+    /* justify-content: center; */
+    display: flex;
+}
+
+.navbarLogo {
+    width: 40px;
+    height: 40px;
+    right: 0px;
+}
+
+.dropbutton {
+    background-color: #846a6a !important;
+    height: 70px;
+    width: 90px !important;
+    border-radius: 0px !important;
+    font-size: 2.5rem !important;
+}
+
+
+.collapseNav {
+    background-color: #846a6a;
+    width: 50vw !important;
+    border-top: 1px solid #a2999e;
+    font-family: "Helvetica, Arial,sans-serif";
+    font-size: 1.5rem;
+    color: #eef0f2 !important;
+    padding: 0px;
+    border-radius: 0px 0px 0px 20px;
+    margin-top: 0px !important;
+}
+
+.collapseNav a {
+    border-top: 1px solid #a2999e;
+    color: #eef0f2 !important;
+    width: 100%;
+    padding-left: 30px;
+}
+
+.collapseNav a:hover {
+    background-color: #353b3c;
+    /* scale: (0) !important; */
+}
+
+/* .collapseNav a {
+    border-top: 1px solid #a2999e;
+    color: #eef0f2 !important;
+    width: 100%;
+    padding-left: 30px;
+}
+
+.collapseNav a:hover {
+    background-color: #353b3c;
+    transform: scale(1.2);
+} */
+
+/* .containerNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #353b3c;
+} */
+
+.navbar {
+    background-color: #353b3c;
+    height: 70px;
+}
+
+.brand {
+    color: #846a6a;
+    font-family: 'Abril Fatface', serif;
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+}
+
+.navbarLogo {
+    width: 40px;
+    height: 40px;
+}
+
+/* .collapseIcon {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #846a6a;
+    cursor: pointer;
+} */
+
+/* .collapseNav {
+    display: none;
+    flex-direction: column;
+    background-color: #846a6a;
+    width: 100%;
+    text-align: left;
+} */
+
+/* .collapseNav a {
+    padding: 15px;
+    color: #eef0f2;
+    text-decoration: none;
+    border-top: 1px solid #a2999e;
+}
+
+.collapseNav a:hover {
+    background-color: #353b3c;
+    transform: scale(1.1);
+} */
+
+/* .collapseNav.open {
+    display: flex;
+} */

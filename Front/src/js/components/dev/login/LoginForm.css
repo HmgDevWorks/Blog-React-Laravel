@@ -1,0 +1,106 @@
+:root {
+    --font-header: 'Abril Fatface', cursive;
+    --font: helvetica, sans-serif;
+    --bg-color: #c6c7c4;
+    --header-bg-color: #353b3c;
+    --header-text-color: #846a6a;
+    --form-bg-color: #eef0f2;
+    --input-bg-color: #c6c7c4;
+    --input-font-size: 1.2rem;
+    --input-font-color: #846a6a;
+    --btn-bg-color: #846a6a;
+    --btn-font-size: 1rem;
+    --hr-color: #c6c7c4;
+    --p-font-size: 0.833rem;
+    --p-color: black;
+}
+
+* {
+    font-family: var(--font);
+}
+
+.login-form{
+    width: 40%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--form-bg-color);
+}
+
+.login-img-container{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: var(--header-bg-color);
+}
+
+.login-img-container img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.login-img-container h1{
+    font-family: var(--font-header);
+    font-size: 2rem;
+    color: var(--header-text-color);
+}
+
+.form-container {
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form-label{
+    font-size: var(--input-font-size);
+    color: var(--input-font-color);
+}
+
+.login-form-input, .form-checkbox{
+    background-color: var(--input-bg-color);
+    font-size: var(--input-font-size);
+    color: var(--input-font-color);
+}
+
+button {
+    cursor: pointer;
+}
+.submit-btn{
+    font-size: var(--btn-font-size);
+    background-color: var(--btn-bg-color);
+    align-self: flex-end;
+}
+
+.login-divider{
+    background-color: var(--hr-color);
+}
+
+.bottom-text{
+    text-align: center;
+    color: var(--p-color);
+    font-size: var(--p-font-size);
+}
+.bottom-text>button{
+    color: var(--btn-bg-color);
+}
+
+@media screen and (max-width: 768px) {
+    form {
+        width: 90%;
+    }
+
+    /* 
+    .form-container{
+
+    } */
+}

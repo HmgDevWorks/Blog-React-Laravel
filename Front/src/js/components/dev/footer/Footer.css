@@ -1,0 +1,38 @@
+footer {
+  position: relative;
+  left: 0;
+  font-family: Helvetica, sans-serif;
+  background-color: #353b3c;
+  color: #846a6a;
+  margin-top: 20px;
+  bottom: 0;
+}
+
+/* @media screen and (min-width: 768px) {
+  footer {}
+
+} */
+
+@media screen and (min-width: 768px) {
+  footer {
+    background-color: #846a6a;
+    color: #eef0f2;
+    margin-top: 20px;
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  footer a {
+    color: #eef0f2 !important;
+  }
+}
+
+footer a:hover {
+  color: #353b3c !important;
+}
+
+footer a {
+  font-size: 1.3rem;
+  text-decoration: underline;
+}

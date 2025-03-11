@@ -1,0 +1,30 @@
+:root{
+    --font-header: 'Abril Fatface', cursive;
+    --font: helvetica, sans-serif;
+    --bg-color: #c6c7c4;
+    --header-bg-color: #353b3c;
+    --header-text-color: #846a6a;
+    --form-bg-color: #eef0f2;
+    --input-bg-color: #c6c7c4;
+    --input-font-size: 1.2rem;
+    --input-font-color: #846a6a;
+    --btn-bg-color: #846a6a;
+    --btn-font-size: 1rem;
+    --hr-color: #c6c7c4;
+    --p-font-size: 0.833rem;
+    --p-color: black;
+}
+
+.parent-box{
+    overflow: hidden;
+    padding: 0;
+    width: 80%;
+    margin: 0 auto;
+}
+
+h3{
+    padding: 5px;
+    color: var(--header-text-color);
+    background-color: var(--header-bg-color);
+    font-family: var(--font-header);
+}

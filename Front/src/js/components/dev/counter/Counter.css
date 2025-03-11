@@ -1,16 +1,27 @@
+:root{
+   --grisClaro: #eef0f2;
+--grisMeio: #c6c7c4;
+--saturadoClaro: #a2999e; 
+--saturadoOscuro: #846a6a;
+--grisOscuro: #353b3c;
+} 
+
+.counter{
+    font-family: 'Special Elite', cursive;
+    background-color: var(--saturadoClaro);
+    color: var(--grisOscuro);
+}
+
 .counter {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
     padding: 10px;
-
-    background-color: #f0f0f0;
-    border-radius: 10px;
 }
 
-.counter > img {
+/* .counter > img {
     width: 50px;
     height: 50px;
-}
+} */

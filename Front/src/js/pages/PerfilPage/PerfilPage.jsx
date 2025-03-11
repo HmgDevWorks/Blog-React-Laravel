@@ -1,11 +1,10 @@
+import ProfileC from "../../components/dev/profileC/ProfileC";
 const PerfilPage = () => {
   //   const { user } = useAuthContext();
 
   return (
     <div>
-      <h1>Perfil</h1>
-      <p>Nome:</p>
-      <p>Email: </p>
+      <ProfileC />
     </div>
   );
 };

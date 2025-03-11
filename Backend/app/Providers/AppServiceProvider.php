@@ -2,11 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\CategoriesService;
-use App\Services\PermissionService;
-use App\Services\PostService;
-use App\Services\RoleService;
-use App\Services\UserService;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+<<<<<<< HEAD
         $this->app->bind(PostService::class, function ($app) { // Con esta función se está registrando las funciones del PostService para el controller
             return new PostService();
         });        
@@ -31,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserService::class, function ($app) { // Con esta función se está registrando las funciones del PostService para el controller
             return new UserService();
         }); 
+=======
+        //
+>>>>>>> 35f41bf90131cf00ca3177b5998c18f0ecfcc639
     }
 
     /**
@@ -38,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
+            return config('app.frontend_url')."/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
+        });
     }
 }

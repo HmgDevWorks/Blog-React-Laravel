@@ -1,5 +1,3 @@
-
-
 <?php
 
 namespace App\Http\Requests\Auth;
@@ -26,7 +24,7 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules(): array //hemos cambiado el que venia por que la tabla user que venia de 0 tenia otros valores
     {
         return [
             'email_user' => ['required', 'string', 'email'],
@@ -39,62 +37,49 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate(): void
-    {
-        $this->ensureIsNotRateLimited();
+    // public function authenticate(): void
+    // {
+    //     $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt(['email_user' => $this->email_user, 'password_user' => $this->password_user], $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
-            throw ValidationException::withMessages([
-                'email_user' => trans('auth.failed'),
-            ]);
-        }
+    //     if (! Auth::attempt($this->only('email_user', 'password_user'), $this->boolean('remember'))) {
+    //         RateLimiter::hit($this->throttleKey());
 
-        RateLimiter::clear($this->throttleKey());
-    }
+    //         throw ValidationException::withMessages([
+    //             'email_user' => __('auth.failed'),
+    //         ]);
+    //     }
 
-    /**
-     * Ensure the login request is not rate limited.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function ensureIsNotRateLimited(): void
-    {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
-            return;
-        }
+    //     RateLimiter::clear($this->throttleKey());
+    // }
 
-        event(new Lockout($this));
+    // /**
+    //  * Ensure the login request is not rate limited.
+    //  *
+    //  * @throws \Illuminate\Validation\ValidationException
+    //  */
+    // public function ensureIsNotRateLimited(): void
+    // {
+    //     if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+    //         return;
+    //     }
 
-        $seconds = RateLimiter::availableIn($this->throttleKey());
+    //     event(new Lockout($this));
 
-        throw ValidationException::withMessages([
-            'email_user' => trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ]),
-        ]);
-    }
+    //     $seconds = RateLimiter::availableIn($this->throttleKey());
 
-    /**
-     * Get the rate limiting throttle key for the request.
-     */
-    public function throttleKey(): string
-    {
-        return Str::transliterate(Str::lower($this->string('email_user')).'|'.$this->ip());
-    }
+    //     throw ValidationException::withMessages([
+    //         'email_user' => trans('auth.throttle', [
+    //             'seconds' => $seconds,
+    //             'minutes' => ceil($seconds / 60),
+    //         ]),
+    //     ]);
+    // }
 
-    public function messages():array{
-        return [
-            'password_user.required'=> 'La contraseña es un campo necesario.',
-            'password_user.string'=> 'La contraseña debe ser una cadena de carácteres.',
-
-            'email_user.required'=> 'El correo electrónico es un campo necesario.',
-            'email_user.string'=> 'El correo electrónico debe ser una cadena de carácteres.',
-            'email_user.email'=> 'No has escrito una dirección de correo electrónico.',
-            'email_user.unique'=> 'Esta dirección de correo electrónico ya está siendo utilizada'
-        ];
-    }
+    // /**
+    //  * Get the rate limiting throttle key for the request.
+    //  */
+    // public function throttleKey(): string
+    // {
+    //     return Str::transliterate(Str::lower($this->input('email_user')).'|'.$this->ip());
+    // }
 }
-
-

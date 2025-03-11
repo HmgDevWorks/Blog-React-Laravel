@@ -22,7 +22,14 @@ class Post extends Model
         'title',
         'content',
         'status',
+        'views'
     ];
 
-
+    // Relación muchos a muchos con los usuarios (si deseas acceder a favoritos desde el post)
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites') // 'favorites' es la tabla intermedia
+                    ->withPivot('categories_id') // Si necesitas campos adicionales
+                    ->withTimestamps();
+    }
 }

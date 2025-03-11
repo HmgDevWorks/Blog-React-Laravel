@@ -1,0 +1,36 @@
+:root{
+    --font-header: 'Abril Fatface', cursive;
+    --font: helvetica, sans-serif;
+    --bg-color: #c6c7c4;
+    --header-bg-color: #353b3c;
+    --header-text-color: #846a6a;
+    --form-bg-color: #eef0f2;
+    --input-bg-color: #eef0f2;
+    --input-font-size: 1.2rem;
+    --input-font-color: black;
+    --btn-bg-color: #846a6a;
+    --btn-font-size: 1rem;
+    --hr-color: #c6c7c4;
+    --p-font-size: 0.833rem;
+    --p-color: black;
+}
+
+*{
+    font-family: var(--font);
+}
+
+.draft-tabs > input{
+    font-size: var(--input-font-size);
+    background-color: var(--input-bg-color);
+    /* color: var(--input-font-color); */
+}
+
+.draft-tabs > .tabs > div{
+    background-color: #eef0f2;
+}
+
+.draft-tabs > .tab {
+    &:not(:checked, :hover, .tab-active, [aria-selected="true"]) {
+        color: var(--btn-bg-color)
+    }
+}

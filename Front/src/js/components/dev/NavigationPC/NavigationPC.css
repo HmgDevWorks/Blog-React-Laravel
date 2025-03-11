@@ -1,0 +1,85 @@
+.navigatorPc {
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+@media screen and (min-width: 768px) {
+    :root {
+        width: calc(100vw-200px);
+        margin-left: 200px;
+    }
+}
+
+.logoDiv {
+    height: 200px;
+    background-color: #846a6a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #eef0f2;
+}
+
+.logoPrincipal {
+    width: 150px;
+    height: 150px;
+}
+
+.listaPc {
+    background-color: #846a6a;
+
+    height: 100%;
+}
+
+.listaPc ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+.listaPc ul li {
+    list-style: none;
+    padding: 15px 20px;
+    border-bottom: 2px solid #eef0f2;
+}
+
+.listaPc ul li:hover {
+    background-color: #353b3c;
+}
+
+.listaPc ul a li {
+    font-size: 1.4rem;
+    text-decoration: none !important;
+    display: inline-block;
+    width: 100%;
+
+}
+
+.listaPc ul a {
+
+    transition: transform 0.1s ease;
+}
+
+.listaPc ul a li:hover .textoNavbar {
+
+    transform: scale(1.1);
+}
+
+.listaPc ul a li:hover {
+    color: #eef0f2;
+}
+
+    {}
+
+.linksNavMob {
+    font-size: 1.4rem;
+    text-decoration: none !important;
+    display: inline-block;
+    transition: transform 0.1s ease;
+}
+
+.linksNavMob:hover {
+    transform: scale(1.1);
+}

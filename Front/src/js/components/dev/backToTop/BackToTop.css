@@ -1,0 +1,25 @@
+.backtoTopButton {
+    width: 6vw;
+    height: 6vw;
+    border-radius: 50%;
+    border: none;
+    background-color: #846a6a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    position: fixed;
+    bottom: 16%;
+    right: 5%;
+}
+
+.backtoTopButton:hover {
+    transform: scale(1.1);
+}
+
+.backtoTopButton img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}

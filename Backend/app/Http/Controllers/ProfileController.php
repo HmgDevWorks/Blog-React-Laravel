@@ -26,7 +26,6 @@ class ProfileController extends Controller
     {
         return $this->userService->createUser($request);
     }
-
     
     public function index():JsonResponse // Muestra todos los usuarios
     {
@@ -69,6 +68,12 @@ class ProfileController extends Controller
 
     //     return Redirect::to('/');
     // }
+
+    public function getUser(Request $request)
+    {
+        // Retorna la información del usuario autenticado
+        return response()->json($request->user());
+    }
 
     public function destroy(User $user):JsonResponse
     {

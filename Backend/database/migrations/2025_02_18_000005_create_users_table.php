@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name_user')->nullable(false);
+            $table->string('name_user')->unique()->nullable(false);
             $table->string('email_user')->unique()->nullable(false);
             $table->string('password_user')->nullable(false);
-            $table->string('name_lastName')->nullable(false);
-            $table->string('img_user')->nullable(false)->default('default.jpg');
+            $table->string('name_lastName')->nullable();
+            $table->string('img_user')->nullable();
             $table->text('bio')->nullable();
             $table->rememberToken(); //Campo para el "Recuerdame" de la sesión del usuario.
             $table->timestamps(); // Crea dos campos de cuando se crea y cuando se actualiza.

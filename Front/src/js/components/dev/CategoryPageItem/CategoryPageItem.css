@@ -1,0 +1,35 @@
+:root {
+    --grisClaro: #eef0f2;
+    --grisMeio: #c6c7c4;
+    --saturadoClaro: #a2999e;
+    --saturadoOscuro: #846a6a;
+    --grisOscuro: #353b3c;
+}
+
+.indiceCategorias {
+    background-color: var(--grisClaro);
+    color: var(--saturadoOscuro);
+    padding: 20px;
+    text-align: center;
+    font-size: 1.728rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Abril Fatface", serif !important;
+}
+
+.enlaces-lista {
+    padding: 0;
+    text-align: center;
+}
+
+.enlace-item {
+    margin-bottom: 0.5rem;
+}
+
+.enlace {
+    color: #353b3c;
+    font-size: 1.2rem;
+}
+
+
