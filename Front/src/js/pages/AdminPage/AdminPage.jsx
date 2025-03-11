@@ -42,7 +42,7 @@ const AdminPage = () => {
   };
 
   return (
-    <div>
+    <div className="admin-page-container">
       <h1 className="Titulo_Admin_Page">Admin Page</h1>
       <div className="admin-users">
         {users.map(user => (

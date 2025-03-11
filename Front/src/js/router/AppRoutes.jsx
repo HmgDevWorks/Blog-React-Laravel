@@ -8,6 +8,7 @@ import HomePage from "../pages/HomePage/HomePage";
 import NovedadesPage from "../pages/NovedadesPage/NovedadesPage";
 import FavPage from "../pages/FavPage/FavPage";
 import CategoryPage from "../pages/CategoryPage/CategoryPage";
+import UsersBlogs from "../pages/UsersBlogs/UsersBlogs";
 // import EditarBlogPage from "../pages/EditarBlogPage/EditarBlogPage";
 
 const AppRoutes = () => {
@@ -24,6 +25,7 @@ const AppRoutes = () => {
       <Route path={"/novedades"} element={<NovedadesPage />} />
       <Route path={"/favoritos"} element={<FavPage />} />
       <Route path={"/categorias/:id_categoria"} element={<CategoryPage />} />
+      {/* <Route path={"/UsuarioBlogs/:id_Usuario"} element={<UsersBlogs />} /> */}
       {/* <Route path={"/signUp"} element={<h1>Sing up</h1>} /> */}
       {/* <Route path={"/editarBlog/:blog_id"} element={<h1>editar</h1>} /> */}
       {/* <Route path={"/contador"} element={<Counter />} /> */}
