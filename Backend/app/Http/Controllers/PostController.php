@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Models\Categories;
 use App\Models\Post;
 use App\Services\PostService;
 use Illuminate\Http\JsonResponse;
@@ -33,8 +34,20 @@ class PostController extends Controller
 
     public function showOne(Post $post): JsonResponse
     {
-        return response()->json($this->postService->showPost($post));
+        return response()->json($this->postService->getPostById($post));
     }
+
+    
+    public function showPostByCategory($cat): JsonResponse //creado para devolver los post con el id de la categoria
+    {
+        return response()->json($this->postService->getPostByCategory($cat));
+    }
+
+    public function showNPost(): JsonResponse
+    {
+        return response()->json($this->postService->getAllNPost());
+    }
+
 
     /**
      * Store a newly created resource in storage.

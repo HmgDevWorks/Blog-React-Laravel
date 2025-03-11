@@ -19,6 +19,7 @@ use App\Http\Middleware\JwtMiddleware;
 Route::controller(ProfileController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/users', 'index')->name('users.index'); //muestra todos los usuarios
     Route::get('/users/{user}', 'show')->name('users.show'); //muestra el usuario por el id
+    Route::get('/users/number', 'showNUsers'); // Devuelve la cantidad de users
     Route::post('/users/store', 'store')->name('users.store');//->middleware(['auth'])->middleware(['role:administrador']);
     Route::put('/users/update/{user}', 'update')->name('users.update'); //->middleware(['auth'])->middleware(['role:administrador']);
     Route::put('/users/changeRole/{user}', 'changeRole')->name('users.changeRole');//->middleware(['auth'])->middleware(['role:administrador']);
@@ -45,6 +46,8 @@ Route::controller(PostController::class)->group(function () {
     Route::get('/posts', 'index')->name('posts.index'); // enseña los 10 últimos
     Route::get('/posts/show', 'show'); // Enseña todos los posts
     Route::get('/posts/show/{post}', 'showOne'); // Enseña un post por un id
+    Route::get('/posts/categories/{cat}', 'showPostByCategory'); // Enseña todos los post pasandole una categoría
+    Route::get('/posts/number', 'showNPost'); // Devuelve la cantidad de posts
     Route::get('/posts/user/{id}', 'postUser');    //Enseña los post a traves del id del usuario
     Route::get('/posts/searchPosts', 'searchPosts');    //Ruta para buscar posts BARRA DE BÚSQUEDA
     Route::get('/posts/posts-overview/{userId}', 'getUserPostsOverview');    // Devuelve las estadísticas para el Dashboard

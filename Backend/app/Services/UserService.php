@@ -21,6 +21,11 @@ class UserService
         return User::findOrFail($id);
     }
 
+    public function getAllNUsers()
+    { // Esta función recoge todos los datos de la tabla Post
+        return User::count();
+    }
+
     public function createUser($data)
     { // Devuelve el usuario recién creado, la función create recibe un array y va rellenando la BBDD. 
         try {

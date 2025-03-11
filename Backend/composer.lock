@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "c436ec2a8028cdcfe1e7fe92ddb5363c",
-=======
     "content-hash": "ad37bb4a372cbdf2984d8e2112212262",
->>>>>>> 35f41bf90131cf00ca3177b5998c18f0ecfcc639
     "packages": [
         {
             "name": "brick/math",
@@ -3637,8 +3633,6 @@
                 }
             ],
             "time": "2025-02-28T20:29:57+00:00"
-<<<<<<< HEAD
-=======
         },
         {
             "name": "stella-maris/clock",
@@ -3686,7 +3680,6 @@
                 "source": "https://github.com/stella-maris-solutions/clock/tree/0.1.7"
             },
             "time": "2022-11-25T16:15:06+00:00"
->>>>>>> 35f41bf90131cf00ca3177b5998c18f0ecfcc639
         },
         {
             "name": "symfony/clock",
@@ -6538,16 +6531,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.21.0",
+            "version": "v1.21.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "531fa0871fbde719c51b12afa3a443b8f4e4b425"
+                "reference": "c44bffbb2334e90fba560933c45948fa4a3f3e86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/531fa0871fbde719c51b12afa3a443b8f4e4b425",
-                "reference": "531fa0871fbde719c51b12afa3a443b8f4e4b425",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/c44bffbb2334e90fba560933c45948fa4a3f3e86",
+                "reference": "c44bffbb2334e90fba560933c45948fa4a3f3e86",
                 "shasum": ""
             },
             "require": {
@@ -6558,9 +6551,9 @@
                 "php": "^8.2.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.68.5",
-                "illuminate/view": "^11.42.0",
-                "larastan/larastan": "^3.0.4",
+                "friendsofphp/php-cs-fixer": "^3.70.2",
+                "illuminate/view": "^11.44.1",
+                "larastan/larastan": "^3.1.0",
                 "laravel-zero/framework": "^11.36.1",
                 "mockery/mockery": "^1.6.12",
                 "nunomaduro/termwind": "^2.3",
@@ -6600,7 +6593,7 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2025-02-18T03:18:57+00:00"
+            "time": "2025-03-11T03:22:21+00:00"
         },
         {
             "name": "laravel/sail",
@@ -7349,7 +7342,6 @@
         },
         {
             "name": "phpunit/phpunit",
-<<<<<<< HEAD
             "version": "11.5.12",
             "source": {
                 "type": "git",
@@ -7360,18 +7352,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d42785840519401ed2113292263795eb4c0f95da",
                 "reference": "d42785840519401ed2113292263795eb4c0f95da",
-=======
-            "version": "11.5.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3946ac38410be7440186c6e74584f31b15107fc7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3946ac38410be7440186c6e74584f31b15107fc7",
-                "reference": "3946ac38410be7440186c6e74584f31b15107fc7",
->>>>>>> 35f41bf90131cf00ca3177b5998c18f0ecfcc639
                 "shasum": ""
             },
             "require": {
@@ -7443,11 +7423,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.12"
-=======
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.11"
->>>>>>> 35f41bf90131cf00ca3177b5998c18f0ecfcc639
             },
             "funding": [
                 {
@@ -7463,11 +7439,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2025-03-07T07:31:03+00:00"
-=======
-            "time": "2025-03-05T07:36:02+00:00"
->>>>>>> 35f41bf90131cf00ca3177b5998c18f0ecfcc639
         },
         {
             "name": "sebastian/cli-parser",

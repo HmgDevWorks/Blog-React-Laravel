@@ -27,8 +27,8 @@ class LoginRequest extends FormRequest
     public function rules(): array //hemos cambiado el que venia por que la tabla user que venia de 0 tenia otros valores
     {
         return [
-            'email_user' => ['required', 'string', 'email'],
-            'password_user' => ['required', 'string'],
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string'],
         ];
     }
 
