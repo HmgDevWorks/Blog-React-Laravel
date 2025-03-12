@@ -12,7 +12,7 @@
   align-items: center;
   background-color: var(--grisClaro); /* Establece el fondo como grisClaro */
   width: 500px; /* Ajusta el valor según tus necesidades */
-  height: 150px; /* Ajusta el valor según tus necesidades */
+  padding: 10px; /* Ajusta el valor según tus necesidades */
 }
 
 .admin-user-image {
