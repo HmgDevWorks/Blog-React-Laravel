@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
             'password' => $request->input('password'), // Deja la contraseña en texto plano
         ];
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) { //codigo de jwt que autentifica si el usuario es correcto comparandolo con la bbdd
             $user = Auth::user();
             $token = JWTAuth::fromUser($user);
             return response()->json(['token' => $token]);

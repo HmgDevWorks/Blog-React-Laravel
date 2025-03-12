@@ -37,6 +37,11 @@ class ProfileController extends Controller
         return response()->json($this->userService->getUserById($id));
     }
 
+    public function showNUsers(): JsonResponse
+    {
+        return response()->json($this->userService->getAllNUsers());
+    }
+
     public function update(Request $request, User $user):JsonResponse // Actualiza un usuario 
     {
         return response()->json($this->userService->updateUser($request, $user));

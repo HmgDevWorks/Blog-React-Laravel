@@ -15,7 +15,7 @@ class JwtMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next) //funcion para validar el token, es decir que el que recibimos de front es el mismo que usamos en back para que el usuario pueda hacer peticiones
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();

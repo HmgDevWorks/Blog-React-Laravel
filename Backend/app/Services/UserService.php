@@ -21,6 +21,11 @@ class UserService
         return User::findOrFail($id);
     }
 
+    public function getAllNUsers()
+    { //
+        return User::count();
+    }
+
     public function createUser($data)
     { // Devuelve el usuario recién creado, la función create recibe un array y va rellenando la BBDD. 
         try {

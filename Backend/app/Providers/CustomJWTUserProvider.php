@@ -15,7 +15,6 @@ class CustomJWTUserProvider extends EloquentUserProvider
      */
     public function validateCredentials($user, array $credentials)
     {
-        // Usamos 'password_user' en lugar de 'password'
-        return Hash::check($credentials['password_user'], $user->getAuthPassword());
+        return Hash::check($credentials['password_user'], $user->getAuthPassword()); // Usamos 'password_user' en lugar de 'password'
     }
 }

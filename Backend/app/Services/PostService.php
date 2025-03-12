@@ -22,13 +22,27 @@ class PostService
             ->get(); // Obtiene los posts
     }
 
-    public function showPost($post)
-    {   // Devuelve el post con el ID especificado, o lanza un error 404 si no existe
+
+    public function getPostById($post)
+    {    // Devuelve el post con el ID especificado, o lanza un error 404 si no existe
+        //$post = Post::findOrFail($id);
         $post->increment('views'); // contador para que cuando alguien entre en el post especificado aumenten las visitas en la tabla de post
         return response()->json([
             "post" => $post,
             "message" => "Visita incrementada en 1"
         ]);
+
+
+    }
+
+    public function getPostByCategory($cat)
+    {    //creado para devolver los post con el id de la categoria
+        return Post::where('id_categories', $cat)->get();
+    }
+
+    public function getAllNPost()
+    { // Esta función recoge todos los datos de la tabla Post
+        return Post::count();
     }
 
     public function createPost($data)
@@ -49,11 +63,7 @@ class PostService
         }
     }
 
-    public function getPostByCategory($cat)
-    {    // 
-        $post = Categories::findOrFail($cat);
-        return Post::findOrFail($post->id);
-    }
+
 
     public function getPostsByUser($userId)
     { //function para enseñar los post de cada usuario a traves de su ID
