@@ -22,7 +22,7 @@ class UserService
     }
 
     public function getAllNUsers()
-    { // Esta función recoge todos los datos de la tabla Post
+    { //
         return User::count();
     }
 

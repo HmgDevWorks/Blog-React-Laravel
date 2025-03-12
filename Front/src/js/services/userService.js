@@ -7,7 +7,7 @@ class UserService {
         })
     }
     getUsers() {
-        return this.api.get('/')
+        return this.api.get('/users')
     }
     createUser(data) {
         console.log(data)
