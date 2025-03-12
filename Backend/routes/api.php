@@ -18,8 +18,9 @@ use App\Http\Middleware\JwtMiddleware;
 //cambiar cuando lo tengamos hecho
 Route::controller(ProfileController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/users', 'index')->name('users.index'); //muestra todos los usuarios
+    Route::get('/users/number', 'number')->name('users.number'); // Devuelve la cantidad de users
+    //Route::get('/users/numberAuth', 'number')->name('users.number'); // Devuelve la cantidad de users
     Route::get('/users/{user}', 'show')->name('users.show'); //muestra el usuario por el id
-    Route::get('/users/number', 'showNUsers'); // Devuelve la cantidad de users
     Route::post('/users/store', 'store')->name('users.store');//->middleware(['auth'])->middleware(['role:administrador']);
     Route::put('/users/update/{user}', 'update')->name('users.update'); //->middleware(['auth'])->middleware(['role:administrador']);
     Route::put('/users/changeRole/{user}', 'changeRole')->name('users.changeRole');//->middleware(['auth'])->middleware(['role:administrador']);

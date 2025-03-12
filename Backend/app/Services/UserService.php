@@ -21,7 +21,11 @@ class UserService
         return User::findOrFail($id);
     }
 
-    public function getAllNUsers()
+    public function numberUsers()
+    { //
+        return User::count();
+    }
+    public function numberAuth() // Terminar mañana -- solo coger los lectores 
     { //
         return User::count();
     }
