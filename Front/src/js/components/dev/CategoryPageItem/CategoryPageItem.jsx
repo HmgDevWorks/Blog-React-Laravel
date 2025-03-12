@@ -1,24 +1,29 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import './CategoryPageItem.css';
 
-const enlacesDePrueba = [
-    { id: 1, title: 'Enlace 1', url: '/enlace1' },
-    { id: 2, title: 'Enlace 2', url: '/enlace2' },
-    { id: 3, title: 'Enlace 3', url: '/enlace3' },
-    { id: 4, title: 'Enlace 4', url: '/enlace4' },
-    { id: 5, title: 'Enlace 5', url: '/enlace5' },
-    { id: 6, title: 'Enlace 6', url: '/enlace6' },
-    { id: 7, title: 'Enlace 7', url: '/enlace7' },
-    { id: 8, title: 'Enlace 8', url: '/enlace8' },
-    { id: 9, title: 'Enlace 9', url: '/enlace9' },
-    { id: 10, title: 'Enlace 10', url: '/enlace10' },
-];
+const images = import.meta.glob('../../../../assets/carouselVertical/*.webp', { eager: true });
 
-export default function CategoryPageItem() {
+export default function Category({ title, imageUrl, description }) {
+    const [loadedImage, setLoadedImage] = useState(null);
+
+    useEffect(() => {
+        // Buscar la imagen que coincide con la ruta
+        const matchedImage = Object.entries(images).find(([path]) => path.includes(imageUrl));
+        if (matchedImage) {
+            setLoadedImage(matchedImage[1].default);
+        }
+    }, [imageUrl]);
     return (
-        <div>
-            <div className="indiceCategorias text-center p-2">
-                Indice
+        <div className="relative category-Carrousel-container">
+            <a href={`#${title}`}>
+                <img
+                    src={loadedImage}
+                    alt={title}
+                    className="grayscale w-full"
+                />
+            </a>
+            <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-custom-color text-center p-2">
+                {title}
             </div>
             <ul className="enlaces-lista">
                 {enlacesDePrueba.map((enlace) => (

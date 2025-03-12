@@ -4,6 +4,35 @@
     width: 80%;
     margin: 0 auto;
     border: 1px solid #000;
+    background-color: white;
+    border-radius: 5px;
+    margin: 10px auto;
+}
+
+.editor-title, .categorie-dropdown{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.editor-title > label, .categorie-dropdown > label > div > span{
+    font-family: "Special Elite";
+    font-size: 1.728rem;
+    color: var(--grisOscuro);
+}
+
+.editor-title > input, .categorie-dropdown > label > select{
+    font-family: Helvetica, sans-serif;
+    font-size: 1.2rem;
+    color: black;
+    background-color: white !important;
+    margin-inline-start: 5px;
+    padding-inline-start: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.categorie-dropdown > label > select{
+    width: 200px;
 }
 
 .yoopta-editor{

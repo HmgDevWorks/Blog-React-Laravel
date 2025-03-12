@@ -31,13 +31,13 @@ const SearchPage = () => {
 
     return (
         <div className="container mx-auto p-4 mt-10">
-            <div className="p-4 rounded text-center">
-                <h2 className="titleArticleFinder">Encuentra el artículo:</h2>
+            <div className="bg-gray-200 p-4 rounded text-center">
+                <h2 className="Titulo">Encuentra el artículo:</h2>
             </div>
             <div className='text-center mt-10 '>
                 <label id="buscador_lab" className="input input-bigger">
                     <svg className="h-[1em] opacity-60 icon-color" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
-                    <input type="search" 
+                    <input type="search"
                         className="input-field"
                         required placeholder="Buscar..."
                         id="input_busc"
@@ -48,25 +48,25 @@ const SearchPage = () => {
             </div>
 
             <div className="flex flex-wrap justify-around mt-10">
-                <button 
+                <button
                     className={`btn-articulo btn-xs sm:btn-sm md:btn-md lg:btn-lg ${selectedButton === 'Autor' ? 'btn-selected' : ''}`}
                     onClick={() => handleCardClick('Autor')}
                 >Autor</button>
-                <button 
+                <button
                     className={`btn-articulo btn-xs sm:btn-sm md:btn-md lg:btn-lg ${selectedButton === 'Título' ? 'btn-selected' : ''}`}
                     onClick={() => handleCardClick('Título')}
                 >Título</button>
-                <button 
+                <button
                     className={`btn-articulo btn-xs sm:btn-sm md:btn-md lg:btn-lg ${selectedButton === 'Contenido' ? 'btn-selected' : ''}`}
                     onClick={() => handleCardClick('Contenido')}
                 >Contenido</button>
-                <button 
+                <button
                     className={`btn-articulo btn-xs sm:btn-sm md:btn-md lg:btn-lg ${selectedButton === 'Fecha de publicación' ? 'btn-selected' : ''}`}
                     onClick={() => handleCardClick('Fecha de publicación')}
                 >Fecha de publicación</button>
             </div>
 
-            
+
             {/* Muestra los resultados de búsqueda en tiempo real */}
             <div className="mt-4">
                 {results.map((result, index) => (

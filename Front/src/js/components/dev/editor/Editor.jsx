@@ -1,5 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import axios from "axios";
+import postService from "../../../services/postService";
+import servicioCategorias from "../../../services/categoriesService";
 
 import { html } from '@yoopta/exports';
 import YooptaEditor, { createYooptaEditor } from "@yoopta/editor";
@@ -44,57 +46,150 @@ const TOOLS = {
   },
 };
 
-export default function Editor() {
+export default function Editor({ isEditable = true, post = null }) {
   const editor = useMemo(() => createYooptaEditor(), []);
-  const [value, setValue] = useState();
-  const [isPreview, setIsPreview] = useState(false);
+  const [value, setValue] = useState({});
+  // const [isPreview, setIsPreview] = useState(false);
+  const [title, setTitle] = useState(post ? post.title : "");
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(post ? post.id_categories : 0);
+  // if (post) { console.log("selectedcat", selectedCategory); }
+
+  function changeTitle(event) {
+    setTitle(event.target.value);
+  }
 
   const onChange = (value, options) => {
     setValue(value);
   };
 
-  // from html to @yoopta content
-  // const deserializeHTML = () => {
-  //   const htmlString = '<h1>First title</h1>';
-  //   const content = html.deserialize(editor, htmlString);
-
-  //   editor.setEditorValue(content);
-  // };
+  const deserializeHTML = useCallback((htmlString) => {
+    if (!htmlString) return [];
+    try {
+      return html.deserialize(editor, htmlString);
+    } catch (error) {
+      console.error('Error deserializing HTML:', error);
+      return [];
+    }
+  }, [editor]);
 
   // from @yoopta content to html string
   const serializeHTML = () => {
     const data = editor.getEditorValue();
     const htmlString = html.serialize(editor, data);
-    console.log('html string', htmlString);
     return htmlString;
   };
 
-  const handlePreview = () => {
-    setIsPreview(isPreview => !isPreview);
+  // const handlePreview = () => {
+  //   setIsPreview(isPreview => !isPreview);
+  // };
+
+  const handleSave = async (status) => {
+    serializeHTML();
+    const userId = localStorage.getItem('userId');
+    let data = {};
+    let request = "";
+    if (!post) {
+      data = { id_categories: selectedCategory, user_id: userId, title: title, content: serializeHTML(), status: status };
+      request = postService.createPost(data);
+    } else {
+      console.log("POST", post);
+      data = { id_categories: post.id_categories, title: title, content: serializeHTML(), status: status };
+      request = postService.editPost(post.id, data);
+    }
+    if (!selectedCategory) {
+      alert('Please select a category before saving.');
+      return;
+    }
+    request
+      .then(response => {
+        console.log('Published:', response.data);
+      })
+      .catch(error => {
+        console.error('Error publishing:', error);
+      });
   };
 
-  const handlePublish = async () => {
-    serializeHTML();
-    // try {
-    //   const response = await axios.post('/api/publish', { content: value });
-    //   console.log('Published:', response.data);
-    // } catch (error) {
-    //   console.error('Error publishing:', error);
-    // }
+  const deletePost = async () => {
+    if (!post) {
+      setValue([]);
+      editor.setEditorValue([]);
+      return;
+    }
+    // const userId = localStorage.getItem('userId');
+    // let data = { id_categories: selectedCategory, user_id: userId, title: title, content: serializeHTML(), status: status };
+    let request = postService.deletePost(post.id);
+    request
+      .then(response => {
+        console.log('Deleted:', response.data);
+      })
+      .catch(error => {
+        console.error('Error deleting:', error);
+      });
   };
 
-  const handleSave = async () => {
-    serializeHTML();
-    // try {
-    //   const response = await axios.post('/api/save', { content: value });
-    //   console.log('Saved:', response.data);
-    // } catch (error) {
-    //   console.error('Error saving:', error);
-    // }
+  const hasFetched = useRef(false);
+
+  useEffect(() => {
+    if (hasFetched.current || categories.length > 0) return;
+
+    const request = servicioCategorias.getCategorias();
+    hasFetched.current = true;
+
+    request
+      .then(response => {
+        setCategories(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching categories:', error);
+      });
+  }, [categories.length]);
+
+  useEffect(() => {
+    if (post && post.content) {
+      const deserializedValue = deserializeHTML(post.content);
+      setValue(deserializedValue);
+      editor.setEditorValue(deserializedValue);
+    }
+  }, [post, editor, deserializeHTML]);
+
+
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
   };
 
   return (
     <>
+      {isEditable && (<div className="editor-title">
+        <label htmlFor="post-title">Title:</label>
+        <input
+          type="text"
+          id="post-title"
+          defaultValue={title}
+          onChange={(e) => changeTitle(e)}
+        />
+      </div>)}
+      {isEditable && (<div className="categorie-dropdown">
+        <label className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">Escoge categoria</span>
+          </div>
+          <select
+            className="select select-bordered"
+            onChange={handleCategoryChange}
+            value={selectedCategory || ""}
+          >
+            <option value="" disabled>
+              Elige una categoría
+            </option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>)}
       <div className="editor">
         <YooptaEditor
           editor={editor}
@@ -104,14 +199,15 @@ export default function Editor() {
           value={value}
           onChange={onChange}
           marks={MARKS}
+          readOnly={!isEditable}
         />
       </div>
-      <div className="editor-btns">
-        <button className="btn" onClick={handlePublish}>Publicar</button>
-        <button className="btn" onClick={handleSave}>Guardar</button>
-        <button className="btn" onClick={handlePreview}>Previsualizar</button>
-      </div>
-      {isPreview && (serializeHTML())}
+      {isEditable && (
+        <div className="editor-btns">
+          <button className="btn" onClick={() => handleSave("published")}>Publicar</button>
+          <button className="btn" onClick={() => handleSave("draft")}>Guardar</button>
+          <button className="btn btn-error" onClick={deletePost}>Borrar</button>
+        </div>)}
     </>
   );
 }

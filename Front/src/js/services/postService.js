@@ -8,37 +8,36 @@ class PostService {
         })
     }
 
-    /* Post by Id */
-    getOnePost(id) {
-        return this.api.get(`/`, id)
+    getOnePost(blog_id) {
+        return this.api.get(`/show/${blog_id}`)
     }
     /* All posts */
     getPosts() {
         return this.api.get('/showAll')
     }
     /* User posts */
-    getPosts(id) {
+    getUserPosts(id) {
         return this.api.get(`/user/${id}`)
     }
     /* Publicar */
     createPost(data) {
-        return this.api.post('/posts/store', data)
+        return this.api.post('/store', data)
     }
 
-    /* Show post */
-    getOnePost(id) {
-        return this.api.get(`/posts/show/${id}`)
+    getLastTenPost() {
+        return this.api.get('')
     }
 
     /* Editar post */
     editPost(id, data) {
-        return this.api.put(`/posts/update/${id}`, data)
+        return this.api.put(`/update/${id}`, data)
     }
 
     /* Eliminar post no se si vale así */
     deletePost(id) {
-        return this.api.delete(`/posts/destroy/${id}`)
+        return this.api.delete(`/destroy/${id}`)
     }
 }
 const postService = new PostService();
+
 export default postService;

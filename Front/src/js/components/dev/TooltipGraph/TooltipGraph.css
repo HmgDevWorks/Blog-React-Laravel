@@ -1,0 +1,22 @@
+.bg-color-tooltip-graph {
+    background-color: #c6c7c4 !important;
+    color: black !important;
+}
+
+.font-titulo {
+    font-family: "Abril Fatface", "cursive";
+    font-weight: bold;
+    color: #846a6a;
+    font-size: 1.2rem;
+}
+
+.tooltipGraphic {
+    width: 70%;
+}
+
+
+@media(min-width: 768px) {
+    .tooltipGraphic {
+        width: 50%;
+    }
+}

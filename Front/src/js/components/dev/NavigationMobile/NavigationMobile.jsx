@@ -5,6 +5,7 @@ import './NavigationMobile.css'
 import logoPluma from '../../../../assets/logo_pluma.svg';
 
 function NavigationMobile() {
+
   return (
 
     <div className="navbar bg-base-300 rounded-box">
@@ -16,7 +17,7 @@ function NavigationMobile() {
           <div tabIndex={0} role="button" className="btn btn-ghost rounded-btn dropbutton"> ☰</div>
           <ul
             tabIndex={0}
-            className="menu dropdown-content bg-base-100 rounded-box z-[1] mt-4 w-52 p-2 shadow collapseNav">
+            className="menu dropdown-content bg-base-100 rounded-box z-[1] mt-4 w-70 p-2 shadow collapseNav">
             <li>
               <a>
                 <div className="linksNavMob">estadisticas de autor</div>

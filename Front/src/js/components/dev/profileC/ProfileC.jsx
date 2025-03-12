@@ -1,6 +1,6 @@
 import './ProfileC.css';
 
-function Profile() {
+function ProfileC() {
     const credenciales = ["Mario", "mario@gmail.com"];
 
     return (
@@ -72,4 +72,4 @@ function Profile() {
         </div>
     );
 }
-export default Profile;
+export default ProfileC;

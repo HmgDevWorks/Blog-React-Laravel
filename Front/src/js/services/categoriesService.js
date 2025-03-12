@@ -15,8 +15,9 @@ class ServicioCategorias {
         return this.api.get('/')
     }
 
-    getOneCategoria(id) {
-        return this.api.get(`/${id}`)
+
+    getOneCategoria(category_id) {
+        return this.api.get(`/show/${category_id}`)
     }
 
     createCategoria(data) {
@@ -31,7 +32,7 @@ class ServicioCategorias {
     }
 
 }
-
 const servicioCategorias = new ServicioCategorias();
+
 
 export default servicioCategorias;

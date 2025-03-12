@@ -3,17 +3,18 @@ import axios from 'axios';
 class UserService {
     constructor() {
         this.api = axios.create({
-            baseURL: 'http://localhost:8000/api/users'
+            baseURL: 'http://localhost:8000/api'
         })
     }
     getUsers() {
         return this.api.get('/')
     }
     createUser(data) {
-        return this.api.post('/', data)
+        console.log(data)
+        return this.api.post('/register', data)
     }
-    getOneUser(id) {
-        return this.api.get(`/${id}`)
+    getOneUser(data) {
+        return this.api.post(`/login`, data)
     }
     editUser(id, data) {
         return this.api.put(`/${id}`, data)

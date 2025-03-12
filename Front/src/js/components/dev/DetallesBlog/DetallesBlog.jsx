@@ -1,64 +1,47 @@
-import './DetallesBlog.css'
+import servicioCategorias from '../../../services/categoriesService';
+import './DetallesBlog.css';
 import { useState, useEffect } from 'react';
-
+import useResize from '../../../bootstrap/hooks/useResize';
+import useImageLoader from '../../../bootstrap/hooks/useImageLoader';
+import { findNearestSpace } from '../../../bootstrap/utils/textUtils';
+import Editor from '../editor/Editor';
 
 const DetallesBlog = ({ blog }) => {
 
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
-    const handleResize = () => {
-        setIsMobile(window.innerWidth < 768);
-    };
+    const [imagenCategoria, setImagenCategoria] = useState();
+    const [nombreCategoria, setNombreCategoria] = useState()
+    const isMobile = useResize();
+    const loadedImage = useImageLoader(imagenCategoria);
 
     useEffect(() => {
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+        servicioCategorias
+            .getOneCategoria(blog.id_categories)
+            .then(({ data }) => {
+                setImagenCategoria(data.img_url)
+                setNombreCategoria(data.name)
 
-    const findNearestSpace = (text, index) => {
-        if (text[index] === ' ') return index;
-        let left = index - 1;
-        let right = index + 1;
-        while (left >= 0 || right < text.length) {
-            if (left >= 0 && text[left] === ' ') return left;
-            if (right < text.length && text[right] === ' ') return right;
-            left--;
-            right++;
-        }
-        return index;
-    };
+            })
+            .catch((err) => console.log(err));
+    }, [blog.id_categories]);
 
-    let PrimerosCaracteresIndex = findNearestSpace(blog.contenido, 400);
-    let restoIndex = findNearestSpace(blog.contenido, 400);
+    // const cutoffIndex = blog.content.length > 400 ? findNearestSpace(blog.content, isMobile ? 90 : 400) : null;
+    // const primerosCaracteres = !cutoffIndex ? blog.content : blog.content.substring(0, cutoffIndex);
+    // const resto = cutoffIndex ? blog.content.substring(cutoffIndex) : '';
 
-    if (isMobile) {
-        PrimerosCaracteresIndex = findNearestSpace(blog.contenido, 90);
-        restoIndex = findNearestSpace(blog.contenido, 90);
-    }
-
-    let PrimerosCaracteres = blog.contenido.substring(0, PrimerosCaracteresIndex);
-    let resto = blog.contenido.substring(restoIndex, blog.contenido.length);
     return (
         <div className="detallesBlog">
-            <h3>{blog.titulo}</h3>
-            <div className="tag">{blog.tag}</div>
+            <h3>{blog.title}</h3>
+            <div className="tag">{nombreCategoria}</div>
             <div className="contenidoEntero">
-                <div className="blogContImg">
-                    <div className="blogContenido">
-                        {PrimerosCaracteres}
-                    </div>
+                {/* <div className="blogContImg">
+                    <div className="blogContenido">{primerosCaracteres}</div>
                     <div className="imagenBlog">
-                        <img src={blog.image} alt="" />
+                        {loadedImage && <img src={loadedImage} alt={blog.title} />}
                     </div>
-                </div>
-                <div className="blogContenido2 blogContenido">
-                    {resto}
-                </div>
-                <div className="autorNombre">
-                    {blog.autor}
-                </div>
+                </div> */}
+                <Editor isEditable={false} post={blog} />
+                {/* {resto ?? <div className="blogContenido2 blogContenido">{resto}</div>} */}
+                <div className="autorNombre">{blog.autor}</div>
             </div>
         </div>
     );
