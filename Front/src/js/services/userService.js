@@ -7,7 +7,7 @@ class UserService {
         })
     }
     getUsers() {
-        return this.api.get('/')
+        return this.api.get('/users')
     }
     createUser(data) {
         console.log(data)
@@ -20,7 +20,7 @@ class UserService {
         return this.api.put(`/${id}`, data)
     }
     deleteUser(id) {
-        return this.api.delete(`/${id}`)
+        return this.api.delete(`/users/destroy/${id}`)
     }
 }
 
