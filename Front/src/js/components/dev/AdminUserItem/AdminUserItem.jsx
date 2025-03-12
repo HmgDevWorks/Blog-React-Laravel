@@ -1,7 +1,7 @@
 import './AdminUserItem.css'; // Importa el archivo CSS
 import { Navigate } from 'react-router-dom';
 
-const AdminUserItem = ({user_id, user }) => {
+const AdminUserItem = ({ user_id, user, onDelete }) => {
   return (
     
     <div className="admin-user-item">

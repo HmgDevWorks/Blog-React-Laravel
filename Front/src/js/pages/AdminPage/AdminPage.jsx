@@ -16,12 +16,19 @@ const AdminPage = () => {
   }, []);
 
   const handleDelete = (userId) => {
-   
+    userService
+    .deleteUser(userId)
+    .then(() => {
+      setUsers(users.filter(user => user.id !== userId));
+    })
+    .catch(error => {
+      console.error('Error al eliminar el usuario:', error);
+    });
   };
   
   return (
     <div className="admin-page-container">
-      <h1 className="Titulo_Admin_Page">Admin Page</h1>
+      <h1 className="Titulo_Admin_Page">Pagina de administración</h1>
       <div className="admin-users">
         {users.map(user => (
           <AdminUserItem 
