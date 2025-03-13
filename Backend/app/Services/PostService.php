@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Categories;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class PostService
@@ -28,12 +29,11 @@ class PostService
         //$post = Post::findOrFail($id);
         $post->increment('views'); // contador para que cuando alguien entre en el post especificado aumenten las visitas en la tabla de post
         //  $post->refresh();           //actualiza el campo para mostrarlo correctamente
+        $post["auth_name"]=User::where('id', $post->user_id)->value('name_user');;
         return response()->json([
             "post" => $post,
             "message" => "Visita incrementada en 1"
         ]);
-
-
     }
 
     public function getPostByCategory($cat)
