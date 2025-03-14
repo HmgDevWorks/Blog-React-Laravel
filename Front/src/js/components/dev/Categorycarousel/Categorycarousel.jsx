@@ -8,6 +8,7 @@ import Loader from '../Loader/Loader';
 
 
 export default function CategoryCarrousel() {
+
     const [categories, setCategories] = useState([]);
     useEffect(() => {
         servicioCategorias
@@ -15,7 +16,9 @@ export default function CategoryCarrousel() {
             .then(({ data }) => {
                 setCategories(data);
             })
-            .catch(err => console.log(err));
+            .catch(error => {
+                console.error('Error al obtener las categorias:', error);
+            });
     }, []);
     return (
         <div className="flex justify-center items-center">
@@ -27,6 +30,7 @@ export default function CategoryCarrousel() {
                     >
 
                         <Category
+                            id_categoria={category.id}
                             title={category.name}
                             imageUrl={category.img_url}
                             description={category.description}

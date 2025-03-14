@@ -6,11 +6,18 @@ class ServicioCategorias {
         this.api = axios.create({
             baseURL: 'http://localhost:8000/api/categories'
         })
+        this.api.interceptors.request.use((config) => {
 
+            const storedToken = localStorage.getItem("authToken");
 
+            if (storedToken) {
+                config.headers = { Authorization: `Bearer ${storedToken}` }
+            }
 
-
+            return config
+        })
     }
+
     getCategorias() {
         return this.api.get('/')
     }
@@ -18,6 +25,10 @@ class ServicioCategorias {
 
     getOneCategoria(category_id) {
         return this.api.get(`/show/${category_id}`)
+    }
+
+    showCategoryByName(name) {
+        return this.api.get(`/${name}`)
     }
 
     createCategoria(data) {
