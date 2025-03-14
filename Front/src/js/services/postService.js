@@ -27,7 +27,7 @@ class PostService {
     }
     /* User posts */
     getUserPosts(id) {
-        return this.api.get(`/posts/user/${id}`);
+        return this.api.get(`/user/${id}`);
     }
 
      /* Category posts */
