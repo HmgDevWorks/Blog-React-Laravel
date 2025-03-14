@@ -11,6 +11,7 @@ import CategoryPage from "../pages/CategoryPage/CategoryPage";
 // import EditarBlogPage from "../pages/EditarBlogPage/EditarBlogPage";
 import DashboardPage from "../pages/DashboardPage/DashboardPage";
 import AdminPage from "../pages/AdminPage/AdminPage";
+import UsersPosts from "../pages/UsersPosts/UsersPosts";
 
 const AppRoutes = () => {
   return (
@@ -27,6 +28,8 @@ const AppRoutes = () => {
       <Route path={"/dashboard"} element={<DashboardPage />} />
       <Route path={"/categorias/:id_categoria"} element={<CategoryPage />} />
       <Route path={"/userlist"} element={<AdminPage />} />
+      <Route path={"/userposts/:id_usuario"} element={<UsersPosts />} />
+
       {/* <Route path={"/editarBlog/:blog_id"} element={<h1>editar</h1>} /> */}
     </Routes>
   );

@@ -14,7 +14,7 @@ const AdminUserItem = ({ user_id, user, onDelete }) => {
       </div> */}
       <span className="user-name">{user}</span>
       <div className="buttons">
-        <button className="view-posts-button" onClick={() => Navigate(`/userPost/${user_id}`)}>Posts</button>
+        <button className="view-posts-button" onClick={() => Navigate(`/userposts/${user_id}`)}>Posts</button>
         <button className="delete-button" onClick={() => onDelete(user_id)}>Eliminar</button>
       </div>
     </div>
