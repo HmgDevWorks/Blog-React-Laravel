@@ -37,15 +37,17 @@ const CategoryPage = () => {
       <div className="indiceCategorias text-center p-2">
         Indice
       </div>
-      <ul className="enlaces-lista">
-        {articulos.map((articulo) => (
-          <li key={articulo.id} className="enlace-item">
-            <a href={`/detallesBlog/${articulo.id}`}>
-              <DetallesBlog blog={articulo} />
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div>
+        <ul className="enlaces-lista">
+          {articulos.map((articulo) => (
+            <li key={articulo.id} className="enlace-item">
+              <a href={`/detallesBlog/${articulo.id}`}>
+                <DetallesBlog blog={articulo} />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
       <BackToTop />
       <CreatePost />
     </div>
