@@ -14,6 +14,10 @@
     width: 100%;
     overflow: hidden;
     height: 80vw;
+
+    div{
+        width: 80%;
+    }
  }
 
 

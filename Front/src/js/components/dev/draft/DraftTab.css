@@ -15,22 +15,20 @@
     --p-color: black;
 }
 
-*{
+.draft-tabs{
     font-family: var(--font);
-}
+    
+    input{
+        font-size: var(--input-font-size);
+        background-color: var(--input-bg-color);
+    }
+    .tabs > div{
+        background-color: #eef0f2;
+    }
 
-.draft-tabs > input{
-    font-size: var(--input-font-size);
-    background-color: var(--input-bg-color);
-    /* color: var(--input-font-color); */
-}
-
-.draft-tabs > .tabs > div{
-    background-color: #eef0f2;
-}
-
-.draft-tabs > .tab {
-    &:not(:checked, :hover, .tab-active, [aria-selected="true"]) {
-        color: var(--btn-bg-color)
+    .tab {
+        &:not(:checked, :hover, .tab-active, [aria-selected="true"]) {
+            color: var(--btn-bg-color)
+        }
     }
 }

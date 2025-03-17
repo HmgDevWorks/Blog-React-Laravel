@@ -3,11 +3,13 @@ import './Categorycarousel.css';
 import servicioCategorias from '../../../services/categoriesService';
 import Category from '../CategoryCarouselItem/CategoryItem';
 import Loader from '../Loader/Loader';
+import { useAlert } from "../../../bootstrap/contexts/AlertContext";
 
 
 
 
 export default function CategoryCarrousel() {
+    const { addError, addSuccess } = useAlert();
 
     const [categories, setCategories] = useState([]);
     useEffect(() => {
@@ -17,7 +19,8 @@ export default function CategoryCarrousel() {
                 setCategories(data);
             })
             .catch(error => {
-                console.error('Error al obtener las categorias:', error);
+                const data = JSON.parse(error.request.response);
+                addError(data.error);
             });
     }, []);
     return (

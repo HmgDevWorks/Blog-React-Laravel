@@ -41,13 +41,18 @@ class PermissionService
 
         // Asigna permisos predeterminados al rol "editor"
         $editorRole = Role::findByName('editor');
-        $editorPermissions = ['create post','delete post','update post','publish post','view post','create user','delete user', 'update user','view user' ];
+        $editorPermissions = ['create_post','delete_post','update_post','publish_post','view_post','create_user','delete_user','update_user','view_user','banned_user'];
         $editorRole->givePermissionTo($editorPermissions);
 
         // Asigna permisos predeterminados al rol "lector"
          $readerRole = Role::findByName('reader');
-         $readerPermissions = ['view post'];
+         $readerPermissions = ['view_post'];
          $readerRole->givePermissionTo($readerPermissions);
+
+         // Asigna permisos predeterminados al rol "banned"
+         $bannedRole = Role::findByName('banned');
+         $bannedPermissions = Role::findByName('banned_user');
+         $bannedRole->givePermissionTo($bannedPermissions);
     }
 
     /**

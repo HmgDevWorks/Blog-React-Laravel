@@ -6,8 +6,18 @@ class RoleService {
         this.api = axios.create({
             baseURL: 'http://localhost:8000/api/role'
         })
+        this.api.interceptors.request.use((config) => {
+
+            const storedToken = localStorage.getItem("authToken");
+
+            if (storedToken) {
+                config.headers = { Authorization: `Bearer ${storedToken}` }
+            }
+
+            return config
+        })
     }
-    
+
     /* Ver todos los Roles */
     getRoles() {
         return this.api.get(`/`)

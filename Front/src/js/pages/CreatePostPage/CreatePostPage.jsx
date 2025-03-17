@@ -1,15 +1,18 @@
 import React from "react";
-import Box from "../../components/dev/box/Box";
-import DraftTab from "../../components/dev/draft/DraftTab";
+import Box from "../../components/dev/Box/Box";
+import DraftTab from "../../components/dev/Draft/DraftTab";
 import { useState, useEffect } from "react";
 import PostTable from "../../components/dev/PostsTable/PostTable";
-import Editor from "../../components/dev/editor/Editor";
+import Editor from "../../components/dev/Editor/Editor";
 import Separador from "../../components/dev/Separador/Separador";
 import postService from "../../services/postService";
+import { useAlert } from "../../bootstrap/contexts/AlertContext";
 
 // import Separador from "../../components/dev/separador/Separador";
 
-const CrearBlogPage = () => {
+const CreatePostPage = () => {
+  const { addError, addSuccess } = useAlert();
+
   const [dataDraft, setDataDraft] = useState([]);
   const [posts, setPosts] = useState([]);
 
@@ -22,7 +25,7 @@ const CrearBlogPage = () => {
         setDataDraft(response.data);
       })
       .catch(error => {
-        console.error('Error al obtener los posts:', error);
+        addError("Error al obtener los borradores. Intentalo de nuevo mas tarde.");
       });
 
   }, []);
@@ -37,7 +40,7 @@ const CrearBlogPage = () => {
         setPosts(response.data);
       })
       .catch(error => {
-        console.error('Error al obtener los posts:', error);
+        addError("Error al obtener las publicaciones. Intentalo de nuevo mas tarde");
       });
 
   }, []);
@@ -57,4 +60,4 @@ const CrearBlogPage = () => {
   );
 };
 
-export default CrearBlogPage;
+export default CreatePostPage;

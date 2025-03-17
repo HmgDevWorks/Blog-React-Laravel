@@ -9,15 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class CategoriesService
 {
-
-    public function getAllCategories()
-    { // Esta función recoge todas las categorias
+    public function getAllCategories() // Esta función recoge todas las categorias
+    { 
         return Categories::all();
     }
 
-    public function createCategories($data)
-    { // Esta función recoge la categoria nueva creada
-
+    public function createCategories($data) // Esta función recoge la categoria nueva creada
+    { 
         $category = Categories::create(
             [
                 'name' => $data->name,
@@ -31,8 +29,8 @@ class CategoriesService
         return response()->json(["mensaje" => "Error al crear la categoria", 400]);
     }
 
-    public function updateCategories($data, $categories)
-    { // Esta función recibe los datos del post actualizado, con los cambios indicados por el usuario, 
+    public function updateCategories($data, $categories) // Esta función recibe los datos del post actualizado, con los cambios indicados por el usuario, 
+    { 
         if ($categories) {
             $categories->update([
                 'name' => $data->name ?? $categories->name,
@@ -45,8 +43,14 @@ class CategoriesService
         }
     }
 
+    public function showCategoriesByName($data)
+    {
+        $categories=Categories::where('name', 'like', '%'. $data. '%')->get();
+        return response()->json(["Nombre" => $categories->pluck('name')]);
+    }
+
     public function destroyCategories($category)
-    { // Esta función recoge la categoria nueva creada
+    { 
         if (Categories::destroy($category->id))
             return response()->json(["mensaje" => "Categoria eliminada correctamente", 204]);
         return response()->json(["mensaje" => "Error al eliminar la categoria", 400]);
@@ -56,12 +60,6 @@ class CategoriesService
     {    // Devuelve el post con el ID especificado, o lanza un error 404 si no existe
         return Categories::findOrFail($id);
     }
-
-    //  Por ahoira sin uso
-    // public function getIdCategoriesByName($data){    // Devuelve el id especificado con el nombre de la categoria, o lanza un error 404 si no existe
-    //     return Categories::findOrFail($data); 
-    // }
-    // */
 }
 
 ?>

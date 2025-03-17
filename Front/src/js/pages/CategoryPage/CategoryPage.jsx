@@ -3,7 +3,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import CreatePost from "../../components/dev/createPost/createPost";
 import BackToTop from "../../components/dev/backToTop/BackToTop";
 import ArticleFinder from "../../components/dev/article_finder/ArticleFinder";
-import DetallesBlog from "../../components/dev/DetallesBlog/DetallesBlog";
+import PostDetails from "../../components/dev/PostDetails/PostDetails";
 import './CategoryPage.css';
 import postService from '../../services/postService';
 

@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
-import "./NovedadesPage.css";
+import "./NewsPage.css";
 import postService from '../../services/postService';
 import Loader from '../../components/dev/Loader/Loader';
-import DetallesBlog from '../../components/dev/DetallesBlog/DetallesBlog';
+import PostDetails from '../../components/dev/PostDetails/PostDetails';
 import { redirect } from 'react-router-dom';
+import { useAlert } from "../../bootstrap/contexts/AlertContext";
 
-const NovedadesPage = () => {
+
+const NewsPage = () => {
+  const { addError, addSuccess } = useAlert();
+
   const [newsItems, setNewsItems] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0); // Estado para controlar el índice del slide actual
 
@@ -19,7 +23,10 @@ const NovedadesPage = () => {
       .then(({ data }) => {
         setNewsItems(data);
       })
-      .catch(err => console.log(err));
+      .catch(error => {
+        const data = JSON.parse(error.request.response);
+        addError(data.error);
+      });
   };
 
   // Función para cambiar el slide
@@ -47,7 +54,7 @@ const NovedadesPage = () => {
               className={`carousel-item relative w-full ${index === currentSlide ? 'block' : 'hidden'}`}
             >
               <a key={item.id} href={`/detallesBlog/${item.id}`}>
-                <DetallesBlog className="w-full" blog={item} />
+                <PostDetails className="w-full" blog={item} />
               </a>
             </div>
 
@@ -66,4 +73,4 @@ const NovedadesPage = () => {
   );
 };
 
-export default NovedadesPage;
+export default NewsPage;

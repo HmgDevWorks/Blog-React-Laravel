@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 use Tymon\JWTAuth\Contracts\JWTSubject;  // Importar la interfaz JWTSubject
 
 class User extends Authenticatable implements JWTSubject  // Implementamos la interfaz JWTSubject
@@ -63,6 +65,7 @@ class User extends Authenticatable implements JWTSubject  // Implementamos la in
     {
         return $this->getKey();  // Usamos el ID del usuario como identificador único
     }
+    
     public function getAuthPassword()
     {
         return $this->password_user;
@@ -81,5 +84,10 @@ class User extends Authenticatable implements JWTSubject  // Implementamos la in
 {
     return $value ? asset('avatars/' . $value) : asset('avatars/default.png');
 }
+public function favorites()
+{
+    return $this->hasMany(Favorites::class); // La relación debería ser con la tabla favorites, no post
+}
+
 }
 

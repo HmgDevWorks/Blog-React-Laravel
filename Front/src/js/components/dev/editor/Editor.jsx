@@ -1,9 +1,13 @@
-import React, { useEffect, useMemo, useState, useCallback, useRef } from "react";
+import React, { useEffect, useMemo, useState, useCallback, useRef, useContext } from "react";
 import axios from "axios";
 import postService from "../../../services/postService";
 import servicioCategorias from "../../../services/categoriesService";
+import { AuthContext } from '../../../bootstrap/contexts/AuthContext';
+import { useAlert } from "../../../bootstrap/contexts/AlertContext";
+import { ErrorAlert, SuccessAlert } from '../Alerts/Alerts';
 
-import { html } from '@yoopta/exports';
+
+import { html, plainText } from '@yoopta/exports';
 import YooptaEditor, { createYooptaEditor } from "@yoopta/editor";
 import Paragraph from "@yoopta/paragraph";
 import Blockquote from '@yoopta/blockquote';
@@ -15,8 +19,8 @@ import Link from '@yoopta/link';
 import File from '@yoopta/file';
 import Callout from '@yoopta/callout';
 import Video from '@yoopta/video';
-import Lists from '@yoopta/lists';
-import Headings from '@yoopta/headings';
+import { NumberedList, BulletedList, TodoList } from '@yoopta/lists';
+import { HeadingOne, HeadingTwo, HeadingThree } from '@yoopta/headings';
 import Table from '@yoopta/table';
 import Divider from '@yoopta/divider';
 import LinkTool, { DefaultLinkToolRender } from '@yoopta/link-tool';
@@ -24,12 +28,12 @@ import ActionMenu, { DefaultActionMenuRender } from '@yoopta/action-menu-list';
 import Toolbar, { DefaultToolbarRender } from '@yoopta/toolbar';
 import { Bold, Italic, CodeMark, Underline, Strike, Highlight } from '@yoopta/marks';
 
-// import DeatallesBlog from "./DetallesBlog";
+// import DeatallesBlog from "./PostDetails";
 import "./Editor.css";
 
 const MARKS = [Bold, Italic, CodeMark, Underline, Strike, Highlight];
 
-const plugins = [Paragraph, Blockquote, Accordion, Code, Embed, Image, Link, File, Callout, Video, Table, Divider];
+const plugins = [Paragraph, Blockquote, Accordion, Code, Embed, Image, Link, File, Callout, Video, NumberedList, BulletedList, TodoList, HeadingOne, HeadingTwo, HeadingThree, Table, Divider];
 
 const TOOLS = {
   Toolbar: {
@@ -46,7 +50,9 @@ const TOOLS = {
   },
 };
 
-export default function Editor({ isEditable = true, post = null }) {
+export default function Editor({ isEditable = true, post = null, maxLenght = null }) {
+  // const { addError, addSuccess } = useAlert();
+
   const editor = useMemo(() => createYooptaEditor(), []);
   const [value, setValue] = useState({});
   // const [isPreview, setIsPreview] = useState(false);
@@ -54,6 +60,10 @@ export default function Editor({ isEditable = true, post = null }) {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(post ? post.id_categories : 0);
   // if (post) { console.log("selectedcat", selectedCategory); }
+  const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+
+  const { loggedUser } = useContext(AuthContext);
 
   function changeTitle(event) {
     setTitle(event.target.value);
@@ -80,13 +90,28 @@ export default function Editor({ isEditable = true, post = null }) {
     return htmlString;
   };
 
+  // from plain text to @yoopta content
+  // const deserializeText = () => {
+  //   const textString = '# First title';
+  //   const value = plainText.deserialize(editor, textString);
+
+  //   editor.setEditorValue(value);
+  // };
+
+  // // from @yoopta content to plain text string
+  // const serializeText = () => {
+  //   const data = editor.getEditorValue();
+  //   const textString = plainText.serialize(editor, data);
+  //   console.log('plain text string', textString);
+  // };
+
   // const handlePreview = () => {
   //   setIsPreview(isPreview => !isPreview);
   // };
 
   const handleSave = async (status) => {
     serializeHTML();
-    const userId = localStorage.getItem('userId');
+    const userId = loggedUser.id;
     let data = {};
     let request = "";
     if (!post) {
@@ -98,15 +123,16 @@ export default function Editor({ isEditable = true, post = null }) {
       request = postService.editPost(post.id, data);
     }
     if (!selectedCategory) {
-      alert('Please select a category before saving.');
+      setErrorMsg('Please select a category before saving.');
       return;
     }
     request
       .then(response => {
-        console.log('Published:', response.data);
+        setSuccessMsg(response.data.mensaje);
       })
       .catch(error => {
-        console.error('Error publishing:', error);
+        const data = JSON.parse(error.request.response);
+        setErrorMsg(data.error);
       });
   };
 
@@ -124,7 +150,8 @@ export default function Editor({ isEditable = true, post = null }) {
         console.log('Deleted:', response.data);
       })
       .catch(error => {
-        console.error('Error deleting:', error);
+        const data = JSON.parse(error.request.response);
+        setErrorMsg(data.error);
       });
   };
 
@@ -141,7 +168,8 @@ export default function Editor({ isEditable = true, post = null }) {
         setCategories(response.data);
       })
       .catch(error => {
-        console.error('Error fetching categories:', error);
+        const data = JSON.parse(error.request.response);
+        setErrorMsg(data.error);
       });
   }, [categories.length]);
 
@@ -190,6 +218,8 @@ export default function Editor({ isEditable = true, post = null }) {
           </select>
         </label>
       </div>)}
+      {errorMsg && <ErrorAlert msg={errorMsg} />}
+      {successMsg && <SuccessAlert msg={successMsg} />}
       <div className="editor">
         <YooptaEditor
           editor={editor}

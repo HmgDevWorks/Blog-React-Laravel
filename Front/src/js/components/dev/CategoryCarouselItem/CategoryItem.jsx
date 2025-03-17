@@ -17,7 +17,7 @@ console.log(id_categoria)
 
     return (
         <div className="relative category-Carrousel-container">
-            <Link to={`/categorias/${title}`} state={{id_categoria}}>              
+            <a href={`/categories/${title}`}>
                 <img
                     src={loadedImage}
                     alt={title}

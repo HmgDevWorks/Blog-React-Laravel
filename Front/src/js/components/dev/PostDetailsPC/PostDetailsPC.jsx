@@ -1,4 +1,4 @@
-const DetallesBlogPC = ({ blog }) => {
+const PostDetailsPC = ({ blog }) => {
     return (
         <div className="detallesBlogPC">
             <h3>{blog.titulo}</h3>
@@ -17,4 +17,4 @@ const DetallesBlogPC = ({ blog }) => {
         </div>
     );
 }
-export default DetallesBlogPC;
+export default PostDetailsPC;

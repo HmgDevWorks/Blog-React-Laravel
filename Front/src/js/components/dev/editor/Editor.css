@@ -37,8 +37,9 @@
 
 .yoopta-editor{
     box-sizing: border-box;
-    width: calc(100% - 50px) !important;
-    margin-inline-start: 50px;
+    width: calc(100% - 100px) !important;
+    margin: 0px 50px;
+    padding: 20px 0 !important;
 }
 
 .editor-btns{

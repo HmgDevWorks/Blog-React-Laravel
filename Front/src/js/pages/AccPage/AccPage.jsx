@@ -1,5 +1,5 @@
 import ProfileC from "../../components/dev/profileC/ProfileC";
-const PerfilPage = () => {
+const AccPage = () => {
   //   const { user } = useAuthContext();
 
   return (
@@ -8,4 +8,4 @@ const PerfilPage = () => {
     </div>
   );
 };
-export default PerfilPage;
+export default AccPage;

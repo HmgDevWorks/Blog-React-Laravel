@@ -1,7 +1,7 @@
 import "./App.css";
 import NavigationFinal from "./js/components/dev/NavigationFinal/NavigationFinal";
 import AppRoutes from "./js/router/AppRoutes";
-import Footer from "./js/components/dev/footer/Footer";
+import Footer from "./js/components/dev/Footer/Footer";
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <NavigationFinal />
       <main>
-        <AppRoutes/ >
+        <AppRoutes />
       </main>
       <Footer /> 
     </div>

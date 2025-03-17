@@ -3,7 +3,6 @@ import './NewsCarousel.css';
 import Loader from '../Loader/Loader';
 
 export default function NewsCarousel({ newsItems }) {
-    console.log(newsItems)
     return (
         <div className="carousel-news">
             {newsItems && newsItems.length > 0 ? (

@@ -22,6 +22,7 @@
 .login-form{
     width: 40%;
     max-width: 600px;
+    min-width: 320px;
     margin: 0 auto;
     padding: 0;
     overflow: hidden;

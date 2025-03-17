@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Models\Categories;
 use App\Models\Post;
+use App\Models\User;
 use App\Services\PostService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -34,18 +35,11 @@ class PostController extends Controller
 
     public function showOne(Post $id): JsonResponse
     {
-        return response()->json($this->postService->getPostById($post));
-    }
+        return response()->json($this->postService->showPost(post: $id));
 
-    
-    public function showPostByCategory($cat): JsonResponse //creado para devolver los post con el id de la categoria
-    {
-        return response()->json($this->postService->getPostByCategory($cat));
-    }
-
-    public function showNPost(): JsonResponse
-    {
-        return response()->json($this->postService->getAllNPost());
+        //     public function getPostById($id): JsonResponse
+        // {
+        //     return response()->json($this->postService->getPostById($id));
     }
 
 
@@ -102,6 +96,18 @@ class PostController extends Controller
             'postsOrderedByViews' => $postsOrderedByViews,
             'postsGroupedByMonth' => $postsGroupedByMonth,
             'postsGroupedByMonthWithViews' => $postsGroupedByMonthWithViews
+        ]);
+    }
+
+    public function getStatsForFooter(): JsonResponse
+    {
+        $postscounts = $this->postService->getCountPost();
+        $postsviewss = $this->postService->getViewsPost();
+        $usercounts = $this->postService->getCountUsers();
+        return response()->json([
+            'Articulos' => $postscounts,
+            'Vistas' => $postsviewss,
+            'Usuarios' => $usercounts
         ]);
     }
 }

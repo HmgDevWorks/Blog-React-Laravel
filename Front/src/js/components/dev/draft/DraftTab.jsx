@@ -1,6 +1,6 @@
 import React from 'react';
 import './DraftTab.css';
-import Editor from '../editor/Editor';
+import Editor from '../Editor/Editor';
 
 export default function DraftTab({ tabs }) {
 

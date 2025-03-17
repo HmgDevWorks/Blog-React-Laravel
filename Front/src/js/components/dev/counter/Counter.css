@@ -19,6 +19,13 @@
     justify-content: center;
     gap: 20px;
     padding: 10px;
+
+    h3{
+        padding: 5px;
+        color: var(--header-bg-color);
+        font-family: var(--font-header);
+        font-size: 1.4rem;
+    }
 }
 
 /* .counter > img {

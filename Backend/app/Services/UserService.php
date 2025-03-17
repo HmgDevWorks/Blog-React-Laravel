@@ -4,30 +4,26 @@ namespace App\Services;
 
 use App\Models\User;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\TryCatch;
 use Spatie\Permission\Contracts\Role;
+use Illuminate\Http\Request;
 
 class UserService
 {
-
-    public function getAllUser()
-    { // Esta función recoge todos los datos de la tabla User
+    public function getAllUser() // Esta función recoge todos los datos de la tabla User
+    { 
         return User::all();
     }
 
-    public function getUserById($id)
-    {    // Devuelve el post con el ID especificado, o lanza un error 404 si no existe
+    public function getUserById($id)  // Devuelve el post con el ID especificado, o lanza un error 404 si no existe
+    {   
         return User::findOrFail($id);
     }
 
-    public function getAllNUsers()
-    { //
-        return User::count();
-    }
-
-    public function createUser($data)
-    { // Devuelve el usuario recién creado, la función create recibe un array y va rellenando la BBDD. 
+    public function createUser($data)// Devuelve el usuario recién creado, la función create recibe un array y va rellenando la BBDD. 
+    { 
         try {
             if (User::where('email_user', $data->email_user)->exists()) {
                 return response()->json(['message' => 'El email ya esta registrado', 'mensaje' => 'malmalrequetemal'], 409); // 409, codigo de error de conflicto de datos
@@ -35,7 +31,6 @@ class UserService
             if (User::where('name_user', $data->name_user)->exists()) {
                 return response()->json(['message' => 'El nombre de ususario ya esta registrado'], 409); // 409, codigo de error de conflicto de datos
             }
-
             $user = User::create([
                 'name_user' => $data->name_user,
                 'email_user' => $data->email_user,
@@ -57,8 +52,8 @@ class UserService
         }
     }
 
-    public function assignRoleUser($request, $user)
-    { // Esta función, hace un shoftDelete de un usuario, devuelve mesaje OK o mensaje KO
+    public function assignRoleUser($request, $user) // Esta función, hace un shoftDelete de un usuario, devuelve mesaje OK o mensaje KO
+    { 
         if ($user->hasRole('admin'))
             return (response()->json(["mensaje" => "Error no se puede modificar el rol al usuario administrador"], 400));
         if ($request->role == 'admin')
@@ -70,8 +65,8 @@ class UserService
         return (response()->json(["mensaje" => "Rol asignado con exito"], 200));
     }
 
-    public function deleteUser($user)
-    { // Esta función, hace un shoftDelete de un usuario, devuelve mesaje OK o mensaje KO
+    public function deleteUser($user) // Esta función, hace un shoftDelete de un usuario, devuelve mesaje OK o mensaje KO
+    { 
         if ($user && !$user->hasRole('admin')) {
             $user->delete();
             return (response()->json(["mensaje" => "Usuario eliminado con exito"], 200));
@@ -81,10 +76,14 @@ class UserService
         }
     }
 
-    public function updateUser($data, $user)
+    public function updateUser(Request $request,$data, User $user)
     {  
+        $authUser = $request->user; //esto gracias al middleware creado de JWT realiza la comprobacion de que el usuario tenga el mismo token
         if (!$user) {
             return response()->json(["mensaje" => "Error al actualizar el usuario"], 404);
+        }
+        if (!$authUser->hasRole('admin') && $authUser->id !== $user->id) {
+            return response()->json(["mensaje" => "No tienes permiso para modificar este usuario"], 403);
         }
     
         if (isset($data->img_user) && $data->hasFile('img_user')) { //manejo de la imagen
@@ -102,14 +101,12 @@ class UserService
             $user->img_user = 'avatars/' . $imageName;
         }
     
-        // Actualizar usuario con la nueva info
-        $user->update([
+        $user->update([// Actualizar usuario con la nueva info
             'name_user' => $data->name_user,
             'email_user' => $data->email_user,
             'bio' => $data->bio,
             'updated_at' => now(),
         ]);
-    
         return response()->json(["mensaje" => "Usuario actualizado correctamente"], 200);
     }
 }

@@ -24,14 +24,6 @@
     font-weight: bold;
 }
 
-:root {
-    --grisClaro: #eef0f2;
-    --grisMedio: #c6c7c4;
-    --saturadoClaro: #a2999e;
-    --saturadoOscuro: #846a6a;
-    --grisOscuro: #353b3c;
-}
-
 .carousel-news {
     min-width: 70vw !important;
     height: 70vh !important;
@@ -49,8 +41,6 @@
 .novedades-page .carousel-news .detallesBlog .contenidoEntero {
     padding: 20px 80px !important;
 }
-
-@media screen and (min-width: 768px) {}
 
 
 .botones-novedades {

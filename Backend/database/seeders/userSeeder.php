@@ -28,5 +28,19 @@ class userSeeder extends Seeder
             // 'name_lastName' => 'Botas',
             'bio' => 'viva el bombo'
         ])->assignRole('admin');
+        User::create([
+            'name_user' => 'Perchitas el del bombo',
+            'email_user' => 'perchitas@gmail.com',
+            'password_user' => bcrypt('1234567'),
+            // 'name_lastName' => 'Botas',
+            'bio' => 'viva el bombo'
+        ])->assignRole('reader');
+        User::create([
+            'name_user' => 'baneado el del bombo',
+            'email_user' => 'banned@gmail.com',
+            'password_user' => bcrypt('1234567'),
+            // 'name_lastName' => 'Botas',
+            'bio' => 'viva el bombo'
+        ])->assignRole('banned');
     }
 }
