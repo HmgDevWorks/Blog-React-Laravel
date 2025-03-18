@@ -30,7 +30,7 @@ const AppRoutes = () => {
         <Route path={"/news"} element={<NewsPage />} />
         <Route path={"/favorite_posts"} element={<FavPage />} />
         <Route path={"/dashboard"} element={<DashboardPage />} />
-        <Route path={"/categorias/:id_categoria"} element={<CategoryPage />} />
+        <Route path={"/categories/:id_categorie"} element={<CategoryPage />} />
         {/* <Route path={"/editarBlog/:blog_id"} element={<h1>editar</h1>} /> */}
       </Route>
 

@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('post_id')->nullable(false);
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade')->onUpdate('cascade');
+            $table->unique(['user_id', 'post_id']);
             $table->timestamps();
         });
         Schema::table('favorites', function (Blueprint $table) {

@@ -1,24 +1,26 @@
 import React from "react";
 import Box from "../../components/dev/Box/Box";
 import DraftTab from "../../components/dev/Draft/DraftTab";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import PostTable from "../../components/dev/PostsTable/PostTable";
 import Editor from "../../components/dev/Editor/Editor";
 import Separador from "../../components/dev/Separador/Separador";
 import postService from "../../services/postService";
 import { useAlert } from "../../bootstrap/contexts/AlertContext";
+import { AuthContext } from '../../bootstrap/contexts/AuthContext';
 
 // import Separador from "../../components/dev/separador/Separador";
 
 const CreatePostPage = () => {
+  const { loggedUser } = useContext(AuthContext);
   const { addError, addSuccess } = useAlert();
 
   const [dataDraft, setDataDraft] = useState([]);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    const request = postService.getUserPosts(userId);
+    if (!loggedUser) return;
+    const request = postService.getUserPosts(loggedUser.id);
 
     request
       .then(response => {
@@ -31,8 +33,8 @@ const CreatePostPage = () => {
   }, []);
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    const request = postService.getUserPosts(userId);
+    if (!loggedUser) return;
+    const request = postService.getUserPosts(loggedUser.id);
 
     request
       .then(response => {

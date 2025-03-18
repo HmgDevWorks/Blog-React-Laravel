@@ -8,8 +8,9 @@ import './CategoryPage.css';
 import postService from '../../services/postService';
 
 const CategoryPage = () => {
+  const { id_categorie } = useParams();
   const location = useLocation();
-  const id_categoria = location.state?.id_categoria;
+  const id_categorie = location.state?.id_categoria;
 
   const {titulo} = useParams();
   console.log(id_categoria);
@@ -17,6 +18,12 @@ const CategoryPage = () => {
   const [articulos, setArticulos] = useState([]);
 
   useEffect(() => {
+    // Datos hardcodeados
+   
+
+    setNumArticulos(data.numArticulos);
+    setArticulos(data.articulos);
+  }, [id_categorie]);
     postService.getCategoryPosts(id_categoria)
       .then(({ data }) => {
         console.log(data);
@@ -28,6 +35,7 @@ const CategoryPage = () => {
   return (
     <div>
       <div className="Titulo_Sin_Fondo text-center p-2">
+        {id_categorie}
         {titulo}
       </div>
       <div className="numArticulos">
