@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CreatePost from "../../components/dev/createPost/createPost";
 import BackToTop from "../../components/dev/backToTop/BackToTop";
-import DetallesBlog from "../../components/dev/DetallesBlog/DetallesBlog";
 import postService from '../../services/postService'; // Importa el servicio de posts
 import './UsersPosts.css';
+import PostDetails from '../../components/dev/PostDetails/PostDetails';
 
 const UsersPosts = () => {
   const { id_usuario } = useParams();
@@ -27,8 +27,8 @@ const UsersPosts = () => {
       <ul className="enlaces-lista">
         {articulos.map((articulo) => (
           <li key={articulo.id} className="enlace-item">
-            <a href={`/detallesBlog/${articulo.id}`}>
-              <DetallesBlog blog={articulo} />
+            <a href={`/postDetails/${articulo.id}`}>
+              <PostDetails blog={articulo} />
             </a>
           </li>
         ))}

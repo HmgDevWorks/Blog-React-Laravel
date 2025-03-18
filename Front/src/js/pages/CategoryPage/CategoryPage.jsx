@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import CreatePost from "../../components/dev/createPost/createPost";
+import CreatePost from "../../components/dev/CreatePost/CreatePost";
 import BackToTop from "../../components/dev/backToTop/BackToTop";
 import ArticleFinder from "../../components/dev/article_finder/ArticleFinder";
 import PostDetails from "../../components/dev/PostDetails/PostDetails";
@@ -8,35 +8,29 @@ import './CategoryPage.css';
 import postService from '../../services/postService';
 
 const CategoryPage = () => {
-  const { id_categorie } = useParams();
   const location = useLocation();
-  const id_categorie = location.state?.id_categoria;
+  const id_categorie = location.state?.id_categorie;
 
-  const {titulo} = useParams();
-  console.log(id_categoria);
+  const {title} = useParams();
+  console.log(  id_categorie
+);
   const [numArticulos, setNumArticulos] = useState(0);
   const [articulos, setArticulos] = useState([]);
 
-  useEffect(() => {
-    // Datos hardcodeados
-   
-
-    setNumArticulos(data.numArticulos);
-    setArticulos(data.articulos);
-  }, [id_categorie]);
-    postService.getCategoryPosts(id_categoria)
-      .then(({ data }) => {
-        console.log(data);
-        setArticulos(data);
-        setNumArticulos(data.length); // Set the number of articles based on the data length
-      });
-  }, []);
-
+    useEffect(() => {
+      postService.getCategoryPosts(id_categorie)
+        .then(({ data }) => {
+          console.log(data);
+          setArticulos(data);
+          setNumArticulos(data.length); // Set the number of articles based on the data length
+        });
+    }, []);
   return (
     <div>
       <div className="Titulo_Sin_Fondo text-center p-2">
+        
+        {title}
         {id_categorie}
-        {titulo}
       </div>
       <div className="numArticulos">
         <p>{numArticulos} artículos</p>
@@ -49,8 +43,8 @@ const CategoryPage = () => {
         <ul className="enlaces-lista">
           {articulos.map((articulo) => (
             <li key={articulo.id} className="enlace-item">
-              <a href={`/detallesBlog/${articulo.id}`}>
-                <DetallesBlog blog={articulo} />
+              <a href={`/postDetails/${articulo.id}`}>
+                <PostDetails blog={articulo} />
               </a>
             </li>
           ))}

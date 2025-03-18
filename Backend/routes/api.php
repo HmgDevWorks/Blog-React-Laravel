@@ -75,6 +75,7 @@ Route::controller(PostController::class)->middleware([JwtMiddleware::class])->gr
     Route::get('/posts/show', 'show')->middleware('role:admin|editor|reader'); // Enseña todos los posts
     Route::get('/posts/show/{post}', 'getPostById')->middleware('role:admin|editor|reader'); // Enseña un post por un id
     Route::get('/posts/user/{id}', 'postUser')->middleware('role:admin|editor|reader');    //Enseña los post a traves del id del usuario
+    Route::get('/posts/categories/{cat}', 'showPostByCategory'); // Enseña todos los post pasandole una categoría
     Route::get('/posts/searchPosts', 'searchPosts')->middleware('role:admin|editor|reader');    //Ruta para buscar posts BARRA DE BÚSQUEDA
     Route::get('/posts/posts-overview/{userId}', 'getUserPostsOverview')->middleware('role:admin|editor|reader');    // Devuelve las estadísticas para el Dashboard
     Route::post('/posts/store', 'store')->name('posts.store')->middleware('role:admin|editor'); //Crea un post

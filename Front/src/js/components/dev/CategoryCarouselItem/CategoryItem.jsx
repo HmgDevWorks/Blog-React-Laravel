@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 
 const images = import.meta.glob('../../../../assets/carouselVertical/*.webp', { eager: true });
 
-export default function Category({ id_categoria ,title, imageUrl, description }) {
+export default function Category({ id_categorie, title, imageUrl, description }) {
     const [loadedImage, setLoadedImage] = useState(null);
-console.log(id_categoria)
+console.log(  id_categorie
+)
     useEffect(() => {
 
         const matchedImage = Object.entries(images).find(([path]) => path.includes(imageUrl));
@@ -17,7 +18,7 @@ console.log(id_categoria)
 
     return (
         <div className="relative category-Carrousel-container">
-            <Link to={`/categorias/${title}`} state={{id_categoria}}>              
+            <Link to={`/categories/${title}`} state={{id_categorie}}>              
             <img
                     src={loadedImage}
                     alt={title}

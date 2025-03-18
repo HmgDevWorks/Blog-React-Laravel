@@ -33,7 +33,8 @@ export default function CategoryCarrousel() {
                     >
 
                         <Category
-                            id_categoria={category.id}
+                              id_categorie
+={category.id}
                             title={category.name}
                             imageUrl={category.img_url}
                             description={category.description}

@@ -12,6 +12,7 @@ import CategoryPage from "../pages/CategoryPage/CategoryPage";
 // import EditarBlogPage from "../pages/EditarBlogPage/EditarBlogPage";
 import DashboardPage from "../pages/DashboardPage/DashboardPage";
 import PrivateRoutes from "./PrivateRoutes";
+import UsersPosts from "../pages/UsersPosts/UsersPosts";
 
 const AppRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const AppRoutes = () => {
         {/* <Route path={"/blogs/:tipo_blog"} element={<h1>HOlaaaa</h1>} /> */}
         <Route path={"/createPost"} element={<CreatePostPage />} />
         <Route path={"/author/:authorId"} element={<AuthorPage />} />
+        <Route path={"/userpost/:id_usuario"} element={<UsersPosts />} />
         <Route path={"/news"} element={<NewsPage />} />
         <Route path={"/favorite_posts"} element={<FavPage />} />
         <Route path={"/dashboard"} element={<DashboardPage />} />
