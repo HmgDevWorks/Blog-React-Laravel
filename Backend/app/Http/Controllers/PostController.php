@@ -91,7 +91,7 @@ class PostController extends Controller
     // }
 
     public function searchPosts(Request $request) //controlador para la barra de busqueda
-    { 
+    {
         $search = $request->input('search');
 
         if (!$search || strlen($search) < 4) {
@@ -99,11 +99,11 @@ class PostController extends Controller
         }
 
         $posts = Post::where('status', 'published') //funcion waparda para una barra de busqueda que filtra con el request que pasamos "search" y devuelve todos los post
-                        ->where(function ($query) use ($search) {
-                            $query->where('title', 'like', "%$search%")
-                                ->orWhere('content', 'like', "%$search%");
-                        })
-                        ->get();
+            ->where(function ($query) use ($search) {
+                $query->where('title', 'like', "%$search%")
+                    ->orWhere('content', 'like', "%$search%");
+            })
+            ->get();
 
         if ($posts->isEmpty()) {
             return response()->json(["mensaje" => "No existen posts con '$search' como búsqueda"], 200);
@@ -131,17 +131,17 @@ class PostController extends Controller
         $postsviewss = $this->postService->getViewsPost();
         $usercounts = $this->postService->getCountUsers();
         return response()->json([
-            'Articulos' => $postscounts,
-            'Vistas' => $postsviewss,
-            'Usuarios' => $usercounts
+            'posts' => $postscounts,
+            'views' => $postsviewss,
+            'users' => $usercounts
         ]);
     }
 
     public function getPublishedPostById($id)
     {
-        $posts = Post::where('user_id', $id) 
-                    ->where('status', 'published')
-                    ->get();
+        $posts = Post::where('user_id', $id)
+            ->where('status', 'published')
+            ->get();
 
         if ($posts->isEmpty()) {
             return response()->json(["error" => "No existen posts publicados para este usuario"], 200);
@@ -152,7 +152,7 @@ class PostController extends Controller
 
     public function getPublishedOrDraftOrDeletedPosts(Request $request)
     {
-        $user = auth()->user(); 
+        $user = auth()->user();
         $status = $request->input('status'); // Obtiene el estado desde el front, status en el json
 
         if (!in_array($status, ['published', 'draft', 'deleted'])) {
@@ -160,8 +160,8 @@ class PostController extends Controller
         }
 
         $posts = Post::where('user_id', $user->id)
-                    ->where('status', $status)
-                    ->get();
+            ->where('status', $status)
+            ->get();
 
         if ($posts->isEmpty()) {
             return response()->json(["mensaje" => "No tienes posts en este estado"], 200);
@@ -169,6 +169,4 @@ class PostController extends Controller
 
         return response()->json(['posts' => $posts]);
     }
-
-    
 }
