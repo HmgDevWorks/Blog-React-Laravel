@@ -5,7 +5,13 @@ const AuthContext = createContext();
 function AuthProviderWrapper(props) {
     const [loggedUser, setLoggedUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true); // Corrección de nombre
-    const [JWT, setJWT] = useState(null);
+
+    let token = sessionStorage.getItem("authToken");
+    if (!token) {
+        token = localStorage.getItem("authToken");
+    }
+    const [JWT, setJWT] = useState(token);
+
 
     const authenticateUser = () => {
         if (JWT) {
