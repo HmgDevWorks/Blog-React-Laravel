@@ -1,6 +1,6 @@
 {
   "title": "C-Blog, where the only limit to ideas is you",
-  "posts": "Articles",
+  "posts": "Posts",
   "views": "Views",
   "fav": "Favorites",
   "draft": "Drafts",
@@ -9,9 +9,20 @@
     "home": "Home",
     "admin": "Admin",
     "profile": "Profile",
-    "createPost": "Create Article",
+    "createPost": "Create Post",
     "login": "Login",
     "logout": "Logout"
+  },
+  "login": {
+    "name": "First Name",
+    "lastname": "Last Name",
+    "pass": "Password",
+    "confirmPass": "Confirm Password",
+    "email": "Email",
+    "remember": "Remember Me",
+    "also": "You can also:",
+    "login": "Login",
+    "create": "Create an Account"
   },
   "news": {
     "title": "News"
@@ -20,18 +31,29 @@
     "sports": "Sports"
   },
   "postFinder": {
-    "title": "Find the article"
+    "title": "Find the Post"
+  },
+  "authorPage": {
+    "title": "{name}'s Posts"
+  },
+  "categoryPage": {
+    "title": "Posts in ",
+    "posts": "posts"
+  },
+  "createPostPage": {
+    "draft": "Draft",
+    "posts": "My Publications"
   },
   "authors": {
-    "title": "Most active authors this week"
+    "title": "Most Active Authors This Week"
   },
   "counter": {
     "title": "Counter",
-    "posts": "Articles",
+    "posts": "Posts",
     "views": "Views",
     "users": "Users"
   },
-  "policies": {
+  "footer": {
     "cookies": "Cookie Policy",
     "privacy": "Privacy Policy"
   },
@@ -47,14 +69,14 @@
   "profile": {
     "title": "Profile",
     "fav": "Favorites",
-    "posts": "Articles",
+    "posts": "Posts",
     "bioPlaceholder": "Edit your post here",
     "email": "Email",
     "pass": "Password",
-    "delete": "Delete account",
-    "formConfirm": "Confirm change",
-    "modalEmailTitle": "Confirm email change",
-    "modalPassTitle": "Confirm password change",
+    "delete": "Delete Account",
+    "formConfirm": "Confirm Change",
+    "modalEmailTitle": "Confirm Email Change",
+    "modalPassTitle": "Confirm Password Change",
     "modalDeleteTitle": "Are you sure you want to delete your account?",
     "modalDeleteInfo": "This action cannot be undone",
     "modalPassInput": "Enter your password",
@@ -67,7 +89,8 @@
     "category": "Category",
     "publishBtn": "Publish",
     "saveBtn": "Save",
-    "deleteBtn": "Delete"
+    "deleteBtn": "Delete",
+    "chooseCat": "Choose a category"
   },
   "errorMsg": {
     "a": "a"

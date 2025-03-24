@@ -46,7 +46,7 @@
 
 .collapseNav {
     background-color: #846a6a;
-    width: 50vw !important;
+    /* width: 50vw !important; */
     border-top: 1px solid #a2999e;
     font-family: "Helvetica, Arial,sans-serif";
     font-size: 1.5rem;

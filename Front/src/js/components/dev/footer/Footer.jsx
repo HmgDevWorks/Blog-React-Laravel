@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import "./Footer.css";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="footer footer-horizontal footer-center bg-base-200 text-base-content p-5">
       <nav className="flex justify-around w-full">
-        <Link to="/cookies" className="link link-hover" id="lk01">Política de Cookies</Link>
-        <Link to="/privacidad" className="link link-hover" id="lk02">Política de Privacidad</Link>
+        <Link to="/cookies" className="link link-hover" id="lk01">{t("footer.cookies")}</Link>
+        <Link to="/privacidad" className="link link-hover" id="lk02">{t("footer.privacy")}</Link>
       </nav>
     </footer>
   );

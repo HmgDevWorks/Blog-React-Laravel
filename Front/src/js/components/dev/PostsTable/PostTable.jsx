@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FavToggle from "../FavToggle/FavToggle";
 import "./PostTable.css";
+import { useTranslation } from "react-i18next";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -16,6 +17,7 @@ const formatDate = (dateString) => {
 };
 
 export default function PostTable({ posts, currentPage, postsPerPage, onPageChange }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   if (!Array.isArray(posts)) {
@@ -39,11 +41,11 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
         <thead>
           <tr>
             <th></th>
-            <th>Título</th>
-            <th>Fecha de publicación</th>
+            <th>{t("postTable.title")}</th>
+            <th>{t("postTable.publishedAt")}</th>
             {/* <th>Contenido del artículo</th> */}
-            <th>Alcance</th>
-            <th>Favoritos</th>
+            <th>{t("counter.views")}</th>
+            <th>{t("postTable.fav")}</th>
           </tr>
         </thead>
         <tbody>
@@ -69,19 +71,18 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
             );
           })}
         </tbody>
-        <tfoot>
+        {/* <tfoot>
           <tr>
             <th></th>
-            <th>Título</th>
-            <th>Fecha de publicación</th>
-            {/* <th>Contenido del artículo</th> */}
-            <th>Alcance</th>
-            <th>Favoritos</th>
+            <th>{t("postTable.title")}</th>
+            <th>{t("postTable.publishedAt")}</th>
+            <th>{t("counter.views")}</th>
+            <th>{t("postTable.fav")}</th>
           </tr>
-        </tfoot>
+        </tfoot> */}
       </table>
 
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-4 mx-auto">
         <div className="join">
           {Array.from({ length: pageCount }, (_, i) => (
             <button

@@ -5,9 +5,10 @@ import { useAlert } from '../../bootstrap/contexts/AlertContext';
 import postService from '../../services/postService';
 import userService from '../../services/userService';
 import PostTablePagination from '../../components/dev/PostTablePagination/PostTablePagination';
-
+import { useTranslation } from 'react-i18next';
 
 const AuthorPage = () => {
+  const { t } = useTranslation();
   const { authorId } = useParams();
 
   const { addError, addSuccess } = useAlert();
@@ -39,7 +40,7 @@ const AuthorPage = () => {
 
   return (
     <div className='author-page'>
-      <h1 className='author'>Posts de {author.name_user}</h1>
+      <h1 className='author'>{t("authorPage.title", { name: author.name_user })}</h1>
       {authorPosts && <PostTablePagination filter={"published"} id={authorId} />}
     </div>
   );

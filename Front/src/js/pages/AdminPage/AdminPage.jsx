@@ -2,8 +2,10 @@ import React, { use, useEffect, useState } from 'react';
 import AdminUserItem from "../../components/dev/AdminUserItem/AdminUserItem";
 import './AdminPage.css'; // Importa el archivo CSS
 import userService from '../../services/userService';
+import { useTranslation } from 'react-i18next';
 
 const AdminPage = () => {
+  const { t } = useTranslation();
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 10;
@@ -37,7 +39,7 @@ const AdminPage = () => {
 
   return (
     <div className="admin-page-container">
-      <h1 className="Titulo_Admin_Page">Pagina de administración</h1>
+      <h1 className="Titulo_Admin_Page">{t("admin.title")}</h1>
       <div className="admin-users">
         {currentUsers.map(user => (
           <AdminUserItem

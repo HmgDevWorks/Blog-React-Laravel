@@ -13,6 +13,17 @@
     "login": "Iniciar Sesión",
     "logout": "Cerrar sesión"
   },
+  "login":{
+    "name": "Nombre",
+    "lastname": "Apellido",
+    "pass": "Cosntraseña",
+    "confirmPass": "Confirmar contraseña",
+    "email": "Email",
+    "remember": "Reacuerdame",
+    "also": "También puedes:",
+    "login": "Iniciar Sesión",
+    "create": "Crear una cuenta"
+  },
   "news": {
     "title": "Novedades"
   },
@@ -21,6 +32,17 @@
   },
   "postFinder": {
     "title": "Encuentra el artículo"
+  },
+  "authorPage": {
+    "title": "Articulos de {name}"
+  },
+  "categoryPage": {
+    "title": "Articulos de ",
+    "posts": "artículos"
+  },
+  "createPostPage": {
+    "draft": "Borrador",
+    "posts": "Mis publicaciones"
   },
   "authors": {
     "title": "Autores más activos esta semana"
@@ -31,7 +53,7 @@
     "views": "Vistas",
     "users": "Usuarios"
   },
-  "policies": {
+  "footer": {
     "cookies": "Politica de Cookies",
     "privacy": "Politica de Privacidad"
   },
@@ -49,7 +71,7 @@
     "fav": "Favoritos",
     "posts": "Articulos",
     "bioPlaceholder": "Edita tu post aquí",
-    "email": "Correo electronico",
+    "email": "Email",
     "pass": "Contraseña",
     "delete": "Eliminar cuenta",
     "formConfirm": "Confirmar cambio",
@@ -67,7 +89,8 @@
     "category": "Categoria",
     "publishBtn": "Publicar",
     "saveBtn": "Guardar",
-    "deleteBtn": "Borrar"
+    "deleteBtn": "Borrar",
+    "chooseCat": "Elige una categoria" 
   },
   "errorMsg":{
     "a": "a"

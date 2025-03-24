@@ -1,26 +1,19 @@
 import { createContext, useEffect, useState } from "react";
 import userService from "../../services/userService";
-
 const AuthContext = createContext();
 
 function AuthProviderWrapper(props) {
     const [loggedUser, setLoggedUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true); // Corrección de nombre
+    const [JWT, setJWT] = useState(null);
 
     const authenticateUser = () => {
-
-        let token = sessionStorage.getItem("authToken");
-        if (!token) {
-            token = localStorage.getItem("authToken");
-        }
-
-        if (token) {
+        if (JWT) {
             userService
-                .verifyUser(token)
+                .verifyUser(JWT)
                 .then(({ data }) => {
                     console.log(data)
                     setLoggedUser(data.user);
-                    //setIsLoading(false); // Podemos quitar el .finally
                 })
                 .catch(error => {
                     console.error("Error:", error);
@@ -36,7 +29,8 @@ function AuthProviderWrapper(props) {
     };
 
     const logOut = () => {
-        sessionStorage.clear();
+        // sessionStorage.clear();
+        sessionStorage.removeItem("authToken");
         localStorage.removeItem("authToken");
         setLoggedUser(null);
         setIsLoading(false);
@@ -47,7 +41,7 @@ function AuthProviderWrapper(props) {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ loggedUser, authenticateUser, isLoading, logOut }}>
+        <AuthContext.Provider value={{ loggedUser, JWT, setJWT, authenticateUser, isLoading, logOut }}>
             {props.children}
         </AuthContext.Provider>
     );

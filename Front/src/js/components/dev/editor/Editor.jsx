@@ -5,6 +5,7 @@ import servicioCategorias from "../../../services/categoriesService";
 import { AuthContext } from '../../../bootstrap/contexts/AuthContext';
 import { useAlert } from "../../../bootstrap/contexts/AlertContext";
 import { ErrorAlert, SuccessAlert } from '../Alerts/Alerts';
+import { useTranslation } from "react-i18next";
 
 import { html, plainText } from '@yoopta/exports';
 import YooptaEditor, { createYooptaEditor } from "@yoopta/editor";
@@ -31,6 +32,7 @@ import "./Editor.css";
 
 const uploadImageToCloudinary = async (file) => {
   try {
+    // TODO implement security
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
@@ -74,7 +76,7 @@ const TOOLS = {
 };
 
 export default function Editor({ isEditable = true, post = null, maxLenght = null }) {
-
+  const { t } = useTranslation();
   const editor = useMemo(() => createYooptaEditor(), []);
   const [value, setValue] = useState({});
   const [title, setTitle] = useState(post ? post.title : "");
@@ -185,7 +187,7 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
   return (
     <>
       {isEditable && (<div className="editor-title">
-        <label htmlFor="post-title">Title:</label>
+        <label htmlFor="post-title">{t("editor.title")}</label>
         <input
           type="text"
           id="post-title"
@@ -196,7 +198,7 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
       {isEditable && (<div className="categorie-dropdown">
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">Escoge categoria</span>
+            <span className="label-text">{t("editor.category")}</span>
           </div>
           <select
             className="select select-bordered"
@@ -204,7 +206,7 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
             value={selectedCategory || ""}
           >
             <option value="" disabled>
-              Elige una categoría
+              {t("editor.chooseCat")}
             </option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
@@ -230,9 +232,9 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
       </div>
       {isEditable && (
         <div className="editor-btns">
-          <button className="btn" onClick={() => handleSave("published")}>Publicar</button>
-          <button className="btn" onClick={() => handleSave("draft")}>Guardar</button>
-          <button className="btn btn-error" onClick={deletePost}>Borrar</button>
+          <button className="btn" onClick={() => handleSave("published")}>{t("editor.publishBtn")}</button>
+          <button className="btn" onClick={() => handleSave("draft")}>{t("editor.saveBtn")}</button>
+          <button className="btn btn-error" onClick={deletePost}>{t("editor.deleteBtn")}</button>
         </div>)}
     </>
   );
