@@ -1,21 +1,9 @@
-import axios from 'axios';
+import BaseService from './baseService';
 
-class FavService {
+class FavService extends BaseService {
 
     constructor() {
-        this.api = axios.create({
-            baseURL: 'http://localhost:8000/api/favorites/'
-        });
-        this.api.interceptors.request.use((config) => {
-
-            const storedToken = localStorage.getItem("authToken");
-
-            if (storedToken) {
-                config.headers = { Authorization: `Bearer ${storedToken}` };
-            }
-
-            return config;
-        });
+        super("favorites/")
     }
 
     /* Current User Fav */
