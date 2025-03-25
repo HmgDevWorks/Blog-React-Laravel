@@ -27,6 +27,12 @@ const AdminPage = () => {
       });
   };
 
+  const handleRoleChange = (userId, newRole) => {
+    setUsers(users.map(user => 
+      user.id === userId ? { ...user, role: newRole } : user
+    ));
+  };
+
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
@@ -47,6 +53,7 @@ const AdminPage = () => {
             user_id={user.id}
             user={`${user.name_user}${user.name_lastName ? ' ' + user.name_lastName : ''}`}
             onDelete={handleDelete}
+            onRoleChange={handleRoleChange}
           />
         ))}
       </div>

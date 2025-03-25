@@ -29,13 +29,9 @@ class UserService {
     getUserById(id) {
         return this.api.get(`/users/${id}`)
     }
-
-    getNonConfidentialUserById(id){
-        return this.api.get(`/users/non-confidential/${id}`);
-    }
     
     editUser(id, data) {
-        return this.api.put(`/users/update/${id}`, data)
+        return this.api.put(`/${id}`, data)
     }
     deleteUser(id) {
         return this.api.delete(`/users/destroy/${id}`)
@@ -44,6 +40,18 @@ class UserService {
         return this.api.get('/verify-token',
             { headers: { Authorization: `Bearer ${token}` } }
         )
+    }
+
+    getAuthenticatedUser() {
+        return this.api.get('/user/loguedUser');
+    }
+
+    getRoles() {
+        console.log('rol ');
+        // return this.api.get('/roles');
+    }
+    changeUserRole(user) {
+        return this.api.put(`/users/changeRole/${user}`);
     }
 }
 
