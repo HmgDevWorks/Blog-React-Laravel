@@ -39,8 +39,9 @@ Route::post('/password/email', [PasswordResetController::class, 'sendResetLinkEm
 Route::post('password/reset', [PasswordResetController::class, 'resetPassword']); //ruta que verifica los datos para poder cambiar la contraseña
 
 Route::get('/categories', [CategoriesController::class, 'index']); //muestra las categorias
-Route::get('/stats/counter', [PostController::class, 'getStatsForFooter']); //stats para el footer
+Route::get('/stats/counter', [PostController::class, 'getStatsForCounter']); //stats para el footer
 Route::get('/categories/{data}', [CategoriesController::class, 'showCategoriesByName']); //muestra el nombre de las categorias
+Route::get('/posts/news', [PostController::class, 'getTenNewsPost']);
 
 Route::middleware('auth:api')->get('/verify-token', [AuthController::class, 'verifyToken']);
 Route::middleware('auth:api')->post('/refresh-token', [AuthController::class, 'refreshToken']);
@@ -108,8 +109,6 @@ Route::controller(PostController::class)->middleware([JwtMiddleware::class])->gr
     Route::put('/posts/update/{post}', 'update')->name('posts.update')->middleware('role:admin|editor'); //Actualiza Post
     Route::delete('/posts/destroy/{post}', 'destroy')->name('posts.destroy'); //->middleware('role:admin|editor'); //Borra 
 });
-
-Route::get('/posts/news', [PostController::class, 'getTenNewsPost'])->name('posts.getTenNewsPost');
 
 Route::controller(FavoritesController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/favorites', 'getFavoritesForAuthenticatedUser')->name('favorites.getFavoritesForAuthenticatedUser')->middleware('role:admin|editor|reader'); //solo enseña los del usuario verificado
