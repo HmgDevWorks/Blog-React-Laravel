@@ -58,7 +58,6 @@ Route::middleware('auth:api')->get('/verify-token', function (Request $request) 
     ]);
 });
 
-
 Route::controller(ProfileController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/users/infouser','getInfoUser')->name('users.getInfoUser')->middleware('role:admin|editor|viewer'); //muestra info no sensible del user
     //Route::get('/users/infofav','getInfoFavUser')->name('users.getInfoFavUser')->middleware('role:admin|editor'); //muestra los favs que tienen los post de un user editor/admin
