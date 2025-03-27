@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
 import CreatePost from "../../components/dev/CreatePost/CreatePost";
-import BackToTop from "../../components/dev/backToTop/BackToTop";
+import BackToTop from "../../components/dev/BackToTop/BackToTop";
 import ArticleFinder from "../../components/dev/article_finder/ArticleFinder";
 import PostDetails from "../../components/dev/PostDetails/PostDetails";
 import './CategoryPage.css';
 import categoriesService from '../../services/categoriesService';
+import { useTranslation } from 'react-i18next';
 
 const CategoryPage = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   //     const id_categorie = location.state?.id_categorie;
   const title = location.state?.title;
@@ -45,7 +47,7 @@ const CategoryPage = () => {
         {/*                 {id_categorie} */}
       </div>
       <div className="numArticulos">
-        <p>{numArticulos} artículos</p>
+        <p>{numArticulos} {t("categoryPage.posts")}</p>
       </div>
       <ArticleFinder />
       <div className="indiceCategorias text-center p-2">

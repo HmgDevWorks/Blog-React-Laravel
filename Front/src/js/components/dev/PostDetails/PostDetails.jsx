@@ -41,7 +41,11 @@ const PostDetails = ({ blog }) => {
             <div className="contenidoEntero">
                 {/* <div className="blogContenido">{primerosCaracteres}</div> */}
                 {/* // TODO Check if image will be used
+<<<<<<< HEAD
                 //  */}
+=======
+                 */}
+>>>>>>> main
                 {/* <div className="imagenBlog">
                     {loadedImage && <img src={loadedImage} alt={blog.title} />}
                 </div> */}

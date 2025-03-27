@@ -13,6 +13,17 @@
     "login": "Iniciar Sesión",
     "logout": "Cerrar sesión"
   },
+  "login":{
+    "name": "Nombre",
+    "lastname": "Apellido",
+    "pass": "Cosntraseña",
+    "confirmPass": "Confirmar contraseña",
+    "email": "Email",
+    "remember": "Reacuerdame",
+    "also": "También puedes:",
+    "login": "Iniciar Sesión",
+    "create": "Crear una cuenta"
+  },
   "news": {
     "title": "Novedades"
   },
@@ -21,6 +32,17 @@
   },
   "postFinder": {
     "title": "Encuentra el artículo"
+  },
+  "authorPage": {
+    "title": "Articulos de {name}"
+  },
+  "categoryPage": {
+    "title": "Articulos de ",
+    "posts": "artículos"
+  },
+  "createPostPage": {
+    "draft": "Borrador",
+    "posts": "Mis publicaciones"
   },
   "authors": {
     "title": "Autores más activos esta semana"
@@ -31,7 +53,7 @@
     "views": "Vistas",
     "users": "Usuarios"
   },
-  "policies": {
+  "footer": {
     "cookies": "Politica de Cookies",
     "privacy": "Politica de Privacidad"
   },
@@ -49,7 +71,7 @@
     "fav": "Favoritos",
     "posts": "Articulos",
     "bioPlaceholder": "Edita tu post aquí",
-    "email": "Correo electronico",
+    "email": "Email",
     "pass": "Contraseña",
     "delete": "Eliminar cuenta",
     "formConfirm": "Confirmar cambio",
@@ -67,15 +89,37 @@
     "category": "Categoria",
     "publishBtn": "Publicar",
     "saveBtn": "Guardar",
-    "deleteBtn": "Borrar"
+    "deleteBtn": "Borrar",
+    "chooseCat": "Elige una categoria" 
   },
   "errorMsg":{
-    "a": "a"
+    "errorMail1": "Error de al enviar correo de verificación.",
+    "errorMail2": "Tiempo de verificación excedido.",
+    "errorMailVerifyDouble": "Este correo ya ha sido verificado.",
+    "errorPass1": "Las contraseñas no son iguales.",
+    "errorPass2": "Introduzca una contraseña diferente a la que ya tenía.",
+    "errorPass3": "Tiempo para actualizar la contraseña excedido.",
+    "errorPass4": "Error de al enviar correo de actualización de contraseña.",
+    "errorPass5": "Error al verificar el token para actualizar la contraseña.",
+    "errorPass6": "Error al confirmar el correo en la actualización de la contraseña.",
+    "errorPass7": "Erro al restablecer la contraseña.",
+
+
+    "coment": "HAY QUE VER MAS CASOS QUE PUEDAN DAR ERROR PARA EVALUARLOS TODOS."
   },
-  "msg": {
-    "a": "a"
+  "infoMsg": {
+    "infoMail1": "Si no encuentras el correo, revisa la carpeta de spam o solicita un nuevo envío.",
+    "infoMail2": "Tu cuenta no estará activada hasta que verifiques tu correo electrónico.",
+    "infoMail3": "Introduzca su correo.",
+
+    "infoPass1": "Introduce una contraseña segura con al menos 8 caracteres, una mayúscula y un número.",
+    "infoPass2": "Introduzca la nueva contraseña",
+    "infoPass3": "Repita la nueva contraseña"
   },
   "successMsg": {
-    "a": "a"
+    "successMail1": "Correo de verificación enviado con éxito, revise su bandeja de correo para confirmar.",
+    "successMail2": "Correo verificado con éxito. ¡Bienvenido, Redacta tu primer post!",
+    "successPass1": "Correo de actualización enviado con éxito, revise su bandeja de correo para cambiar su contraseña.",
+    "successPass2": "Contraseña actualizada con éxito"
   }
 }

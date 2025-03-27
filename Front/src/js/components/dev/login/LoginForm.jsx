@@ -4,11 +4,13 @@ import './LoginForm.css';
 import userService from '../../../services/userService';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../bootstrap/contexts/AuthContext';
-import { Navigate } from 'react-router-dom';
 import { ErrorAlert, SuccessAlert } from '../Alerts/Alerts';
+import { useTranslation } from 'react-i18next';
 
 export default function LoginForm() {
-    const [username, setUsername] = useState('');
+    const { t } = useTranslation();
+    const [name, setName] = useState('');
+    const [lastname, setLastame] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -17,7 +19,7 @@ export default function LoginForm() {
 
     const [login, setLogin] = useState(true);
 
-    const { authenticateUser } = useContext(AuthContext);
+    const { authenticateUser, setJWT } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -26,19 +28,15 @@ export default function LoginForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log('username:', username);
-        // console.log('password:', password);
-        // console.log('email:', email);
-        // console.log('confirmPassword:', confirmPassword);
         if (!login && password !== confirmPassword) {
             setErrorMsg('Las contraseñas no coinciden');
             return;
         }
 
         const data = login ?
-            { email: username, password: password }
+            { email: email, password: password }
             :
-            { name_user: username, email_user: email, password_user: password, password_user_confirmation: confirmPassword };
+            { name_user: name, name_lastName: lastname, email_user: email, password_user: password, password_user_confirmation: confirmPassword };
         const request = login ?
             userService.getOneUser(data)
             :
@@ -49,6 +47,10 @@ export default function LoginForm() {
                 if (remember) {
                     localStorage.setItem("authToken", data.authToken);
                 }
+<<<<<<< HEAD
+=======
+                setJWT(data.authToken);
+>>>>>>> main
                 authenticateUser()
                 setSuccessMsg('Credenciales correctas, serás redirigido en unos segundos.');
                 navigate('/')
@@ -64,8 +66,11 @@ export default function LoginForm() {
         setRemember((value) => !value);
     }
 
-    function handleUsernameChange(e) {
-        setUsername(e.target.value);
+    function handleNameChange(e) {
+        setName(e.target.value);
+    }
+    function handleLastnameChange(e) {
+        setLastname(e.target.value);
     }
     function handlePasswordChange(e) {
         setPassword(e.target.value);
@@ -84,15 +89,21 @@ export default function LoginForm() {
                 <h1 className="text-2xl font-bold">C-Blog</h1>
             </div>
             <div className='form-container'>
-                <LoginFormInput id="username" label="Email" type="text" placeholder="ej@gmail.com" onChange={handleUsernameChange} />
-                <LoginFormInput id="password" label="Contraseña" type="password" placeholder="Contraseña" onChange={handlePasswordChange} />
-                {!login &&
-                    <><LoginFormInput id="password" label="Confirmar contraseña" type="password" placeholder="Confirmar contraseña" onChange={handleConfirmPasswordChange} />
-                        <LoginFormInput id="email" label="Email" type="text" placeholder="Email" onChange={handleEmailChange} /></>}
+                <LoginFormInput id="email" name="email" label={t("login.email")} type="text" placeholder="ej@gmail.com" onChange={handleEmailChange} />
+                {!login && (<>
+                    <LoginFormInput id="name" name="name" label={t("login.name")} type="text" placeholder={t("login.name")} onChange={handleNameChange} />
+                    <LoginFormInput id="lastname" name="lastname" label={t("login.lastname")} type="text" placeholder={t("login.lastname")} onChange={handleLastnameChange} />
+                </>)}
+                <LoginFormInput id="password" name="password" label={t("login.pass")} type="password" placeholder="Contraseña" onChange={handlePasswordChange} />
+                {!login && (<LoginFormInput id="password" label={t("login.confirmPass")} type="password" placeholder="Confirmar contraseña" onChange={handleConfirmPasswordChange} />)}
                 {login && <div className="mb-4">
                     <label className="inline-flex items-center">
                         <input type="checkbox" className="form-checkbox checkbox " onChange={handleRemember} />
+<<<<<<< HEAD
                         <span className="ml-2">Recuerdame</span>
+=======
+                        <span className="ml-2">{t("login.remember")}</span>
+>>>>>>> main
                     </label>
                 </div>}
                 {errorMsg && <ErrorAlert msg={errorMsg} />}
@@ -104,7 +115,7 @@ export default function LoginForm() {
                 </button>
                 <hr className="my-4 login-divider" />
                 <p className='bottom-text'>
-                    Tambien puedes: <button type="button" className="text-blue-500 underline" onClick={() => setLogin(login => !login)}>{login ? "Crear una cuenta" : "Iniciar Sesion"}</button>
+                    {t("login.also")} <button type="button" className="text-blue-500 underline" onClick={() => setLogin(login => !login)}>{login ? t("login.create") : t("login.login")}</button>
                 </p>
             </div>
         </form>

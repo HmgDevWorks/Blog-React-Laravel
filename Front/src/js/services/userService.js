@@ -1,21 +1,11 @@
-import axios from 'axios';
+import BaseService from './baseService';
 
-class UserService {
+class UserService extends BaseService {
+    
     constructor() {
-        this.api = axios.create({
-            baseURL: 'http://localhost:8000/api'
-        })
-        this.api.interceptors.request.use((config) => {
-
-            const storedToken = localStorage.getItem("authToken");
-
-            if (storedToken) {
-                config.headers = { Authorization: `Bearer ${storedToken}` }
-            }
-
-            return config
-        })
+        super("");
     }
+
     getUsers() {
         return this.api.get('/users')
     }

@@ -8,10 +8,11 @@ import Separador from "../../components/dev/Separador/Separador";
 import postService from "../../services/postService";
 import { useAlert } from "../../bootstrap/contexts/AlertContext";
 import { AuthContext } from '../../bootstrap/contexts/AuthContext';
-
+import { useTranslation } from "react-i18next";
 // import Separador from "../../components/dev/separador/Separador";
 
 const CreatePostPage = () => {
+  const { t } = useTranslation();
   const { loggedUser } = useContext(AuthContext);
   const { addError, addSuccess } = useAlert();
 
@@ -49,13 +50,13 @@ const CreatePostPage = () => {
 
   return (
     <div className="mt-4 mb-4">
-      <Box title="Borrador">
+      <Box title={t("createPostPage.draft")}>
         <DraftTab tabs={dataDraft} />
       </Box>
       <Separador />
       <Editor />
       <Separador />
-      <Box title="Mis publicaciones">
+      <Box title={t("createPostPage.posts")}>
         <PostTablePagination filter={"published"} />
       </Box>
     </div>

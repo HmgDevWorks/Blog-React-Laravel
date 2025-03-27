@@ -2,8 +2,10 @@ import statService from "../../../services/statService";
 import Stats from "../Stats/Stats";
 import "./Counter.css";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Counter() {
+  const { t } = useTranslation();
   const [stats, setStats] = useState([]);
 
   useEffect(() => {
@@ -19,7 +21,7 @@ export default function Counter() {
   return (
     <div className="counter w-full">
       {/* <img src="" alt=""></img> */}
-      <h3>Contador</h3>
+      <h3>{t("counter.title")}</h3>
       <Stats stats={stats} />
     </div>
   );

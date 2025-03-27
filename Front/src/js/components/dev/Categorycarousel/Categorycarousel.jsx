@@ -4,11 +4,10 @@ import servicioCategorias from '../../../services/categoriesService';
 import Category from '../CategoryCarouselItem/CategoryItem';
 import Loader from '../Loader/Loader';
 import { useAlert } from "../../../bootstrap/contexts/AlertContext";
-
-
-
+import { useTranslation } from 'react-i18next';
 
 export default function CategoryCarrousel() {
+    const { t } = useTranslation();
     const { addError, addSuccess } = useAlert();
 
     const [categories, setCategories] = useState([]);

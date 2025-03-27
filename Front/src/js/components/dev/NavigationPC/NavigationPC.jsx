@@ -9,9 +9,13 @@ import { useTranslation } from 'react-i18next';
 
 const NavigationPC = () => {
     const { loggedUser, logOut } = useContext(AuthContext);
+<<<<<<< HEAD
     const { t, i18n } = useTranslation();
     console.log("Idioma actual:", i18n.language);
     console.log("Traducciones cargadas:", i18n.getDataByLanguage(i18n.language));
+=======
+    const { t } = useTranslation();
+>>>>>>> main
     return (
         <div className="navigatorPc" style={{ backgroundColor: 'black', color: 'white' }}>
             <div className='logoDiv'>
@@ -25,7 +29,11 @@ const NavigationPC = () => {
                         <li>
                             <div className="textoNavbar flex items-center">
                                 <FaHome className="mr-2" />
+<<<<<<< HEAD
                                 <p>{t("Inicio")}</p>
+=======
+                                <p>{t("nav.home")}</p>
+>>>>>>> main
                             </div>
                         </li>
                     </Link>
@@ -37,7 +45,11 @@ const NavigationPC = () => {
                                     <li>
                                         <div className="textoNavbar flex items-center">
                                             <FaLock className="mr-2" />
+<<<<<<< HEAD
                                             <p>{t('Admin')}</p>
+=======
+                                            <p>{t('nav.admin')}</p>
+>>>>>>> main
                                         </div>
                                     </li>
                                 </Link>
@@ -47,7 +59,11 @@ const NavigationPC = () => {
                                 <li>
                                     <div className="textoNavbar flex items-center">
                                         <FaStar className="mr-2" />
+<<<<<<< HEAD
                                         <p>Favoritos</p>
+=======
+                                        <p>{t('fav')}</p>
+>>>>>>> main
                                     </div>
                                 </li>
                             </Link>
@@ -56,7 +72,11 @@ const NavigationPC = () => {
                                 <li>
                                     <div className="textoNavbar flex items-center">
                                         <FaUser className="mr-2" />
+<<<<<<< HEAD
                                         <p>Perfil</p>
+=======
+                                        <p>{t('nav.profile')}</p>
+>>>>>>> main
                                     </div>
                                 </li>
                             </Link>
@@ -65,7 +85,11 @@ const NavigationPC = () => {
                                 <li>
                                     <div className="textoNavbar flex items-center">
                                         <FaPlusSquare className="mr-2" />
+<<<<<<< HEAD
                                         <p>Crear Post</p>
+=======
+                                        <p>{t('nav.createPost')}</p>
+>>>>>>> main
                                     </div>
                                 </li>
                             </Link>
@@ -74,7 +98,11 @@ const NavigationPC = () => {
                                 <li>
                                     <div className="textoNavbar flex items-center text-red-500">
                                         <FaSignOutAlt className="mr-2" />
+<<<<<<< HEAD
                                         <p>{t('logout')}</p>
+=======
+                                        <p>{t('nav.logout')}</p>
+>>>>>>> main
                                     </div>
                                 </li>
                             </Link>
@@ -86,7 +114,11 @@ const NavigationPC = () => {
                             <li>
                                 <div className="textoNavbar flex items-center">
                                     <FaSignInAlt className="mr-2" />
+<<<<<<< HEAD
                                     <p>Iniciar sesión</p>
+=======
+                                    <p>{t('nav.login')}</p>
+>>>>>>> main
                                 </div>
                             </li>
                         </Link>

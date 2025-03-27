@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import './ArticleFinder.css';
+import { useTranslation } from 'react-i18next';
 
 const ArticleFinder = () => {
+<<<<<<< HEAD
 
+=======
+    const { t } = useTranslation();
+>>>>>>> main
     const [selectedButton, setselectedButton] = useState('');
     const [inputValue, setInputValue] = useState('');
     const [results, setResults] = useState([]); // Estado para los resultados de la búsqueda (sin acabar)
@@ -23,7 +28,7 @@ const ArticleFinder = () => {
     return (
         <div className="container">
             <div className="bg-gray-200 p-4 rounded text-center">
-                <h2 className="titleArticleFinder">Encuentra el artículo:</h2>
+                <h2 className="titleArticleFinder">{t("postFinder.title")}</h2>
             </div>
 
             <div className='text-center mt-10'>

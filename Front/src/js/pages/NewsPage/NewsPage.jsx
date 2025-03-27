@@ -5,9 +5,10 @@ import Loader from '../../components/dev/Loader/Loader';
 import PostDetails from '../../components/dev/PostDetails/PostDetails';
 import { Link, redirect } from 'react-router-dom';
 import { useAlert } from "../../bootstrap/contexts/AlertContext";
-
+import { useTranslation } from 'react-i18next';
 
 const NewsPage = () => {
+  const { t } = useTranslation();
   const { addError, addSuccess } = useAlert();
 
   const [newsItems, setNewsItems] = useState([]);
@@ -42,7 +43,11 @@ const NewsPage = () => {
 
   return (
     // <div className='mb-4 mt-4 novedades-page'>
+<<<<<<< HEAD
     <><h1 className='novedades'>Novedades</h1>
+=======
+    <><h1 className='novedades'>{t("news.title")}</h1>
+>>>>>>> main
       <div className="carousel w-full carousel-news mx-auto relative">
         {newsItems && newsItems.length > 0 ? (
           newsItems.map((item, index) => (

@@ -10,8 +10,13 @@ export default function LangBubble() {
     };
 
     return (
+<<<<<<< HEAD
         <div className="fixed top-4 right-4">
             <div className="dropdown dropdown-bottom dropdown-end">
+=======
+        <div className="">
+            <div className="dropdown dropdown-top dropdown-start">
+>>>>>>> main
                 <label tabIndex={0} className="btn btn-circle btn-primary">
                     <FaGlobe className="text-xl" />
                 </label>

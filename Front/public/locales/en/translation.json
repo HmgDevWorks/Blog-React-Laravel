@@ -1,6 +1,10 @@
 {
   "title": "C-Blog, where the only limit to ideas is you",
+<<<<<<< HEAD
   "posts": "Articles",
+=======
+  "posts": "Posts",
+>>>>>>> main
   "views": "Views",
   "fav": "Favorites",
   "draft": "Drafts",
@@ -9,10 +13,28 @@
     "home": "Home",
     "admin": "Admin",
     "profile": "Profile",
+<<<<<<< HEAD
     "createPost": "Create Article",
     "login": "Login",
     "logout": "Logout"
   },
+=======
+    "createPost": "Create Post",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "login": {
+    "name": "First Name",
+    "lastname": "Last Name",
+    "pass": "Password",
+    "confirmPass": "Confirm Password",
+    "email": "Email",
+    "remember": "Remember Me",
+    "also": "You can also:",
+    "login": "Login",
+    "create": "Create an Account"
+  },
+>>>>>>> main
   "news": {
     "title": "News"
   },
@@ -20,6 +42,7 @@
     "sports": "Sports"
   },
   "postFinder": {
+<<<<<<< HEAD
     "title": "Find the article"
   },
   "authors": {
@@ -32,6 +55,31 @@
     "users": "Users"
   },
   "policies": {
+=======
+    "title": "Find the Post"
+  },
+  "authorPage": {
+    "title": "{name}'s Posts"
+  },
+  "categoryPage": {
+    "title": "Posts in ",
+    "posts": "posts"
+  },
+  "createPostPage": {
+    "draft": "Draft",
+    "posts": "My Publications"
+  },
+  "authors": {
+    "title": "Most Active Authors This Week"
+  },
+  "counter": {
+    "title": "Counter",
+    "posts": "Posts",
+    "views": "Views",
+    "users": "Users"
+  },
+  "footer": {
+>>>>>>> main
     "cookies": "Cookie Policy",
     "privacy": "Privacy Policy"
   },
@@ -47,6 +95,7 @@
   "profile": {
     "title": "Profile",
     "fav": "Favorites",
+<<<<<<< HEAD
     "posts": "Articles",
     "bioPlaceholder": "Edit your post here",
     "email": "Email",
@@ -55,6 +104,16 @@
     "formConfirm": "Confirm change",
     "modalEmailTitle": "Confirm email change",
     "modalPassTitle": "Confirm password change",
+=======
+    "posts": "Posts",
+    "bioPlaceholder": "Edit your post here",
+    "email": "Email",
+    "pass": "Password",
+    "delete": "Delete Account",
+    "formConfirm": "Confirm Change",
+    "modalEmailTitle": "Confirm Email Change",
+    "modalPassTitle": "Confirm Password Change",
+>>>>>>> main
     "modalDeleteTitle": "Are you sure you want to delete your account?",
     "modalDeleteInfo": "This action cannot be undone",
     "modalPassInput": "Enter your password",
@@ -67,6 +126,7 @@
     "category": "Category",
     "publishBtn": "Publish",
     "saveBtn": "Save",
+<<<<<<< HEAD
     "deleteBtn": "Delete"
   },
   "errorMsg": {
@@ -77,5 +137,34 @@
   },
   "successMsg": {
     "a": "a"
+=======
+    "deleteBtn": "Delete",
+    "chooseCat": "Choose a category"
+  },
+  "errorMsg": {
+    "errorMail1": "Error sending the verification email.",
+    "errorMail2": "Verification time exceeded.",
+    "errorMailVerifyDouble": "This email has already been verified.",
+    "errorPass1": "Passwords do not match.",
+    "errorPass2": "Please enter a password different from your previous one.",
+    "errorPass3": "Time to update the password has expired.",
+
+    "coment": "WE NEED TO ANALYZE MORE POSSIBLE ERRORS TO COVER ALL CASES."
+  },
+  "infoMsg": {
+    "infoMail1": "If you can't find the email, check your spam folder or request a new one.",
+    "infoMail2": "Your account will not be activated until you verify your email.",
+    "infoMail3": "Enter your email.",
+
+    "infoPass1": "Enter a secure password with at least 8 characters, one uppercase letter, and one number.",
+    "infoPass2": "Enter the new password.",
+    "infoPass3": "Repeat the new password."
+  },
+  "successMsg": {
+    "successMail1": "Verification email sent successfully. Check your inbox to confirm it.",
+    "successMail2": "Email verified successfully. Welcome! Write your first post.",
+    "successPass1": "Password update email sent successfully. Check your inbox to change your password.",
+    "successPass2": "Password updated successfully."
+>>>>>>> main
   }
 }
