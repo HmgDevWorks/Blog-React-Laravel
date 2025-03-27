@@ -51,7 +51,7 @@ class CustomEmailVerification extends Mailable
         );
 
         // Usamos `url()` para asegurarnos de que la URL use APP_URL desde el archivo `.env`
-         $this->verificationUrl = env('APP_URL') . parse_url($this->verificationUrl, PHP_URL_PATH);
+         $this->verificationUrl = env('FRONTEND_URL') . parse_url($this->verificationUrl, PHP_URL_PATH);
     }
 
     /**

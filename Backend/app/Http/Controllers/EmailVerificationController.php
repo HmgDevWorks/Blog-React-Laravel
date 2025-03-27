@@ -30,20 +30,6 @@ class EmailVerificationController extends Controller
 
     public function verify($id, $hash)
     {
-        // $user = User::findOrFail($id);
-
-        // if (!hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
-        //     return response()->json(['message' => 'Enlace de verificación no válido'], 403);
-        // }
-
-        // if ($user->hasVerifiedEmail()) {
-        //     return response()->json(['message' => 'El email ya ha sido verificado'], 200);
-        // }
-
-        // $user->markEmailAsVerified();
-
-        // return response()->json(['message' => 'Cuenta verificada con éxito']);
-
         $user = User::findOrFail($id);
         $generatedHash = sha1($user->getEmailForVerification());
         Log::info("Hash generado: $generatedHash");
@@ -58,16 +44,5 @@ class EmailVerificationController extends Controller
          }
 
          $user->markEmailAsVerified();
-
-         //return redirect()->to('http://localhost:5173');; // Redirige al login con un query param
-
-        // $user = User::findOrFail($id);
-
-        // if (!$user->hasVerifiedEmail()) {
-        //     $user->markEmailAsVerified();
-        // }
-
-        // // Redirige al usuario a la página principal (o cualquier otra página que prefieras)
-        // return redirect('http://localhost:5173');
     }
 }
