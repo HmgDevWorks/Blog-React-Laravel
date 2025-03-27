@@ -78,39 +78,46 @@ class UserService
         }
     }
 
-    public function updateUser(Request $request,$data, User $user)
-    {  
-        $authUser = $request->user; //esto gracias al middleware creado de JWT realiza la comprobacion de que el usuario tenga el mismo token
-        if (!$user) {
-            return response()->json(["mensaje" => "Error al actualizar el usuario"], 404);
-        }
-        if (!$authUser->hasRole('admin') && $authUser->id !== $user->id) {
-            return response()->json(["mensaje" => "No tienes permiso para modificar este usuario"], 403);
-        }
-    
-        if (isset($data->img_user) && $data->hasFile('img_user')) { //manejo de la imagen
-            $image = $data->file('img_user');
-            $imageName = time() . '.' . $image->extension();
-            $image->move(public_path('avatars'), $imageName);
-    
-            if ($user->img_user && $user->img_user !== 'avatars/default.png') { // Borrar la imagen anterior si no es la default
-                $oldImagePath = public_path($user->img_user);
-                if (file_exists($oldImagePath)) {
-                    unlink($oldImagePath);
-                }
-            }
-    
-            $user->img_user = 'avatars/' . $imageName;
-        }
-    
-        $user->update([// Actualizar usuario con la nueva info
-            'name_user' => $data->name_user,
-            'email_user' => $data->email_user,
-            'bio' => $data->bio,
-            'updated_at' => now(),
-        ]);
-        return response()->json(["mensaje" => "Usuario actualizado correctamente"], 200);
+    public function updateUser(Request $request, User $user)
+{  
+    $authUser = $request->user(); // Comprobar autenticación con JWT
+
+    if (!$user) {
+        return response()->json(["mensaje" => "Error al actualizar el usuario"], 404);
     }
+
+    if (!$authUser->hasRole('admin') && $authUser->id !== $user->id) {
+        return response()->json(["mensaje" => "No tienes permiso para modificar este usuario"], 403);
+    }
+
+    $data = $request->only(['name_user', 'email_user', 'bio', 'password_user', 'img_user']);
+
+    // Manejo de la imagen
+    if ($request->hasFile('img_user')) {
+        $image = $request->file('img_user');
+        $imageName = time() . '.' . $image->extension();
+        $image->move(public_path('avatars'), $imageName);
+
+        if ($user->img_user && $user->img_user !== 'avatars/default.png') {
+            $oldImagePath = public_path($user->img_user);
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+        }
+
+        $data['img_user'] = 'avatars/' . $imageName;
+    }
+
+    // Si se envía password, lo encripta
+    if ($request->filled('password_user')) {
+        $data['password_user'] = bcrypt($request->password_user);
+    }
+
+    // Actualiza solo los campos proporcionados
+    $user->update($data);
+
+    return response()->json(["mensaje" => "Usuario actualizado correctamente"], 200);
+}
 
     public function getInfoUser()
     {

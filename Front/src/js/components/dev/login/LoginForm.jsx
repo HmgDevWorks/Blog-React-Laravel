@@ -13,6 +13,8 @@ export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    const [remember, setRemember] = useState(false);
+
     const [login, setLogin] = useState(true);
 
     const { authenticateUser } = useContext(AuthContext);
@@ -43,17 +45,24 @@ export default function LoginForm() {
             userService.createUser(data);
         request
             .then(({ data }) => {
-                localStorage.setItem("authToken", data.authToken)
+                sessionStorage.setItem("authToken", data.authToken);
+                if (remember) {
+                    localStorage.setItem("authToken", data.authToken);
+                }
                 authenticateUser()
                 setSuccessMsg('Credenciales correctas, serás redirigido en unos segundos.');
                 navigate('/')
             })
             .catch(error => {
-                const data = JSON.parse(error.request.response);
+                console.log(error);
+                const data = JSON.parse(error.response.data.message);
                 setErrorMsg(data.error);
             });
     };
 
+    function handleRemember() {
+        setRemember((value) => !value);
+    }
 
     function handleUsernameChange(e) {
         setUsername(e.target.value);
@@ -82,7 +91,7 @@ export default function LoginForm() {
                         <LoginFormInput id="email" label="Email" type="text" placeholder="Email" onChange={handleEmailChange} /></>}
                 {login && <div className="mb-4">
                     <label className="inline-flex items-center">
-                        <input type="checkbox" className="form-checkbox checkbox " />
+                        <input type="checkbox" className="form-checkbox checkbox " onChange={handleRemember} />
                         <span className="ml-2">Recuerdame</span>
                     </label>
                 </div>}

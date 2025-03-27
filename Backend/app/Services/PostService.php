@@ -22,9 +22,27 @@ class PostService
             ->get(); // Obtiene los posts
     }
 
+    public function getLastTenPopularPosts()
+    {
+        return Post::where('status', 'published') // Solo los publicados
+        ->orderBy('created_at', 'desc') // Ordena por fecha (últimos 50)
+        ->take(50)
+        ->orderBy('views', 'desc') // Luego, ordena por vistas
+        ->take(10) // Se queda solo con los 10 más vistos
+        ->get();
+    }
+
     public function getPostById($id) // Devuelve el post con el ID especificado, o lanza un error 404 si no existe
     {    
-        $post = Post::findOrFail($id);
+        $post = Post::where('id', $id)
+                ->where('status', 'published')  
+                ->first();
+         
+        if (!$post) {
+            return response()->json([
+                'error' => 'Post no exixte o no está publicado.'
+            ], 404);
+        }
         $post->increment('views'); // contador para que cuando alguien entre en el post especificado aumenten las visitas en la tabla de post
         $post->refresh();           //actualiza el campo para mostrarlo correctamente
         return response()->json([

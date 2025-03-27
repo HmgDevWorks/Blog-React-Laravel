@@ -1,0 +1,29 @@
+/* .FormElementProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.changeButton {
+    width: auto;
+    padding: 10px 20px;
+    display: inline-block;
+    text-align: center;
+    border: none;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.profileContainer {
+    font-family: Helvetica, sans-serif !important;
+}
+
+.profileContainer p{
+    color: #846a6a;
+}
+   */

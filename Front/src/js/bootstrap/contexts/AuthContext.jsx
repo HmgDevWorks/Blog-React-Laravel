@@ -8,7 +8,11 @@ function AuthProviderWrapper(props) {
     const [isLoading, setIsLoading] = useState(true); // Corrección de nombre
 
     const authenticateUser = () => {
-        const token = localStorage.getItem("authToken");
+
+        let token = sessionStorage.getItem("authToken");
+        if (!token) {
+            token = localStorage.getItem("authToken");
+        }
 
         if (token) {
             userService
@@ -32,6 +36,7 @@ function AuthProviderWrapper(props) {
     };
 
     const logOut = () => {
+        sessionStorage.clear();
         localStorage.removeItem("authToken");
         setLoggedUser(null);
         setIsLoading(false);

@@ -3,7 +3,7 @@ import "./NewsPage.css";
 import postService from '../../services/postService';
 import Loader from '../../components/dev/Loader/Loader';
 import PostDetails from '../../components/dev/PostDetails/PostDetails';
-import { redirect } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 import { useAlert } from "../../bootstrap/contexts/AlertContext";
 
 
@@ -41,9 +41,9 @@ const NewsPage = () => {
   };
 
   return (
-    <div className='novedades-page'>
-      <h1 className='novedades'>Novedades:</h1>
-      <div className="carousel w-full carousel-news">
+    // <div className='mb-4 mt-4 novedades-page'>
+    <><h1 className='novedades'>Novedades</h1>
+      <div className="carousel w-full carousel-news mx-auto relative">
         {newsItems && newsItems.length > 0 ? (
           newsItems.map((item, index) => (
 
@@ -53,9 +53,9 @@ const NewsPage = () => {
               id={`slide${item.id}`}
               className={`carousel-item relative w-full ${index === currentSlide ? 'block' : 'hidden'}`}
             >
-              <a key={item.id} href={`/detallesBlog/${item.id}`}>
+              <Link key={item.id} to={`/detallesBlog/${item.id}`}>
                 <PostDetails className="w-full" blog={item} />
-              </a>
+              </Link>
             </div>
 
           ))
@@ -64,12 +64,13 @@ const NewsPage = () => {
         )}
 
         {/* Navigation buttons */}
-        <div className="botones-novedades absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+        <div className="botones-novedades absolute top-1/2 flex -translate-y-1/2 justify-between px-3">
           <button onClick={() => handleNavigation('prev')} className="btn btn-circle">❮</button>
           <button onClick={() => handleNavigation('next')} className="btn btn-circle">❯</button>
         </div>
       </div>
-    </div>
+    </>
+    // </div>
   );
 };
 

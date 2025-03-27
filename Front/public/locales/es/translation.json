@@ -1,0 +1,81 @@
+{
+  "title": "C-Blog, donde el limite de las ideas, lo pones tú",
+  "posts": "Articulos",
+  "views": "Vistas",
+  "fav": "Favoritos",
+  "draft": "Borradores",
+  "published": "Mis publicaciones",
+  "nav" : {
+    "home": "Inicio",
+    "admin": "Administrador",
+    "profile": "Perfil",
+    "createPost": "Crear Articulo",
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar sesión"
+  },
+  "news": {
+    "title": "Novedades"
+  },
+  "category": {
+    "sports": "Deportes"
+  },
+  "postFinder": {
+    "title": "Encuentra el artículo"
+  },
+  "authors": {
+    "title": "Autores más activos esta semana"
+  },
+  "counter": {
+    "title": "Contador",
+    "posts": "Articulos",
+    "views": "Vistas",
+    "users": "Usuarios"
+  },
+  "policies": {
+    "cookies": "Politica de Cookies",
+    "privacy": "Politica de Privacidad"
+  },
+  "admin": {
+    "title": "Página de administración",
+    "delete": "Eliminar"
+  },
+  "postTable": {
+    "title": "Título",
+    "publishedAt": "Fecha de publicación",
+    "fav": "Favorito"
+  },
+  "profile": {
+    "title": "Perfil",
+    "fav": "Favoritos",
+    "posts": "Articulos",
+    "bioPlaceholder": "Edita tu post aquí",
+    "email": "Correo electronico",
+    "pass": "Contraseña",
+    "delete": "Eliminar cuenta",
+    "formConfirm": "Confirmar cambio",
+    "modalEmailTitle": "Confirmar cambio de email",
+    "modalPassTitle": "Confirmar cambio de contraseña",
+    "modalDeleteTitle": "¿Estás seguro de que quieres eliminar tu cuenta?",
+    "modalDeleteInfo": "Esta acción no se puede deshacer",
+    "modalPassInput": "Introduce tu contraseña",
+    "modalEmailInput": "Introduce tu email",
+    "confirmBtn": "Confirmar",
+    "cancelBtn": "Cancelar"
+  },
+  "editor": {
+    "title": "Titulo",
+    "category": "Categoria",
+    "publishBtn": "Publicar",
+    "saveBtn": "Guardar",
+    "deleteBtn": "Borrar"
+  },
+  "errorMsg":{
+    "a": "a"
+  },
+  "msg": {
+    "a": "a"
+  },
+  "successMsg": {
+    "a": "a"
+  }
+}

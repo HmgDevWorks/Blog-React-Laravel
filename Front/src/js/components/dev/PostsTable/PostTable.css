@@ -22,6 +22,7 @@
 
 .posts-table{
     width: 100%;
+    overflow: hidden;
     /* thead, tbody{
         width: 100%;
     } */

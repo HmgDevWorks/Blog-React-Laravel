@@ -18,11 +18,11 @@ const PostDetailsPage = () => {
     postService
       .getOnePost(blog_id)
       .then(({ data }) => {
-        console.log(data.original.post)
-        setBlog(data.original.post)
+        setBlog(data.post);
       })
       .catch(error => {
-        const data = JSON.parse(error.request.response);
+        console.log("ERROR", error);
+        const data = JSON.parse(error.response.data.message);
         addError(data.error);
       });
   }

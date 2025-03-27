@@ -1,0 +1,29 @@
+:root{
+    --grisClaro: #eef0f2;
+ --grisMedio: #c6c7c4;
+ --saturadoClaro: #a2999e; 
+ --saturadoOscuro: #846a6a;
+ --grisOscuro: #353b3c;
+ } 
+
+ .profile-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+
+    /* >div{
+        width: 80%;
+    } */
+ }
+
+
+.profile{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--saturadoOscuro);
+    font-weight: bold;
+}

@@ -1,6 +1,6 @@
-.writeButton {
-    width: 6vw;
-    height: 6vw;
+.create-post-btn {
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     border: none;
     background-color: #846a6a;
@@ -11,16 +11,16 @@
     overflow: hidden;
     position: fixed;
     bottom: 35%;
-    right: 5%;
+    right: 2%;
+
+    img {
+        width: 70%;
+        height: 70%;
+        object-fit: contain;
+        transform: translateX(5%);
+    }
 }
 
-.writeButton:hover {
+.create-post-btn:hover {
     transform: scale(1.1);
-}
-
-.writeButton img {
-    width: 70%;
-    height: 70%;
-    object-fit: contain;
-    transform: translateX(5%);
 }

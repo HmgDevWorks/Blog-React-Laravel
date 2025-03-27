@@ -2,7 +2,7 @@ import React from "react";
 import Box from "../../components/dev/Box/Box";
 import DraftTab from "../../components/dev/Draft/DraftTab";
 import { useState, useEffect, useContext } from "react";
-import PostTable from "../../components/dev/PostsTable/PostTable";
+import PostTablePagination from "../../components/dev/PostTablePagination/PostTablePagination";
 import Editor from "../../components/dev/Editor/Editor";
 import Separador from "../../components/dev/Separador/Separador";
 import postService from "../../services/postService";
@@ -48,7 +48,7 @@ const CreatePostPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="mt-4 mb-4">
       <Box title="Borrador">
         <DraftTab tabs={dataDraft} />
       </Box>
@@ -56,7 +56,7 @@ const CreatePostPage = () => {
       <Editor />
       <Separador />
       <Box title="Mis publicaciones">
-        <PostTable posts={posts} />
+        <PostTablePagination filter={"published"} />
       </Box>
     </div>
   );

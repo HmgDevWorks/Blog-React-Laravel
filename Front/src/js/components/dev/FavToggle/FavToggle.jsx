@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaStar, FaRegStar } from 'react-icons/fa';
 import favService from '../../../services/favService';
 import { useAlert } from '../../../bootstrap/contexts/AlertContext';
@@ -14,6 +14,10 @@ export default function FavToggle({ fav, id }) {
             addFav(id);
         }
     };
+
+    useEffect(() => {
+        setIsFav(fav);
+    }, [fav]);
 
     const addFav = () => {
         favService.addFav(id)

@@ -10,10 +10,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-block: 2rem;
     width: 100%;
     overflow: hidden;
-    height: 80vw;
 
     div{
         width: 80%;

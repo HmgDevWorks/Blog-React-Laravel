@@ -6,7 +6,6 @@ import { AuthContext } from '../../../bootstrap/contexts/AuthContext';
 import { useAlert } from "../../../bootstrap/contexts/AlertContext";
 import { ErrorAlert, SuccessAlert } from '../Alerts/Alerts';
 
-
 import { html, plainText } from '@yoopta/exports';
 import YooptaEditor, { createYooptaEditor } from "@yoopta/editor";
 import Paragraph from "@yoopta/paragraph";
@@ -28,12 +27,36 @@ import ActionMenu, { DefaultActionMenuRender } from '@yoopta/action-menu-list';
 import Toolbar, { DefaultToolbarRender } from '@yoopta/toolbar';
 import { Bold, Italic, CodeMark, Underline, Strike, Highlight } from '@yoopta/marks';
 
-// import DeatallesBlog from "./PostDetails";
 import "./Editor.css";
+
+const uploadImageToCloudinary = async (file) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
+
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+      { method: "POST", body: formData }
+    );
+
+    const data = await response.json();
+    return {
+      src: data.secure_url,
+      alt: data.original_filename || "cloudinary_image",
+      sizes: { width: data.width, height: data.height },
+    };
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    throw error;
+  }
+};
 
 const MARKS = [Bold, Italic, CodeMark, Underline, Strike, Highlight];
 
-const plugins = [Paragraph, Blockquote, Accordion, Code, Embed, Image, Link, File, Callout, Video, NumberedList, BulletedList, TodoList, HeadingOne, HeadingTwo, HeadingThree, Table, Divider];
+const plugins = [Paragraph, Blockquote, Accordion, Code, Embed,
+  Image.extend({ options: { onUpload: uploadImageToCloudinary }, }),
+  Link, File, Callout, Video, NumberedList, BulletedList, TodoList, HeadingOne, HeadingTwo, HeadingThree, Table, Divider];
 
 const TOOLS = {
   Toolbar: {
@@ -51,15 +74,12 @@ const TOOLS = {
 };
 
 export default function Editor({ isEditable = true, post = null, maxLenght = null }) {
-  // const { addError, addSuccess } = useAlert();
 
   const editor = useMemo(() => createYooptaEditor(), []);
   const [value, setValue] = useState({});
-  // const [isPreview, setIsPreview] = useState(false);
   const [title, setTitle] = useState(post ? post.title : "");
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(post ? post.id_categories : 0);
-  // if (post) { console.log("selectedcat", selectedCategory); }
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
 
@@ -90,25 +110,6 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
     return htmlString;
   };
 
-  // from plain text to @yoopta content
-  // const deserializeText = () => {
-  //   const textString = '# First title';
-  //   const value = plainText.deserialize(editor, textString);
-
-  //   editor.setEditorValue(value);
-  // };
-
-  // // from @yoopta content to plain text string
-  // const serializeText = () => {
-  //   const data = editor.getEditorValue();
-  //   const textString = plainText.serialize(editor, data);
-  //   console.log('plain text string', textString);
-  // };
-
-  // const handlePreview = () => {
-  //   setIsPreview(isPreview => !isPreview);
-  // };
-
   const handleSave = async (status) => {
     serializeHTML();
     const userId = loggedUser.id;
@@ -131,7 +132,7 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
         setSuccessMsg(response.data.mensaje);
       })
       .catch(error => {
-        const data = JSON.parse(error.request.response);
+        const data = JSON.parse(error.response.data.message);
         setErrorMsg(data.error);
       });
   };
@@ -142,15 +143,13 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
       editor.setEditorValue([]);
       return;
     }
-    // const userId = localStorage.getItem('userId');
-    // let data = { id_categories: selectedCategory, user_id: userId, title: title, content: serializeHTML(), status: status };
     let request = postService.deletePost(post.id);
     request
       .then(response => {
         console.log('Deleted:', response.data);
       })
       .catch(error => {
-        const data = JSON.parse(error.request.response);
+        const data = JSON.parse(error.response.data.message);
         setErrorMsg(data.error);
       });
   };
@@ -158,20 +157,17 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
   const hasFetched = useRef(false);
 
   useEffect(() => {
-    if (hasFetched.current || categories.length > 0) return;
+    if (!isEditable || hasFetched.current || categories.length > 0) return;
 
-    const request = servicioCategorias.getCategorias();
-    hasFetched.current = true;
-
-    request
-      .then(response => {
-        setCategories(response.data);
-      })
-      .catch(error => {
-        const data = JSON.parse(error.request.response);
+    servicioCategorias.getCategorias()
+      .then(({ data }) => {
+        hasFetched.current = true;
+        setCategories(data);
+      }).catch(error => {
+        const data = JSON.parse(error.response.data.message);
         setErrorMsg(data.error);
       });
-  }, [categories.length]);
+  }, [isEditable, categories.length]);
 
   useEffect(() => {
     if (post && post.content) {

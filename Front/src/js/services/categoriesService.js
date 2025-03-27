@@ -27,6 +27,10 @@ class ServicioCategorias {
         return this.api.get(`/show/${category_id}`)
     }
 
+    gerPostForCategory(name) {
+        return this.api.get(`/posts/${name}`)
+    }
+    
     createCategoria(data) {
         return this.api.post('/', data)
     }

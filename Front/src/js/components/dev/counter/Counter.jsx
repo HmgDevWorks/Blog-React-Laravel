@@ -9,7 +9,6 @@ export default function Counter() {
   useEffect(() => {
     statService.getCounterStats()
       .then(response => {
-        console.log(response);
         setStats(response.data);
       })
       .catch(error => {
@@ -18,7 +17,7 @@ export default function Counter() {
   }, []);
 
   return (
-    <div className="counter">
+    <div className="counter w-full">
       {/* <img src="" alt=""></img> */}
       <h3>Contador</h3>
       <Stats stats={stats} />

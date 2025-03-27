@@ -27,15 +27,21 @@ class PostController extends Controller
         return response()->json($this->postService->getLastTenPosts());
     }
 
-    public function show(): JsonResponse
+    public function getTenNewsPost(): JsonResponse
     {
-        return response()->json($this->postService->getAllPost());
+        return response()->json($this->postService->getLastTenPopularPosts());
     }
 
     public function getPostById($id)
     {
         return $this->postService->getPostById($id);
     }
+
+    public function show(): JsonResponse
+    {
+        return response()->json($this->postService->getAllPost());
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -119,7 +125,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function getStatsForFooter(): JsonResponse
+    public function getStatsForCounter(): JsonResponse
     {
         $postscounts = $this->postService->getCountPost();
         $postsviewss = $this->postService->getViewsPost();

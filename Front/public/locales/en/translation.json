@@ -1,0 +1,81 @@
+{
+  "title": "C-Blog, where the only limit to ideas is you",
+  "posts": "Articles",
+  "views": "Views",
+  "fav": "Favorites",
+  "draft": "Drafts",
+  "published": "My Publications",
+  "nav": {
+    "home": "Home",
+    "admin": "Admin",
+    "profile": "Profile",
+    "createPost": "Create Article",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "news": {
+    "title": "News"
+  },
+  "category": {
+    "sports": "Sports"
+  },
+  "postFinder": {
+    "title": "Find the article"
+  },
+  "authors": {
+    "title": "Most active authors this week"
+  },
+  "counter": {
+    "title": "Counter",
+    "posts": "Articles",
+    "views": "Views",
+    "users": "Users"
+  },
+  "policies": {
+    "cookies": "Cookie Policy",
+    "privacy": "Privacy Policy"
+  },
+  "admin": {
+    "title": "Admin Page",
+    "delete": "Delete"
+  },
+  "postTable": {
+    "title": "Title",
+    "publishedAt": "Published Date",
+    "fav": "Favorite"
+  },
+  "profile": {
+    "title": "Profile",
+    "fav": "Favorites",
+    "posts": "Articles",
+    "bioPlaceholder": "Edit your post here",
+    "email": "Email",
+    "pass": "Password",
+    "delete": "Delete account",
+    "formConfirm": "Confirm change",
+    "modalEmailTitle": "Confirm email change",
+    "modalPassTitle": "Confirm password change",
+    "modalDeleteTitle": "Are you sure you want to delete your account?",
+    "modalDeleteInfo": "This action cannot be undone",
+    "modalPassInput": "Enter your password",
+    "modalEmailInput": "Enter your email",
+    "confirmBtn": "Confirm",
+    "cancelBtn": "Cancel"
+  },
+  "editor": {
+    "title": "Title",
+    "category": "Category",
+    "publishBtn": "Publish",
+    "saveBtn": "Save",
+    "deleteBtn": "Delete"
+  },
+  "errorMsg": {
+    "a": "a"
+  },
+  "msg": {
+    "a": "a"
+  },
+  "successMsg": {
+    "a": "a"
+  }
+}

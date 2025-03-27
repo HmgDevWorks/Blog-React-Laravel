@@ -6,7 +6,7 @@ import './CreatePost.css';
 function CreatePost() {
     const navigate = useNavigate();
     return (
-        <button className="writeButton" onClick={() => { navigate("/createPost") }}>
+        <button className="create-post-btn shadow" title="Crear Post" onClick={() => { navigate("/createPost") }}>
             <img src={logo} alt="write" />
         </button>
     );

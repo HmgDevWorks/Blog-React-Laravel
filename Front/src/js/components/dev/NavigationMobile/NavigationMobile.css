@@ -60,7 +60,8 @@
     border-top: 1px solid #a2999e;
     color: #eef0f2 !important;
     width: 100%;
-    padding-left: 30px;
+    padding-left: 20px;
+    /* padding-left: 30px; */
 }
 
 .collapseNav a:hover {

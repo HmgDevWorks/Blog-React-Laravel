@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import './NavigationMobile.css'
 import logoPluma from '../../../../assets/logo_pluma.svg';
 import { AuthContext } from '../../../bootstrap/contexts/AuthContext';
+import { Link } from 'react-router-dom';
 
 function NavigationMobile() {
   const { loggedUser, logOut } = useContext(AuthContext);
@@ -13,8 +14,12 @@ function NavigationMobile() {
 
     <div className="navbar bg-base-300 rounded-box">
       <div className="flex-1 justify-start px-2 lg:flex-none brand">
-        <img src={logoPluma} className="navbarLogo" alt="hola" />CB
+        // TODO fix it
+        <Link to="/">
+          <img src={logoPluma} className="navbarLogo" alt="logo" />CB
+        </Link>
       </div>
+
       <div className="flex flex-1 justify-end px-2 pr-0">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost rounded-btn dropbutton"> ☰</div>
@@ -31,18 +36,17 @@ function NavigationMobile() {
                 <div className="linksNavMob">favoritos</div>
               </a>
             </li> */}
-            <a href="/"><li><div className="linksNavMob">Inicio</div></li></a>
-            <a href="/news"><li><div className="linksNavMob">Novedades</div></li></a>
-            {console.log(loggedUser)}
+            <Link to="/"><li><div className="linksNavMob">Inicio</div></li></Link>
+            {/* <a href="/news"><li><div className="linksNavMob">Novedades</div></li></a> */}
             {loggedUser && (<>
               {loggedUser.role === "admin"
-                && (<a href="/admin" ><li><div className="linksNavMob">Admin</div></li></a>)}
-              <a href="/favorites" ><li><div className="linksNavMob">Favoritos</div></li></a>
-              <a href={`/acc/${loggedUser.id}`} ><li><div className="linksNavMob">Perfil</div></li></a>
-              <a href='/createPost'><li><div className="linksNavMob">Crear Post</div></li></a>
-              <a href="#" onClick={logOut}><li><div className="linksNavMob">Cerrar sesion</div></li></a>
+                && (<Link to="/admin" ><li><div className="linksNavMob">Admin</div></li></Link>)}
+              <Link to="/favorite_posts" ><li><div className="linksNavMob">Favoritos</div></li></Link>
+              <Link to={`/profile`} ><li><div className="linksNavMob">Perfil</div></li></Link>
+              <Link to='/createPost'><li><div className="linksNavMob">Crear Post</div></li></Link>
+              <Link to="#" onClick={logOut}><li><div className="linksNavMob color-error">Cerrar sesion</div></li></Link>
             </>)}
-            {!loggedUser && (<a href="/logIn" ><li><div className="linksNavMob">Iniciar Sesion</div></li></a>)}
+            {!loggedUser && (<Link to="/logIn" ><li><div className="linksNavMob">Iniciar Sesion</div></li></Link>)}
           </ul>
         </div>
       </div>

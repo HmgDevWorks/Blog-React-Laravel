@@ -17,7 +17,7 @@ class UserService {
         })
     }
     getUsers() {
-        return this.api.get('/')
+        return this.api.get('/users')
     }
     createUser(data) {
         console.log(data)
@@ -29,12 +29,16 @@ class UserService {
     getUserById(id) {
         return this.api.get(`/users/${id}`)
     }
+
+    getNonConfidentialUserById(id){
+        return this.api.get(`/users/non-confidential/${id}`);
+    }
     
     editUser(id, data) {
-        return this.api.put(`/${id}`, data)
+        return this.api.put(`/users/update/${id}`, data)
     }
     deleteUser(id) {
-        return this.api.delete(`/${id}`)
+        return this.api.delete(`/users/destroy/${id}`)
     }
     verifyUser(token) {
         return this.api.get('/verify-token',

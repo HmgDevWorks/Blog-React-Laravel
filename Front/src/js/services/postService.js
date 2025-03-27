@@ -23,7 +23,7 @@ class PostService {
     }
     /* All posts */
     getPosts() {
-        return this.api.get('/showAll')
+        return this.api.get('/show')
     }
     /* User posts */
     getUserPosts(id) {
@@ -35,7 +35,7 @@ class PostService {
     }
 
     getLastTenPost() {
-        return this.api.get('')
+        return this.api.get('/news')
     }
 
     /* Editar post */

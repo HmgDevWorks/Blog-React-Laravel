@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProviderWrapper } from "./js/bootstrap/contexts/AuthContext.jsx";
 import { AlertProvider } from "./js/bootstrap/contexts/AlertContext.jsx";
+import './i18n';
 
 createRoot(document.getElementById("root")).render(
   <AlertProvider>

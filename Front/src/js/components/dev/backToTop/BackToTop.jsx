@@ -7,8 +7,8 @@ function BackToTop() {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
     return (
-        <button className="backtoTopButton" onClick={scrollToTop}>
-            <img src= {logo} alt="backToTop" />
+        <button className="backtoTopButton shadow-xl" onClick={scrollToTop}>
+            <img src={logo} alt="backToTop" />
         </button>
     );
 }

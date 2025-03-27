@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './ArticleFinder.css';
 
 const ArticleFinder = () => {
-    
+
     const [selectedButton, setselectedButton] = useState('');
     const [inputValue, setInputValue] = useState('');
     const [results, setResults] = useState([]); // Estado para los resultados de la búsqueda (sin acabar)
@@ -14,14 +14,14 @@ const ArticleFinder = () => {
     const handleSearchChange = (e) => { //Input changes
         const query = e.target.value;
         setInputValue(query);
-        
+
         if (selectedButton) {
             console.log(`Buscando "${query}" en "${selectedButton}"`);
-            
+
         }
     };
     return (
-        <div className="container mx-auto p-4 mt-10">
+        <div className="container">
             <div className="bg-gray-200 p-4 rounded text-center">
                 <h2 className="titleArticleFinder">Encuentra el artículo:</h2>
             </div>
@@ -34,7 +34,7 @@ const ArticleFinder = () => {
                             <path d="m21 21-4.3-4.3"></path>
                         </g>
                     </svg>
-                    <input 
+                    <input
                         type="search"
                         className="input-field"
                         required placeholder="Buscar..."
@@ -46,17 +46,17 @@ const ArticleFinder = () => {
             </div>
 
             <div className="flex flex-wrap justify-around mt-10">
-                <button 
+                <button
                     className={`categorybutton ${selectedButton === 'Autor' ? 'categorybutton-selected' : ''}`}
                     onClick={() => handleCardClick('Autor')}
                 >Autor</button>
 
-                <button 
+                <button
                     className={`categorybutton ${selectedButton === 'Título' ? 'categorybutton-selected' : ''}`}
                     onClick={() => handleCardClick('Título')}
                 >Título</button>
 
-                <button 
+                <button
                     className={`categorybutton ${selectedButton === 'FechaPublicacion' ? 'categorybutton-selected' : ''}`}
                     onClick={() => handleCardClick('FechaPublicacion')}
                 >Fecha de publicación</button>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import "./AuthorPage.css";
-import PostTable from '../../components/dev/PostsTable/PostTable';
 import { useAlert } from '../../bootstrap/contexts/AlertContext';
 import postService from '../../services/postService';
 import userService from '../../services/userService';
+import PostTablePagination from '../../components/dev/PostTablePagination/PostTablePagination';
 
 
 const AuthorPage = () => {
@@ -40,7 +40,7 @@ const AuthorPage = () => {
   return (
     <div className='author-page'>
       <h1 className='author'>Posts de {author.name_user}</h1>
-      {authorPosts && <PostTable posts={authorPosts} />}
+      {authorPosts && <PostTablePagination filter={"published"} id={authorId} />}
     </div>
   );
 };
