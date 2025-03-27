@@ -1,10 +1,6 @@
 {
   "title": "C-Blog, where the only limit to ideas is you",
-<<<<<<< HEAD
-  "posts": "Articles",
-=======
   "posts": "Posts",
->>>>>>> main
   "views": "Views",
   "fav": "Favorites",
   "draft": "Drafts",
@@ -13,12 +9,6 @@
     "home": "Home",
     "admin": "Admin",
     "profile": "Profile",
-<<<<<<< HEAD
-    "createPost": "Create Article",
-    "login": "Login",
-    "logout": "Logout"
-  },
-=======
     "createPost": "Create Post",
     "login": "Login",
     "logout": "Logout"
@@ -34,7 +24,6 @@
     "login": "Login",
     "create": "Create an Account"
   },
->>>>>>> main
   "news": {
     "title": "News"
   },
@@ -42,20 +31,6 @@
     "sports": "Sports"
   },
   "postFinder": {
-<<<<<<< HEAD
-    "title": "Find the article"
-  },
-  "authors": {
-    "title": "Most active authors this week"
-  },
-  "counter": {
-    "title": "Counter",
-    "posts": "Articles",
-    "views": "Views",
-    "users": "Users"
-  },
-  "policies": {
-=======
     "title": "Find the Post"
   },
   "authorPage": {
@@ -79,7 +54,6 @@
     "users": "Users"
   },
   "footer": {
->>>>>>> main
     "cookies": "Cookie Policy",
     "privacy": "Privacy Policy"
   },
@@ -95,16 +69,6 @@
   "profile": {
     "title": "Profile",
     "fav": "Favorites",
-<<<<<<< HEAD
-    "posts": "Articles",
-    "bioPlaceholder": "Edit your post here",
-    "email": "Email",
-    "pass": "Password",
-    "delete": "Delete account",
-    "formConfirm": "Confirm change",
-    "modalEmailTitle": "Confirm email change",
-    "modalPassTitle": "Confirm password change",
-=======
     "posts": "Posts",
     "bioPlaceholder": "Edit your post here",
     "email": "Email",
@@ -113,7 +77,6 @@
     "formConfirm": "Confirm Change",
     "modalEmailTitle": "Confirm Email Change",
     "modalPassTitle": "Confirm Password Change",
->>>>>>> main
     "modalDeleteTitle": "Are you sure you want to delete your account?",
     "modalDeleteInfo": "This action cannot be undone",
     "modalPassInput": "Enter your password",
@@ -126,18 +89,6 @@
     "category": "Category",
     "publishBtn": "Publish",
     "saveBtn": "Save",
-<<<<<<< HEAD
-    "deleteBtn": "Delete"
-  },
-  "errorMsg": {
-    "a": "a"
-  },
-  "msg": {
-    "a": "a"
-  },
-  "successMsg": {
-    "a": "a"
-=======
     "deleteBtn": "Delete",
     "chooseCat": "Choose a category"
   },
@@ -165,6 +116,5 @@
     "successMail2": "Email verified successfully. Welcome! Write your first post.",
     "successPass1": "Password update email sent successfully. Check your inbox to change your password.",
     "successPass2": "Password updated successfully."
->>>>>>> main
   }
 }

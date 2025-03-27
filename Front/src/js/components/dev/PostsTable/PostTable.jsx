@@ -3,10 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FavToggle from "../FavToggle/FavToggle";
 import "./PostTable.css";
-<<<<<<< HEAD
-=======
 import { useTranslation } from "react-i18next";
->>>>>>> main
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -20,10 +17,7 @@ const formatDate = (dateString) => {
 };
 
 export default function PostTable({ posts, currentPage, postsPerPage, onPageChange }) {
-<<<<<<< HEAD
-=======
   const { t } = useTranslation();
->>>>>>> main
   const navigate = useNavigate();
 
   if (!Array.isArray(posts)) {
@@ -88,11 +82,7 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
         </tfoot> */}
       </table>
 
-<<<<<<< HEAD
-      <div className="flex justify-center mt-4">
-=======
       <div className="flex justify-center mt-4 mx-auto">
->>>>>>> main
         <div className="join">
           {Array.from({ length: pageCount }, (_, i) => (
             <button

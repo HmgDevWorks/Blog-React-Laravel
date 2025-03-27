@@ -47,10 +47,7 @@ export default function LoginForm() {
                 if (remember) {
                     localStorage.setItem("authToken", data.authToken);
                 }
-<<<<<<< HEAD
-=======
                 setJWT(data.authToken);
->>>>>>> main
                 authenticateUser()
                 setSuccessMsg('Credenciales correctas, serás redirigido en unos segundos.');
                 navigate('/')
@@ -99,11 +96,7 @@ export default function LoginForm() {
                 {login && <div className="mb-4">
                     <label className="inline-flex items-center">
                         <input type="checkbox" className="form-checkbox checkbox " onChange={handleRemember} />
-<<<<<<< HEAD
-                        <span className="ml-2">Recuerdame</span>
-=======
                         <span className="ml-2">{t("login.remember")}</span>
->>>>>>> main
                     </label>
                 </div>}
                 {errorMsg && <ErrorAlert msg={errorMsg} />}

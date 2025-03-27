@@ -4,16 +4,10 @@ import userService from '../../../services/userService';
 import { useAlert } from "../../../bootstrap/contexts/AlertContext";
 import { AuthContext } from '../../../bootstrap/contexts/AuthContext';
 import { data } from 'autoprefixer';
-<<<<<<< HEAD
-
-function Profile() {
-    const { loggedUser, logOut } = useContext(AuthContext);
-=======
 import { useTranslation } from 'react-i18next';
 function Profile() {
     const { loggedUser, logOut } = useContext(AuthContext);
     const { t } = useTranslation();
->>>>>>> main
     const [userData, setUserData] = useState({ userName: "", lastName: "", bio: "", email: "" });
     const [additionalData, setAdditionalData] = useState({ likes: 0, posts: 0 });
     const [isEditingDesc, setIsEditingDesc] = useState(false);
@@ -32,10 +26,6 @@ function Profile() {
 
     const ofuscateEmail = (email) => {
         if (!email || email === "") {
-<<<<<<< HEAD
-            console.log("dentro ????", email);
-=======
->>>>>>> main
             email = "ejemplo@email.com";
         }
         const [user, domain] = email.split("@");
@@ -165,11 +155,7 @@ function Profile() {
                         {loggedUser.role !== "reader" && (
                             <div className="text-center">
                                 <p className="text-2xl font-bold">{additionalData.likes}</p>
-<<<<<<< HEAD
-                                <p className="text-sm">Likes</p>
-=======
                                 <p className="text-sm">{t("profile.fav")}</p>
->>>>>>> main
                             </div>
                         )}
                         <div className="avatar">
@@ -181,11 +167,7 @@ function Profile() {
                         {loggedUser.role !== "reader" && (
                             <div className="text-center">
                                 <p className="text-2xl font-bold">{additionalData.posts}</p>
-<<<<<<< HEAD
-                                <p className="text-sm">Posts</p>
-=======
                                 <p className="text-sm">{t("profile.posts")}</p>
->>>>>>> main
                             </div>
                         )}
                     </div>
@@ -213,11 +195,7 @@ function Profile() {
                     <div className="flex flex-col items-center w-full gap-4">
                         <div className="form-control w-full max-w-md">
                             <label className="label">
-<<<<<<< HEAD
-                                <span className="label-text">Correo electrónico</span>
-=======
                                 <span className="label-text">{t("profile.email")}</span>
->>>>>>> main
                             </label>
                             {!isEditingEmail && (
                                 <div className="flex items-center justify-between w-full">
@@ -236,11 +214,7 @@ function Profile() {
                                         onChange={(e) => setProvisionalEmail(e.target.value)}
                                     />
                                     <button className="btn btn-primary mt-2 w-full">
-<<<<<<< HEAD
-                                        Confirmar cambio
-=======
                                         {t("profile.formConfirm")}
->>>>>>> main
                                     </button>
                                 </div>
                             )}
@@ -248,11 +222,7 @@ function Profile() {
 
                         <div className="form-control w-full max-w-md">
                             <label className="label">
-<<<<<<< HEAD
-                                <span className="label-text">Contraseña</span>
-=======
                                 <span className="label-text">{t("profile.pass")}</span>
->>>>>>> main
                             </label>
                             {!isEditingPassword && (
                                 <div className="flex items-center justify-between w-full">
@@ -267,11 +237,7 @@ function Profile() {
                                     <input type="password" placeholder="Nueva contraseña" className="input input-bordered mb-2 w-full" />
                                     <input type="password" placeholder="Confirmar nueva contraseña" className="input input-bordered mb-2 w-full" />
                                     <button className="btn btn-primary w-full" onClick={handlePasswordChange}>
-<<<<<<< HEAD
-                                        Confirmar cambio
-=======
                                         {t("profile.formConfirm")}
->>>>>>> main
                                     </button>
                                 </div>
                             )}
@@ -282,11 +248,7 @@ function Profile() {
 
                     <div className="text-center md:text-right">
                         <button className="btn btn-error btn-outline" onClick={() => document.getElementById('delete-modal').showModal()}>
-<<<<<<< HEAD
-                            Eliminar cuenta
-=======
                             {t("profile.delete")}
->>>>>>> main
                         </button>
                     </div>
                 </div>
@@ -297,19 +259,11 @@ function Profile() {
                     e.preventDefault();
                     confirmEmailChange(e.target.currentPassword.value);
                 }}>
-<<<<<<< HEAD
-                    <h3 className="font-bold text-lg">Confirmar cambio de email</h3>
-                    <input type="password" name="currentPassword" placeholder="Ingresa tu contraseña" className="input input-bordered mt-4 w-full" />
-                    <div className="modal-action">
-                        <button type="submit" className="btn btn-primary">Confirmar</button>
-                        <button className="btn" onClick={() => setIsEditingEmail(false)}>Cancelar</button>
-=======
                     <h3 className="font-bold text-lg">{t("profile.modalEmailTitle")}</h3>
                     <input type="password" name="currentPassword" placeholder="Ingresa tu contraseña" className="input input-bordered mt-4 w-full" />
                     <div className="modal-action">
                         <button type="submit" className="btn btn-primary">{t("profile.confirmBtn")}</button>
                         <button className="btn" onClick={() => setIsEditingEmail(false)}>{t("profile.cancelBtn")}</button>
->>>>>>> main
                     </div>
                 </form>
             </dialog>
@@ -319,19 +273,11 @@ function Profile() {
                     e.preventDefault();
                     confirmPasswordChange(e.target.currentPassword.value);
                 }}>
-<<<<<<< HEAD
-                    <h3 className="font-bold text-lg">Confirmar cambio de contraseña</h3>
-                    <input type="password" name="currentPassword" placeholder="Ingresa tu contraseña actual" className="input input-bordered mt-4 w-full" />
-                    <div className="modal-action">
-                        <button type="submit" className="btn btn-primary">Confirmar</button>
-                        <button className="btn" onClick={() => setIsEditingPassword(false)}>Cancelar</button>
-=======
                     <h3 className="font-bold text-lg">{t("profile.modalPassTitle")}</h3>
                     <input type="password" name="currentPassword" placeholder="Ingresa tu contraseña actual" className="input input-bordered mt-4 w-full" />
                     <div className="modal-action">
                         <button type="submit" className="btn btn-primary">{t("profile.confirmBtn")}</button>
                         <button className="btn" onClick={() => setIsEditingPassword(false)}>{t("profile.cancelBtn")}</button>
->>>>>>> main
                     </div>
                 </form>
             </dialog>
@@ -341,25 +287,15 @@ function Profile() {
                     e.preventDefault();
                     confirmDeleteUser(e.target.currentPassword.value);
                 }}>
-<<<<<<< HEAD
-                    <h3 className="font-bold text-lg">Â¿EstÃ¡s seguro de que quieres eliminar tu cuenta?</h3>
-                    <p className="py-4">Esta acciÃ³n no se puede deshacer.</p>
-=======
                     <h3 className="font-bold text-lg">{t("profile.modalDeleteTitle")}</h3>
                     <p className="py-4">{t("profile.modalDeleteInfo")}</p>
->>>>>>> main
                     <div className="form-control">
                         <input type="email" placeholder="Confirma tu correo electrÃ³nico" className="input input-bordered mb-2" />
                         <input type="password" name="currentPassword" placeholder="Ingresa tu contraseÃ±a" className="input input-bordered mb-2" />
                     </div>
                     <div className="modal-action">
-<<<<<<< HEAD
-                        <button className="btn btn-error">Eliminar cuenta</button>
-                        <button className="btn">Cancelar</button>
-=======
                         <button className="btn btn-error">{t("profile.delete")}</button>
                         <button className="btn">{t("profile.cancelBtn")}</button>
->>>>>>> main
                     </div>
                 </form>
             </dialog>

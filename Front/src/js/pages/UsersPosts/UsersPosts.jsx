@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import CreatePost from "../../components/dev/CreatePost/CreatePost";
-<<<<<<< HEAD
-import BackToTop from "../../components/dev/backToTop/BackToTop";
-=======
 import BackToTop from "../../components/dev/BackToTop/BackToTop";
->>>>>>> main
 import postService from '../../services/postService'; // Importa el servicio de posts
 import './UsersPosts.css';
 import PostDetails from '../../components/dev/PostDetails/PostDetails';

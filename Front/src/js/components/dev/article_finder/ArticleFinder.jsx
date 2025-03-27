@@ -3,11 +3,7 @@ import './ArticleFinder.css';
 import { useTranslation } from 'react-i18next';
 
 const ArticleFinder = () => {
-<<<<<<< HEAD
-
-=======
     const { t } = useTranslation();
->>>>>>> main
     const [selectedButton, setselectedButton] = useState('');
     const [inputValue, setInputValue] = useState('');
     const [results, setResults] = useState([]); // Estado para los resultados de la búsqueda (sin acabar)

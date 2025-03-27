@@ -5,10 +5,7 @@ import servicioCategorias from "../../../services/categoriesService";
 import { AuthContext } from '../../../bootstrap/contexts/AuthContext';
 import { useAlert } from "../../../bootstrap/contexts/AlertContext";
 import { ErrorAlert, SuccessAlert } from '../Alerts/Alerts';
-<<<<<<< HEAD
-=======
 import { useTranslation } from "react-i18next";
->>>>>>> main
 
 import { html, plainText } from '@yoopta/exports';
 import YooptaEditor, { createYooptaEditor } from "@yoopta/editor";
@@ -35,10 +32,7 @@ import "./Editor.css";
 
 const uploadImageToCloudinary = async (file) => {
   try {
-<<<<<<< HEAD
-=======
     // TODO implement security
->>>>>>> main
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
@@ -82,11 +76,7 @@ const TOOLS = {
 };
 
 export default function Editor({ isEditable = true, post = null, maxLenght = null }) {
-<<<<<<< HEAD
-
-=======
   const { t } = useTranslation();
->>>>>>> main
   const editor = useMemo(() => createYooptaEditor(), []);
   const [value, setValue] = useState({});
   const [title, setTitle] = useState(post ? post.title : "");

@@ -6,20 +6,11 @@ function AuthProviderWrapper(props) {
     const [loggedUser, setLoggedUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true); // Corrección de nombre
 
-<<<<<<< HEAD
-    const authenticateUser = () => {
-
-        let token = sessionStorage.getItem("authToken");
-        if (!token) {
-            token = localStorage.getItem("authToken");
-        }
-=======
     let token = sessionStorage.getItem("authToken");
     if (!token) {
         token = localStorage.getItem("authToken");
     }
     const [JWT, setJWT] = useState(token);
->>>>>>> main
 
 
     const authenticateUser = () => {
@@ -44,12 +35,8 @@ function AuthProviderWrapper(props) {
     };
 
     const logOut = () => {
-<<<<<<< HEAD
-        sessionStorage.clear();
-=======
         // sessionStorage.clear();
         sessionStorage.removeItem("authToken");
->>>>>>> main
         localStorage.removeItem("authToken");
         setLoggedUser(null);
         setIsLoading(false);
