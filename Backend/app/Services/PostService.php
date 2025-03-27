@@ -11,7 +11,7 @@ class PostService
 {
     public function getAllPost()// Esta función recoge todos los datos de la tabla Post
     { 
-        return Post::all();
+        return Post::where('status', 'published')->get();
     }
 
     public function getLastTenPosts()
