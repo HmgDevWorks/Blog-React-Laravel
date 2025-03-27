@@ -49,9 +49,9 @@ class PasswordResetController extends Controller
 
         //$user->notify(new PasswordResetNotification($token));
        // Mail::to($user->email_user)->send(new PasswordResetNotification($token)); 
-       $url = url(config('app.url') . '/api/password/reset/' . $token . '?email=' . $user->email_user); //creamos la url a mano con los datos que queremos mandar para que los recoja el front
+       $url = url(config('app.url') . '/password/reset/' . $token . '?email=' . $user->email_user); //creamos la url a mano con los datos que queremos mandar para que los recoja el front
 
-       Mail::to($user->email_user)->send(new PasswordResetMail($url)); //funcion pa llamar al mail
+       Mail::to($user->email_user)->send(new PasswordResetMail($url,$user)); //funcion pa llamar al mail
 
         return response()->json(['message' => 'Correo de restablecimiento enviado']);
     }
