@@ -49,7 +49,7 @@ class PasswordResetController extends Controller
 
         //$user->notify(new PasswordResetNotification($token));
        // Mail::to($user->email_user)->send(new PasswordResetNotification($token)); 
-       $url = url(config('app.url') . '/password/reset/' . $token . '?email=' . $user->email_user); //creamos la url a mano con los datos que queremos mandar para que los recoja el front
+       $url = url(env('FRONTEND_URL') . '/password/reset/' . $token . '?email=' . $user->email_user); //creamos la url a mano con los datos que queremos mandar para que los recoja el front
 
        Mail::to($user->email_user)->send(new PasswordResetMail($url,$user)); //funcion pa llamar al mail
 
@@ -66,7 +66,7 @@ class PasswordResetController extends Controller
 
         $tokenRecord = DB::table('password_reset_tokens')->where('token', $request->token)->first(); //busca el token creado para compararlo despues con el del link
 
-        if (!$tokenRecord || $tokenRecord->email_users != $request->email_user) {
+        if (!$tokenRecord || $tokenRecord->email_user != $request->email_user) {
             return response()->json(['message' => 'Token inválido o correo incorrecto'], 400);
         }
 
