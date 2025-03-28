@@ -1,17 +1,17 @@
 import './AdminUserItem.css'; // Importa el archivo CSS
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import userService from '../../../services/userService'; // Importa el servicio para cambiar roles
+import rolService from '../../../services/roleSrevice'; // Importa el servicio para cambiar roles
 
 const AdminUserItem = ({ user_id, user, currentRole, onDelete, onRoleChange }) => {
   const { t } = useTranslation();
   const Navigate = useNavigate();
 
   const handleRoleChange = (event) => {
-    const newRole = event.target.value; // Obtiene el nuevo rol seleccionado
-    userService.changeUserRole(user_id, newRole) // Llama al servicio para cambiar el rol
+    const newName = event.target.value; // Obtiene el nuevo rol seleccionado
+    rolService.UpdateRole(user_id, { role: newName }) // Llama al servicio para cambiar el rol
       .then(() => {
-        onRoleChange(user_id, newRole); // Actualiza el estado en el componente padre
+        onRoleChange(user_id, newName); // Actualiza el estado en el componente padre
       })
       .catch(error => {
         console.error('Error al cambiar el rol del usuario:', error);

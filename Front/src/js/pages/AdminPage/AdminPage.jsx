@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AdminUserItem from "../../components/dev/AdminUserItem/AdminUserItem";
 import './AdminPage.css'; // Importa el archivo CSS
 import userService from '../../services/userService';
@@ -27,9 +27,9 @@ const AdminPage = () => {
       });
   };
 
-  const handleRoleChange = (userId, newRole) => {
+  const handleRoleChange = (userId, newName) => {
     setUsers(users.map(user => 
-      user.id === userId ? { ...user, role: newRole } : user
+      user.id === userId ? { ...user, role: newName } : user
     ));
   };
 

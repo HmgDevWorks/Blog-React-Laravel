@@ -40,9 +40,7 @@ class UserService extends BaseService {
         console.log('rol ');
         // return this.api.get('/roles');
     }
-    changeUserRole(userId, newRole) {
-        return this.api.put(`/users/changeRole/${userId}`, { role: newRole });
-    }
+    
 }
 
 const userService = new UserService();
