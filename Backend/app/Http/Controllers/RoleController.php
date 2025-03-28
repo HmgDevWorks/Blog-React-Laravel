@@ -7,6 +7,8 @@ use App\Services\RoleService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use App\Models\User;
+
 
 class RoleController extends Controller
 {
@@ -44,9 +46,9 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Role $role):JsonResponse
+    public function update(Request $request, User $user):JsonResponse
     {
-        return $this->roleService->updateRole($request,$role);
+        return $this->roleService->updateRole($request,$user);
     }
 
     /**
