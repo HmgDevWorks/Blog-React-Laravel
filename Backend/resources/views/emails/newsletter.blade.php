@@ -28,28 +28,41 @@
                         </td>
                     </tr>
 
-                    @if($data['most_read'])
+                    <!-- Los 3 posts más leídos de la semana -->
+                    @if($data['most_read']->count())
                         <tr>
                             <td style="padding-top: 5px; padding-bottom: 5px;">
-                                <h3 style="color: #7d1b1b; margin-bottom: 5px;">🔥 Blog más leído de la semana</h3>
-                                <p><strong>{{ $data['most_read']->title }}</strong></p>
-                                <p>{{ Str::limit($data['most_read']->excerpt, 100) }}</p>
-                                <p><a href="{{ env('FRONTEND_URL') . '/posts/show/' . $data['most_read']->id }}" style="color: #7d1b1b; font-weight: bold;">📖 Leer más</a></p>
+                                <h3 style="color: #7d1b1b; margin-bottom: 5px;">🔥 Posts más leídos de la semana</h3>
+                                <ul>
+                                    @foreach($data['most_read'] as $post)
+                                        <li>
+                                            <strong>{{ $post->title }}</strong> - 
+                                            <a href="{{ env('FRONTEND_URL') . '/posts/show/' . $post->id }}" style="color: #7d1b1b; font-weight: bold;">Leer más</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </td>
                         </tr>
                     @endif
 
-                    @if($data['old_popular'])
+                    <!-- Los 3 posts más antiguos más vistos -->
+                    @if($data['old_popular']->count())
                         <tr>
                             <td style="padding-top: 5px; padding-bottom: 5px;">
-                                <h3 style="color: #7d1b1b; margin-bottom: 5px;">📜 Recomendación de un clásico</h3>
-                                <p><strong>{{ $data['old_popular']->title }}</strong></p>
-                                <p>{{ Str::limit($data['old_popular']->excerpt, 100) }}</p>
-                                <p><a href="{{ env('FRONTEND_URL') . '/posts/show/' . $data['old_popular']->id }}" style="color: #7d1b1b; font-weight: bold;">📖 Leer más</a></p>
+                                <h3 style="color: #7d1b1b; margin-bottom: 5px;">📜 Posts antiguos más populares</h3>
+                                <ul>
+                                    @foreach($data['old_popular'] as $post)
+                                        <li>
+                                            <strong>{{ $post->title }}</strong> - 
+                                            <a href="{{ env('FRONTEND_URL') . '/posts/show/' . $post->id }}" style="color: #7d1b1b; font-weight: bold;">Leer más</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </td>
                         </tr>
                     @endif
 
+                    <!-- Posts recomendados -->
                     @if($data['recommended_posts']->count())
                         <tr>
                             <td style="padding-top: 5px; padding-bottom: 5px;">
@@ -57,6 +70,23 @@
                                 <p style="margin-top: 5px;">Estos artículos están dando mucho de qué hablar. ¡No te los pierdas!</p>
                                 <ul>
                                     @foreach($data['recommended_posts'] as $post)
+                                        <li>
+                                            <strong>{{ $post->title }}</strong> - 
+                                            <a href="{{ env('FRONTEND_URL') . '/posts/show/' . $post->id }}" style="color: #7d1b1b; font-weight: bold;">Leer más</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </td>
+                        </tr>
+                    @endif
+
+                    <!-- Los 3 posts más recientes -->
+                    @if($data['newest_posts']->count())
+                        <tr>
+                            <td style="padding-top: 5px; padding-bottom: 5px;">
+                                <h3 style="color: #7d1b1b; margin-bottom: 5px;">📅 Posts más recientes</h3>
+                                <ul>
+                                    @foreach($data['newest_posts'] as $post)
                                         <li>
                                             <strong>{{ $post->title }}</strong> - 
                                             <a href="{{ env('FRONTEND_URL') . '/posts/show/' . $post->id }}" style="color: #7d1b1b; font-weight: bold;">Leer más</a>
@@ -98,4 +128,3 @@
     </table>
 </body>
 </html>
-
