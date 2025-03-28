@@ -21,8 +21,8 @@ class PostFactory extends Factory
         return [
             'id_categories' => fake()->numberBetween(1, 10),
             'user_id' => null, // Se asignará después
-            'title' => fake()->sentence(),
-            'content' => json_encode(['type' => 'yoopta', 'content' => fake()->paragraphs(3, true)]),
+            'title' => fake()->sentence(6),
+            'content' => json_encode(['type' => 'yoopta', 'content' => fake()->realText(200)]),
             'status' => $status,
             'views' => in_array($status, ['published', 'deleted']) ? fake()->numberBetween(0, 200) : 0, // Asigna vistas a published y deleted
         ];
