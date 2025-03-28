@@ -84,7 +84,7 @@ Route::controller(RoleController::class)->middleware([JwtMiddleware::class])->gr
     Route::get('/role', 'index')->middleware('role:admin');
     Route::post('/role/store', 'store')->name('role.store')->middleware('role:admin'); // crea un nuevo rol
     Route::get('/role/show/{role}', 'show')->name('role.show')->middleware('role:admin'); // Enseña un rol 
-    Route::put('/role/update/{user}', 'update')->name('role.update')->middleware('role:admin'); // Modifica un roll, necesita el id y de value role:rol
+    Route::put('/role/update/{user}', 'update')->name('role.update')->middleware('role:admin'); // Modifica un roll del user, necesita el id y de value role:rol
     Route::delete('/role/destroy/{role}', 'destroy')->name('role.destroy')->middleware('role:admin'); // Elimina un roll
 });
 
