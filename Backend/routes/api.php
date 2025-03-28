@@ -36,7 +36,7 @@ Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 've
 Route::post('/email/resend', [EmailVerificationController::class, 'resend']); //reenvia el email para que pueda verificar cuenta
 
 Route::post('/password/email', [PasswordResetController::class, 'sendResetLinkEmail']); //envia el correo con el link para restablecer la pass
-Route::post('password/reset', [PasswordResetController::class, 'resetPassword']); //ruta que verifica los datos para poder cambiar la contraseña
+Route::post('/password/reset', [PasswordResetController::class, 'resetPassword']); //ruta que verifica los datos para poder cambiar la contraseña
 
 Route::get('/categories', [CategoriesController::class, 'index']); //muestra las categorias
 Route::get('/stats/counter', [PostController::class, 'getStatsForCounter']); //stats para el footer
