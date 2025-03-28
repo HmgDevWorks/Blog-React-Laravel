@@ -168,7 +168,6 @@ class UserService
         return response()->json($postViews);
     }
 
-
     public function getInfoUserCrypted()
     {
         $user = auth()->user();
