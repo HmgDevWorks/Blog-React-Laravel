@@ -32,7 +32,17 @@ class DatabaseSeeder extends Seeder
 
         $editors = User::role('editor')->get();
         $posts = Post::factory(1000)->make()->each(function ($post) use ($editors) {
-            $post->user_id = $editors->random()->id;
+            $editor = $editors->random();
+            $postDate = fake()->dateTimeBetween($editor->created_at, 'now'); //genera fecha random despues de la fecha de creacion del user
+            
+            if ($postDate < $editor->created_at) { //condicion para asegurar que la fecha siempre es posterior
+                $postDate = $editor->created_at->addDay(); //si no le añade un dia a su fecha de creacion y la mete en created at posts
+            }
+            
+            $post->user_id = $editor->id;
+            $post->created_at = $postDate;
+            $post->updated_at = $postDate;
+        
             $post->save();
         });
 
