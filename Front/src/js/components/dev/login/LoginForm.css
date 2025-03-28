@@ -22,6 +22,7 @@
 .login-form{
     width: 40%;
     max-width: 600px;
+    /* min-width: 360px; */
     min-width: 320px;
     margin: 0 auto;
     padding: 0;
@@ -69,7 +70,8 @@
 
 .login-form-input, .form-checkbox{
     background-color: var(--input-bg-color);
-    font-size: var(--input-font-size);
+    font-size: 1rem;
+    /* font-size: var(--input-font-size); */
     color: var(--input-font-color);
 }
 
@@ -92,6 +94,14 @@ button {
     font-size: var(--p-font-size);
 }
 .bottom-text>button{
+    color: var(--btn-bg-color);
+}
+
+.forgot-text{
+    color: var(--p-color);
+    font-size: var(--p-font-size);
+}
+.forgot-text>button{
     color: var(--btn-bg-color);
 }
 

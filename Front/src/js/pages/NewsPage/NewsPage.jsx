@@ -37,7 +37,7 @@ const NewsPage = () => {
       redirect(`novedades#slide${currentSlide}`) // Navegar al siguiente slide
     } else if (direction === 'prev') {
       setCurrentSlide((prev) => (prev - 1 + newsItems.length) % newsItems.length); // Navegar al slide anterior
-      redirect(`novedades#slide${currentSlide}`) // Navegar al siguiente slide 
+      redirect(`novedades#slide${currentSlide}`) // Navegar al siguiente slide
     }
   };
 
@@ -66,13 +66,16 @@ const NewsPage = () => {
 
         {/* Navigation buttons */}
         <div className="botones-novedades absolute top-1/2 flex -translate-y-1/2 justify-between px-3">
-          <button onClick={() => handleNavigation('prev')} className="btn btn-circle">❮</button>
-          <button onClick={() => handleNavigation('next')} className="btn btn-circle">❯</button>
+          <div className="botones-novedades absolute top-1/2 flex -translate-y-1/2 justify-between px-3">
+            <button onClick={() => handleNavigation('prev')} className="btn btn-circle">❮</button>
+            <button onClick={() => handleNavigation('next')} className="btn btn-circle">❯</button>
+          </div>
         </div>
+
       </div>
     </>
-    // </div>
-  );
+  )
 };
+
 
 export default NewsPage;

@@ -30,29 +30,76 @@ import { Bold, Italic, CodeMark, Underline, Strike, Highlight } from '@yoopta/ma
 
 import "./Editor.css";
 
+// const uploadImageToCloudinary = async (file) => {
+//   try {
+//     // TODO implement security
+//     const formData = new FormData();
+//     formData.append("file", file);
+//     formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
+
+//     const response = await fetch(
+//       `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+//       { method: "POST", body: formData }
+//     );
+
+//     const data = await response.json();
+//     return {
+//       src: data.secure_url,
+//       alt: data.original_filename || "cloudinary_image",
+//       sizes: { width: data.width, height: data.height },
+//     };
+//   } catch (error) {
+//     console.error("Error uploading image:", error);
+//     throw error;
+//   }
+// };
+
 const uploadImageToCloudinary = async (file) => {
   try {
-    // TODO implement security
+    // Validar tipo de archivo
+    const validTypes = ["image/jpeg", "image/png", "image/gif"];
+    if (!validTypes.includes(file.type)) {
+      throw new Error("Formato no permitido. Usa JPG, PNG o GIF.");
+    }
+
+    // Validar tamaño del archivo (5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      throw new Error("El archivo es demasiado grande. Máximo 5MB.");
+    }
+
+    // Validar dimensiones de la imagen
+    const image = await new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+      img.onload = () => resolve({ width: img.width, height: img.height });
+      img.onerror = reject;
+    });
+
+    if (image.width < 300 || image.height < 300) {
+      throw new Error("La imagen debe ser al menos de 300x300 píxeles.");
+    }
+
+    // Enviar archivo al backend si pasa las validaciones
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
 
-    const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
-      { method: "POST", body: formData }
-    );
+    const response = await fetch("http://127.0.0.1:8000/api/upload", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    });
 
-    const data = await response.json();
-    return {
-      src: data.secure_url,
-      alt: data.original_filename || "cloudinary_image",
-      sizes: { width: data.width, height: data.height },
-    };
+    if (!response.ok) throw new Error("Error al subir la imagen");
+
+    return await response.json();
   } catch (error) {
-    console.error("Error uploading image:", error);
+    console.error("Error:", error.message);
     throw error;
   }
 };
+
 
 const MARKS = [Bold, Italic, CodeMark, Underline, Strike, Highlight];
 
