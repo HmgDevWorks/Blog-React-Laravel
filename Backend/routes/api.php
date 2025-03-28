@@ -43,7 +43,7 @@ Route::get('/categories', [CategoriesController::class, 'index']); //muestra las
 Route::get('/stats/counter', [PostController::class, 'getStatsForCounter']); //stats para el footer
 Route::get('/categories/{data}', [CategoriesController::class, 'showCategoriesByName']); //muestra el nombre de las categorias
 Route::get('/posts/news', [PostController::class, 'getTenNewsPost']);
-Route::get('/newsletter/generate', [NewsletterController::class, 'generate']);
+Route::get('/newsletter/generate', [NewsletterController::class, 'generate']); //ruta para probar que la newsletter se envia y que envia todo bene
 
 Route::middleware('auth:api')->get('/verify-token', [AuthController::class, 'verifyToken']);
 Route::middleware('auth:api')->post('/refresh-token', [AuthController::class, 'refreshToken']);
