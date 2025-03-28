@@ -52,6 +52,7 @@ const AdminPage = () => {
             key={user.id}
             user_id={user.id}
             user={`${user.name_user}${user.name_lastName ? ' ' + user.name_lastName : ''}`}
+            currentRole={user.role} // Pasa el rol actual del usuario
             onDelete={handleDelete}
             onRoleChange={handleRoleChange}
           />

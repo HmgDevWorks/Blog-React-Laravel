@@ -50,8 +50,8 @@ class UserService {
         console.log('rol ');
         // return this.api.get('/roles');
     }
-    changeUserRole(user) {
-        return this.api.put(`/users/changeRole/${user}`);
+    changeUserRole(userId, newRole) {
+        return this.api.put(`/users/changeRole/${userId}`, { role: newRole });
     }
 }
 
