@@ -95,12 +95,28 @@
     "chooseCat": "Choose a category"
   },
   "errorMsg": {
-    "a": "a"
+    "errorMail1": "Error sending the verification email.",
+    "errorMail2": "Verification time exceeded.",
+    "errorMailVerifyDouble": "This email has already been verified.",
+    "errorPass1": "Passwords do not match.",
+    "errorPass2": "Please enter a password different from your previous one.",
+    "errorPass3": "Time to update the password has expired.",
+
+    "coment": "WE NEED TO ANALYZE MORE POSSIBLE ERRORS TO COVER ALL CASES."
   },
-  "msg": {
-    "a": "a"
+  "infoMsg": {
+    "infoMail1": "If you can't find the email, check your spam folder or request a new one.",
+    "infoMail2": "Your account will not be activated until you verify your email.",
+    "infoMail3": "Enter your email.",
+
+    "infoPass1": "Enter a secure password with at least 8 characters, one uppercase letter, and one number.",
+    "infoPass2": "Enter the new password.",
+    "infoPass3": "Repeat the new password."
   },
   "successMsg": {
-    "a": "a"
+    "successMail1": "Verification email sent successfully. Check your inbox to confirm it.",
+    "successMail2": "Email verified successfully. Welcome! Write your first post.",
+    "successPass1": "Password update email sent successfully. Check your inbox to change your password.",
+    "successPass2": "Password updated successfully."
   }
 }

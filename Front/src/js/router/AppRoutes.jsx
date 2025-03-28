@@ -12,12 +12,15 @@ import CategoryPage from "../pages/CategoryPage/CategoryPage";
 // import EditarBlogPage from "../pages/EditarBlogPage/EditarBlogPage";
 import DashboardPage from "../pages/DashboardPage/DashboardPage";
 import PrivateRoutes from "./PrivateRoutes";
+import VerifyEmail from "../pages/VerifyEmail/VerifyEmail";
+
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path={"/"} element={<HomePage />} />
       <Route path={"/logIn"} element={<LogInPage />} />
+      <Route path="/email/verify/:id/:hash" element={<VerifyEmail />} />
 
       <Route element={<PrivateRoutes />} >
 

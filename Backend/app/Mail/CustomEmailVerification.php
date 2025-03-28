@@ -24,21 +24,34 @@ class CustomEmailVerification extends Mailable
      */
     public function __construct($user)
     {
+    //     $this->user = $user;
+    //     $hash = sha1($this->user->getEmailForVerification()); // Generamos el hash para el enlace de verificación
+    //     // $this->verificationUrl = URL::temporarySignedRoute( // Generamos el enlace de verificación firmado
+    //     //     'verification.verify', Carbon::now()->addMinutes(60), [
+    //     //         'id' => $this->user->id,
+    //     //         'hash' => $hash,//sha1($this->user->getEmailForVerification()), 
+    //     //     ]
+    //     // );
+    //         $this->verificationUrl = config('app.frontend_url') . "/verify-email/{$this->user->id}/{$hash}";
+    //    // $this->verificationUrl = str_replace('http://127.0.0.1:8000/', url('api/') . '/', $this->verificationUrl);
+    //     // Log::debug('Generated Verification URL: ' . $this->verificationUrl);
         $this->user = $user;
 
         // Generamos el hash para el enlace de verificación
         $hash = sha1($this->user->getEmailForVerification());
+
         // Generamos el enlace de verificación firmado
         $this->verificationUrl = URL::temporarySignedRoute(
-            'verification.verify', Carbon::now()->addMinutes(60), [
-                'id' => $this->user->id,
-                'hash' => $hash,//sha1($this->user->getEmailForVerification()), 
+            'verification.email_verify',  // Ruta nombrada
+            Carbon::now()->addMinutes(60),  // Tiempo de expiración (60 minutos)
+            [
+                'id' => $this->user->id,  // Pasamos el id del usuario
+                'hash' => $hash,  // Hash generado para el email
             ]
         );
 
-       // $this->verificationUrl = str_replace('http://127.0.0.1:8000/', url('api/') . '/', $this->verificationUrl);
-        Log::debug('Generated Verification URL: ' . $this->verificationUrl);
-       
+        // Usamos `url()` para asegurarnos de que la URL use APP_URL desde el archivo `.env`
+         $this->verificationUrl = env('FRONTEND_URL') . parse_url($this->verificationUrl, PHP_URL_PATH);
     }
 
     /**

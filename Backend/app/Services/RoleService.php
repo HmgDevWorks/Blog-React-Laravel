@@ -2,8 +2,11 @@
 // Hemos creado dentro de la carpeta App, la carpeta Services, para añadir los servicios de cada modelo
 namespace App\Services;
 
-// use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use Illuminate\Http\Request;
+use App\Models\User;
+
 
 class RoleService {
     
@@ -26,18 +29,30 @@ class RoleService {
         return response()->json(["mensaje"=>"Error al crear el rol", 400]);
     }
     
-    public function updateRole($data, $role){    // Esta función recibe los datos del role actualizado, con los cambios indicados por el usuario, 
-        //$role = Role::findOrFail($data->id); // si encuentra el id del role cambia los datos del antiguo. 
-        if ($role) {
-            $role->update([
-                'name' => $data->name ?? $role->name,
-            ]);
-            return response()->json(["mensaje"=>"Rol actualizado correctamente", 200]);
-        }else {
-            return response()->json(["Error al actualizar el rol", 400]);
+    public function updateRole(Request $request, User $user)
+    {
+        $authUser = auth()->user();
+        if (!$authUser->hasRole('admin')) {
+            return response()->json(["mensaje" => "No tienes permisos para cambiar roles"], 403);
         }
-    }
 
+        if ($user->hasRole('admin')) {
+            return response()->json(["mensaje" => "No se puede cambiar el rol de un administrador"], 403);
+        }
+
+        $request->validate([ //lo que se pide en el json para poder cambiar el rol
+            'role' => 'required|string|in:editor,reader,banned',
+        ]);
+
+        $role = Role::where('name', $request->role)->first(); // buscar el rol por nombre y obtener su ID
+        if (!$role) {
+            return response()->json(["mensaje" => "El rol especificado no existe"], 400);
+        }
+
+        $user->syncRoles([$role->id]); //funcion que asigna el rol en la tabla model has roles
+        return response()->json(["mensaje" => "Rol actualizado correctamente"], 200);
+    }
+    
     public function destroyRole($role){ // Devuelve V o F, si se le pasa un id de un role que no existe F y si el id existe, el role pasa a estar en estado 'delete'
         if(Role::destroy($role->id))
             return response()->json(["mensaje"=>"Rol eliminado correctamente", 204]);

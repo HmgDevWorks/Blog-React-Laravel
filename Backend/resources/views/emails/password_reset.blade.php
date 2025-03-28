@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Correo</title>
+    <title>Restablecimiento de Contraseña</title>
 </head>
 <body style="background-color: #FAF3E0; margin: 0; padding: 0; font-family: Arial, sans-serif; color: #333;">
 
@@ -15,7 +15,7 @@
                     <!-- Encabezado -->
                     <tr>
                         <td align="center" style="background-color: #800000; padding: 20px; border-radius: 5px 5px 0 0;">
-                            <h1 style="color: #FAF3E0; margin: 0; font-size: 24px;">C-Blog | Verificación de Correo</h1>
+                            <h1 style="color: #FAF3E0; margin: 0; font-size: 24px;">C-Blog | Restablecimiento de Contraseña</h1>
                         </td>
                     </tr>
 
@@ -24,20 +24,16 @@
                         <td style="padding: 20px;">
                             <h2 style="color: #800000; text-align: center;">¡Hola, {{ $user->name_user }}!</h2>
                             <p style="font-size: 16px; text-align: center;">
-                                Gracias por registrarte en <strong>C-Blog</strong>. Para completar tu registro, verifica tu correo electrónico haciendo clic en el botón a continuación.
+                                Recibiste este correo porque solicitaste restablecer tu contraseña.
                             </p>
                             <p style="text-align: center;">
-                                <a href="{{ $verificationUrl }}" style="display: inline-block; background-color: #800000; color: #FAF3E0; padding: 12px 20px; text-decoration: none; font-size: 16px; border-radius: 5px;">
-                                    Verificar mi correo
+                                <a href="{{ $url }}" style="display: inline-block; background-color: #800000; color: #FAF3E0; padding: 12px 20px; text-decoration: none; font-size: 16px; border-radius: 5px;">
+                                    Restablecer contraseña
                                 </a>
                             </p>
 
                             <p style="font-size: 14px; text-align: center; color: #666;">
-                                Este enlace expirará en <strong>60 minutos</strong>. Si necesitas otro, <strong>pincha <a href="{{ url('/api/resend?email_user=' . urlencode($user->email_user)) }}" style="color: #800000; text-decoration: none;">aquí</a></strong>.
-                            </p>
-
-                            <p style="font-size: 14px; text-align: center; color: #666;">
-                                Si no creaste una cuenta, puedes ignorar este correo de manera segura.
+                                Si no solicitaste este cambio, puedes ignorar este mensaje de manera segura.
                             </p>
                         </td>
                     </tr>
@@ -57,4 +53,3 @@
 
 </body>
 </html>
-

@@ -1,21 +1,9 @@
-import axios from 'axios';
+import BaseService from './baseService';
 
-class ServicioCategorias {
+class ServicioCategorias extends BaseService {
 
     constructor() {
-        this.api = axios.create({
-            baseURL: 'http://localhost:8000/api/categories'
-        })
-        this.api.interceptors.request.use((config) => {
-
-            const storedToken = localStorage.getItem("authToken");
-
-            if (storedToken) {
-                config.headers = { Authorization: `Bearer ${storedToken}` }
-            }
-
-            return config
-        })
+super("categories/");
     }
 
     getCategorias() {
