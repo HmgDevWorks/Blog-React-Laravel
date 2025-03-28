@@ -105,9 +105,9 @@ class ProfileController extends Controller
         return $this->userService->getInfoUserCrypted();
     }
 
-    public function getUpdateInfo(Request $request): JsonResponse
+    public function getUpdatePassword(Request $request): JsonResponse
     {
-        return $this->userService->getUpdateInfo($request);
+        return $this->userService->getUpdatePassword($request);
     }
 
 }
