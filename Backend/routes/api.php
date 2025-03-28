@@ -20,6 +20,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Models\User;
 use App\Mail\CustomEmailVerification;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\NewsletterController;
 
 
 // Route::get('/user', function (Request $request) {
@@ -42,6 +43,7 @@ Route::get('/categories', [CategoriesController::class, 'index']); //muestra las
 Route::get('/stats/counter', [PostController::class, 'getStatsForCounter']); //stats para el footer
 Route::get('/categories/{data}', [CategoriesController::class, 'showCategoriesByName']); //muestra el nombre de las categorias
 Route::get('/posts/news', [PostController::class, 'getTenNewsPost']);
+Route::get('/newsletter/generate', [NewsletterController::class, 'generate']);
 
 Route::middleware('auth:api')->get('/verify-token', [AuthController::class, 'verifyToken']);
 Route::middleware('auth:api')->post('/refresh-token', [AuthController::class, 'refreshToken']);
