@@ -20,7 +20,7 @@ class NewsletterController extends Controller
     {
         $data = $this->newsletterService->generateNewsletter();
 
-        $subscribers = ['raulbenedid@hotmail.com']; 
+        $subscribers = ['raulbenedis@gmail.com']; 
         //$subscribers = User::pluck('email_user')->toArray(); //con esta linea enviaria correo a todos los users de la bbdd 
 
         foreach ($subscribers as $email) { //bucle para que pueda enviar todos los mails a todos los users de la BBDD

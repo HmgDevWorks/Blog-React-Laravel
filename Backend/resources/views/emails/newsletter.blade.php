@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boletín Semanal</title>
 </head>
-<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f5efe0;">
-    <table role="presentation" width="100%" bgcolor="#f5efe0" cellpadding="0" cellspacing="0" border="0">
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f1f1f1;"> <!-- Fondo blanco roto -->
+    <table role="presentation" width="100%" bgcolor="#f1f1f1" cellpadding="0" cellspacing="0" border="0"> <!-- Fondo blanco roto -->
         <tr>
             <td align="center">
                 <!-- Encabezado -->
