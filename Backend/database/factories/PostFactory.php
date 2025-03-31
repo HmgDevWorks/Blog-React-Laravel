@@ -41,22 +41,17 @@ class PostFactory extends Factory
 
     private function formatContent($content)
     {
-        // Generar un UUID dinámico para el atributo data-editor-id
-        $editorId = $this->faker->uuid();
+        $editorId = $this->faker->uuid();  // generar un UUID dinámico para el atributo data-editor-id
     
-        // Añadir etiquetas HTML básicas como <body> con el atributo data-editor-id
-        $contentFormatted = "<body id='yoopta-clipboard' data-editor-id='$editorId'>";
+        $contentFormatted = "<body id='yoopta-clipboard' data-editor-id='$editorId'>";    // añade etiquetas HTML básicas como <body> con el atributo data-editor-id
     
-        // Si el contenido ya tiene etiquetas HTML, lo dejamos tal cual.
-        if (strpos($content, '<body') === false) {
-            // Convertir saltos de línea a <p> y agregarlo al contenido
-            $contentFormatted .= "<p>" . nl2br(e($content)) . "</p>";
+        if (strpos($content, '<body') === false) { //si el contenido ya tiene etiquetas HTML, lo dejamos tal cual.
+            $contentFormatted .= "<p>" . nl2br(e($content)) . "</p>"; // convertir saltos de línea a <p> y agregarlo al contenido
         } else {
-            $contentFormatted .= $content;  // Si ya tiene formato, no tocamos nada
+            $contentFormatted .= $content;  // si ya tiene formato, no tocamos nada
         }
     
-        // Finalizamos la estructura
-        $contentFormatted .= "</body>";
+        $contentFormatted .= "</body>"; // finalizamos la estructura
     
         return $contentFormatted;
     }
