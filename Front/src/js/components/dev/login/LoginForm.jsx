@@ -50,6 +50,9 @@ export default function LoginForm() {
                 setJWT(data.authToken);
                 authenticateUser()
                 setSuccessMsg('Credenciales correctas, serás redirigido en unos segundos.');
+
+            }).then(() => {
+
                 navigate('/')
             })
             .catch(error => {
