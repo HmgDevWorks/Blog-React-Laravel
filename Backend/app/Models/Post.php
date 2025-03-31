@@ -63,4 +63,9 @@ class Post extends Model
     {
         return $this->categories ? $this->categories->name : null; // Devuelve el nombre de la categoría
     }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id'); // 'user_id' es la clave foránea
+    }
 }
