@@ -9,26 +9,30 @@ class NewsletterService
     public function generateNewsletter()
     {
         
-        $mostPopuPost = Post::where('status', 'published') //post con mas visitas de la semana
-            ->orderByDesc('views')
-            ->where('created_at', '>=', Carbon::now()->subWeek())
-            ->limit(3) // obtener los 3 más vistos
-            ->get();
+        $mostPopuPost = Post::where('status', 'published')
+        ->where('created_at', '>=', Carbon::now()->subWeek())
+        ->orderByDesc('views')
+        ->limit(3)
+        ->with(['author:id,name_user']) //como tenemos una una relacion creada en model llamada author permite traerte el name user
+        ->get();
 
-        $oldPopuPost = Post::where('status', 'published') // posts antiguos con visitas
+        $oldPopuPost = Post::where('status', 'published')
             ->where('created_at', '<', Carbon::now()->subMonth())
             ->orderByDesc('views')
-            ->limit(3) // obtener los 3 más vistos
+            ->limit(3)
+            ->with(['author:id,name_user']) 
             ->get();
 
-        $recomPosts = Post::where('status', 'published') //posts randoms para recomendar
+        $recomPosts = Post::where('status', 'published')
             ->inRandomOrder()
             ->limit(3)
+            ->with(['author:id,name_user']) 
             ->get();
         
-        $newestPosts = Post::where('status', 'published') //ultimos 3 posts publisss
+        $newestPosts = Post::where('status', 'published')
             ->orderByDesc('created_at')
             ->limit(3)
+            ->with(['author:id,name_user']) 
             ->get();
 
         return [

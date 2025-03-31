@@ -41,3 +41,13 @@ class PostFactory extends Factory
         ];
     }
 }
+
+
+// 'title' => $faker->realText(rand(50,65)),  // entre 50 60 caracs para generar texto random en español con algo de sentido y utilizando el php faker
+//             'content' => json_encode([
+//                 'type' => 'yoopta',
+//                 'content' => fake()->paragraph(rand(5, 7), true) . "\n\n" .
+//                             fake()->paragraph(rand(5, 7), true) . "\n\n" .
+//                             fake()->paragraph(rand(5, 7), true) . "\n\n" .
+//                             fake()->paragraph(rand(5, 7), true) . "\n\n" .
+//                             fake()->paragraph(rand(5, 7), true) // genera 5 parrafos largos

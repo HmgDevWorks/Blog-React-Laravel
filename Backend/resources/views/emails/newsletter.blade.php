@@ -1,130 +1,125 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boletín Semanal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 600px;
+            margin: 0 auto;
+            background-color: #f4f1e1;
+            border-radius: 8px;
+            padding: 20px;
+            color: #4f4f4f;
+        }
+
+        .header {
+            background-color: #800000;
+            color: #f4f1e1;
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+        }
+
+        .section-title {
+            color: #800000;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .post-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+
+        .post-list li {
+            margin-bottom: 10px;
+        }
+
+        .post-list a {
+            color: #800000;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .call-to-action {
+            background-color: #800000;
+            color: #ffffff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            display: block;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #fff;
+            background-color: #800000;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
-<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f1f1f1;"> <!-- Fondo blanco roto -->
-    <table role="presentation" width="100%" bgcolor="#f1f1f1" cellpadding="0" cellspacing="0" border="0"> <!-- Fondo blanco roto -->
-        <tr>
-            <td align="center">
-                <!-- Encabezado -->
-                <table role="presentation" width="600" bgcolor="#7d1b1b" cellpadding="15" cellspacing="0" border="0" style="border-radius: 8px; color: #fff;">
-                    <tr>
-                        <td align="center">
-                            <h1 style="margin: 0; font-size: 24px;">📢 Boletín Semanal</h1>
-                            <p style="margin: 5px 0 0; font-size: 14px;">Mantente al día con las novedades más importantes</p>
-                        </td>
-                    </tr>
-                </table>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📢 Boletín Semanal</h1>
+            <p>Mantente al día con las novedades más importantes</p>
+        </div>
 
-                <!-- Contenido principal -->
-                <table role="presentation" width="600" bgcolor="#ffffff" cellpadding="15" cellspacing="0" border="0" style="border-radius: 8px; margin-top: 10px; color: #333;">
-                    <tr>
-                        <td style="padding-bottom: 5px;">
-                            <h2 style="color: #7d1b1b; margin-bottom: 5px;">📌 Resumen de la Semana</h2>
-                            <p style="margin-top: 5px;">¡Hola equipo! Esta semana ha sido intensa, llena de ideas y creatividad. Te traemos lo más destacado:</p>
-                        </td>
-                    </tr>
+        <div>
+            <h2 class="section-title">📌 Resumen de la Semana</h2>
+            <p>¡Hola equipo! Esta semana ha sido intensa, llena de ideas y creatividad. Te traemos lo más destacado:</p>
+            
+            @foreach(['most_read' => '🔥 Posts más leídos', 'old_popular' => '📜 Posts antiguos más populares', 'recommended_posts' => '⭐ Posts recomendados', 'newest_posts' => '📅 Posts más recientes'] as $key => $title)
+                @if($data[$key]->count())
+                    <h3 class="section-title">{{ $title }}</h3>
+                    <ul class="post-list">
+                        @foreach($data[$key] as $post)
+                            <li>
+                                <strong>{{ $post->title }}</strong> - por <em>{{ $post->author->name_user }}</em><br>
+                                <a href="{{ env('FRONTEND_URL') . '/posts/show/' . $post->id }}">Leer más</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+            @endforeach
 
-                    <!-- Los 3 posts más leídos de la semana -->
-                    @if($data['most_read']->count())
-                        <tr>
-                            <td style="padding-top: 5px; padding-bottom: 5px;">
-                                <h3 style="color: #7d1b1b; margin-bottom: 5px;">🔥 Posts más leídos de la semana</h3>
-                                <ul>
-                                    @foreach($data['most_read'] as $post)
-                                        <li>
-                                            <strong>{{ $post->title }}</strong> - 
-                                            <a href="{{ env('FRONTEND_URL') . '/posts/show/' . $post->id }}" style="color: #7d1b1b; font-weight: bold;">Leer más</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </td>
-                        </tr>
-                    @endif
+            <h3 class="section-title">💡 Reflexión de la Semana</h3>
+            <p style="font-style: italic;">"El éxito no es la clave de la felicidad. La felicidad es la clave del éxito. Si amas lo que haces, tendrás éxito." – Albert Schweitzer</p>
+            
+            <p style="text-align: center;">
+                <a href="{{ env('FRONTEND_URL') . '/posts/store' }}" class="call-to-action">✍️ Escribir un post</a>
+            </p>
+        </div>
 
-                    <!-- Los 3 posts más antiguos más vistos -->
-                    @if($data['old_popular']->count())
-                        <tr>
-                            <td style="padding-top: 5px; padding-bottom: 5px;">
-                                <h3 style="color: #7d1b1b; margin-bottom: 5px;">📜 Posts antiguos más populares</h3>
-                                <ul>
-                                    @foreach($data['old_popular'] as $post)
-                                        <li>
-                                            <strong>{{ $post->title }}</strong> - 
-                                            <a href="{{ env('FRONTEND_URL') . '/posts/show/' . $post->id }}" style="color: #7d1b1b; font-weight: bold;">Leer más</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </td>
-                        </tr>
-                    @endif
-
-                    <!-- Posts recomendados -->
-                    @if($data['recommended_posts']->count())
-                        <tr>
-                            <td style="padding-top: 5px; padding-bottom: 5px;">
-                                <h3 style="color: #7d1b1b; margin-bottom: 5px;">⭐ Posts recomendados</h3>
-                                <p style="margin-top: 5px;">Estos artículos están dando mucho de qué hablar. ¡No te los pierdas!</p>
-                                <ul>
-                                    @foreach($data['recommended_posts'] as $post)
-                                        <li>
-                                            <strong>{{ $post->title }}</strong> - 
-                                            <a href="{{ env('FRONTEND_URL') . '/posts/show/' . $post->id }}" style="color: #7d1b1b; font-weight: bold;">Leer más</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </td>
-                        </tr>
-                    @endif
-
-                    <!-- Los 3 posts más recientes -->
-                    @if($data['newest_posts']->count())
-                        <tr>
-                            <td style="padding-top: 5px; padding-bottom: 5px;">
-                                <h3 style="color: #7d1b1b; margin-bottom: 5px;">📅 Posts más recientes</h3>
-                                <ul>
-                                    @foreach($data['newest_posts'] as $post)
-                                        <li>
-                                            <strong>{{ $post->title }}</strong> - 
-                                            <a href="{{ env('FRONTEND_URL') . '/posts/show/' . $post->id }}" style="color: #7d1b1b; font-weight: bold;">Leer más</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </td>
-                        </tr>
-                    @endif
-
-                    <!-- Sección motivacional -->
-                    <tr>
-                        <td style="padding-top: 5px; padding-bottom: 5px;">
-                            <h3 style="color: #7d1b1b; margin-bottom: 5px;">💡 Reflexión de la Semana</h3>
-                            <p style="font-style: italic; margin-top: 5px;">"El éxito no es la clave de la felicidad. La felicidad es la clave del éxito. Si amas lo que haces, tendrás éxito." – Albert Schweitzer</p>
-                        </td>
-                    </tr>
-
-                    <!-- Llamado a la acción -->
-                    <tr>
-                        <td align="center" style="padding-top: 5px; padding-bottom: 5px;">
-                            <h3 style="color: #7d1b1b; margin-bottom: 5px;">📣 ¿Tienes algo que contar?</h3>
-                            <p>Comparte tus ideas con el equipo. ¡Tu próximo post podría ser el más leído de la semana!</p>
-                            <p><a href="{{ env('FRONTEND_URL') . '/posts/store' }}" style="background-color: #7d1b1b; color: #ffffff; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-weight: bold;">✍️ Escribir un post</a></p>
-                        </td>
-                    </tr>
-                </table>
-
-                <!-- Pie de página -->
-                <table role="presentation" width="600" bgcolor="#7d1b1b" cellpadding="10" cellspacing="0" border="0" style="border-radius: 8px; margin-top: 10px; color: #fff; text-align: center;">
-                    <tr>
-                        <td>
-                            <p style="margin: 0; font-size: 12px;">Recibes este boletín porque eres parte de la empresa.</p>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+        <div class="footer">
+            <p>Recibes este boletín porque eres parte de la empresa.</p>
+        </div>
+    </div>
 </body>
 </html>
