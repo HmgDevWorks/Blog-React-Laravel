@@ -24,21 +24,19 @@ class CustomEmailVerification extends Mailable
      */
     public function __construct($user)
     {
-        $this->user = $user;
 
-        // Generamos el hash para el enlace de verificación
-        $hash = sha1($this->user->getEmailForVerification());
-        // Generamos el enlace de verificación firmado
-        $this->verificationUrl = URL::temporarySignedRoute(
-            'verification.verify', Carbon::now()->addMinutes(60), [
-                'id' => $this->user->id,
-                'hash' => $hash,//sha1($this->user->getEmailForVerification()), 
+        $this->user = $user;
+        $hash = sha1($this->user->getEmailForVerification()); // generamos el hash para el enlace de verificación
+
+        $this->verificationUrl = URL::temporarySignedRoute(  // generamos el enlace de verificación firmado
+            'verification.email_verify',  // ruta nombrada
+            Carbon::now()->addMinutes(60),  // tiempo de expiración (60 minutos)
+            [
+                'id' => $this->user->id,  // Pasamos el id del usuario
+                'hash' => $hash,  // Hash generado para el email
             ]
         );
-
-       // $this->verificationUrl = str_replace('http://127.0.0.1:8000/', url('api/') . '/', $this->verificationUrl);
-        Log::debug('Generated Verification URL: ' . $this->verificationUrl);
-       
+         $this->verificationUrl = env('FRONTEND_URL') . parse_url($this->verificationUrl, PHP_URL_PATH); // usamos `url()` para asegurarnos de que la URL use APP_URL desde el archivo `.env`
     }
 
     /**
@@ -46,11 +44,11 @@ class CustomEmailVerification extends Mailable
      */
     public function build()
     {
-        return $this->subject('Verificación de correo electrónico') // Asunto del correo
-            ->view('emails.verify') // Aquí usamos la vista Blade que creamos
+        return $this->subject('Verificación de correo electrónico') // asunto del correo
+            ->view('emails.verify') // aquí usamos la vista Blade que creamos
             ->with([
-                'user' => $this->user, // Pasamos el usuario a la vista
-                'verificationUrl' => $this->verificationUrl, // Pasamos el enlace de verificación
+                'user' => $this->user, // pasamos el usuario a la vista
+                'verificationUrl' => $this->verificationUrl, // pasamos el enlace de verificación
         ]);
     }
 

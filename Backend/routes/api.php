@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesController;
@@ -11,12 +9,20 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Middleware\JwtMiddleware;
+use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\AuthController;
 use App\Http\Kernel;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Models\User;
 use App\Mail\CustomEmailVerification;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\NewsletterController;
+
+
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:passport');
@@ -26,6 +32,22 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 //Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth:api');
 Route::get('/user', [ProfileController::class, 'getUser'])->middleware('auth:api');
+
+Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify'); //verifica la cuenta del user una vez se crea
+Route::post('/email/resend', [EmailVerificationController::class, 'resend']); //reenvia el email para que pueda verificar cuenta
+
+Route::post('/password/email', [PasswordResetController::class, 'sendResetLinkEmail']); //envia el correo con el link para restablecer la pass
+Route::post('/password/reset', [PasswordResetController::class, 'resetPassword']); //ruta que verifica los datos para poder cambiar la contraseña
+
+Route::get('/categories', [CategoriesController::class, 'index']); //muestra las categorias
+Route::get('/stats/counter', [PostController::class, 'getStatsForCounter']); //stats para el footer
+Route::get('/categories/{data}', [CategoriesController::class, 'showCategoriesByName']); //muestra el nombre de las categorias
+Route::get('/posts/news', [PostController::class, 'getTenNewsPost']);
+Route::get('/newsletter/generate', [NewsletterController::class, 'generate']); //ruta para probar que la newsletter se envia y que envia todo bene
+
+Route::middleware('auth:api')->get('/verify-token', [AuthController::class, 'verifyToken']);
+Route::middleware('auth:api')->post('/refresh-token', [AuthController::class, 'refreshToken']);
+
 Route::middleware('auth:api')->get('/verify-token', function (Request $request) {
     $user = $request->user();
     return response()->json([
@@ -37,50 +59,6 @@ Route::middleware('auth:api')->get('/verify-token', function (Request $request) 
         ]
     ]);
 });
-Route::get('/categories/{data}', [CategoriesController::class, 'showCategoriesByName']);
-Route::middleware('auth:api')->post('/refresh-token', function () { //renueva el token para que no se expire a los 60 minutos
-    return response()->json([
-        'token' => auth()->refresh(),
-        'message' => 'Token actualizado correctamente'
-    ]);
-});
-
-Route::get('/verify-email/{id}/{hash}', function ($id, $hash) {
-    $user = User::findOrFail($id);
-
-    if (!hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
-        return response()->json(['message' => 'Enlace de verificación no válido'], 403);
-    }
-
-    if ($user->hasVerifiedEmail()) {
-        return response()->json(['message' => 'El email ya ha sido verificado'], 200);
-    }
-
-    $user->markEmailAsVerified();
-
-    return response()->json(['message' => 'Cuenta verificada con exito']);
-})->name('verification.verify'); //->middleware(['signed'])
-
-Route::post('/email/resend', function (Request $request) {
-    $user = User::where('email_user', $request->email_user)->first();
-
-    if (!$user) {
-        return response()->json(['message' => 'Usuario no encontrado'], 404);
-    }
-
-    if ($user->hasVerifiedEmail()) {
-        return response()->json(['message' => 'El email ya ha sido verificado'], 200);
-    }
-
-    Mail::to($user->email_user)->send(new CustomEmailVerification($user));
-
-    return response()->json(['message' => 'Correo de verificación reenviado']);
-});
-
-Route::get('/categories', [CategoriesController::class, 'index']);
-Route::get('/stats/counter', [PostController::class, 'getStatsForCounter']);
-
-
 
 Route::controller(ProfileController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/users/infouser','getInfoUser')->name('users.getInfoUser')->middleware('role:admin|editor|viewer'); //muestra info no sensible del user
@@ -90,13 +68,12 @@ Route::controller(ProfileController::class)->middleware([JwtMiddleware::class])-
     Route::get('/users', 'index')->name('users.index')->middleware('role:admin|editor'); //muestra todos los usuarios
     Route::get('/users/{user}', 'show')->name('users.show')->middleware('role:admin|editor|reader'); //muestra el usuario por el id
     Route::post('/users/store', 'store')->name('users.store')->middleware('role:admin'); //crea un usuario sin registro normal
-    Route::put('/users/update/{user}', 'update')->name('users.update')->middleware('role:admin|editor|reader');; //middleware en el servicio
+    Route::put('/users/update', 'update')->name('users.update')->middleware('role:admin|editor|reader');; //middleware en el servicio
+    Route::put('/users/updatePassword', 'getUpdatePassword')->name('users.getUpdatePassword')->middleware('role:admin|editor|reader'); //cambia la contraseña, se necesita "current_password" y "new_password"
     Route::put('/users/changeRole/{user}', 'changeRole')->name('users.changeRole')->middleware('role:admin'); //cambio de roles, solo se puede si eres adminn
     Route::delete('/users/destroy/{user}', 'destroy')->name('users.destroy')->middleware('role:admin'); //eliminar un perfil
 });
-Route::controller(CategoriesController::class)->group(function () {
-    Route::get('/categories', 'index');
-});
+
 Route::controller(CategoriesController::class)->middleware([JwtMiddleware::class])->group(function () {
     // Route::get('/categories', 'index');//->middleware('role:admin|editor|reader');//ver todas categorias
     Route::get('/categories/posts/{name}', 'PostForCategory')->name('categories.PostsForCategory')->middleware('role:admin|editor|reader');
@@ -110,7 +87,7 @@ Route::controller(RoleController::class)->middleware([JwtMiddleware::class])->gr
     Route::get('/role', 'index')->middleware('role:admin');
     Route::post('/role/store', 'store')->name('role.store')->middleware('role:admin'); // crea un nuevo rol
     Route::get('/role/show/{role}', 'show')->name('role.show')->middleware('role:admin'); // Enseña un rol 
-    Route::put('/role/update/{role}', 'update')->name('role.update')->middleware('role:admin'); // Modifica un roll
+    Route::put('/role/update/{user}', 'update')->name('role.update')->middleware('role:admin'); // Modifica un roll del user, necesita el id y de value role:rol
     Route::delete('/role/destroy/{role}', 'destroy')->name('role.destroy')->middleware('role:admin'); // Elimina un roll
 });
 
@@ -134,8 +111,6 @@ Route::controller(PostController::class)->middleware([JwtMiddleware::class])->gr
     Route::put('/posts/update/{post}', 'update')->name('posts.update')->middleware('role:admin|editor'); //Actualiza Post
     Route::delete('/posts/destroy/{post}', 'destroy')->name('posts.destroy'); //->middleware('role:admin|editor'); //Borra 
 });
-
-Route::get('/posts/news', [PostController::class, 'getTenNewsPost'])->name('posts.getTenNewsPost');
 
 Route::controller(FavoritesController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/favorites', 'getFavoritesForAuthenticatedUser')->name('favorites.getFavoritesForAuthenticatedUser')->middleware('role:admin|editor|reader'); //solo enseña los del usuario verificado

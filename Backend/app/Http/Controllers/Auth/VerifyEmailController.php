@@ -18,10 +18,12 @@ class VerifyEmailController extends Controller
             return redirect()->intended(
                 config('app.frontend_url').'/dashboard?verified=1'
             );
+            //return response()->json(["errorMsg" => "errorMailVerifyDouble"]);
         }
 
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
+            //return response()->json(["successMsg" => "successMail1"]);
         }
 
         return redirect()->intended(

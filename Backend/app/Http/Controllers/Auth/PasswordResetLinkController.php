@@ -32,8 +32,11 @@ class PasswordResetLinkController extends Controller
             throw ValidationException::withMessages([
                 'email' => [__($status)],
             ]);
+            //throw response()->json(["errorMsg" => "errorPass4"]);
         }
 
         return response()->json(['status' => __($status)]);
+        //return response()->json(["successMsg" => "successPass1"]);
+
     }
 }

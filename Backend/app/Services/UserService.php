@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\TryCatch;
 use Spatie\Permission\Contracts\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
+
 
 class UserService
 {
@@ -78,37 +82,41 @@ class UserService
         }
     }
 
-    public function updateUser(Request $request,$data, User $user)
-    {  
-        $authUser = $request->user; //esto gracias al middleware creado de JWT realiza la comprobacion de que el usuario tenga el mismo token
+    public function updateUser(Request $request, User $user): JsonResponse
+    {
+        
+        $authUser = $request->user(); // obtiene el user verif
+            $user = $authUser;
+    
         if (!$user) {
             return response()->json(["mensaje" => "Error al actualizar el usuario"], 404);
         }
-        if (!$authUser->hasRole('admin') && $authUser->id !== $user->id) {
+    
+        if (!$authUser->hasRole('admin') && $authUser->id !== $user->id) { // verifica que el user autenticado tiene permisos
             return response()->json(["mensaje" => "No tienes permiso para modificar este usuario"], 403);
         }
     
-        if (isset($data->img_user) && $data->hasFile('img_user')) { //manejo de la imagen
-            $image = $data->file('img_user');
+        $data = $request->only(['name_user', 'email_user', 'bio', 'img_user']);
+        Log::info('Datos recibidos:', $request->all());
+        Log::info('Archivo recibido:', [$request->file('img_user')]);
+    
+        if ($request->hasFile('img_user')) { // comprueba si hay cambios en la imagen 
+            $image = $request->file('img_user');
             $imageName = time() . '.' . $image->extension();
             $image->move(public_path('avatars'), $imageName);
     
-            if ($user->img_user && $user->img_user !== 'avatars/default.png') { // Borrar la imagen anterior si no es la default
+            if ($user->img_user && $user->img_user !== 'avatars/default.png') { // elimina la imagen anterior si es diferente de la predeterminada
                 $oldImagePath = public_path($user->img_user);
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath);
                 }
             }
     
-            $user->img_user = 'avatars/' . $imageName;
+            $data['img_user'] = 'avatars/' . $imageName;
         }
     
-        $user->update([// Actualizar usuario con la nueva info
-            'name_user' => $data->name_user,
-            'email_user' => $data->email_user,
-            'bio' => $data->bio,
-            'updated_at' => now(),
-        ]);
+        $data = array_filter($data); // Esto eliminará campos vacíos
+        $user->update($data);
         return response()->json(["mensaje" => "Usuario actualizado correctamente"], 200);
     }
 
@@ -164,7 +172,6 @@ class UserService
         return response()->json($postViews);
     }
 
-
     public function getInfoUserCrypted()
     {
         $user = auth()->user();
@@ -176,34 +183,25 @@ class UserService
         return response()->json(['data' => $encryptedData]);
     }
 
-    public function getUpdateInfo(Request $request)
+    public function getUpdatePassword(Request $request)
     {
-        $user = auth()->user();
-        if (!$user) {
-            return response()->json(['error' => 'Usuario no autenticado'], 401);
-        }
-        $request->validate([
-            'mail_user' => 'nullable|email|unique:users,mail_user,' . $user->id,
-            'bio' => 'nullable|string',
-            'password_user' => 'nullable|min:8'
+        $authUser = auth()->user();
+            $request->validate([ //campos a rellenar
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:6', 
         ]);
     
-        if ($request->has('mail_user')) { //solo actualiza si hay valores enel request
-            $user->mail_user = $request->mail_user;
+        if (!Hash::check($request->current_password, $authUser->password_user)) {  // verifica si la contraseña actual es correcta
+            throw ValidationException::withMessages([
+                'current_password' => ['La contraseña actual es incorrecta.'],
+            ]);
         }
     
-        if ($request->has('bio')) {
-            $user->bio = $request->bio;
-        }
+        $authUser->password_user = Hash::make($request->new_password);
+        $authUser->save();  
     
-        if ($request->has('password_user')) {
-            $user->password_user = bcrypt($request->password_user);
-        }
-    
-        $user->save();
-        return response()->json([
-            'message' => 'Información actualizada correctamente', 
-            'user' => $user]);
+        return response()->json(['message' => 'Contraseña actualizada correctamente.']);
     }
+       
 }
 ?>

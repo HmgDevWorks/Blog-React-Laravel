@@ -43,7 +43,7 @@ class ProfileController extends Controller
 
     public function update(Request $request, User $user):JsonResponse // Actualiza un usuario 
     {
-        return response()->json($this->userService->updateUser($request, $user));
+        return $this->userService->updateUser($request, $user);
     }
 
     public function changeRole(Request $request, User $user):JsonResponse // Falta prueba
@@ -105,9 +105,9 @@ class ProfileController extends Controller
         return $this->userService->getInfoUserCrypted();
     }
 
-    public function getUpdateInfo(Request $request): JsonResponse
+    public function getUpdatePassword(Request $request): JsonResponse
     {
-        return $this->userService->getUpdateInfo($request);
+        return $this->userService->getUpdatePassword($request);
     }
 
 }
