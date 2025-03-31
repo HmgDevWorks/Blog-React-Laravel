@@ -22,13 +22,13 @@ class PostFactory extends Factory
 
         $titles = require database_path('factories\post_titles.php');
         $contents = require database_path('factories\post_content.php');
-        $categoryId = $faker->numberBetween(1, 10);
-
-        $title = $faker->randomElement($titles[$categoryId]);
-        $content = $contents[$categoryId];
+        
+        $id_categories = $faker->numberBetween(1, 10); // coge un id de una categoria y va rellenado de los arrays creados en posttiles y postcontent
+        $title = $faker->randomElement($titles[$id_categories]); 
+        $content = $contents[$id_categories];
 
         return [
-            'id_categories' => $categoryId,
+            'id_categories' => $id_categories,
             'user_id' => null, // se asignará después
             'title' => $title,  // entre 50 60 caracs
             'content' => json_encode([
