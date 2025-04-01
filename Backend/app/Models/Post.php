@@ -13,9 +13,9 @@ class Post extends Model
 {
     use HasFactory, Notifiable;
 
-    protected $appends = ['category_name','isFav'];
+    protected $appends = ['category_name','isFav','author_name'];
 
-    protected $hidden = ['categories'];  //se utiliza para poder ocultar en el json cosas del campo category
+    protected $hidden = ['categories', 'author'];  //se utiliza para poder ocultar en el json cosas del campo category
 
     public function getIsFavAttribute()
     {
@@ -68,4 +68,9 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'user_id'); // 'user_id' es la clave foránea
     }
+
+    public function getAuthorNameAttribute()
+{
+    return $this->author ? $this->author->name_user : null;
+}
 }

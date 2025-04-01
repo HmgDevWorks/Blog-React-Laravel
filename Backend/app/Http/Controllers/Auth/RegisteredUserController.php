@@ -32,6 +32,7 @@ public function store(Request $request)
         'name_user' => ['required', 'string', 'max:255'],
         'email_user' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
         'password_user' => ['required', 'confirmed', Rules\Password::min(6)], 
+        'name_lastName'=>['required','string', 'max:255'],
         'img_user' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
     ]);
 
@@ -39,14 +40,14 @@ public function store(Request $request)
         return response()->json(['errors' => $validator->errors()], 422);
     }
 
-    $imgPath = 'avatars/default.png'; 
+    // $imgPath = 'avatars/default.png'; //se comenta por que vamos a utilizar cloudinary en vez de el sistema de gestion de laravel
 
-    if ($request->hasFile('img_user') && $request->file('img_user')->isValid()) {
-        $image = $request->file('img_user');
-        $imageName = time() . '.' . $image->extension(); // Genera un nombre único
-        $image->move(public_path('avatars'), $imageName); // Guarda la imagen en public/avatars
-        $imgPath = 'avatars/' . $imageName; // Ruta de la imagen en la base de datos
-    }
+    // if ($request->hasFile('img_user') && $request->file('img_user')->isValid()) {
+    //     $image = $request->file('img_user');
+    //     $imageName = time() . '.' . $image->extension(); // Genera un nombre único
+    //     $image->move(public_path('avatars'), $imageName); // Guarda la imagen en public/avatars
+    //     $imgPath = 'avatars/' . $imageName; // Ruta de la imagen en la base de datos
+    // }
 
     $user = User::create([
         'name_user' => $request->input('name_user'),
@@ -61,15 +62,15 @@ public function store(Request $request)
             $user->assignRole('reader');
             Mail::to($user->email_user)->send(new CustomEmailVerification($user)); //envia mail para confirmar la cuenta
         } catch (\Exception $e) {
-            return response()->json(["mensaje" => "Error al asignar el rol", 400]);
+            return response()->json(["message" => "errorMsg.errorRole", 400]);
         }
 
         return response()->json([
-            'message' => "Usuario creado, revise su email para verificar",
+            'message' => "infoMsg.infoCreateUser",
             'user' => $user
         ], 201);
     }
 
-    return response()->json(['message' => 'Hubo un problema al crear el usuario.'], 500);
+    return response()->json(['message' => 'errorMsg.errorCreateUser'], 500);
 }
 }

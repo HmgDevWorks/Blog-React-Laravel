@@ -52,7 +52,6 @@ class PostFactory extends Factory
         }
     
         $contentFormatted .= "</body>"; // finalizamos la estructura
-    
         return $contentFormatted;
     }
 }

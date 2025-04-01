@@ -36,7 +36,7 @@ class PasswordResetController extends Controller
         }
 
         if (!$user) {
-            return response()->json(['message' => 'Usuario no encontrado'], 404);
+            return response()->json(['message' => 'errorMsg.errorUserNotFound'], 404);
         }
 
         $token = Str::random(60); // creamos el token nosotros mismos con una combi random
@@ -53,7 +53,7 @@ class PasswordResetController extends Controller
 
        Mail::to($user->email_user)->send(new PasswordResetMail($url,$user)); //funcion pa llamar al mail
 
-        return response()->json(['message' => 'Correo de restablecimiento enviado']);
+        return response()->json(['message' => 'errorMsg.infoMailSend']);
     }
 
     public function resetPassword(Request $request)
@@ -67,17 +67,17 @@ class PasswordResetController extends Controller
         $tokenRecord = DB::table('password_reset_tokens')->where('token', $request->token)->first(); //busca el token creado para compararlo despues con el del link
 
         if (!$tokenRecord || $tokenRecord->email_user != $request->email_user) {
-            return response()->json(['message' => 'Token inválido o correo incorrecto'], 400);
+            return response()->json(['message' => 'errorMsg.errorTokenOrMail'], 400);
         }
 
         $user = User::where('email_user', $request->email_user)->first();
 
         if (!$user) {
-            return response()->json(['message' => 'Usuario no encontrado'], 404);
+            return response()->json(['message' => 'errorMsg.errorUser'], 404);
         }
 
         if (Carbon::parse($tokenRecord->created_at)->addMinutes(5)->isPast()) { //comprueba si ha pasao 5 min en la duracion del tokkken
-            return response()->json(['message' => 'El enlace ha caducado, vuelva a pedir otro'], 400);
+            return response()->json(['message' => 'errorMsg.errorPassTime'], 400);
         }
 
         $user->password_user = Hash::make($request->password); 
@@ -85,6 +85,6 @@ class PasswordResetController extends Controller
 
         DB::table('password_reset_tokens')->where('token', $request->token)->delete(); //se borra el token una vez usado ya que no admite mas mails iguales 
 
-        return response()->json(['message' => 'Contraseña restablecida correctamente']);
+        return response()->json(['message' => 'successMsg.successUpdatePass']);
     }
 }

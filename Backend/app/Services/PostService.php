@@ -6,6 +6,8 @@ use App\Models\Categories;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 class PostService
 {
@@ -51,30 +53,25 @@ class PostService
         ]);
     }
 
-    public function createPost($data)
-    { // Esta función recoge el post y lo crea
-        if (!$data) {
-            return response()->json(["mensaje" => "Error al crear el post"], 400);
-        }
-        if (empty($data->id_categories)) {
-            return response()->json(["Error" => "La categoría es obligatoria"], 400);
-        }
-        if (empty($data->title)) {
-            return response()->json(["Error" => "El título es necesario"], 400);
-        }
-        if (empty($data->content)) {
-            return response()->json(["Error" => "El contenido del post es obligatorio"], 400);
-        }
-            $post = Post::create([
-                    'id_categories' => $data->id_categories,
-                    'user_id' => $data->user_id,
-                    'title' => $data->title,
-                    'content' => $data->content,
-                    'status' => $data->status ? $data->status : "draft"
-                ]
-            );
-            return response()->json(["mensaje" => "Post creado con exito", 201]);
-        } 
+    public function createPost(Request $request)
+    { 
+        $validatedData = $request->validate([ //valida datos introducids
+            'id_categories' => 'required|integer|exists:categories,id',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'status' => 'nullable|in:published,draft,deleted'
+        ]);
+    
+        $post = Post::create([
+            'id_categories' => $validatedData['id_categories'],
+            'user_id' => auth()->id(), // asigna el usuario autenticado
+            'title' => $validatedData['title'],
+            'content' => $validatedData['content'],
+            'status' => $validatedData['status'] ?? "draft" // por defecto draft si no dice na
+        ]);
+    
+        return response()->json(["mensaje" => "Post creado con éxito"], 201);
+    } 
 
     public function getPostByCategory($cat)
     {    // 

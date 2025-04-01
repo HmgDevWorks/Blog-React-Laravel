@@ -25,19 +25,19 @@ class RoleService {
             ]
         );
         if($role)
-            return response()->json(["mensaje"=>"Rol creado", 201]);
-        return response()->json(["mensaje"=>"Error al crear el rol", 400]);
+            return response()->json(["message"=>"successMsg.successRoleOk", 201]);
+        return response()->json(["message"=>"errorMsg.errorCreateRole", 400]);
     }
     
     public function updateRole(Request $request, User $user)
     {
         $authUser = auth()->user();
         if (!$authUser->hasRole('admin')) {
-            return response()->json(["mensaje" => "No tienes permisos para cambiar roles"], 403);
+            return response()->json(["message" => "errorMsg.errorChangeRoles"], 403);
         }
 
         if ($user->hasRole('admin')) {
-            return response()->json(["mensaje" => "No se puede cambiar el rol de un administrador"], 403);
+            return response()->json(["message" => "errorMsg.errorChangeAdminRole"], 403);
         }
 
         $request->validate([ //lo que se pide en el json para poder cambiar el rol
@@ -46,17 +46,17 @@ class RoleService {
 
         $role = Role::where('name', $request->role)->first(); // buscar el rol por nombre y obtener su ID
         if (!$role) {
-            return response()->json(["mensaje" => "El rol especificado no existe"], 400);
+            return response()->json(["message" => "errorMsg.errorRoleNotExist"], 400);
         }
 
         $user->syncRoles([$role->id]); //funcion que asigna el rol en la tabla model has roles
-        return response()->json(["mensaje" => "Rol actualizado correctamente"], 200);
+        return response()->json(["message" => "successMsg.successUpdateRole"], 200);
     }
     
     public function destroyRole($role){ // Devuelve V o F, si se le pasa un id de un role que no existe F y si el id existe, el role pasa a estar en estado 'delete'
         if(Role::destroy($role->id))
-            return response()->json(["mensaje"=>"Rol eliminado correctamente", 204]);
-        return response()->json(["mensaje"=>"Error al eliminar el rol", 400]);
+            return response()->json(["message"=>"successMsg.successDeleteRole", 204]);
+        return response()->json(["message"=>"errorMsg.errorDeleteRole", 400]);
     }
 }
 
