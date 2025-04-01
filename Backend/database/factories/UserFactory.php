@@ -35,7 +35,7 @@ class UserFactory extends Factory
             'bio' => $this->faker->realText(rand(20,40)),
             'remember_token' => Str::random(10),
             'email_verified_at' => now(), 
-            'img_user' => 'avatars/default.png',
+           // 'img_user' => 'avatars/default.png',
             'created_at' => fake()->dateTimeBetween('2024-01-01', 'now')->format('Y-m-d H:i:s'),
         ];
     }
