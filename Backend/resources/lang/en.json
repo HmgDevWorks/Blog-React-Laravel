@@ -1,4 +1,6 @@
 {
+  "prueba":"Hello Worldazo",
+
   "errorMsg": {
     "errorMailSend": "Error sending verification email.",
     "errorMailTime": "Verification time exceeded.",

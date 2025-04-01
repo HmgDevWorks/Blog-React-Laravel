@@ -74,6 +74,9 @@ class PostService
                 ]
             );
             return response()->json(["mensaje" => "Post creado con exito", 201]);
+            //return response()->json(["mensaje" => "pueba.hola", 201]);            
+            //return response()->json(["mensaje" => __("prueba")], 201);
+
         } 
 
     public function getPostByCategory($cat)
