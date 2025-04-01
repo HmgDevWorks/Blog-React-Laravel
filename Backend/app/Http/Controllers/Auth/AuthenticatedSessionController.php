@@ -19,16 +19,16 @@ class AuthenticatedSessionController extends Controller
         ];
 
         if (!Auth::attempt($credentials)) {
-            return response()->json(['error' => 'Las credenciales no corresponden'], 401);
+            return response()->json(['message' => 'errorMsg.errorCredentals'], 401);
         }
 
         $user = Auth::user();
         if ($user->hasRole('banned')) { //verifica si el usuario esta banned, si esta banned no puede entrar y no genera el token
-            return response()->json(['error' => 'Este usuario ha sido suspendido.'], 403);
+            return response()->json(['message' => 'infoMsg.infoUserSuspended'], 403);
         }
         
         if (!$user->hasVerifiedEmail()) {
-            return response()->json(['message' => 'Debes verificar tu email antes de iniciar sesión.'], 403);
+            return response()->json(['message' => 'infoMsg.infoMailVerify'], 403);
         }
         $token = JWTAuth::fromUser($user);
         return response()->json([

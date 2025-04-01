@@ -5,6 +5,7 @@ import postService from '../../services/postService.js';
 import { useState, useEffect } from 'react';
 import Loader from '../../components/dev/Loader/Loader.jsx'
 import { useAlert } from "../../bootstrap/contexts/AlertContext.jsx";
+import FavToggle from '../../components/dev/FavToggle/FavToggle.jsx';
 
 const PostDetailsPage = () => {
   const { addError, addSuccess } = useAlert();
@@ -35,8 +36,16 @@ const PostDetailsPage = () => {
 
 
   return (
-    <div>
-      {blog ? <PostDetails blog={blog} /> : <Loader />}
+    <div className='pb-4'>
+      {blog
+        ?
+        <>
+          <PostDetails blog={blog} />
+          <FavToggle fav={blog.isFav} id={blog.id} />
+        </>
+        :
+        <Loader />}
+
     </div >
 
   );

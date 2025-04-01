@@ -1,4 +1,4 @@
-:root{
+:root {
     --font-header: 'Abril Fatface', cursive;
     --font: helvetica, sans-serif;
     --bg-color: #c6c7c4;
@@ -15,14 +15,15 @@
     --p-color: black;
 }
 
-.draft-tabs{
+.draft-tabs {
     font-family: var(--font);
-    
-    input{
+
+    input {
         font-size: var(--input-font-size);
         background-color: var(--input-bg-color);
     }
-    .tabs > div{
+
+    .tabs>div {
         background-color: #eef0f2;
     }
 

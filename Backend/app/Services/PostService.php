@@ -41,15 +41,13 @@ class PostService
                 ->first();
          
         if (!$post) {
-            return response()->json([
-                'error' => 'Post no exixte o no está publicado.'
-            ], 404);
+            return response()->json(['message' => 'errorMsg.errorPostNotFoundOrNotPublish'], 404);
         }
         $post->increment('views'); // contador para que cuando alguien entre en el post especificado aumenten las visitas en la tabla de post
         $post->refresh();           //actualiza el campo para mostrarlo correctamente
         return response()->json([
             "post" => $post,
-            "message" => "Visita incrementada en 1"
+            "message" => "errorMsg.errorPostVisited"
         ]);
     }
 
@@ -70,7 +68,7 @@ class PostService
             'status' => $validatedData['status'] ?? "draft" // por defecto draft si no dice na
         ]);
     
-        return response()->json(["mensaje" => "Post creado con éxito"], 201);
+        return response()->json(["message" => "successMsg.successCreatePost"], 201);
     } 
 
     public function getPostByCategory($cat)
@@ -93,21 +91,21 @@ class PostService
         $post->content = $data['content'] ?? $post->content;
         $post->status = $data['status'] ?? $post->status;
         $post->save();
-        return response()->json(["mensaje" => "Post actualizado correctamente"], 200);
+        return response()->json(["message" => "successMsg.successUpdatePost"], 200);
     } else {
-        return response()->json(["mensaje" => "Error al actualizar el post"], 400);
+        return response()->json(["message" => "errorMsg.errorUpdatePost"], 400);
         }
     }
 
     public function destroyPost($post) // cambia el post a estado delete
     {
         if (!auth()->user()->hasRole(['admin', 'editor'])) {
-            return response()->json(['message' => 'No tienes el rol adecuado.'], 403);
+            return response()->json(['message' => 'errorMsg.errorInvalidRole'], 403);
         }elseif ($post) {
             $post->update(['status' => 'deleted']);
-            return response()->json(["mensaje" => "Post Cambiado a estado borrado", 200]);
+            return response()->json(["message" => "successMsg.successDeleteSoftPost", 200]);
         } else{
-            return response()->json(["mensaje" => "Error al cambiar el estado borrado", 400]);
+            return response()->json(["message" => "errorMsg.errorDeleteSoftPost", 400]);
         }
     }
 

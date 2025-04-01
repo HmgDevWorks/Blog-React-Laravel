@@ -1,12 +1,12 @@
-:root{
-   --grisClaro: #eef0f2;
---grisMeio: #c6c7c4;
---saturadoClaro: #a2999e; 
---saturadoOscuro: #846a6a;
---grisOscuro: #353b3c;
-} 
+:root {
+    --grisClaro: #eef0f2;
+    --grisMeio: #c6c7c4;
+    --saturadoClaro: #a2999e;
+    --saturadoOscuro: #846a6a;
+    --grisOscuro: #353b3c;
+}
 
-.counter{
+.counter {
     font-family: 'Special Elite', cursive;
     background-color: var(--saturadoClaro);
     color: var(--grisOscuro);
@@ -20,7 +20,7 @@
     gap: 20px;
     padding: 10px;
 
-    h3{
+    h3 {
         padding: 5px;
         color: var(--header-bg-color);
         font-family: var(--font-header);

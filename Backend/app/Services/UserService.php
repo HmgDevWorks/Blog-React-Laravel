@@ -30,10 +30,10 @@ class UserService
     { 
         try {
             if (User::where('email_user', $data->email_user)->exists()) {
-                return response()->json(['message' => 'El email ya esta registrado', 'mensaje' => 'malmalrequetemal'], 409); // 409, codigo de error de conflicto de datos
+                return response()->json(['message' => 'errorMsg.errorMailDuplicate'], 409); // 409, codigo de error de conflicto de datos
             }
             if (User::where('name_user', $data->name_user)->exists()) {
-                return response()->json(['message' => 'El nombre de ususario ya esta registrado'], 409); // 409, codigo de error de conflicto de datos
+                return response()->json(['message' => 'errorMsg.errorNameUserDuplicate'], 409); // 409, codigo de error de conflicto de datos
             }
             $user = User::create([
                 'name_user' => $data->name_user,
@@ -47,35 +47,35 @@ class UserService
                     $user->assignRole('reader');
 
                 } catch (\Exception $e) {
-                    return response()->json(["mensaje" => "Error al asignar el role", 400]);
+                    return response()->json(["message" => "errorMsg.errorAssignRole", 400]);
                 }
                 return response()->json($user, 201);
             }
         } catch (\Exception $e) {
-            return response()->json(["mensaje" => "Error al crear el usuario", 400]);
+            return response()->json(["message" => "errorMsg.errorCreateUser", 400]);
         }
     }
 
     public function assignRoleUser($request, $user) // Esta función, hace un shoftDelete de un usuario, devuelve mesaje OK o mensaje KO
     { 
         if ($user->hasRole('admin'))
-            return (response()->json(["mensaje" => "Error no se puede modificar el rol al usuario administrador"], 400));
+            return (response()->json(["message" => "errorMsg.errorChangeAdminRole"], 400));
         if ($request->role == 'admin')
-            return (response()->json(["mensaje" => "Error no se puede asignar el rol de administrador a un usuario"], 400));
+            return (response()->json(["message" => "errorMsg.errorChangeRoleUserAdmin"], 400));
         if ($user->roles()->get()->isNotEmpty()) {
             $user->roles()->detach();
         }
         $user->assignRole($request->role);
-        return (response()->json(["mensaje" => "Rol asignado con exito"], 200));
+        return (response()->json(["message" => "successMsg.successAssignRole"], 200));
     }
 
     public function deleteUser($user) // Esta función, hace un shoftDelete de un usuario, devuelve mesaje OK o mensaje KO
     { 
         if ($user && !$user->hasRole('admin')) {
             $user->delete();
-            return (response()->json(["mensaje" => "Usuario eliminado con exito"], 200));
+            return (response()->json(["message" => "successMsg.successDeleteUser"], 200));
         } else {
-            return (response()->json(["mensaje" => "Error al borrar el usuario"], 201));
+            return (response()->json(["message" => "errorMsg.errorDeleteUser"], 201));
 
         }
     }
@@ -87,11 +87,11 @@ class UserService
             $user = $authUser;
     
         if (!$user) {
-            return response()->json(["mensaje" => "Error al actualizar el usuario"], 404);
+            return response()->json(["message" => "errorMsg.errorUpdateUser"], 404);
         }
     
         if (!$authUser->hasRole('admin') && $authUser->id !== $user->id) { // verifica que el user autenticado tiene permisos
-            return response()->json(["mensaje" => "No tienes permiso para modificar este usuario"], 403);
+            return response()->json(["message" => "errorMsg.errorPermissionModifyUser"], 403);
         }
     
         $data = $request->only(['name_user', 'email_user', 'bio']);
@@ -113,14 +113,14 @@ class UserService
     
         $data = array_filter($data); // Esto eliminará campos vacíos
         $user->update($data);
-        return response()->json(["mensaje" => "Usuario actualizado correctamente"], 200);
+        return response()->json(["message" => "successMsg.successUpdateUser"], 200);
     }
 
     public function getInfoUser()
     {
         $user = auth()->user();
         if (!$user) {
-            return response()->json(['error' => 'Usuario no autenticado'], 401);
+            return response()->json(['message' => 'errorMsg.errorUserNotAuth'], 401);
         }
         return response()->json([
             'name_user' => $user->name_user,
@@ -132,7 +132,7 @@ class UserService
     {
         $user = auth()->user();
         if (!$user) {
-            return response()->json(['error' => 'Usuario no autenticado'], 401);
+            return response()->json(['message' => 'errorMsg.errorUserNotAuth'], 401);
         }
 
         $posts = $user->posts()->withCount('favorites')->get(); //funcion automatica de laravel que hace que pueda contar la cantidad de favoritos que tiene ese post
@@ -153,7 +153,7 @@ class UserService
     {
         $user = auth()->user();
         if (!$user) {
-            return response()->json(['error' => 'Usuario no autenticado'], 401);
+            return response()->json(['message' => 'errorMsg.errorUserNotAuth'], 401);
         }
         
         $posts = $user->posts;
@@ -172,7 +172,7 @@ class UserService
     {
         $user = auth()->user();
         if (!$user) {
-            return response()->json(['error' => 'Usuario no autenticado'], 401);
+            return response()->json(['message' => 'errorMsg.errorUserNotAuth'], 401);
         }
 
         $encryptedData = encrypt($user->toArray());
@@ -196,7 +196,7 @@ class UserService
         $authUser->password_user = Hash::make($request->new_password);
         $authUser->save();  
     
-        return response()->json(['message' => 'Contraseña actualizada correctamente.']);
+        return response()->json(['message' => 'successMsg.successUpdatePass']);
     }
        
 }

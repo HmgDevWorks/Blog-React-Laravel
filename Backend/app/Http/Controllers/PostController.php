@@ -107,12 +107,64 @@ class PostController extends Controller
         ->get();
 
         if ($posts->isEmpty()) {
-            return response()->json(["mensaje" => "No existen posts con '$search' como búsqueda"], 200);
+            //return response()->json(["message" => "No existen posts con '$search' como búsqueda"], 200);
+            return response()->json(["message" => "errorMsg.errorFindSearch"], 200);
+
         }
 
         return response()->json(['posts' => $posts]); //solo titulo views  id author y aparte hacer otro searchuser -> name_user id cuantos post tiene, otra funcion que busque los 10 autores con mas visitas y que categoria con mas visitas/posts id views nombre total count img_user
     }
 
+    // public function searchAuthors(Request $request){//controlador para la barra de busqueda, para buscar autores
+    //     $search = $request->input('search');
+
+    //     if (!$search || strlen($search) < 2) {
+    //         return response()->json(["message" => "errorMsg.errorSearchCharacters"], 400);
+    //     }
+
+    //     $posts = Post::where('status', 'published') //funcion waparda para una barra de busqueda que filtra con el request que pasamos "search" y devuelve todos los post
+    //     ->where(function ($query) use ($search) {
+    //         $query->where('title', 'like', "%$search%")
+    //             ->orWhere('content', 'like', "%$search%");
+    //     })
+    //     ->get();
+
+
+    // } 
+
+    public function searchAuthors(Request $request)
+    {
+        $search = $request->input('search');
+    
+        $authors = User::whereHas('posts', function ($query) { // Utilizamos la función para buscar autores que hayan publicado algún post
+
+                $query->where('status', 'published');
+            })
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%$search%");
+            })
+            ->select('id', 'name') // Solo ID y Nombre
+            ->get();
+    
+        foreach ($authors as $author) {  // Utilizamos la función para calcular las visitas totales de cada autor y la categoria mas usada 
+            $posts = Post::where('user_id', $author->id)
+                ->where('status', 'published')
+                ->get();
+    
+            $author->total_visits = $posts->sum('views');  // visitas totales
+
+    
+            $mostUsedCategory = $posts->groupBy('category_id') // Categoría más usada
+                ->sortByDesc(fn ($posts) => count($posts))
+                ->keys()
+                ->first();
+    
+            $author->most_used_category = $mostUsedCategory ?? null;
+        }
+    
+        return response()->json($authors);
+    }
+    
     public function searchPopuUser(): JsonResponse
     {
         $popularUsers = User::query() //metodo query para hacer una consulta mas extensa
@@ -162,7 +214,7 @@ class PostController extends Controller
     {
         $user = auth()->user();
         if (!$user) {
-            return response()->json(["error" => "No estás autenticado"], 401);
+            return response()->json(["message" => "errorMsg.errorUserNotAuth"], 401);
         }
     
         $status = trim(strtolower($request->input('status')));
@@ -172,7 +224,7 @@ class PostController extends Controller
             ->get();
     
         if ($posts->isEmpty()) {
-            return response()->json(["error" => "No existen posts con ese estado para este usuario"], 404);
+            return response()->json(["message" => "errorMsg.errorFindPostStatus"], 404);
         }
     
         return response()->json(['posts' => $posts], 200);
@@ -185,7 +237,7 @@ class PostController extends Controller
             ->get();
 
         if ($posts->isEmpty()) {
-            return response()->json(["error" => "No existen posts publicados para este usuario"], 200);
+            return response()->json(["message" => "errorMsg.errorCeroPostPublish"], 200);
         }
 
         return response()->json(['posts' => $posts]);

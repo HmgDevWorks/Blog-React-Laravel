@@ -99,32 +99,84 @@
     "deleteBtn": "Borrar",
     "chooseCat": "Elige una categoria" 
   },
+
+
   "errorMsg":{
-    "errorMail1": "Error de al enviar correo de verificación.",
-    "errorMail2": "Tiempo de verificación excedido.",
+    "errorSearchCharacters": "La búsqueda debe tener al menos 4 caracteres.",
+    "errorFindSearch": "No existen posts con esas palabras clave como búsqueda.",
+
+    "errorFindPostStatus": "No existen posts con ese estado para este usuario.",
+    "errorCeroPostPublish": "No existen posts publicados para este usuario.",
+    "errorPostNotFoundOrNotPublish": "El post no existe o no está publicado.",
+    "errorPostVisited": "Visita incrementada en 1.",
+    "errorUpdatePost": "Error al actualizar el post.",
+    "errorDeleteSoftPost": "Error al cambiar el estado del post a borrado.",
+
+    "errorCredentals": "Error de al enviar correo de verificación.",
+    
+    "errorUserNotAuth": "Usuario no autenticado.",
+    "errorUserNotFound": "Usuario no encontrado.",
+    "errorCreateUser": "Hubo un problema al crear el usuario.",
+    "errorNameUserDuplicate": "El nombre de ususario ya esta registrado.",
+    "errorDeleteUser": "Error al borrar el usuario.",
+    "errorUpdateUser": "Error al actualizar el usuario.",
+    "errorPermissionModifyUser": "No tienes permiso para modificar este usuario.",
+
+    "errorTokenOrMail": "Token inválido o correo incorrecto.",
+
+    "errorAssignRole": "Error al asignar el rol.",
+    "errorCreateRole": "Error al crear el rol.",
+    "errorChangeRoles": "No tienes permisos para cambiar roles.",
+    "errorChangeAdminRole": "No se puede cambiar el rol de un administrador.",
+    "errorChangeRoleUserAdmin": "No se puede asignar el rol de administrador a un usuario.",
+    "errorRoleNotExist": "El rol especificado no existe.",
+    "errorDeleteRole": "Error al eliminar el rol.",
+    "errorInvalidRole": "No tienes el rol adecuado.",
+
+    "errorMailSend": "Error de al enviar correo de verificación.",
+    "errorMailTime": "Tiempo de verificación excedido.",
     "errorMailVerifyDouble": "Este correo ya ha sido verificado.",
-    "errorPass1": "Las contraseñas no son iguales.",
-    "errorPass2": "Introduzca una contraseña diferente a la que ya tenía.",
-    "errorPass3": "Tiempo para actualizar la contraseña excedido.",
-    "errorPass4": "Error de al enviar correo de actualización de contraseña.",
-    "errorPass5": "Error al verificar el token para actualizar la contraseña.",
-    "errorPass6": "Error al confirmar el correo en la actualización de la contraseña.",
-    "errorPass7": "Erro al restablecer la contraseña.",
-    "coment": "HAY QUE VER MAS CASOS QUE PUEDAN DAR ERROR PARA EVALUARLOS TODOS."
+    "errorMailDuplicate": "El correo ya está registrado.",
+
+    "errorPassNotSame": "Las contraseñas no son iguales.",
+    "errorPassOldSame": "Introduzca una contraseña diferente a la que ya tenía.",
+    "errorPassTime": "Tiempo para actualizar la contraseña excedido.",
+    "errorPassSendMail": "Error al enviar correo de actualización de contraseña.",
+    "errorPassVerifyToken": "Error al verificar el token para actualizar la contraseña.",
+    "errorPassConfirmMail": "Error al confirmar el correo en la actualización de la contraseña.",
+    "errorUpdatePass": "Erro al restablecer la contraseña."
   },
   "infoMsg": {
-    "infoMail1": "Si no encuentras el correo, revisa la carpeta de spam o solicita un nuevo envío.",
-    "infoMail2": "Tu cuenta no estará activada hasta que verifiques tu correo electrónico.",
-    "infoMail3": "Introduzca su correo.",
+    "infoUserSuspended": "Este usuario ha sido suspendido.",
+    "infoCreateUser": "Usuario creado, revise su email para verificar.",
 
-    "infoPass1": "Introduce una contraseña segura con al menos 8 caracteres, una mayúscula y un número.",
-    "infoPass2": "Introduzca la nueva contraseña",
-    "infoPass3": "Repita la nueva contraseña"
+    "infoPostCreate": "Post creado con exito.",
+
+    "infoMailSend": "Correo enviado. Si no encuentras el correo, revisa la carpeta de spam o solicita un nuevo envío.",
+    "infoMailVerify": "Debes verificar tu email antes de iniciar sesión.",
+    "infoInToMail": "Introduzca su correo.",
+
+    "infoPassInstruction": "Introduce una contraseña segura con al menos 8 caracteres, una mayúscula y un número.",
+    "infoInToNewPass": "Introduzca la nueva contraseña",
+    "infoPassRepit": "Repita la nueva contraseña"
   },
   "successMsg": {
-    "successMail1": "Correo de verificación enviado con éxito, revise su bandeja de correo para confirmar.",
-    "successMail2": "Correo verificado con éxito. ¡Bienvenido, Redacta tu primer post!",
-    "successPass1": "Correo de actualización enviado con éxito, revise su bandeja de correo para cambiar su contraseña.",
-    "successPass2": "Contraseña actualizada con éxito"
+    "successRoleOk": "Rol creado.",
+    "successUpdateRole": "Rol actualizado correctamente.",
+    "successDeleteRole": "Rol eliminado correctamente.",
+    "successAssignRole": "Rol asignado con exito.",
+
+    "successCreatePost": "Post creado con éxito.",
+    "successUpdatePost": "Post actualizado correctamente.",
+    "successDeleteSoftPost": "Post cambiado a estado borrado.",
+
+    "successDeleteUser": "Usuario eliminado con exito.",
+    "successUpdateUser": "Usuario actualizado con exito.",
+
+    "successSendMail": "Correo de verificación enviado con éxito, revise su bandeja de correo para confirmar.",
+    "successVerifyMail": "Correo verificado con éxito. ¡Bienvenido, Redacta tu primer post!",
+
+    "successSendPass": "Correo de actualización enviado con éxito, revise su bandeja de correo para cambiar su contraseña.",
+    "successUpdatePass": "Contraseña actualizada con éxito"
   }
 }

@@ -1,4 +1,4 @@
-.editor{
+.editor {
     overflow: hidden;
     padding: 0;
     width: 80%;
@@ -7,20 +7,24 @@
     background-color: white;
     border-radius: 5px;
     margin: 10px auto;
+    color: black;
 }
 
-.editor-title, .categorie-dropdown{
+.editor-title,
+.categorie-dropdown {
     width: 80%;
     margin: 0 auto;
 }
 
-.editor-title > label, .categorie-dropdown > label > div > span{
+.editor-title>label,
+.categorie-dropdown>label>div>span {
     font-family: "Special Elite";
     font-size: 1.728rem;
     color: var(--grisOscuro);
 }
 
-.editor-title > input, .categorie-dropdown > label > select{
+.editor-title>input,
+.categorie-dropdown>label>select {
     font-family: Helvetica, sans-serif;
     font-size: 1.2rem;
     color: black;
@@ -31,35 +35,35 @@
     border: 1px solid black;
 }
 
-.categorie-dropdown > label > select{
+.categorie-dropdown>label>select {
     width: 200px;
 }
 
-.yoopta-editor{
+.yoopta-editor {
     box-sizing: border-box;
     width: calc(100% - 100px) !important;
     margin: 0px 50px;
     padding: 20px 0 !important;
 }
 
-.editor-btns{
+.editor-btns {
     margin: 0 auto;
     width: 80%;
     display: flex;
     justify-content: center;
 }
 
-.editor-btns > .btn{
+.editor-btns>.btn {
     font-family: var(--font-family);
     color: white;
     background-color: #353b3c !important;
 }
 
-.editor-btns .btn:first-of-type{
+.editor-btns .btn:first-of-type {
     background-color: #846a6a !important;
 }
 
-.post-preview{
+.post-preview {
     width: 80%;
     margin: 0 auto;
 }

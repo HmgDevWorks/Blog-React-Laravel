@@ -145,7 +145,11 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
   const deserializeHTML = useCallback((htmlString) => {
     if (!htmlString) return [];
     try {
-      return html.deserialize(editor, htmlString);
+      const originalConsoleLog = console.log; // Guardamos el log original
+      console.log = () => { }; // Silenciamos los logs
+      const content = html.deserialize(editor, htmlString);
+      console.log = originalConsoleLog; // Restauramos console.log
+      return content;
     } catch (error) {
       console.error('Error deserializing HTML:', error);
       return [];
