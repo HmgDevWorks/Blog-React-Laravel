@@ -61,15 +61,15 @@ public function store(Request $request)
             $user->assignRole('reader');
             Mail::to($user->email_user)->send(new CustomEmailVerification($user)); //envia mail para confirmar la cuenta
         } catch (\Exception $e) {
-            return response()->json(["mensaje" => "Error al asignar el rol", 400]);
+            return response()->json(["message" => "errorMsg.errorRole", 400]);
         }
 
         return response()->json([
-            'message' => "Usuario creado, revise su email para verificar",
+            'message' => "infoMsg.infoCreateUser",
             'user' => $user
         ], 201);
     }
 
-    return response()->json(['message' => 'Hubo un problema al crear el usuario.'], 500);
+    return response()->json(['message' => 'errorMsg.errorCreateUser'], 500);
 }
 }
