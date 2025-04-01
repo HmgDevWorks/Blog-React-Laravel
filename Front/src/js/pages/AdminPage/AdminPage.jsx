@@ -13,7 +13,14 @@ const AdminPage = () => {
   useEffect(() => {
     userService.getUsers()
       .then(({ data }) => {
-        setUsers(data);
+        // Ordena los usuarios alfabéticamente por el nombre
+        const sortedUsers = data.sort((a, b) => 
+          a.name_user.localeCompare(b.name_user)
+        );
+        setUsers(sortedUsers);
+      })
+      .catch(error => {
+        console.error('Error al obtener los usuarios:', error);
       });
   }, []);
 
