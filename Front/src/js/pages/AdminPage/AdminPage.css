@@ -1,9 +1,9 @@
 :root {
-    --grisClaro: #eef0f2;
-    --grisMeio: #c6c7c4;
-    --saturadoClaro: #a2999e;
-    --saturadoOscuro: #846a6a;
-    --grisOscuro: #353b3c;
+  --grisClaro: #eef0f2;
+  --grisMeio: #c6c7c4;
+  --saturadoClaro: #a2999e;
+  --saturadoOscuro: #846a6a;
+  --grisOscuro: #353b3c;
 }
 
 .admin-users {
@@ -11,18 +11,19 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  overflow-y: auto; /* Permite el desplazamiento si el contenido excede la altura máxima */
+  overflow-y: auto;
+  /* Permite el desplazamiento si el contenido excede la altura máxima */
 }
 
 .Titulo_Admin_Page {
-    color: var(--saturadoOscuro);
-    padding: 20px;
-    text-align: center;
-    font-size: 1.728rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Abril Fatface", serif !important;
+  color: var(--saturadoOscuro);
+  padding: 20px;
+  text-align: center;
+  font-size: 1.728rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Abril Fatface", serif !important;
 }
 
 .admin-page-container {

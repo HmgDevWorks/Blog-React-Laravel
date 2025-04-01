@@ -1,0 +1,4 @@
+.botonActivo {
+    background-color: var(--grisClaro);
+    color: var(--grisOscuro);
+}

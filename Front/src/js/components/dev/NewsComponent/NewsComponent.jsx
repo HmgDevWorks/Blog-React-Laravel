@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
-import "./NewsPage.css";
-import postService from '../../services/postService';
-import Loader from '../../components/dev/Loader/Loader';
-import PostDetails from '../../components/dev/PostDetails/PostDetails';
+import "./NewsComponent.css";
+import postService from '../../../services/postService';
+import Loader from '../Loader/Loader';
+import PostDetails from '../PostDetails/PostDetails';
 import { Link, redirect } from 'react-router-dom';
-import { useAlert } from "../../bootstrap/contexts/AlertContext";
+import { useAlert } from "../../../bootstrap/contexts/AlertContext";
 import { useTranslation } from 'react-i18next';
+import FavToggle from '../FavToggle/FavToggle';
+import { useContext } from 'react';
+import { AuthContext } from '../../../bootstrap/contexts/AuthContext';
 
-const NewsPage = () => {
+const NewsComponent = () => {
   const { t } = useTranslation();
   const { addError, addSuccess } = useAlert();
-
+  const { loggedUser } = useContext(AuthContext)
   const [newsItems, setNewsItems] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0); // Estado para controlar el índice del slide actual
 
@@ -44,7 +47,7 @@ const NewsPage = () => {
   return (
     // <div className='mb-4 mt-4 novedades-page'>
     <><h1 className='novedades'>{t("news.title")}</h1>
-      <div className="carousel w-full carousel-news mx-auto relative">
+      <div className="carousel w-full carousel-news  mx-auto relative">
         {newsItems && newsItems.length > 0 ? (
           newsItems.map((item, index) => (
 
@@ -52,11 +55,14 @@ const NewsPage = () => {
             <div
               key={item.id}
               id={`slide${item.id}`}
-              className={`carousel-item relative w-full ${index === currentSlide ? 'block' : 'hidden'}`}
+              className={`carousel-item relative w-full  ${index === currentSlide ? 'block' : 'hidden'}`}
             >
               <Link key={item.id} to={`/detallesBlog/${item.id}`}>
                 <PostDetails className="w-full" blog={item} />
               </Link>
+              <div className='pb-4'>
+                {loggedUser && <FavToggle fav={item.isFav} id={item.id} />}
+              </div>
             </div>
 
           ))
@@ -78,4 +84,4 @@ const NewsPage = () => {
 };
 
 
-export default NewsPage;
+export default NewsComponent;

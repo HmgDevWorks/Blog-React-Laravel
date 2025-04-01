@@ -21,7 +21,9 @@ class PostService extends BaseService {
     createPost(data) {
         return this.api.post('/store', data)
     }
-
+    // // getPostByTitle(title) {
+    //     return this.api.get(`/search/${title}`)
+    // }
     getLastTenPost() {
         return this.api.get('/news')
     }
