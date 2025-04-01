@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Services\PostService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -95,15 +96,15 @@ class PostController extends Controller
         $search = $request->input('search');
 
         if (!$search || strlen($search) < 2) {
-            return response()->json(["message" => "errorMsg.errorSearchCharacters"], 400);
+            return response()->json(["error" => "La búsqueda debe tener al menos 2 caracteres"], 400);
         }
 
-        $posts = Post::where('status', 'published') //funcion waparda para una barra de busqueda que filtra con el request que pasamos "search" y devuelve todos los post
-            ->where(function ($query) use ($search) {
-                $query->where('title', 'like', "%$search%")
-                    ->orWhere('content', 'like', "%$search%");
-            })
-            ->get();
+        $posts = Post::where('status', 'published') // Función waparda para la barra de búsqueda que filtra con el request "search"
+        ->where('title', 'like', "%$search%")
+        ->select('id', 'title', 'views', 'user_id','id_categories') 
+        ->with('author:id,name_user') // Cargamos la relación author solo con id y name_user y la de categories para que nos salga tanto el name user como la categoria
+        ->with('categories:id,name')
+        ->get();
 
         if ($posts->isEmpty()) {
             //return response()->json(["message" => "No existen posts con '$search' como búsqueda"], 200);
@@ -111,7 +112,7 @@ class PostController extends Controller
 
         }
 
-        return response()->json(['posts' => $posts]);
+        return response()->json(['posts' => $posts]); //solo titulo views  id author y aparte hacer otro searchuser -> name_user id cuantos post tiene, otra funcion que busque los 10 autores con mas visitas y que categoria con mas visitas/posts id views nombre total count img_user
     }
 
     // public function searchAuthors(Request $request){//controlador para la barra de busqueda, para buscar autores
