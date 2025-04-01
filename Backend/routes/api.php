@@ -21,6 +21,7 @@ use App\Models\User;
 use App\Mail\CustomEmailVerification;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\UploadController;
 
 
 // Route::get('/user', function (Request $request) {
@@ -47,6 +48,8 @@ Route::get('/newsletter/generate', [NewsletterController::class, 'generate']); /
 
 Route::middleware('auth:api')->get('/verify-token', [AuthController::class, 'verifyToken']);
 Route::middleware('auth:api')->post('/refresh-token', [AuthController::class, 'refreshToken']);
+Route::post('/upload', [UploadController::class, 'uploadImage'])->middleware([JwtMiddleware::class])->middleware('role:admin|editor'); //ruta para subir img al post
+Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->middleware([JwtMiddleware::class])->middleware('role:admin|editor'); //ruta para cambiar la imagen de perfil
 
 Route::middleware('auth:api')->get('/verify-token', function (Request $request) {
     $user = $request->user();
@@ -109,7 +112,7 @@ Route::controller(PostController::class)->middleware([JwtMiddleware::class])->gr
     Route::get('/posts/posts-overview/{userId}', 'getUserPostsOverview')->middleware('role:admin|editor|reader');      // Devuelve las estadísticas para el Dashboard
     Route::post('/posts/store', 'store')->name('posts.store')->middleware('role:admin|editor'); //Crea un post
     Route::put('/posts/update/{post}', 'update')->name('posts.update')->middleware('role:admin|editor'); //Actualiza Post
-    Route::delete('/posts/destroy/{post}', 'destroy')->name('posts.destroy'); //->middleware('role:admin|editor'); //Borra
+    Route::delete('/posts/destroy/{post}', 'destroy')->name('posts.destroy')->middleware('role:admin|editor'); //Borra
 });
 
 Route::controller(FavoritesController::class)->middleware([JwtMiddleware::class])->group(function () {

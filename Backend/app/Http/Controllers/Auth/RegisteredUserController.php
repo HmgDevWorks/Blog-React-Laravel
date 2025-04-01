@@ -40,14 +40,14 @@ public function store(Request $request)
         return response()->json(['errors' => $validator->errors()], 422);
     }
 
-    $imgPath = 'avatars/default.png'; 
+    // $imgPath = 'avatars/default.png'; //se comenta por que vamos a utilizar cloudinary en vez de el sistema de gestion de laravel
 
-    if ($request->hasFile('img_user') && $request->file('img_user')->isValid()) {
-        $image = $request->file('img_user');
-        $imageName = time() . '.' . $image->extension(); // Genera un nombre único
-        $image->move(public_path('avatars'), $imageName); // Guarda la imagen en public/avatars
-        $imgPath = 'avatars/' . $imageName; // Ruta de la imagen en la base de datos
-    }
+    // if ($request->hasFile('img_user') && $request->file('img_user')->isValid()) {
+    //     $image = $request->file('img_user');
+    //     $imageName = time() . '.' . $image->extension(); // Genera un nombre único
+    //     $image->move(public_path('avatars'), $imageName); // Guarda la imagen en public/avatars
+    //     $imgPath = 'avatars/' . $imageName; // Ruta de la imagen en la base de datos
+    // }
 
     $user = User::create([
         'name_user' => $request->input('name_user'),
