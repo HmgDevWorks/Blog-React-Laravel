@@ -1,9 +1,9 @@
 import BaseService from './baseService';
 
-class ServicioCategorias extends BaseService {
+class categoriesServices extends BaseService {
 
     constructor() {
-super("categories/");
+        super("categories/");
     }
 
     getCategorias() {
@@ -15,10 +15,10 @@ super("categories/");
         return this.api.get(`/show/${category_id}`)
     }
 
-    gerPostForCategory(name) {
+    getPostForCategory(name) {
         return this.api.get(`/posts/${name}`)
     }
-    
+
     createCategoria(data) {
         return this.api.post('/', data)
     }
@@ -31,7 +31,7 @@ super("categories/");
     }
 
 }
-const servicioCategorias = new ServicioCategorias();
+const CategoriesServices = new categoriesServices();
 
 
-export default servicioCategorias;
+export default CategoriesServices;

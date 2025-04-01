@@ -15,7 +15,7 @@ class Post extends Model
 
     protected $appends = ['category_name','isFav','author_name'];
 
-    protected $hidden = ['categories'];  //se utiliza para poder ocultar en el json cosas del campo category
+    protected $hidden = ['categories', 'author'];  //se utiliza para poder ocultar en el json cosas del campo category
 
     public function getIsFavAttribute()
     {

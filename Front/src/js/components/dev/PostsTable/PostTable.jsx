@@ -54,17 +54,17 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
             return (
               <tr
                 key={index}
-                onClick={() => navigate(`/postDetails/${item.id}`)}
+                onClick={() => navigate(`/postDetails/${item.post.id}`)}
               >
                 <th>{totalIndex}</th>
-                <td>{item.title}</td>
+                <td>{item.post.title}</td>
                 <td>{formatDate(item.created_at)}</td>
                 {/* <td>{item.content.length > 50 ? item.content.substring(0, 50) + "..." : item.content}</td> */}
-                <td>{item.views}</td>
+                <td>{item.post.views}</td>
                 <td>
                   <FavToggle
-                    fav={item.isFav}
-                    id={item.id}
+                    fav={item.post.isFav}
+                    id={item.post.id}
                   />
                 </td>
               </tr>

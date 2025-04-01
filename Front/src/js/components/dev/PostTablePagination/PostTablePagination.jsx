@@ -13,13 +13,13 @@ export default function PostTablePagination({ filter, id = 0 }) { //, search = "
     useEffect(() => {
         const fetchPosts = () => {
             let postPromise;
-
+            console.log(loggedUser)
             // if (search !== "") {
             //     postPromise = postService.getPosts();
             // } else {
             switch (filter) {
                 case 'favs':
-                    postPromise = favService.getUserFavs();
+                    postPromise = favService.getFavById(loggedUser.id);
                     break;
                 case 'published':
                     postPromise = postService.getPosts(); //loggedUser.id
@@ -38,7 +38,8 @@ export default function PostTablePagination({ filter, id = 0 }) { //, search = "
 
             postPromise
                 .then(({ data }) => {
-                    setPosts(data);
+                    setPosts(data.original);
+                    console.log(data.original)
                 })
                 .catch(error => {
                     console.error("Error fetching posts:", error);

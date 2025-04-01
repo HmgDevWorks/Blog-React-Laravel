@@ -19,7 +19,7 @@
     font-family: var(--font);
 }
 
-.login-form{
+.login-form {
     width: 40%;
     max-width: 600px;
     /* min-width: 360px; */
@@ -35,7 +35,7 @@
     background-color: var(--form-bg-color);
 }
 
-.login-img-container{
+.login-img-container {
     width: 100%;
     padding: 10px;
     display: flex;
@@ -43,13 +43,13 @@
     background-color: var(--header-bg-color);
 }
 
-.login-img-container img{
+.login-img-container img {
     width: 50px;
     height: 50px;
     object-fit: cover;
 }
 
-.login-img-container h1{
+.login-img-container h1 {
     font-family: var(--font-header);
     font-size: 2rem;
     color: var(--header-text-color);
@@ -63,12 +63,13 @@
     flex-direction: column;
 }
 
-.login-form-label{
+.login-form-label {
     font-size: var(--input-font-size);
     color: var(--input-font-color);
 }
 
-.login-form-input, .form-checkbox{
+.login-form-input,
+.form-checkbox {
     background-color: var(--input-bg-color);
     font-size: 1rem;
     /* font-size: var(--input-font-size); */
@@ -78,30 +79,33 @@
 button {
     cursor: pointer;
 }
-.submit-btn{
+
+.submit-btn {
     font-size: var(--btn-font-size);
     background-color: var(--btn-bg-color);
     align-self: flex-end;
 }
 
-.login-divider{
+.login-divider {
     background-color: var(--hr-color);
 }
 
-.bottom-text{
+.bottom-text {
     text-align: center;
     color: var(--p-color);
     font-size: var(--p-font-size);
 }
-.bottom-text>button{
+
+.bottom-text>button {
     color: var(--btn-bg-color);
 }
 
-.forgot-text{
+.forgot-text {
     color: var(--p-color);
     font-size: var(--p-font-size);
 }
-.forgot-text>button{
+
+.forgot-text>button {
     color: var(--btn-bg-color);
 }
 

@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 42381f0ddc4ce0b3304b32a761217f12e25d0fcc
 
 class UploadController extends Controller
 {

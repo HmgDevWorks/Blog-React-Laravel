@@ -1,11 +1,3 @@
-:root {
-    --grisClaro: #eef0f2;
-    --grisMedio: #c6c7c4;
-    --saturadoClaro: #a2999e;
-    --saturadoOscuro: #846a6a;
-    --grisOscuro: #353b3c;
-}
-
 .novedades-page {
     display: flex;
     flex-direction: column;
@@ -21,6 +13,7 @@
     font-size: 3rem;
     color: var(--saturadoOscuro);
     font-weight: bold;
+    background-color: var(--grisOscuro);
 }
 
 .carousel-news {
@@ -45,7 +38,7 @@
 .botones-novedades {
     position: absolute !important;
     width: 100%;
-    /* margin-left: 15vw; */
+    padding-left: 5px;
 }
 
 .carousel-item-news {

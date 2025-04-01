@@ -3,6 +3,7 @@ import AdminUserItem from "../../components/dev/AdminUserItem/AdminUserItem";
 import './AdminPage.css'; // Importa el archivo CSS
 import userService from '../../services/userService';
 import { useTranslation } from 'react-i18next';
+import PaginationComponent from '../../components/dev/PaginationComponent/PaginationComponent';
 
 const AdminPage = () => {
   const { t } = useTranslation();
@@ -50,21 +51,9 @@ const AdminPage = () => {
           />
         ))}
       </div>
-      {pageCount > 1 && (
-        <div className="flex justify-center mt-4">
-          <div className="join">
-            {Array.from({ length: pageCount }, (_, i) => (
-              <button
-                key={i}
-                className={`join-item btn ${currentPage === i + 1 ? 'btn-active' : ''}`}
-                onClick={() => handlePageChange(i + 1)}
-              >
-                {i + 1}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+      <PaginationComponent pageCount={pageCount} currentPage={currentPage} handlePageChange={handlePageChange} />
+
+
     </div>
   );
 };

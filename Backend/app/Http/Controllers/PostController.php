@@ -171,4 +171,12 @@ class PostController extends Controller
 
         return response()->json(['posts' => $posts]);
     }
+
+    public function getPostsForAdminbyId($id)
+    {
+        $user = User::findOrFail($id);
+        $posts = Post::where('user_id', $user->id)->get();
+
+        return response()->json(['posts' => $posts]);
+    }
 }
