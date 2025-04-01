@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Models\Categories;
 use App\Models\Post;
 use App\Models\User;
 use App\Services\PostService;
@@ -112,62 +113,40 @@ class PostController extends Controller
         }
 
         return response()->json(['posts' => $posts]);
-    }
-
-    // public function searchAuthors(Request $request){//controlador para la barra de busqueda, para buscar autores
-    //     $search = $request->input('search');
-
-    //     if (!$search || strlen($search) < 2) {
-    //         return response()->json(["message" => "errorMsg.errorSearchCharacters"], 400);
-    //     }
-
-    //     $posts = Post::where('status', 'published') //funcion waparda para una barra de busqueda que filtra con el request que pasamos "search" y devuelve todos los post
-    //     ->where(function ($query) use ($search) {
-    //         $query->where('title', 'like', "%$search%")
-    //             ->orWhere('content', 'like', "%$search%");
-    //     })
-    //     ->get();
-
-
-    // } 
+    } 
 
     public function searchAuthors(Request $request)
     {
         $search = $request->input('search');
-    
-        $authors = User::whereHas('posts', function ($query) { // Utilizamos la función para buscar autores que hayan publicado algún post
 
-                $query->where('status', 'published');
-            })
+        $authors = User::whereHas('posts', function ($query) { // Utilizamos la función para buscar autores que hayan publicado algún post
+                $query->where('status', 'published');})
             ->when($search, function ($query) use ($search) {
-                $query->where('name', 'LIKE', "%$search%");
-            })
-            ->select('id', 'name') // Solo ID y Nombre
+                $query->where('name_user', 'LIKE', "%$search%");})
+            ->select('id', 'name_user') 
             ->get();
     
-        foreach ($authors as $author) {  // Utilizamos la función para calcular las visitas totales de cada autor y la categoria mas usada 
-            $posts = Post::where('user_id', $author->id)
-                ->where('status', 'published')
-                ->get();
+            foreach ($authors as $author) {  // Utilizamos la función para calcular las visitas totales de cada autor y la categoria mas usada 
+                $posts = Post::where('user_id', $author->id)
+                    ->where('status', 'published')
+                    ->get();
+        
+                $author->total_visits = $posts->sum('views');  // visitas totales
     
-            $author->total_visits = $posts->sum('views');  // visitas totales
-
-    
-            $mostUsedCategory = $posts->groupBy('category_id') // Categoría más usada
+                $mostUsedCategoryId = $posts->groupBy('id_categories')
                 ->sortByDesc(fn ($posts) => count($posts))
                 ->keys()
                 ->first();
-    
-            $author->most_used_category = $mostUsedCategory ?? null;
-        }
+            
+                $mostUsedCategoryName = $mostUsedCategoryId  
+                    ? Categories::where('id', $mostUsedCategoryId)->value('name')  
+                    : null;
+                
+                $author->most_used_category = $mostUsedCategoryName;
+            }
     
         return response()->json($authors);
     }
-    
-
-
-
-
 
 
     public function getUserPostsOverview($userId): JsonResponse // Obtenemos los post ordenados por visitas y su porcentaje, también los posts agrupados por mes y por último obtenemos posts agrupados por mes y sus visitas
