@@ -98,5 +98,60 @@
     "saveBtn": "Guardar",
     "deleteBtn": "Borrar",
     "chooseCat": "Elige una categoria" 
+  },
+
+
+  "errorMsg":{
+    "errorCredentals": "Error de al enviar correo de verificación.",
+
+    "errorUserNotFound": "Usuario no encontrado.",
+    "errorCreateUser": "Hubo un problema al crear el usuario.",
+
+    "errorTokenOrMail": "Token inválido o correo incorrecto.",
+
+    "errorAssignRole": "Error al asignar el rol.",
+    "errorCreateRole": "Error al crear el rol.",
+    "errorChangeRoles": "No tienes permisos para cambiar roles.",
+    "errorChangeAdminRole": "No se puede cambiar el rol de un administrador.",
+    "errorRoleNotExist": "El rol especificado no existe.",
+    "errorDeleteRole": "Error al eliminar el rol.",
+
+    "errorMailSend": "Error de al enviar correo de verificación.",
+    "errorMailTime": "Tiempo de verificación excedido.",
+    "errorMailVerifyDouble": "Este correo ya ha sido verificado.",
+
+    "errorPassNotSame": "Las contraseñas no son iguales.",
+    "errorPassOldSame": "Introduzca una contraseña diferente a la que ya tenía.",
+    "errorPassTime": "Tiempo para actualizar la contraseña excedido.",
+    "errorPassSendMail": "Error al enviar correo de actualización de contraseña.",
+    "errorPassVerifyToken": "Error al verificar el token para actualizar la contraseña.",
+    "errorPassConfirmMail": "Error al confirmar el correo en la actualización de la contraseña.",
+    "errorUpdatePass": "Erro al restablecer la contraseña."
+  },
+  "infoMsg": {
+    "infoUserSuspended": "Este usuario ha sido suspendido.",
+    "infoCreateUser": "Usuario creado, revise su email para verificar.",
+
+    "infoPostCreate": "Post creado con exito.",
+
+    "infoMailSend": "Correo enviado. Si no encuentras el correo, revisa la carpeta de spam o solicita un nuevo envío.",
+    "infoMailVerify": "Debes verificar tu email antes de iniciar sesión.",
+    "infoInToMail": "Introduzca su correo.",
+
+    "infoPassInstruction": "Introduce una contraseña segura con al menos 8 caracteres, una mayúscula y un número.",
+    "infoInToNewPass": "Introduzca la nueva contraseña",
+    "infoPassRepit": "Repita la nueva contraseña"
+  },
+  "successMsg": {
+    "successRoleOk": "Rol creado.",
+    "successUpdateRole": "Rol actualizado correctamente.",
+    "successDeleteRole": "Rol eliminado correctamente.",
+
+
+    "successSendMail": "Correo de verificación enviado con éxito, revise su bandeja de correo para confirmar.",
+    "successVerifyMail": "Correo verificado con éxito. ¡Bienvenido, Redacta tu primer post!",
+
+    "successSendPass": "Correo de actualización enviado con éxito, revise su bandeja de correo para cambiar su contraseña.",
+    "successUpdatePass": "Contraseña actualizada con éxito"
   }
 }

@@ -98,5 +98,35 @@
     "saveBtn": "Save",
     "deleteBtn": "Delete",
     "chooseCat": "Choose a category"
+  },
+
+  
+  "errorMsg": {
+    "errorMailSend": "Error sending verification email.",
+    "errorMailTime": "Verification time exceeded.",
+    "errorMailVerifyDouble": "This email has already been verified.",
+    
+    "errorPassNotSame": "Passwords do not match.",
+    "errorPassOldSame": "Please enter a password different from your current one.",
+    "errorPassTime": "Password update time exceeded.",
+    "errorPassSendMail": "Error sending password update email.",
+    "errorPassVerifyToken": "Error verifying token for password update.",
+    "errorPassConfirmMail": "Error confirming email for password update.",
+    "errorUpdatePass": "Error resetting password."
+  },
+  "infoMsg": {
+    "infoMailFind": "If you can't find the email, check your spam folder or request a new one.",
+    "infoMailVerify": "Your account won't be activated until you verify your email.",
+    "infoInToMail": "Enter your email.",
+    "infoPassInstruction": "Enter a secure password with at least 8 characters, one uppercase letter, and one number.",
+    "infoInToNewPass": "Enter the new password",
+    "infoPassRepit": "Repeat the new password"
+  },
+  "successMsg": {
+    "successSendMail": "Verification email sent successfully, check your inbox to confirm.",
+    "successVerifyMail": "Email verified successfully. Welcome, Write your first post!",
+    "successSendPass": "Update email sent successfully, check your inbox to change your password.",
+    "successUpdatePass": "Password updated successfully"
   }
+
 }
