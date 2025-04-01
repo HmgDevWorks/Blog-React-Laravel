@@ -101,7 +101,7 @@ Route::controller(PermissionController::class)->middleware([JwtMiddleware::class
 Route::controller(PostController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/posts', 'index')->name('posts.index')->middleware('role:admin|editor|reader'); // enseña los 10 últimos
     Route::get('/posts/{id}','getPublishedPostById')->name('posts.getPublishedPostById')->middleware('role:admin|editor|reader');//enseña los posts published de un user
-    Route::get('/posts/status','getPublishedOrDraftOrDeletedPosts')->name('posts.getPublishedOrDraftOrDeletedPosts')->middleware('role:admin|editor|reader');//elige y enseña los posts published draft o deleted del user auth
+    Route::get('/posts/status','getPostsByStatus')->name('posts.getPostsByStatus')->middleware('role:admin|editor|reader');//elige y enseña los posts published draft o deleted del user auth
     Route::get('/posts/show', 'show')->middleware('role:admin|editor|reader'); // Enseña todos los posts
     Route::get('/posts/show/{post}', 'getPostById')->middleware('role:admin|editor|reader'); // Enseña un post por un id
     Route::get('/posts/user/{id}', 'postUser')->middleware('role:admin|editor|reader');    //Enseña los post a traves del id del usuario

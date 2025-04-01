@@ -150,23 +150,25 @@ class PostController extends Controller
         return response()->json(['posts' => $posts]);
     }
 
-    public function getPublishedOrDraftOrDeletedPosts(Request $request)
+    public function getPostsByStatus(Request $request):JsonResponse
     {
         $user = auth()->user();
-        $status = $request->input('status'); // Obtiene el estado desde el front, status en el json
-
-        if (!in_array($status, ['published', 'draft', 'deleted'])) {
-            return response()->json(["error" => "No existen post con ese status"], 400);
+        if (!$user) {
+            return response()->json(["error" => "No estás autenticado"], 401);
         }
-
+    
+        $status = trim(strtolower($request->input('status')));
+        dd($status, $user->id);
+        
+        // Verifica si hay posts con el estado publicado
         $posts = Post::where('user_id', $user->id)
             ->where('status', $status)
             ->get();
-
+    
         if ($posts->isEmpty()) {
-            return response()->json(["mensaje" => "No tienes posts en este estado"], 200);
+            return response()->json(["error" => "No existen posts con ese estado para este usuario"], 404);
         }
-
-        return response()->json(['posts' => $posts]);
+    
+        return response()->json(['posts' => $posts], 200);
     }
 }
