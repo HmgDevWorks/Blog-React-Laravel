@@ -95,7 +95,7 @@ class PostController extends Controller
         $search = $request->input('search');
 
         if (!$search || strlen($search) < 4) {
-            return response()->json(["error" => "La búsqueda debe tener al menos 4 caracteres"], 400);
+            return response()->json(["message" => "errorMsg.errorSearchCharacters"], 400);
         }
 
         $posts = Post::where('status', 'published') //funcion waparda para una barra de busqueda que filtra con el request que pasamos "search" y devuelve todos los post
@@ -106,7 +106,9 @@ class PostController extends Controller
             ->get();
 
         if ($posts->isEmpty()) {
-            return response()->json(["mensaje" => "No existen posts con '$search' como búsqueda"], 200);
+            //return response()->json(["message" => "No existen posts con '$search' como búsqueda"], 200);
+            return response()->json(["message" => "errorMsg.errorFindSearch"], 200);
+
         }
 
         return response()->json(['posts' => $posts]);
@@ -141,7 +143,7 @@ class PostController extends Controller
     {
         $user = auth()->user();
         if (!$user) {
-            return response()->json(["error" => "No estás autenticado"], 401);
+            return response()->json(["message" => "errorMsg.errorUserNotAuth"], 401);
         }
     
         $status = trim(strtolower($request->input('status')));
@@ -151,7 +153,7 @@ class PostController extends Controller
             ->get();
     
         if ($posts->isEmpty()) {
-            return response()->json(["error" => "No existen posts con ese estado para este usuario"], 404);
+            return response()->json(["message" => "errorMsg.errorFindPostStatus"], 404);
         }
     
         return response()->json(['posts' => $posts], 200);
@@ -164,7 +166,7 @@ class PostController extends Controller
             ->get();
 
         if ($posts->isEmpty()) {
-            return response()->json(["error" => "No existen posts publicados para este usuario"], 200);
+            return response()->json(["message" => "errorMsg.errorCeroPostPublish"], 200);
         }
 
         return response()->json(['posts' => $posts]);

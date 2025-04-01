@@ -102,10 +102,25 @@
 
 
   "errorMsg":{
-    "errorCredentals": "Error de al enviar correo de verificación.",
+    "errorSearchCharacters": "La búsqueda debe tener al menos 4 caracteres.",
+    "errorFindSearch": "No existen posts con esas palabras clave como búsqueda.",
 
+    "errorFindPostStatus": "No existen posts con ese estado para este usuario.",
+    "errorCeroPostPublish": "No existen posts publicados para este usuario.",
+    "errorPostNotFoundOrNotPublish": "El post no existe o no está publicado.",
+    "errorPostVisited": "Visita incrementada en 1.",
+    "errorUpdatePost": "Error al actualizar el post.",
+    "errorDeleteSoftPost": "Error al cambiar el estado del post a borrado.",
+
+    "errorCredentals": "Error de al enviar correo de verificación.",
+    
+    "errorUserNotAuth": "Usuario no autenticado.",
     "errorUserNotFound": "Usuario no encontrado.",
     "errorCreateUser": "Hubo un problema al crear el usuario.",
+    "errorNameUserDuplicate": "El nombre de ususario ya esta registrado.",
+    "errorDeleteUser": "Error al borrar el usuario.",
+    "errorUpdateUser": "Error al actualizar el usuario.",
+    "errorPermissionModifyUser": "No tienes permiso para modificar este usuario.",
 
     "errorTokenOrMail": "Token inválido o correo incorrecto.",
 
@@ -113,12 +128,15 @@
     "errorCreateRole": "Error al crear el rol.",
     "errorChangeRoles": "No tienes permisos para cambiar roles.",
     "errorChangeAdminRole": "No se puede cambiar el rol de un administrador.",
+    "errorChangeRoleUserAdmin": "No se puede asignar el rol de administrador a un usuario.",
     "errorRoleNotExist": "El rol especificado no existe.",
     "errorDeleteRole": "Error al eliminar el rol.",
+    "errorInvalidRole": "No tienes el rol adecuado.",
 
     "errorMailSend": "Error de al enviar correo de verificación.",
     "errorMailTime": "Tiempo de verificación excedido.",
     "errorMailVerifyDouble": "Este correo ya ha sido verificado.",
+    "errorMailDuplicate": "El correo ya está registrado.",
 
     "errorPassNotSame": "Las contraseñas no son iguales.",
     "errorPassOldSame": "Introduzca una contraseña diferente a la que ya tenía.",
@@ -146,7 +164,14 @@
     "successRoleOk": "Rol creado.",
     "successUpdateRole": "Rol actualizado correctamente.",
     "successDeleteRole": "Rol eliminado correctamente.",
+    "successAssignRole": "Rol asignado con exito.",
 
+    "successCreatePost": "Post creado con éxito.",
+    "successUpdatePost": "Post actualizado correctamente.",
+    "successDeleteSoftPost": "Post cambiado a estado borrado.",
+
+    "successDeleteUser": "Usuario eliminado con exito.",
+    "successUpdateUser": "Usuario actualizado con exito.",
 
     "successSendMail": "Correo de verificación enviado con éxito, revise su bandeja de correo para confirmar.",
     "successVerifyMail": "Correo verificado con éxito. ¡Bienvenido, Redacta tu primer post!",
