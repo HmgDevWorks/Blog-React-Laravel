@@ -94,22 +94,22 @@ class UserService
             return response()->json(["mensaje" => "No tienes permiso para modificar este usuario"], 403);
         }
     
-        $data = $request->only(['name_user', 'email_user', 'bio', 'img_user']);
+        $data = $request->only(['name_user', 'email_user', 'bio']);
     
-        if ($request->hasFile('img_user')) { // comprueba si hay cambios en la imagen 
-            $image = $request->file('img_user');
-            $imageName = time() . '.' . $image->extension();
-            $image->move(public_path('avatars'), $imageName);
+        // if ($request->hasFile('img_user')) { // comprueba si hay cambios en la imagen 
+        //     $image = $request->file('img_user');
+        //     $imageName = time() . '.' . $image->extension();
+        //     $image->move(public_path('avatars'), $imageName);
     
-            if ($user->img_user && $user->img_user !== 'avatars/default.png') { // elimina la imagen anterior si es diferente de la predeterminada
-                $oldImagePath = public_path($user->img_user);
-                if (file_exists($oldImagePath)) {
-                    unlink($oldImagePath);
-                }
-            }
+        //     if ($user->img_user && $user->img_user !== 'avatars/default.png') { // elimina la imagen anterior si es diferente de la predeterminada
+        //         $oldImagePath = public_path($user->img_user);
+        //         if (file_exists($oldImagePath)) {
+        //             unlink($oldImagePath);
+        //         }
+        //     }
     
-            $data['img_user'] = 'avatars/' . $imageName;
-        }
+        //     $data['img_user'] = 'avatars/' . $imageName;
+        // }
     
         $data = array_filter($data); // Esto eliminará campos vacíos
         $user->update($data);
