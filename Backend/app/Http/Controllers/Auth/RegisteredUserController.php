@@ -32,6 +32,7 @@ public function store(Request $request)
         'name_user' => ['required', 'string', 'max:255'],
         'email_user' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
         'password_user' => ['required', 'confirmed', Rules\Password::min(6)], 
+        'name_lastName'=>['required','string', 'max:255'],
         'img_user' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
     ]);
 

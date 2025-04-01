@@ -75,6 +75,13 @@ export default function LoginForm() {
                     setRegistrationComplete(true);
                     setSuccessMsg('Se ha enviado un email de confirmación a tu dirección de correo electrónico.');
                 }
+                setJWT(data.authToken);
+                authenticateUser()
+                setSuccessMsg('Credenciales correctas, serás redirigido en unos segundos.');
+
+            }).then(() => {
+
+                navigate('/')
             })
             .catch(error => {
                 console.log(error);
