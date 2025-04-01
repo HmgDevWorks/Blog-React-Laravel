@@ -45,6 +45,7 @@ Route::get('/stats/counter', [PostController::class, 'getStatsForCounter']); //s
 Route::get('/categories/{data}', [CategoriesController::class, 'showCategoriesByName']); //muestra el nombre de las categorias
 Route::get('/posts/news', [PostController::class, 'getTenNewsPost']);
 Route::get('/newsletter/generate', [NewsletterController::class, 'generate']); //ruta para probar que la newsletter se envia y que envia todo bene
+Route::get('/popular-users', [PostController::class, 'searchPopuUser']);
 
 Route::middleware('auth:api')->get('/verify-token', [AuthController::class, 'verifyToken']);
 Route::middleware('auth:api')->post('/refresh-token', [AuthController::class, 'refreshToken']);
@@ -111,7 +112,8 @@ Route::controller(PostController::class)->middleware([JwtMiddleware::class])->gr
     Route::get('/posts/all', 'show')->name('posts.show')->middleware('role:admin|editor|reader'); // Enseña todos los posts (URL modificada)
     Route::get('/posts/show/{post}', 'getPostById')->middleware('role:admin|editor|reader'); // Enseña un post por un id
     Route::get('/posts/user/{id}', 'postUser')->middleware('role:admin|editor|reader');     //Enseña los post a traves del id del usuario
-    Route::get('/posts/searchPosts', 'searchPosts')->middleware('role:admin|editor|reader');      //Ruta para buscar posts BARRA DE BÚSQUEDA    
+    Route::get('/posts/searchPosts', 'searchPosts')->middleware('role:admin|editor|reader');      //Ruta para buscar posts BARRA DE BÚSQUEDA 
+    //Route::get('/posts/searchAuthors','searchAuthors')->middleware('role:admin|editor|reader');//ruta para barra de busqueda de autores   
     Route::get('/posts/posts-overview/{userId}', 'getUserPostsOverview')->middleware('role:admin|editor|reader');      // Devuelve las estadísticas para el Dashboard
     Route::post('/posts/store', 'store')->name('posts.store')->middleware('role:admin|editor'); //Crea un post
     Route::put('/posts/update/{post}', 'update')->name('posts.update')->middleware('role:admin|editor'); //Actualiza Post
