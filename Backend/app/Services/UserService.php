@@ -13,8 +13,6 @@ use Spatie\Permission\Contracts\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Log;
-
 
 class UserService
 {
@@ -97,8 +95,6 @@ class UserService
         }
     
         $data = $request->only(['name_user', 'email_user', 'bio', 'img_user']);
-        Log::info('Datos recibidos:', $request->all());
-        Log::info('Archivo recibido:', [$request->file('img_user')]);
     
         if ($request->hasFile('img_user')) { // comprueba si hay cambios en la imagen 
             $image = $request->file('img_user');
