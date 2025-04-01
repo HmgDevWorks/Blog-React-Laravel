@@ -133,7 +133,6 @@ class PostController extends Controller
         return response()->json(['popular_users' => $popularUsers]);
     }
 
-
     public function getUserPostsOverview($userId): JsonResponse // Obtenemos los post ordenados por visitas y su porcentaje, también los posts agrupados por mes y por último obtenemos posts agrupados por mes y sus visitas
     {
         $postsOrderedByViews = $this->postService->getPostsByUserOrderedByViews($userId);
