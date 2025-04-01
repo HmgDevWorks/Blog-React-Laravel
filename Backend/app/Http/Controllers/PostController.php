@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Services\PostService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -94,23 +95,44 @@ class PostController extends Controller
     {
         $search = $request->input('search');
 
-        if (!$search || strlen($search) < 4) {
-            return response()->json(["error" => "La búsqueda debe tener al menos 4 caracteres"], 400);
+        if (!$search || strlen($search) < 2) {
+            return response()->json(["error" => "La búsqueda debe tener al menos 2 caracteres"], 400);
         }
 
-        $posts = Post::where('status', 'published') //funcion waparda para una barra de busqueda que filtra con el request que pasamos "search" y devuelve todos los post
-            ->where(function ($query) use ($search) {
-                $query->where('title', 'like', "%$search%")
-                    ->orWhere('content', 'like', "%$search%");
-            })
-            ->get();
+        $posts = Post::where('status', 'published') // Función waparda para la barra de búsqueda que filtra con el request "search"
+        ->where('title', 'like', "%$search%")
+        ->select('id', 'title', 'views', 'user_id','id_categories') 
+        ->with('author:id,name_user') // Cargamos la relación author solo con id y name_user y la de categories para que nos salga tanto el name user como la categoria
+        ->with('categories:id,name')
+        ->get();
 
         if ($posts->isEmpty()) {
             return response()->json(["mensaje" => "No existen posts con '$search' como búsqueda"], 200);
         }
 
-        return response()->json(['posts' => $posts]);
+        return response()->json(['posts' => $posts]); //solo titulo views  id author y aparte hacer otro searchuser -> name_user id cuantos post tiene, otra funcion que busque los 10 autores con mas visitas y que categoria con mas visitas/posts id views nombre total count img_user
     }
+
+    public function searchPopuUser(): JsonResponse
+    {
+        $popularUsers = User::query() //metodo query para hacer una consulta mas extensa
+        ->leftJoinSub( //para unir una subconsulta
+            Post::where('status', 'published')
+                ->groupBy('user_id')
+                ->select('user_id', DB::raw('SUM(views) as total_views')), // permite obtener el total de visitar por autores
+            'post_views', //alias o nombre para la subconsulta
+            'users.id', //columna de la tabla para la union
+            '=', 
+            'post_views.user_id' //columna creada de la subconsulta para la union
+        )
+        ->orderByDesc('total_views')
+        ->take(10)
+        ->select('users.id', 'users.name_user', 'users.img_user', 'post_views.total_views')
+        ->get();
+
+        return response()->json(['popular_users' => $popularUsers]);
+    }
+
 
     public function getUserPostsOverview($userId): JsonResponse // Obtenemos los post ordenados por visitas y su porcentaje, también los posts agrupados por mes y por último obtenemos posts agrupados por mes y sus visitas
     {
