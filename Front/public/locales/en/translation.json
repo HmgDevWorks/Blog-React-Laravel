@@ -1,28 +1,35 @@
 {
-  "title": "C-Blog, where the only limit to ideas is you",
-  "posts": "Posts",
+  "title": "C-Blog, where the limit of ideas is set by you",
+  "posts": "Articles",
   "views": "Views",
   "fav": "Favorites",
   "draft": "Drafts",
-  "published": "My Publications",
+  "published": "My publications",
   "nav": {
     "home": "Home",
-    "admin": "Admin",
+    "admin": "Administrator",
     "profile": "Profile",
-    "createPost": "Create Post",
-    "login": "Login",
-    "logout": "Logout"
+    "createPost": "Create Article",
+    "login": "Log In",
+    "logout": "Log Out"
   },
   "login": {
-    "name": "First Name",
+    "name": "Name",
     "lastname": "Last Name",
     "pass": "Password",
     "confirmPass": "Confirm Password",
     "email": "Email",
     "remember": "Remember Me",
     "also": "You can also:",
-    "login": "Login",
-    "create": "Create an Account"
+    "login": "Log In",
+    "register": "Register",
+    "create": "Create an account",
+    "forgot": "Forgot your password?",
+    "verified": "Account verified, you can now log in"
+  },
+  "recover": {
+    "title": "Recover Password",
+    "back": "Back to login"
   },
   "news": {
     "title": "News"
@@ -31,25 +38,25 @@
     "sports": "Sports"
   },
   "postFinder": {
-    "title": "Find the Post"
+    "title": "Find the article"
   },
   "authorPage": {
-    "title": "{name}'s Posts"
+    "title": "Articles by {name}"
   },
   "categoryPage": {
-    "title": "Posts in ",
-    "posts": "posts"
+    "title": "Articles in ",
+    "posts": "articles"
   },
   "createPostPage": {
     "draft": "Draft",
-    "posts": "My Publications"
+    "posts": "My publications"
   },
   "authors": {
-    "title": "Most Active Authors This Week"
+    "title": "Most active authors this week"
   },
   "counter": {
     "title": "Counter",
-    "posts": "Posts",
+    "posts": "Articles",
     "views": "Views",
     "users": "Users"
   },
@@ -65,20 +72,20 @@
   },
   "postTable": {
     "title": "Title",
-    "publishedAt": "Published Date",
+    "publishedAt": "Publication Date",
     "fav": "Favorite"
   },
   "profile": {
     "title": "Profile",
     "fav": "Favorites",
-    "posts": "Posts",
+    "posts": "Articles",
     "bioPlaceholder": "Edit your post here",
     "email": "Email",
     "pass": "Password",
-    "delete": "Delete Account",
-    "formConfirm": "Confirm Change",
-    "modalEmailTitle": "Confirm Email Change",
-    "modalPassTitle": "Confirm Password Change",
+    "delete": "Delete account",
+    "formConfirm": "Confirm change",
+    "modalEmailTitle": "Confirm email change",
+    "modalPassTitle": "Confirm password change",
     "modalDeleteTitle": "Are you sure you want to delete your account?",
     "modalDeleteInfo": "This action cannot be undone",
     "modalPassInput": "Enter your password",
@@ -95,28 +102,30 @@
     "chooseCat": "Choose a category"
   },
   "errorMsg": {
-    "errorMail1": "Error sending the verification email.",
+    "errorMail1": "Error sending verification email.",
     "errorMail2": "Verification time exceeded.",
     "errorMailVerifyDouble": "This email has already been verified.",
     "errorPass1": "Passwords do not match.",
-    "errorPass2": "Please enter a password different from your previous one.",
-    "errorPass3": "Time to update the password has expired.",
-
-    "coment": "WE NEED TO ANALYZE MORE POSSIBLE ERRORS TO COVER ALL CASES."
+    "errorPass2": "Please enter a password different from your current one.",
+    "errorPass3": "Password update time exceeded.",
+    "errorPass4": "Error sending password update email.",
+    "errorPass5": "Error verifying token for password update.",
+    "errorPass6": "Error confirming email for password update.",
+    "errorPass7": "Error resetting password.",
+    "coment": "WE NEED TO CONSIDER MORE CASES THAT MAY CAUSE ERRORS TO EVALUATE THEM ALL."
   },
   "infoMsg": {
     "infoMail1": "If you can't find the email, check your spam folder or request a new one.",
-    "infoMail2": "Your account will not be activated until you verify your email.",
+    "infoMail2": "Your account won't be activated until you verify your email.",
     "infoMail3": "Enter your email.",
-
     "infoPass1": "Enter a secure password with at least 8 characters, one uppercase letter, and one number.",
-    "infoPass2": "Enter the new password.",
-    "infoPass3": "Repeat the new password."
+    "infoPass2": "Enter the new password",
+    "infoPass3": "Repeat the new password"
   },
   "successMsg": {
-    "successMail1": "Verification email sent successfully. Check your inbox to confirm it.",
-    "successMail2": "Email verified successfully. Welcome! Write your first post.",
-    "successPass1": "Password update email sent successfully. Check your inbox to change your password.",
-    "successPass2": "Password updated successfully."
+    "successMail1": "Verification email sent successfully, check your inbox to confirm.",
+    "successMail2": "Email verified successfully. Welcome, Write your first post!",
+    "successPass1": "Update email sent successfully, check your inbox to change your password.",
+    "successPass2": "Password updated successfully"
   }
 }

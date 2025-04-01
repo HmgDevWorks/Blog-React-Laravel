@@ -22,7 +22,14 @@
     "remember": "Reacuerdame",
     "also": "También puedes:",
     "login": "Iniciar Sesión",
-    "create": "Crear una cuenta"
+    "register": "Registrarse",
+    "create": "Crear una cuenta",
+    "forgot": "¿Has olvidado tu contraseña?",
+    "verified": "Cuenta verificada, ya puedes iniciar sesión"
+  },
+  "recover":{
+    "title": "Recuperar Contraseña",
+    "back": "Volver al inicio de sesión"
   },
   "news": {
     "title": "Novedades"
@@ -105,8 +112,6 @@
     "errorPass5": "Error al verificar el token para actualizar la contraseña.",
     "errorPass6": "Error al confirmar el correo en la actualización de la contraseña.",
     "errorPass7": "Erro al restablecer la contraseña.",
-
-
     "coment": "HAY QUE VER MAS CASOS QUE PUEDAN DAR ERROR PARA EVALUARLOS TODOS."
   },
   "infoMsg": {

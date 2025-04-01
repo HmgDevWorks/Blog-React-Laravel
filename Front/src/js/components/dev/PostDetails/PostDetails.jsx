@@ -6,9 +6,11 @@ import useImageLoader from '../../../bootstrap/hooks/useImageLoader';
 import { findNearestSpace } from '../../../bootstrap/utils/textUtils';
 import Editor from '../Editor/Editor';
 import { useAlert } from "../../../bootstrap/contexts/AlertContext";
+import FavToggle from '../FavToggle/FavToggle';
 
 const PostDetails = ({ blog }) => {
     const { addError, addSuccess } = useAlert();
+
 
     // const [imagenCategoria, setImagenCategoria] = useState();
     const [nombreCategoria, setNombreCategoria] = useState()
@@ -49,6 +51,7 @@ const PostDetails = ({ blog }) => {
                 {/* {resto ?? <div className="blogContenido2 blogContenido">{resto}</div>} */}
                 <div className="autorNombre">{blog.autor}</div>
             </div>
+            <FavToggle fav={blog.isFav} id={blog.id} />
         </div>
     );
 }

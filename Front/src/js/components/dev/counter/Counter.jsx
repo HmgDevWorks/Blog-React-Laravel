@@ -19,7 +19,7 @@ export default function Counter() {
   }, []);
 
   return (
-    <div className="counter w-full">
+    <div className="counter flex flex-row flex-wrap w-full">
       {/* <img src="" alt=""></img> */}
       <h3>{t("counter.title")}</h3>
       <Stats stats={stats} />

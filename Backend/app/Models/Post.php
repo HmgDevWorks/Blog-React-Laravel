@@ -13,7 +13,7 @@ class Post extends Model
 {
     use HasFactory, Notifiable;
 
-    protected $appends = ['category_name','isFav'];
+    protected $appends = ['category_name','isFav','author_name'];
 
     protected $hidden = ['categories'];  //se utiliza para poder ocultar en el json cosas del campo category
 
@@ -63,4 +63,14 @@ class Post extends Model
     {
         return $this->categories ? $this->categories->name : null; // Devuelve el nombre de la categoría
     }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id'); // 'user_id' es la clave foránea
+    }
+
+    public function getAuthorNameAttribute()
+{
+    return $this->author ? $this->author->name_user : null;
+}
 }

@@ -1,7 +1,7 @@
-.loginPage{
+.loginPage {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     background-color: #c6c7c4;
+    padding: 5%;
 }

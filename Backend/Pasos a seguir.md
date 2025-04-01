@@ -37,6 +37,9 @@
 -Pasamos a la carpeta routes, en nuestro caso utilizaremos una api ya que estan trabajando en el front con react y no es un blade propio incluido con el laravel, aqui introduciremos cada ruta creada en los controladores con sus respectivas funciones para que pueda procesar las peticiones, aqui se trabaja con los method get(para la solicitud de datos) post(para solicitar la creacion de datos nuevos) put(para actualizar/modificar los datos ya creados) delete(como su nombre bien indica, borra datos xd).
 -Para comprobar que estas rutas funcionan se puede utilizar el **Postman** 
 -QUEDA POR PONER COSAS DE LAS AUTORIZACIONES, ROLES Y PERMISOS QUE YO NPI
+
+-Para las factorias hacer un composer update o composer require fakerphp/faker, como fakerphp tira mucho de memoria hay que cambiar en el php ini la memoria a 2G y cuando ejecutemos el seed 
+php -d memory_limit=4G artisan migrate:fresh --seed
 # hacer que funcione(?)
 
 -php artisan key:generate  

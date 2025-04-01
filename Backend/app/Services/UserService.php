@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\TryCatch;
 use Spatie\Permission\Contracts\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class UserService
 {
@@ -166,7 +168,6 @@ class UserService
         return response()->json($postViews);
     }
 
-
     public function getInfoUserCrypted()
     {
         $user = auth()->user();
@@ -178,34 +179,25 @@ class UserService
         return response()->json(['data' => $encryptedData]);
     }
 
-    public function getUpdateInfo(Request $request)
+    public function getUpdatePassword(Request $request)
     {
-        $user = auth()->user();
-        if (!$user) {
-            return response()->json(['error' => 'Usuario no autenticado'], 401);
-        }
-        $request->validate([
-            'mail_user' => 'nullable|email|unique:users,mail_user,' . $user->id,
-            'bio' => 'nullable|string',
-            'password_user' => 'nullable|min:8'
+        $authUser = auth()->user();
+            $request->validate([ //campos a rellenar
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:6', 
         ]);
     
-        if ($request->has('mail_user')) { //solo actualiza si hay valores enel request
-            $user->mail_user = $request->mail_user;
+        if (!Hash::check($request->current_password, $authUser->password_user)) {  // verifica si la contraseña actual es correcta
+            throw ValidationException::withMessages([
+                'current_password' => ['La contraseña actual es incorrecta.'],
+            ]);
         }
     
-        if ($request->has('bio')) {
-            $user->bio = $request->bio;
-        }
+        $authUser->password_user = Hash::make($request->new_password);
+        $authUser->save();  
     
-        if ($request->has('password_user')) {
-            $user->password_user = bcrypt($request->password_user);
-        }
-    
-        $user->save();
-        return response()->json([
-            'message' => 'Información actualizada correctamente', 
-            'user' => $user]);
+        return response()->json(['message' => 'Contraseña actualizada correctamente.']);
     }
+       
 }
 ?>
