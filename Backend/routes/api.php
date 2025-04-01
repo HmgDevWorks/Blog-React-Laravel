@@ -49,7 +49,7 @@ Route::get('/newsletter/generate', [NewsletterController::class, 'generate']); /
 Route::middleware('auth:api')->get('/verify-token', [AuthController::class, 'verifyToken']);
 Route::middleware('auth:api')->post('/refresh-token', [AuthController::class, 'refreshToken']);
 Route::post('/upload', [UploadController::class, 'uploadImage'])->middleware([JwtMiddleware::class])->middleware('role:admin|editor'); //ruta para subir img al post
-Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->middleware([JwtMiddleware::class])->middleware('role:admin|editor'); //ruta para cambiar la imagen de perfil
+Route::post('/profile/upload-avatar', [UploadController::class, 'uploadAvatar'])->middleware([JwtMiddleware::class])->middleware('role:admin|editor'); //ruta para cambiar la imagen de perfil
 
 Route::middleware('auth:api')->get('/verify-token', function (Request $request) {
     $user = $request->user();
@@ -104,6 +104,7 @@ Route::controller(PermissionController::class)->middleware([JwtMiddleware::class
 Route::controller(PostController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/posts', 'index')->name('posts.index')->middleware('role:admin|editor|reader'); // enseña los 10 últimos
     Route::get('/posts/published/{id}','getPublishedPostById')->name('posts.getPublishedPostById')->middleware('role:admin|editor|reader');//enseña los posts published de un user
+    Route::get('/posts/admin/{id}','getPostsForAdminbyId')->name('posts.getPostsForAdminbyId')->middleware('role:admin');//muestra todos los post de un user a un admin
     Route::get('/posts/status','getPostsByStatus')->name('posts.getPostsByStatus')->middleware('role:admin|editor|reader');//elige y enseña los posts published draft o deleted del user auth
     Route::get('/posts/all', 'show')->name('posts.show')->middleware('role:admin|editor|reader'); // Enseña todos los posts (URL modificada)
     Route::get('/posts/show/{post}', 'getPostById')->middleware('role:admin|editor|reader'); // Enseña un post por un id
