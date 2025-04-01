@@ -165,11 +165,25 @@ class PostController extends Controller
         return response()->json($authors);
     }
     
+    public function searchPopuUser(): JsonResponse
+    {
+        $popularUsers = User::query() //metodo query para hacer una consulta mas extensa
+        ->leftJoinSub( //para unir una subconsulta
+            Post::where('status', 'published')
+                ->groupBy('user_id')
+                ->select('user_id', DB::raw('SUM(views) as total_views')), // permite obtener el total de visitar por autores
+            'post_views', //alias o nombre para la subconsulta
+            'users.id', //columna de la tabla para la union
+            '=', 
+            'post_views.user_id' //columna creada de la subconsulta para la union
+        )
+        ->orderByDesc('total_views')
+        ->take(10)
+        ->select('users.id', 'users.name_user', 'users.img_user', 'post_views.total_views')
+        ->get();
 
-
-
-
-
+        return response()->json(['popular_users' => $popularUsers]);
+    }
 
     public function getUserPostsOverview($userId): JsonResponse // Obtenemos los post ordenados por visitas y su porcentaje, también los posts agrupados por mes y por último obtenemos posts agrupados por mes y sus visitas
     {
