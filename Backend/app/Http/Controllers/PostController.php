@@ -137,6 +137,26 @@ class PostController extends Controller
         ]);
     }
 
+    public function getPostsByStatus(Request $request):JsonResponse
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json(["error" => "No estás autenticado"], 401);
+        }
+    
+        $status = trim(strtolower($request->input('status')));
+        
+        $posts = Post::where('user_id', $user->id)
+            ->where('status', $status)
+            ->get();
+    
+        if ($posts->isEmpty()) {
+            return response()->json(["error" => "No existen posts con ese estado para este usuario"], 404);
+        }
+    
+        return response()->json(['posts' => $posts], 200);
+    }
+
     public function getPublishedPostById($id)
     {
         $posts = Post::where('user_id', $id)
@@ -148,27 +168,5 @@ class PostController extends Controller
         }
 
         return response()->json(['posts' => $posts]);
-    }
-
-    public function getPostsByStatus(Request $request):JsonResponse
-    {
-        $user = auth()->user();
-        if (!$user) {
-            return response()->json(["error" => "No estás autenticado"], 401);
-        }
-    
-        $status = trim(strtolower($request->input('status')));
-        dd($status, $user->id);
-        
-        // Verifica si hay posts con el estado publicado
-        $posts = Post::where('user_id', $user->id)
-            ->where('status', $status)
-            ->get();
-    
-        if ($posts->isEmpty()) {
-            return response()->json(["error" => "No existen posts con ese estado para este usuario"], 404);
-        }
-    
-        return response()->json(['posts' => $posts], 200);
     }
 }
