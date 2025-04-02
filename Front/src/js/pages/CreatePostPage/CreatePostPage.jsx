@@ -17,11 +17,13 @@ const CreatePostPage = () => {
   const { addError, addSuccess } = useAlert();
 
   const [dataDraft, setDataDraft] = useState([]);
-  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     if (!loggedUser) return;
-    const request = postService.getUserPosts(loggedUser.id);
+    const request = postService.getPostsByStatus({
+      id: loggedUser.id,
+      status: "draft"
+    });
 
     request
       .then(response => {
@@ -33,20 +35,20 @@ const CreatePostPage = () => {
 
   }, []);
 
-  useEffect(() => {
-    if (!loggedUser) return;
-    const request = postService.getUserPosts(loggedUser.id);
+  // useEffect(() => {
+  //   if (!loggedUser) return;
+  //   const request = postService.getUserPosts(loggedUser.id);
 
-    request
-      .then(response => {
-        // console.log('DATOS:', response.data);
-        setPosts(response.data);
-      })
-      .catch(error => {
-        addError("Error al obtener las publicaciones. Intentalo de nuevo mas tarde");
-      });
+  //   request
+  //     .then(response => {
+  //       // console.log('DATOS:', response.data);
+  //       setPosts(response.data);
+  //     })
+  //     .catch(error => {
+  //       addError("Error al obtener las publicaciones. Intentalo de nuevo mas tarde");
+  //     });
 
-  }, []);
+  // }, []);
 
   return (
     <div className="mt-4 mb-4">

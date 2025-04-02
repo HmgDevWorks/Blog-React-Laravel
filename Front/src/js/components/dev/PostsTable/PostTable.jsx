@@ -16,14 +16,22 @@ const formatDate = (dateString) => {
   }).format(date);
 };
 
-export default function PostTable({ posts, currentPage, postsPerPage, onPageChange, rechargePosts, setPosts }) {
+export default function PostTable({ posts, currentPage, postsPerPage, onPageChange, setPosts }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  console.log("QUE COÑO RECIBO?", posts);
   if (!Array.isArray(posts)) {
     return (
       <div className="alert alert-warning">
         {posts?.error || "Error desconocido al cargar los posts"}
+      </div>
+    );
+  }
+  if (posts.length == 0) {
+    return (
+      <div className="alert alert-info">
+        No hay posts
       </div>
     );
   }
@@ -65,7 +73,7 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
               >
                 <th>{totalIndex}</th>
                 <td>{item.title}</td>
-                <td>{formatDate(item.created_at)}</td>
+                <td>{item.created_at}</td>
                 {/* <td>{item.content.length > 50 ? item.content.substring(0, 50) + "..." : item.content}</td> */}
                 <td>{item.views}</td>
                 <td>
