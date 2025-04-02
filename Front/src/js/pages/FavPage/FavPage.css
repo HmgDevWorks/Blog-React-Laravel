@@ -1,23 +1,25 @@
-:root{
+:root {
     --grisClaro: #eef0f2;
- --grisMedio: #c6c7c4;
- --saturadoClaro: #a2999e; 
- --saturadoOscuro: #846a6a;
- --grisOscuro: #353b3c;
- } 
+    --grisMedio: #c6c7c4;
+    --saturadoClaro: #a2999e;
+    --saturadoOscuro: #846a6a;
+    --grisOscuro: #353b3c;
+}
 
- .favourites-page{
+.favourites-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-block: 2rem;
     width: 100%;
     overflow: hidden;
-    height: 80vw;
- }
+
+    div {
+        width: 80%;
+    }
+}
 
 
-.favourites{
+.favourites {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

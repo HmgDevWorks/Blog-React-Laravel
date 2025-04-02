@@ -1,4 +1,4 @@
-:root{
+:root {
     --font-header: 'Abril Fatface', cursive;
     --font: helvetica, sans-serif;
     --bg-color: #c6c7c4;
@@ -13,27 +13,48 @@
     --hr-color: #c6c7c4;
     --p-font-size: 0.833rem;
     --p-color: black;
-    --th-bg-color: #846a6a ;
-    --th-text-color: #eef0f2 ;
+    --th-bg-color: #846a6a;
+    --th-text-color: #eef0f2;
     --font-th: helvetica, sans-serif;
     --th-font-size: 1.2rem;
     --td-font-size: 1rem;
 }
 
-th{
-    background-color: var(--th-bg-color);
-    color: var(--th-text-color);
-    font-family: var(--font-th);
-    font-size: var(--th-font-size);
-    font-weight: bold;
-}
+.posts-table {
+    width: 100%;
+    overflow: hidden;
 
-td{
-    font-family: var(--font-th);
-    font-size: var(--td-font-size);
-    background-color: var(--bg-color);
-}
+    /* thead, tbody{
+        width: 100%;
+    } */
+    th {
+        background-color: var(--th-bg-color);
+        color: var(--th-text-color);
+        font-family: var(--font-th);
+        font-size: var(--th-font-size);
+        font-weight: bold;
+        padding: 5px 10px;
+    }
 
-td:nth-child(even){
-    background-color: #a2999e;
+    td {
+        font-family: var(--font-th);
+        font-size: var(--td-font-size);
+        background-color: var(#c6c7c4);
+        text-align: center;
+        padding: 5px 10px;
+    }
+
+    tbody tr {
+        cursor: pointer;
+
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: var(--saturadoClaro);
+    }
+
+    tbody tr:hover {
+        background-color: var(--saturadoOscuro);
+        color: white;
+    }
 }

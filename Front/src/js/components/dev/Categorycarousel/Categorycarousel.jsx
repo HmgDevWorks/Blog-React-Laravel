@@ -1,25 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Categorycarousel.css';
 import servicioCategorias from '../../../services/categoriesService';
 import Category from '../CategoryCarouselItem/CategoryItem';
 import Loader from '../Loader/Loader';
-
-
-
+import { useAlert } from "../../../bootstrap/contexts/AlertContext";
+import { useTranslation } from 'react-i18next';
 
 export default function CategoryCarrousel() {
-    const [categories, setCategories] = useState([]);
+    const { t } = useTranslation();
+    const { addError, addSuccess } = useAlert();
 
-    servicioCategorias.
-        getCategorias()
-        .then(({ data }) => {
-            setCategories(data)
-        })
-        .catch(err => console.log(err))
+    const [categories, setCategories] = useState([]);
+    useEffect(() => {
+        servicioCategorias
+            .getCategorias()
+            .then(({ data }) => {
+                setCategories(data);
+            })
+            .catch(error => {
+                const data = JSON.parse(error.request.response);
+                addError(data.error);
+            });
+    }, []);
 
     return (
-        <div className="flex justify-center items-center">
+        <div className=" justify-center items-center">
+            <div className="tituloCategorias">
+                <h2>CATEGORIAS</h2>
+            </div>
             <div className="carousel carousel-vertical rounded-box carousel-Category">
+
                 {categories ? categories.map((category) => (
                     <div
                         key={category.id}
@@ -27,6 +37,7 @@ export default function CategoryCarrousel() {
                     >
 
                         <Category
+                            id_categorie={category.id}
                             title={category.name}
                             imageUrl={category.img_url}
                             description={category.description}

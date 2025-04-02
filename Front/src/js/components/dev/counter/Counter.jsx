@@ -1,32 +1,27 @@
+import statService from "../../../services/statService";
 import Stats from "../Stats/Stats";
 import "./Counter.css";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 export default function Counter() {
-  // Llamar a la BD para obtener los datos
-  const stats = [
-    { name: "Articulos", value: 28 },
-    { name: "Autores", value: 9 },
-    { name: "Lectores", value: 456 },
-  ];
+  const { t } = useTranslation();
+  const [stats, setStats] = useState([]);
 
-  // const [stats, setStats] = useState([]);
-
-  // useEffect(() => {
-  //   axios.get('/stats')
-  //     .then(response => {
-  //       setStats(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.error("There was an error fetching the stats!", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    statService.getCounterStats()
+      .then(response => {
+        setStats(response.data);
+      })
+      .catch(error => {
+        console.error("There was an error fetching the stats!", error);
+      });
+  }, []);
 
   return (
-    <div className="counter">
+    <div className="counter flex flex-row flex-wrap w-full">
       {/* <img src="" alt=""></img> */}
-      <h3>Contador</h3>
+      <h3>{t("counter.title")}</h3>
       <Stats stats={stats} />
     </div>
   );

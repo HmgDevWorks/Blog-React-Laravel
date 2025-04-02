@@ -1,59 +1,104 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CreatePost from "../../components/dev/createPost/createPost";
+import CreatePost from "../../components/dev/CreatePost/CreatePost";
 import BackToTop from "../../components/dev/BackToTop/BackToTop";
-import ArticleFinder from "../../components/dev/article_finder/ArticleFinder";
-import DetallesBlog from "../../components/dev/DetallesBlog/DetallesBlog";
+import PostDetails from "../../components/dev/PostDetails/PostDetails";
+import PaginationComponent from "../../components/dev/PaginationComponent/PaginationComponent";
+import CategoriesServices from '../../services/categoriesService';
+import FavToggle from '../../components/dev/FavToggle/FavToggle';
 import './CategoryPage.css';
 
 const CategoryPage = () => {
-  const { id_categoria } = useParams();
-  const [numArticulos, setNumArticulos] = useState(0);
   const [articulos, setArticulos] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortType, setSortType] = useState("novedades"); // Estado para ordenar
+
+  const postPerPage = 10;
+  const { category_name } = useParams();
 
   useEffect(() => {
-    // Datos hardcodeados
-    const data = {
-      numArticulos: 10,
-      articulos: [
-        { id: 1, titulo: 'Javascript', content: 'orem ipsum dolor, sit amet consectetur adipisicing elit. Iure rerum tempore quod aliquam nostrum repudiandae, vero, autem nisi, alias placeat suscipit. Aliquam non a et deserunt debitis molestiae vel autem?', autor: 'Pedro', tag: 'Tag 1', image: 'https://via.placeholder.com/150' },
-        { id: 2, titulo: 'Php', content: 'Contenido del artículo PHP', autor: 'Paco', tag: 'Tag 2', image: 'https://via.placeholder.com/150' },
-        { id: 3, titulo: 'Java', content: 'Contenido del artículo Java', autor: 'Dolores', tag: 'Tag 3', image: 'https://via.placeholder.com/150' },
-        { id: 4, titulo: 'React', content: 'Contenido del artículo React', autor: 'Sabaton', tag: 'Tag 4', image: 'https://via.placeholder.com/150' },
-        { id: 5, titulo: 'Laravel', content: 'Contenido del artículo Laravel', autor: 'Autor 5', tag: 'Tag 5', image: 'https://via.placeholder.com/150' },
-        { id: 6, titulo: 'aaaaaa', content: 'Contenido del artículo aaaaaa', autor: 'Autor 6', tag: 'Tag 6', image: 'https://via.placeholder.com/150' },
-        { id: 7, titulo: 'WIIIIII', content: 'Contenido del artículo WIIIIII', autor: 'Autor 7', tag: 'Tag 7', image: 'https://via.placeholder.com/150' },
-        { id: 8, titulo: 'Artículo 8', content: 'Contenido del artículo 8', autor: 'Autor 8', tag: 'Tag 8', image: 'https://via.placeholder.com/150' },
-        { id: 9, titulo: 'Artículo 9', content: 'Contenido del artículo 9', autor: 'Autor 9', tag: 'Tag 9', image: 'https://via.placeholder.com/150' },
-        { id: 10, titulo: 'Artículo 10', content: 'Contenido del artículo 10', autor: 'Autor 10', tag: 'Tag 10', image: 'https://via.placeholder.com/150' },
-      ],
-    };
+    if (category_name) {
+      CategoriesServices.getPostForCategory(category_name)
+        .then(({ data }) => {
+          const posts = data.Post;
+          if (Array.isArray(posts)) {
+            setArticulos(posts);
+          } else {
+            console.error('La respuesta de la API no es un array:', posts);
+          }
+        })
+        .catch(error => {
+          console.error('Error al obtener los artículos de la categoría:', error);
+        });
+    }
+  }, [category_name]);
 
-    setNumArticulos(data.numArticulos);
-    setArticulos(data.articulos);
-  }, [id_categoria]);
+  // Función para ordenar por "Más vistos"
+  const ordenarMasVistos = () => {
+    const sorted = [...articulos].sort((a, b) => {
+      if (b.views === a.views) {
+        return new Date(b.created_at) - new Date(a.created_at); // Más nuevo primero
+      }
+      return b.views - a.views; // Más vistos primero
+    });
+    setArticulos(sorted);
+    setSortType("mas_vistos");
+  };
+
+  // Función para ordenar por "Novedades"
+  const ordenarNovedades = () => {
+    const sorted = [...articulos].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    setArticulos(sorted);
+    setSortType("novedades");
+  };
+
+  useEffect(() => {
+    if (sortType === "mas_vistos") {
+      ordenarMasVistos();
+    } else {
+      ordenarNovedades();
+    }
+  }, [sortType]);
+
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentPostPage = articulos.slice(indexOfFirstPost, indexOfLastPost);
+  const pageCount = Math.ceil(articulos.length / postPerPage);
 
   return (
-    <div>
-      <div className="Titulo_Sin_Fondo text-center p-2">
-        {id_categoria}
+    <div className='categoryPage'>
+      <div className="QueVemos">
+        {sortType === "novedades" ? `¿Qué vemos hoy en ${category_name} ? (Novedades)` : `¿Qué vemos hoy en ${category_name} ? (Más vistos)`}
       </div>
-      <div className="numArticulos">
-        <p>{numArticulos} artículos</p>
+      <div className="filtro-categorias">
+        <button
+          className={`filtro-boton ${sortType === "novedades" ? "activo" : ""}`}
+          onClick={ordenarNovedades}
+        >
+          Novedades
+        </button>
+        <button
+          className={`filtro-boton ${sortType === "mas_vistos" ? "activo" : ""}`}
+          onClick={ordenarMasVistos}
+        >
+          Más Vistos
+        </button>
       </div>
-      <ArticleFinder />
-      <div className="indiceCategorias text-center p-2">
-        Indice
+
+      <PaginationComponent pageCount={pageCount} currentPage={currentPage} handlePageChange={setCurrentPage} />
+
+      <div>
+        <ul className="enlaces-lista">
+          {currentPostPage.map((articulo) => (
+            <li key={articulo.id} className="enlace-item">
+              <PostDetails blog={articulo} />
+              <FavToggle fav={articulo.isFav} id={articulo.id} />
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className="enlaces-lista">
-        {articulos.map((articulo) => (
-          <li key={articulo.id} className="enlace-item">
-            <a href={`/detallesBlog/${articulo.id}`}>
-              <DetallesBlog blog={articulo} />
-            </a>
-          </li>
-        ))}
-      </ul>
+
+      <PaginationComponent pageCount={pageCount} currentPage={currentPage} handlePageChange={setCurrentPage} />
       <BackToTop />
       <CreatePost />
     </div>

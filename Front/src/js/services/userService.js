@@ -1,11 +1,11 @@
-import axios from 'axios';
+import BaseService from './baseService';
 
-class UserService {
+class UserService extends BaseService {
+    
     constructor() {
-        this.api = axios.create({
-            baseURL: 'http://localhost:8000/api'
-        })
+        super("");
     }
+
     getUsers() {
         return this.api.get('/users')
     }
@@ -16,11 +16,45 @@ class UserService {
     getOneUser(data) {
         return this.api.post(`/login`, data)
     }
-    editUser(id, data) {
-        return this.api.put(`/${id}`, data)
+    getUserById(id) {
+        return this.api.get(`/users/${id}`)
     }
+
+
+
+    requestPasswordReset(data) {
+        return this.api.post(`/password/email`,data);
+    }
+    verifyResetCode(data) {
+        return this.api.get(``,data);
+    }
+    resetPassword(data) {
+        return this.api.post(`/password/reset`,data);
+    }
+    updatePassword(data){
+        return this.api.put("/users/updatePassword", data)
+    }
+
+
+
+    getNonConfidentialUserById(id){
+        return this.api.get(`/users/non-confidential/${id}`);
+    }
+    
+    editUser(data) {
+        console.log("DATA", data);
+        return this.api.put(`/users/update`, data);
+    }
+    // editUser(id, data) {
+    //     return this.api.put(`/users/update/${id}`, data)
+    // }
     deleteUser(id) {
-        return this.api.delete(`/${id}`)
+        return this.api.delete(`/users/destroy/${id}`)
+    }
+    verifyUser(token) {
+        return this.api.get('/verify-token',
+            { headers: { Authorization: `Bearer ${token}` } }
+        )
     }
 }
 

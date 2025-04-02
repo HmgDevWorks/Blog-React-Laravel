@@ -1,16 +1,11 @@
-import axios from 'axios';
+import BaseService from './baseService';
 
-class ServicioCategorias {
+class categoriesServices extends BaseService {
 
     constructor() {
-        this.api = axios.create({
-            baseURL: 'http://localhost:8000/api/categories'
-        })
-
-
-
-
+        super("categories/");
     }
+
     getCategorias() {
         return this.api.get('/')
     }
@@ -18,6 +13,10 @@ class ServicioCategorias {
 
     getOneCategoria(category_id) {
         return this.api.get(`/show/${category_id}`)
+    }
+
+    getPostForCategory(name) {
+        return this.api.get(`/posts/${name}`)
     }
 
     createCategoria(data) {
@@ -32,7 +31,7 @@ class ServicioCategorias {
     }
 
 }
-const servicioCategorias = new ServicioCategorias();
+const CategoriesServices = new categoriesServices();
 
 
-export default servicioCategorias;
+export default CategoriesServices;

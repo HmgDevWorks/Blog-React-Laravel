@@ -51,11 +51,22 @@ class CategoriesController extends Controller
         return $this->categoriesService->updateCategories($request,$categories);
     }
 
+    public function showCategoriesByName($data)
+    {
+        return $this->categoriesService->showCategoriesByName($data);
+    }
+
     /**
      * Eliminar categoría de la bbdd.
      */
     public function destroy(Categories $categories)
     {
         return $this->categoriesService->destroyCategories($categories);
+    }
+    
+    public function PostForCategory($name)
+    {
+        $posts = $this->categoriesService->getPostsForCategory($name);
+        return response()->json(["Post" => $posts]);
     }
 }

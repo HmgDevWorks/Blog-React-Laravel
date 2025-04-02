@@ -16,10 +16,13 @@ class EmailVerificationNotificationController extends Controller
     {
         if ($request->user()->hasVerifiedEmail()) {
             return redirect()->intended('/dashboard');
+            //return response()->json(["message" => "errorMsg.errorMailVerifyDouble"]);
         }
 
         $request->user()->sendEmailVerificationNotification();
 
         return response()->json(['status' => 'verification-link-sent']);
+        //return response()->json(["message" => "successMsg.successMail1"]);
+
     }
 }

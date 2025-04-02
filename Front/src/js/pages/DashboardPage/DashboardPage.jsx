@@ -1,5 +1,5 @@
 import Circle_graphic from "../../components/dev/circle_graphic/Circle_graphic";
-import Separador from "../../components/dev/separador/Separador";
+import Separador from "../../components/dev/Separador/Separador";
 import TooltipGraphic from "../../components/dev/TooltipGraph/TooltipGraph";
 import AreaChart from "../../components/dev/Areachart/Areachart";
 import DataLabelGraphic from "../../components/dev/Datalabel/Datalabel";

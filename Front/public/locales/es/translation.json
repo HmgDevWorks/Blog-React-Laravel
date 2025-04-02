@@ -1,0 +1,182 @@
+{
+  "title": "C-Blog, donde el limite de las ideas, lo pones tú",
+  "posts": "Articulos",
+  "views": "Vistas",
+  "fav": "Favoritos",
+  "draft": "Borradores",
+  "published": "Mis publicaciones",
+  "nav" : {
+    "home": "Inicio",
+    "admin": "Administrador",
+    "profile": "Perfil",
+    "createPost": "Crear Articulo",
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar sesión"
+  },
+  "login":{
+    "name": "Nombre",
+    "lastname": "Apellido",
+    "pass": "Cosntraseña",
+    "confirmPass": "Confirmar contraseña",
+    "email": "Email",
+    "remember": "Reacuerdame",
+    "also": "También puedes:",
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "create": "Crear una cuenta",
+    "forgot": "¿Has olvidado tu contraseña?",
+    "verified": "Cuenta verificada, ya puedes iniciar sesión"
+  },
+  "recover":{
+    "title": "Recuperar Contraseña",
+    "back": "Volver al inicio de sesión"
+  },
+  "news": {
+    "title": "Novedades"
+  },
+  "category": {
+    "sports": "Deportes"
+  },
+  "postFinder": {
+    "title": "Encuentra el artículo"
+  },
+  "authorPage": {
+    "title": "Articulos de {name}"
+  },
+  "categoryPage": {
+    "title": "Articulos de ",
+    "posts": "artículos"
+  },
+  "createPostPage": {
+    "draft": "Borrador",
+    "posts": "Mis publicaciones"
+  },
+  "authors": {
+    "title": "Autores más activos esta semana"
+  },
+  "counter": {
+    "title": "Contador",
+    "posts": "Articulos",
+    "views": "Vistas",
+    "users": "Usuarios"
+  },
+  "footer": {
+    "cookies": "Politica de Cookies",
+    "privacy": "Politica de Privacidad"
+  },
+  "admin": {
+    "title": "Página de administración",
+    "delete": "Eliminar"
+  },
+  "postTable": {
+    "title": "Título",
+    "publishedAt": "Fecha de publicación",
+    "fav": "Favorito"
+  },
+  "profile": {
+    "title": "Perfil",
+    "fav": "Favoritos",
+    "posts": "Articulos",
+    "bioPlaceholder": "Edita tu post aquí",
+    "email": "Email",
+    "pass": "Contraseña",
+    "delete": "Eliminar cuenta",
+    "formConfirm": "Confirmar cambio",
+    "modalEmailTitle": "Confirmar cambio de email",
+    "modalPassTitle": "Confirmar cambio de contraseña",
+    "modalDeleteTitle": "¿Estás seguro de que quieres eliminar tu cuenta?",
+    "modalDeleteInfo": "Esta acción no se puede deshacer",
+    "modalPassInput": "Introduce tu contraseña",
+    "modalEmailInput": "Introduce tu email",
+    "confirmBtn": "Confirmar",
+    "cancelBtn": "Cancelar"
+  },
+  "editor": {
+    "title": "Titulo",
+    "category": "Categoria",
+    "publishBtn": "Publicar",
+    "saveBtn": "Guardar",
+    "deleteBtn": "Borrar",
+    "chooseCat": "Elige una categoria" 
+  },
+
+
+  "errorMsg":{
+    "errorSearchCharacters": "La búsqueda debe tener al menos 4 caracteres.",
+    "errorFindSearch": "No existen posts con esas palabras clave como búsqueda.",
+
+    "errorFindPostStatus": "No existen posts con ese estado para este usuario.",
+    "errorCeroPostPublish": "No existen posts publicados para este usuario.",
+    "errorPostNotFoundOrNotPublish": "El post no existe o no está publicado.",
+    "errorPostVisited": "Visita incrementada en 1.",
+    "errorUpdatePost": "Error al actualizar el post.",
+    "errorDeleteSoftPost": "Error al cambiar el estado del post a borrado.",
+
+    "errorCredentals": "Error de al enviar correo de verificación.",
+    
+    "errorUserNotAuth": "Usuario no autenticado.",
+    "errorUserNotFound": "Usuario no encontrado.",
+    "errorCreateUser": "Hubo un problema al crear el usuario.",
+    "errorNameUserDuplicate": "El nombre de ususario ya esta registrado.",
+    "errorDeleteUser": "Error al borrar el usuario.",
+    "errorUpdateUser": "Error al actualizar el usuario.",
+    "errorPermissionModifyUser": "No tienes permiso para modificar este usuario.",
+
+    "errorTokenOrMail": "Token inválido o correo incorrecto.",
+
+    "errorAssignRole": "Error al asignar el rol.",
+    "errorCreateRole": "Error al crear el rol.",
+    "errorChangeRoles": "No tienes permisos para cambiar roles.",
+    "errorChangeAdminRole": "No se puede cambiar el rol de un administrador.",
+    "errorChangeRoleUserAdmin": "No se puede asignar el rol de administrador a un usuario.",
+    "errorRoleNotExist": "El rol especificado no existe.",
+    "errorDeleteRole": "Error al eliminar el rol.",
+    "errorInvalidRole": "No tienes el rol adecuado.",
+
+    "errorMailSend": "Error de al enviar correo de verificación.",
+    "errorMailTime": "Tiempo de verificación excedido.",
+    "errorMailVerifyDouble": "Este correo ya ha sido verificado.",
+    "errorMailDuplicate": "El correo ya está registrado.",
+
+    "errorPassNotSame": "Las contraseñas no son iguales.",
+    "errorPassOldSame": "Introduzca una contraseña diferente a la que ya tenía.",
+    "errorPassTime": "Tiempo para actualizar la contraseña excedido.",
+    "errorPassSendMail": "Error al enviar correo de actualización de contraseña.",
+    "errorPassVerifyToken": "Error al verificar el token para actualizar la contraseña.",
+    "errorPassConfirmMail": "Error al confirmar el correo en la actualización de la contraseña.",
+    "errorUpdatePass": "Erro al restablecer la contraseña."
+  },
+  "infoMsg": {
+    "infoUserSuspended": "Este usuario ha sido suspendido.",
+    "infoCreateUser": "Usuario creado, revise su email para verificar.",
+
+    "infoPostCreate": "Post creado con exito.",
+
+    "infoMailSend": "Correo enviado. Si no encuentras el correo, revisa la carpeta de spam o solicita un nuevo envío.",
+    "infoMailVerify": "Debes verificar tu email antes de iniciar sesión.",
+    "infoInToMail": "Introduzca su correo.",
+
+    "infoPassInstruction": "Introduce una contraseña segura con al menos 8 caracteres, una mayúscula y un número.",
+    "infoInToNewPass": "Introduzca la nueva contraseña",
+    "infoPassRepit": "Repita la nueva contraseña"
+  },
+  "successMsg": {
+    "successRoleOk": "Rol creado.",
+    "successUpdateRole": "Rol actualizado correctamente.",
+    "successDeleteRole": "Rol eliminado correctamente.",
+    "successAssignRole": "Rol asignado con exito.",
+
+    "successCreatePost": "Post creado con éxito.",
+    "successUpdatePost": "Post actualizado correctamente.",
+    "successDeleteSoftPost": "Post cambiado a estado borrado.",
+
+    "successDeleteUser": "Usuario eliminado con exito.",
+    "successUpdateUser": "Usuario actualizado con exito.",
+
+    "successSendMail": "Correo de verificación enviado con éxito, revise su bandeja de correo para confirmar.",
+    "successVerifyMail": "Correo verificado con éxito. ¡Bienvenido, Redacta tu primer post!",
+
+    "successSendPass": "Correo de actualización enviado con éxito, revise su bandeja de correo para cambiar su contraseña.",
+    "successUpdatePass": "Contraseña actualizada con éxito"
+  }
+}

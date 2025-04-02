@@ -9,6 +9,20 @@
     font-family: "Abril Fatface", serif !important;
 }
 
+.QueVemos {
+    background-color: var(--grisClaro);
+    color: var(--grisOscuro);
+    height: 10vh;
+    font-size: 1.75rem;
+    align-content: center;
+    margin: 0 auto;
+}
+
+.categoryPage {
+    background-color: rgb(53, 59, 60, 0.7);
+    margin-top: 0px;
+}
+
 .numArticulos {
     background-color: var(--grisClaro);
     color: #353b3c;
@@ -27,7 +41,6 @@
     text-align: center;
     font-size: 1.728rem;
     display: flex;
-    justify-content: center;
     align-items: center;
     font-family: "Abril Fatface", serif !important;
 }
@@ -36,12 +49,36 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    padding: 0;
+
     text-align: center;
 }
 
 .enlace-item {
-    margin-top: 1rem;
+    margin: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: var(--saturadoClaro);
+    padding: 10px 0px;
+}
+
+.enlace-item h3 {
+    color: var(--grisOscuro);
+}
+
+.enlace-item .contenidoEntero {
+    width: 90% !important;
+}
+
+.enlace-item .editor {
+    max-height: 400px;
+    width: 100%;
+    overflow: hidden
+}
+
+.enlace-item .yoopta-editor {
+    margin: 0px 15px auto;
+    width: calc(100%-30px) !important;
+
 }
 
 .enlace {
@@ -53,4 +90,35 @@
     .enlaces-lista {
         grid-template-columns: 1fr 1fr;
     }
+}
+
+.filtro-categorias {
+    display: flex;
+    justify-content: space-around;
+
+    padding: 20px 0;
+}
+
+.filtro-boton {
+    background-color: var(--grisClaro);
+    color: var(--saturadoOscuro);
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    font-family: "Abril Fatface", serif !important;
+    border: 2px solid var(--saturadoOscuro);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.filtro-boton:hover {
+    background-color: var(--saturadoClaro);
+    color: var(--grisOscuro);
+}
+
+.filtro-boton.activo {
+    background-color: var(--saturadoOscuro);
+    color: white;
+    border-color: var(--grisOscuro);
+    transform: scale(1.05);
 }

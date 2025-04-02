@@ -9,46 +9,35 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-
 class AuthenticatedSessionController extends Controller
 {
- 
     public function store(LoginRequest $request)
     {
-
-        // $credentials = $request->only('email_user', 'password'); // No hagas Hash::make() aquí
-
-        // if (!$token = Auth::attempt($credentials)) {
-        //     return response()->json(['error' => 'Las credenciales no corresponden'], 401);
-        // }
-
-        // // Si la autenticación es correcta, devolvemos el token
-        // return response()->json(['token' => $token]);
-
         $credentials = [
             'email_user' => $request->input('email'),
-            'password' => $request->input('password'), // Deja la contraseña en texto plano
+            'password' => $request->input('password'),
         ];
 
-        if (Auth::attempt($credentials)) { //codigo de jwt que autentifica si el usuario es correcto comparandolo con la bbdd
-            $user = Auth::user();
-            $token = JWTAuth::fromUser($user);
-            return response()->json(['token' => $token]);
-        } else {
-            return response()->json(['error' => 'Las credenciales no corresponden',$credentials], 401);
+        if (!Auth::attempt($credentials)) {
+            return response()->json(['message' => 'errorMsg.errorCredentals'], 401);
         }
 
-        // Si las credenciales son incorrectas
+        $user = Auth::user();
+        if ($user->hasRole('banned')) { //verifica si el usuario esta banned, si esta banned no puede entrar y no genera el token
+            return response()->json(['message' => 'infoMsg.infoUserSuspended'], 403);
+        }
+        
+        if (!$user->hasVerifiedEmail()) {
+            return response()->json(['message' => 'infoMsg.infoMailVerify'], 403);
+        }
+        $token = JWTAuth::fromUser($user);
+        return response()->json([
+            'authToken' => $token,
+            // 'user' => [ //para mostrar a parte del token info del usuario
+            //     '_id' => $user->id,
+            //     'name' => $user->name_user,
+            //     'role' => $user->roles->pluck('name'),
+            // ]
+        ]);
     }
-
-    // /**
-    //  * Destroy an authenticated session.
-    //  */
-    // public function destroy(Request $request): Response
-    // {
-    //     Auth::logout(); Esta comentado porque lo realizan desde el front
-
-    //     return response()->noContent();
-    // }
-
 }

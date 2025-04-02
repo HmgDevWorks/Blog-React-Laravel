@@ -8,25 +8,25 @@ function Title({ texto, f_size = 40, h_num = 1 }) {
 
   return (
     <>
-    <div className="title-container">
-      <Tag id="titulo" style={{ fontSize: `${f_size}px` }} className="title">
-        {partes.map((parte, index) =>
-          parte === "el limite" || parte === "lo pones tú" ? (
-            <span key={index} className="highlight">
-              {parte}
-            </span>
-          ) : (
-            parte
-          )
-        )}
-      </Tag>
+      <div className="title-container w-full">
+        <Tag id="titulo" style={{ fontSize: `${f_size}px` }} className="title">
+          {partes.map((parte, index) =>
+            parte === "el limite" || parte === "lo pones tú" ? (
+              <span key={index} className="highlight">
+                {parte}
+              </span>
+            ) : (
+              parte
+            )
+          )}
+        </Tag>
       </div>
-      <div>
+      {/* <div>
         <p className="descripcion-blog">
-        Desde la ciencia y tecnología hasta arte y cultura, cada autor aporta su perspectiva única para saciar tu curiosidad. Únete a nuestra comunidad de mentes inquietas y disfruta del placer de aprender cada día.
-      </p>
-      </div>
-   </>
+          Desde la ciencia y tecnología hasta arte y cultura, cada autor aporta su perspectiva única para saciar tu curiosidad. Únete a nuestra comunidad de mentes inquietas y disfruta del placer de aprender cada día.
+        </p>
+      </div> */}
+    </>
   );
 }
 

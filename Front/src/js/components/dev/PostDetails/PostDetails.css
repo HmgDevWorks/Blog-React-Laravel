@@ -1,0 +1,111 @@
+.detallesBlog h3 {
+    color: #846a6a;
+    font-family: 'Abril Fatface', serif, cursive;
+    text-transform: capitalize;
+    padding: 10px 20px 5px 20px;
+    font-size: 1.75rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    margin: 0 auto !important;
+    width: fit-content;
+}
+
+
+
+@media screen and (min-width: 768px) {
+    .detallesBlog h3 {
+        font-size: 2rem !important;
+
+    }
+
+    .tag {
+        font-size: 1.5rem;
+        padding: 10px !important;
+        display: flex;
+        justify-content: center;
+    }
+
+    .contenidoEntero img {
+        width: 90% !important;
+        max-height: 170px;
+        margin-left: 30px;
+        margin-bottom: 10px;
+
+    }
+
+    .contenidoEntero {
+        width: 70%;
+        padding: 20px 0px;
+    }
+
+    .blogContImg {
+        padding-bottom: 20px !important;
+
+    }
+
+    .imagenBlog {
+        border-left: 7px solid #846a6a;
+        border-bottom: 7px solid #846a6a;
+        border-radius: 0px 20px;
+        border-style: solid;
+    }
+
+    .autorNombre {
+        margin-top: 20px;
+    }
+}
+
+.tag {
+    background-color: #eef0f2;
+    color: #353b3c;
+    font-weight: 550;
+    font-family: 'Special Elite', serif, cursive;
+    padding: 0px 20px;
+}
+
+
+.blogContImg {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 20px 0px 20px;
+}
+
+.blogContenido {
+    font-family: Helvetica, sans-serif, Arial;
+    font-size: 16px;
+    color: #353b3c;
+    flex: 1;
+    font-size: 1.25rem;
+}
+
+.imagenBlog {
+    width: 40%;
+}
+
+.imagenBlog img {
+    width: 100%;
+
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.blogContenido2 {
+    padding: 0px 20px 10px 20px;
+
+}
+
+.contenidoEntero {
+    margin: 0 auto;
+}
+
+.autorNombre {
+    font-family: dancing script, cursive;
+    font-size: 1.7rem;
+    color: #846a6a;
+    padding: 0px 20px;
+    font-weight: 800;
+    text-transform: capitalize;
+
+}

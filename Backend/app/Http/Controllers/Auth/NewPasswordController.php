@@ -46,8 +46,10 @@ class NewPasswordController extends Controller
             throw ValidationException::withMessages([
                 'email' => [__($status)],
             ]);
+
         }
 
         return response()->json(['status' => __($status)]);
+
     }
 }

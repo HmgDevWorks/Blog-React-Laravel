@@ -11,6 +11,11 @@ class Favorites extends Model
 {
     use HasFactory, Notifiable;
     
+    protected $table = 'favorites'; // Define la tabla
+
+    protected $fillable = ['user_id', 'post_id']; // Campos permitidos
+    public $timestamps = true;
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -4,12 +4,28 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory; // Añadimos esta linea y la siguiente para que la linea 12 funcione
+use Illuminate\Database\Eloquent\Factories\HasFactory; 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+
 
 class Post extends Model
 {
     use HasFactory, Notifiable;
+
+    protected $appends = ['category_name','isFav','author_name'];
+
+    protected $hidden = ['categories', 'author'];  //se utiliza para poder ocultar en el json cosas del campo category
+
+    public function getIsFavAttribute()
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return false; // Si no hay usuario autenticado, no puede marcarse como favorito
+        }
+
+        return $this->favorites()->where('user_id', $user->id)->exists();
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -32,4 +48,29 @@ class Post extends Model
                     ->withPivot('categories_id') // Si necesitas campos adicionales
                     ->withTimestamps();
     }
+    
+    public function favorites()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'post_id', 'user_id');
+    }
+
+    public function categories() //funcion que gracias al hidden permite mostrar un campo de categories
+    {
+        return $this->belongsTo(Categories::class, 'id_categories');
+    }
+
+    public function getCategoryNameAttribute() //esto se puede hacer aqui porque hemos creado la relacion entre ambas tablas y podemos llamar asi al category
+    {
+        return $this->categories ? $this->categories->name : null; // Devuelve el nombre de la categoría
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id'); // 'user_id' es la clave foránea
+    }
+
+    public function getAuthorNameAttribute()
+{
+    return $this->author ? $this->author->name_user : null;
+}
 }

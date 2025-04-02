@@ -1,4 +1,4 @@
-:root{
+:root {
     --font-header: 'Abril Fatface', cursive;
     --font: helvetica, sans-serif;
     --bg-color: #c6c7c4;
@@ -15,16 +15,16 @@
     --p-color: black;
 }
 
-.parent-box{
+.parent-box {
     overflow: hidden;
     padding: 0;
     width: 80%;
     margin: 0 auto;
-}
 
-h3{
-    padding: 5px;
-    color: var(--header-text-color);
-    background-color: var(--header-bg-color);
-    font-family: var(--font-header);
+    h3 {
+        padding: 5px;
+        color: var(--header-text-color);
+        background-color: var(--header-bg-color);
+        font-family: var(--font-header);
+    }
 }

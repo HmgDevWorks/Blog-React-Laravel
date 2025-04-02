@@ -1,11 +1,9 @@
-import axios from 'axios';
+import BaseService from './baseService';
 
-class PostService {
+class PostService extends BaseService {
 
     constructor() {
-        this.api = axios.create({
-            baseURL: 'http://localhost:8000/api/posts'
-        })
+        super("posts/")
     }
 
     getOnePost(blog_id) {
@@ -13,7 +11,7 @@ class PostService {
     }
     /* All posts */
     getPosts() {
-        return this.api.get('/showAll')
+        return this.api.get('/show')
     }
     /* User posts */
     getUserPosts(id) {
@@ -23,19 +21,21 @@ class PostService {
     createPost(data) {
         return this.api.post('/store', data)
     }
-
+    // // getPostByTitle(title) {
+    //     return this.api.get(`/search/${title}`)
+    // }
     getLastTenPost() {
-        return this.api.get('')
+        return this.api.get('/news')
     }
 
     /* Editar post */
     editPost(id, data) {
-        return this.api.put(`/posts/update/${id}`, data)
+        return this.api.put(`/update/${id}`, data)
     }
 
     /* Eliminar post no se si vale así */
     deletePost(id) {
-        return this.api.delete(`/posts/destroy/${id}`)
+        return this.api.delete(`/destroy/${id}`)
     }
 }
 const postService = new PostService();

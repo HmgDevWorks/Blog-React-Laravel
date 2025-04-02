@@ -1,0 +1,54 @@
+.novedades-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+.novedades {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--saturadoOscuro);
+    font-weight: bold;
+    background-color: var(--grisOscuro);
+}
+
+.carousel-news {
+    min-width: 70vw !important;
+    height: 70vh !important;
+}
+
+.carousel-news h3 {
+    font-size: 1.2rem;
+    padding: 20px !important;
+}
+
+.carousel-news .tags {
+    padding: 0px 20px !important;
+}
+
+.novedades-page .carousel-news .detallesBlog .contenidoEntero {
+    padding: 20px 80px !important;
+}
+
+
+.botones-novedades {
+    position: absolute !important;
+    width: 100%;
+    padding-left: 5px;
+}
+
+.carousel-item-news {
+    background-color: var(--grisClaro);
+    border-radius: 1rem;
+    box-shadow: 0 0 10px var(--grisOscuro);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.carousel-item-news:hover {
+    filter: brightness(1.1);
+}

@@ -1,0 +1,23 @@
+.boton-fav {
+    background-color: var(--grisOscuro) !important;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 10px 10px;
+    border-radius: 50%;
+}
+
+.boton-fav:hover,
+.fav-star:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.fav-star {
+    height: 30px;
+    width: 30px;
+}
+
+.fav-star:hover {
+    cursor: pointer;
+
+}
