@@ -102,9 +102,11 @@
 
 
   "errorMsg":{
-    "errorSearchCharacters": "La búsqueda debe tener al menos 4 caracteres.",
-    "errorFindSearch": "No existen posts con esas palabras clave como búsqueda.",
-
+    "errorSearchCharacters": "La búsqueda debe tener al menos 2 caracteres.",
+    "errorFindSearchPosts": "No existen posts con esas palabras clave como búsqueda.",
+    "errorFindSearchAuthors": "No existen autores con esas palabras clave como búsqueda.",
+    
+    
     "errorFindPostStatus": "No existen posts con ese estado para este usuario.",
     "errorCeroPostPublish": "No existen posts publicados para este usuario.",
     "errorPostNotFoundOrNotPublish": "El post no existe o no está publicado.",

@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory; 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
+
 
 
 class Post extends Model
 {
     use HasFactory, Notifiable;
 
-    protected $appends = ['category_name','isFav','author_name'];
+    protected $appends = ['category_name','isFav','author_name',];
 
     protected $hidden = ['categories', 'author'];  //se utiliza para poder ocultar en el json cosas del campo category
 
@@ -70,7 +72,7 @@ class Post extends Model
     }
 
     public function getAuthorNameAttribute()
-{
-    return $this->author ? $this->author->name_user : null;
-}
+    {
+        return $this->author ? $this->author->name_user : null;
+    }
 }

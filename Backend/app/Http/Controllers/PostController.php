@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Models\Categories;
 use App\Models\Post;
 use App\Models\User;
 use App\Services\PostService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
@@ -96,7 +98,7 @@ class PostController extends Controller
         $search = $request->input('search');
 
         if (!$search || strlen($search) < 2) {
-            return response()->json(["error" => "La búsqueda debe tener al menos 2 caracteres"], 400);
+            return response()->json(["error" => "errorMsg.errorSearchCharacters"], 400);
         }
 
         $posts = Post::where('status', 'published') // Función waparda para la barra de búsqueda que filtra con el request "search"
@@ -108,62 +110,55 @@ class PostController extends Controller
 
         if ($posts->isEmpty()) {
             //return response()->json(["message" => "No existen posts con '$search' como búsqueda"], 200);
-            return response()->json(["message" => "errorMsg.errorFindSearch"], 200);
+            return response()->json(["message" => "errorMsg.errorFindSearchPosts"], 200);
 
         }
+        return response()->json(['posts' => $posts]);
+    } 
 
-        return response()->json(['posts' => $posts]); //solo titulo views  id author y aparte hacer otro searchuser -> name_user id cuantos post tiene, otra funcion que busque los 10 autores con mas visitas y que categoria con mas visitas/posts id views nombre total count img_user
-    }
-
-    // public function searchAuthors(Request $request){//controlador para la barra de busqueda, para buscar autores
-    //     $search = $request->input('search');
-
-    //     if (!$search || strlen($search) < 2) {
-    //         return response()->json(["message" => "errorMsg.errorSearchCharacters"], 400);
-    //     }
-
-    //     $posts = Post::where('status', 'published') //funcion waparda para una barra de busqueda que filtra con el request que pasamos "search" y devuelve todos los post
-    //     ->where(function ($query) use ($search) {
-    //         $query->where('title', 'like', "%$search%")
-    //             ->orWhere('content', 'like', "%$search%");
-    //     })
-    //     ->get();
-
-
-    // } 
 
     public function searchAuthors(Request $request)
     {
         $search = $request->input('search');
-    
+
+        if (!$search || strlen($search) < 2) {
+            return response()->json(["error" => "errorMsg.errorSearchCharacters"], 400);
+        }        
+
         $authors = User::whereHas('posts', function ($query) { // Utilizamos la función para buscar autores que hayan publicado algún post
-
-                $query->where('status', 'published');
-            })
+                $query->where('status', 'published');})
             ->when($search, function ($query) use ($search) {
-                $query->where('name', 'LIKE', "%$search%");
-            })
-            ->select('id', 'name') // Solo ID y Nombre
+                $query->where('name_user', 'LIKE', "%$search%");})
+            ->select('id', 'name_user') 
             ->get();
-    
-        foreach ($authors as $author) {  // Utilizamos la función para calcular las visitas totales de cada autor y la categoria mas usada 
-            $posts = Post::where('user_id', $author->id)
-                ->where('status', 'published')
-                ->get();
-    
-            $author->total_visits = $posts->sum('views');  // visitas totales
+        
+        if ($authors->isEmpty()) {
+            return response()->json(["message" => "errorMsg.errorFindSearchAuthors"], 200);
 
+        }
+                
+            foreach ($authors as $author) {  // Utilizamos la función para calcular las visitas totales de cada autor y la categoria mas usada 
+                $posts = Post::where('user_id', $author->id)
+                    ->where('status', 'published')
+                    ->get();
+        
+                $author->total_visits = $posts->sum('views');  // visitas totales
     
-            $mostUsedCategory = $posts->groupBy('category_id') // Categoría más usada
+                $mostUsedCategoryId = $posts->groupBy('id_categories')
                 ->sortByDesc(fn ($posts) => count($posts))
                 ->keys()
                 ->first();
-    
-            $author->most_used_category = $mostUsedCategory ?? null;
-        }
+            
+                $mostUsedCategoryName = $mostUsedCategoryId  
+                    ? Categories::where('id', $mostUsedCategoryId)->value('name')  
+                    : null;
+                
+                $author->most_used_category = $mostUsedCategoryName;
+            }
     
         return response()->json($authors);
     }
+
     
     public function searchPopuUser(): JsonResponse
     {
@@ -249,5 +244,27 @@ class PostController extends Controller
         $posts = Post::where('user_id', $user->id)->get();
 
         return response()->json(['posts' => $posts]);
+    }
+
+    public function getPostsAuthUser()
+    {
+        $user= Auth::user();
+
+        $posts = Post::where('user_id', $user->id)
+        ->whereIn('status', ['published', 'deleted'])
+        ->withCount('favorites') // Cuenta cuántas veces ha sido marcado como favorito
+        ->get()
+        ->map(function ($post) {
+            return [
+                'id' => $post->id,
+                'title' => $post->title,
+                'created_at' => $post->created_at ? $post->created_at->format('Y-m-d') : null,
+                'status' => $post->status,
+                'views' => $post->views,
+                'favorites_count' => $post->favorites_count,
+            ];
+        });
+
+        return response()->json($posts);
     }
 }

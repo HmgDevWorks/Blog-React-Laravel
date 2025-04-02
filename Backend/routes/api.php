@@ -106,6 +106,7 @@ Route::get('/posts/searchAuthors', [PostController::class, 'searchAuthors']);
 
 Route::controller(PostController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/posts', 'index')->name('posts.index')->middleware('role:admin|editor|reader'); // enseña los 10 últimos
+    Route::get('/posts/authUser','getPostsAuthUser')->name('posts.getPostsAuthUser')->middleware('role:admin|editor');
     Route::get('/posts/published/{id}','getPublishedPostById')->name('posts.getPublishedPostById')->middleware('role:admin|editor|reader');//enseña los posts published de un user
     Route::get('/posts/admin/{id}','getPostsForAdminbyId')->name('posts.getPostsForAdminbyId')->middleware('role:admin');//muestra todos los post de un user a un admin
     Route::get('/posts/status','getPostsByStatus')->name('posts.getPostsByStatus')->middleware('role:admin|editor|reader');//elige y enseña los posts published draft o deleted del user auth
@@ -113,7 +114,7 @@ Route::controller(PostController::class)->middleware([JwtMiddleware::class])->gr
     Route::get('/posts/show/{post}', 'getPostById')->middleware('role:admin|editor|reader'); // Enseña un post por un id
     Route::get('/posts/user/{id}', 'postUser')->middleware('role:admin|editor|reader');     //Enseña los post a traves del id del usuario
     Route::get('/posts/searchPosts', 'searchPosts')->middleware('role:admin|editor|reader');      //Ruta para buscar posts BARRA DE BÚSQUEDA 
-    Route::get('/posts/searchAuthors','searchAuthors')->middleware('role:admin|editor|reader');//ruta para barra de busqueda de autores   
+    //Route::get('/posts/searchAuthors','searchAuthors')->middleware('role:admin|editor|reader');//ruta para barra de busqueda de autores   
     Route::get('/posts/posts-overview/{userId}', 'getUserPostsOverview')->middleware('role:admin|editor|reader');      // Devuelve las estadísticas para el Dashboard
     Route::post('/posts/store', 'store')->name('posts.store')->middleware('role:admin|editor'); //Crea un post
     Route::put('/posts/update/{post}', 'update')->name('posts.update')->middleware('role:admin|editor'); //Actualiza Post
