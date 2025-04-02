@@ -102,6 +102,9 @@
 
 
   "errorMsg":{
+
+    "errorCreatePermission": "Hubo un problema al crear el permiso.",
+
     "errorSearchCharacters": "La búsqueda debe tener al menos 2 caracteres.",
     "errorFindSearchPosts": "No existen posts con esas palabras clave como búsqueda.",
     "errorFindSearchAuthors": "No existen autores con esas palabras clave como búsqueda.",
@@ -163,6 +166,12 @@
     "infoPassRepit": "Repita la nueva contraseña"
   },
   "successMsg": {
+    "successCreateNewsletter": "Boletín generado y enviado correctamente.",
+
+    "successCreatePermission": "Permiso creado correctamente.",
+    "successAssignPermissionRole": "Permisos asignados correctamente al rol.",
+    "successRevokePermissionRole": "Permisos del rol revocados correctamente.",
+
     "successRoleOk": "Rol creado.",
     "successUpdateRole": "Rol actualizado correctamente.",
     "successDeleteRole": "Rol eliminado correctamente.",
