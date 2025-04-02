@@ -30,12 +30,12 @@ class PermissionController extends Controller
             ]);
     
             return response()->json([
-                'message' => 'Permiso creado correctamente',
+                'message' => 'successMsg.successCreatePermission',
                 'permission' => $permission,
             ], 201); 
         } catch (\Exception $e) {
             return response()->json([
-                'error' => 'Hubo un problema al crear el permiso',
+                'message' => 'errorMsg.errorCreatePermission',
                 'details' => $e->getMessage(),
             ], 500); 
         }
@@ -53,7 +53,7 @@ class PermissionController extends Controller
         $role->givePermissionTo($validated['permissions']);
 
         return response()->json([
-            'message' => 'Permisos asignados correctamente al rol.',
+            'message' => 'successMsg.successAssignPermissionRole',
             'role' => $role,  // Devuelve el rol actualizado con los permisos asignados
             'permissions' => $role->permissions, // Los permisos asignados al rol
         ], 200);
@@ -71,7 +71,7 @@ class PermissionController extends Controller
         $role->revokePermissionTo($validated['permissions']);
 
         return response()->json([
-            'message' => 'Permisos revocados correctamente del rol.',
+            'message' => 'successMsg.successRevokePermissionRole',
             'role' => $role,  // Devuelve el rol actualizado con los permisos revocados
             'permissions' => $role->permissions, // Los permisos restantes del rol
         ], 200);
