@@ -97,7 +97,7 @@ class PostController extends Controller
         $search = $request->input('search');
 
         if (!$search || strlen($search) < 2) {
-            return response()->json(["error" => "La búsqueda debe tener al menos 2 caracteres"], 400);
+            return response()->json(["error" => "errorMsg.errorSearchCharacters"], 400);
         }
 
         $posts = Post::where('status', 'published') // Función waparda para la barra de búsqueda que filtra con el request "search"
@@ -109,7 +109,7 @@ class PostController extends Controller
 
         if ($posts->isEmpty()) {
             //return response()->json(["message" => "No existen posts con '$search' como búsqueda"], 200);
-            return response()->json(["message" => "errorMsg.errorFindSearch"], 200);
+            return response()->json(["message" => "errorMsg.errorFindSearchPosts"], 200);
 
         }
         return response()->json(['posts' => $posts]);
@@ -120,13 +120,22 @@ class PostController extends Controller
     {
         $search = $request->input('search');
 
+        if (!$search || strlen($search) < 2) {
+            return response()->json(["error" => "errorMsg.errorSearchCharacters"], 400);
+        }        
+
         $authors = User::whereHas('posts', function ($query) { // Utilizamos la función para buscar autores que hayan publicado algún post
                 $query->where('status', 'published');})
             ->when($search, function ($query) use ($search) {
                 $query->where('name_user', 'LIKE', "%$search%");})
             ->select('id', 'name_user') 
             ->get();
-    
+        
+        if ($authors->isEmpty()) {
+            return response()->json(["message" => "errorMsg.errorFindSearchAuthors"], 200);
+
+        }
+                
             foreach ($authors as $author) {  // Utilizamos la función para calcular las visitas totales de cada autor y la categoria mas usada 
                 $posts = Post::where('user_id', $author->id)
                     ->where('status', 'published')
