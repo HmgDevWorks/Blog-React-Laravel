@@ -4,11 +4,13 @@ import favService from '../../../services/favService';
 import { useAlert } from '../../../bootstrap/contexts/AlertContext';
 import './FavToggle.css';
 
-export default function FavToggle({ fav, id }) {
+
+export default function FavToggle({ fav, id, onToggle }) {
     const { addError, addSuccess } = useAlert();
     const [isFav, setIsFav] = useState(fav);
+
     const handleToggle = (e) => {
-        e.stopPropagation(); // Previene que el click se propague a la fila
+        e.stopPropagation();
         if (isFav) {
             removeFav(id);
         } else {
@@ -24,9 +26,11 @@ export default function FavToggle({ fav, id }) {
         favService.addFav(id)
             .then(response => {
                 console.log(response);
-                setIsFav(() => true);
+                setIsFav(true);
                 addSuccess(response.data.mensaje);
-            }).catch(error => {
+                onToggle?.(id, true); //  Solo llama a onToggle si existe
+            })
+            .catch(error => {
                 console.log(error);
                 addError(error.mensaje);
             });
@@ -36,9 +40,11 @@ export default function FavToggle({ fav, id }) {
         favService.removeFav(id)
             .then(response => {
                 console.log(response);
-                setIsFav(() => false);
-                addSuccess(response.data.mensaje);
-            }).catch(error => {
+                setIsFav(false);
+                addSuccess(response.data.original.mensaje);
+                onToggle?.(id, false); //  Solo llama a onToggle si existe
+            })
+            .catch(error => {
                 console.log(error);
                 addError(error.mensaje);
             });
@@ -52,7 +58,7 @@ export default function FavToggle({ fav, id }) {
                 alignItems: 'center'
             }} className='fav-toggle'>
                 {isFav ? <FaStar color="gold" className='fav-star' /> : <FaRegStar color="gold" className='fav-star' />}
-            </a >
+            </a>
         </div>
     );
 }

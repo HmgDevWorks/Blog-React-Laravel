@@ -19,7 +19,6 @@ const HomePage = () => {
       <div className="newsHomeComponent">
         <NewsComponent />
       </div>
-
       <Separador />
       <ArticleFinder />
       <Separador />

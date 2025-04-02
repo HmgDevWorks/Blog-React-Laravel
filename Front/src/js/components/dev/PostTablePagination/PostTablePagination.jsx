@@ -10,48 +10,38 @@ export default function PostTablePagination({ filter, id = 0 }) { //, search = "
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 10;
 
+    const fetchPosts = () => {
+        let postPromise;
+
+        switch (filter) {
+            case 'favs':
+                postPromise = favService.getUserFavs();
+                break;
+            case 'published':
+            case 'draft':
+            case 'deleted':
+            default:
+                postPromise = postService.getPosts();
+                break;
+        }
+
+        postPromise
+            .then(({ data }) => {
+                setPosts(data);
+            })
+            .catch(error => {
+                console.error("Error fetching posts:", error);
+            });
+    };
+
     useEffect(() => {
-        const fetchPosts = () => {
-            let postPromise;
-            console.log(loggedUser)
-            // if (search !== "") {
-            //     postPromise = postService.getPosts();
-            // } else {
-            switch (filter) {
-                case 'favs':
-                    postPromise = favService.getFavById(loggedUser.id);
-                    break;
-                case 'published':
-                    postPromise = postService.getPosts(); //loggedUser.id
-                    break;
-                case 'draft':
-                    postPromise = postService.getPosts();
-                    break;
-                case 'deleted':
-                    postPromise = postService.getPosts();
-                    break;
-                default:
-                    postPromise = postService.getPosts();
-                    break;
-            }
-            // }
-
-            postPromise
-                .then(({ data }) => {
-                    setPosts(data.original);
-                    console.log(data.original)
-                })
-                .catch(error => {
-                    console.error("Error fetching posts:", error);
-                    // Aquí podrías mostrar un mensaje de error al usuario
-                });
-        };
-
         fetchPosts();
-    }, [filter, loggedUser]);
+    }, [filter, loggedUser]); // Se ejecuta solo cuando cambian estos valores
+
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
+        // Recargar los posts al cambiar de página
     };
 
     return (
@@ -60,6 +50,9 @@ export default function PostTablePagination({ filter, id = 0 }) { //, search = "
             currentPage={currentPage}
             postsPerPage={postsPerPage}
             onPageChange={handlePageChange}
+            rechargePosts={fetchPosts}
+            setPosts={setPosts}
+
         />
     );
 }
