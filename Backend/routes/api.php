@@ -106,7 +106,8 @@ Route::get('/posts/searchAuthors', [PostController::class, 'searchAuthors']);
 
 Route::controller(PostController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/posts', 'index')->name('posts.index')->middleware('role:admin|editor|reader'); // enseña los 10 últimos
-    Route::get('/posts/authUser','getPostsAuthUser')->name('posts.getPostsAuthUser')->middleware('role:admin|editor');
+    Route::get('/posts/count', 'getCountPost')->name('posts.getCountPost')->middleware('role:admin|editor|reader');//muestra la cantidad de post published que tiene el user
+    Route::get('/posts/authUser','getPostsAuthUser')->name('posts.getPostsAuthUser')->middleware('role:admin|editor'); //muestra los posts publis y delet del user auth para el crear articulo
     Route::get('/posts/published/{id}','getPublishedPostById')->name('posts.getPublishedPostById')->middleware('role:admin|editor|reader');//enseña los posts published de un user
     Route::get('/posts/admin/{id}','getPostsForAdminbyId')->name('posts.getPostsForAdminbyId')->middleware('role:admin');//muestra todos los post de un user a un admin
     Route::get('/posts/status','getPostsByStatus')->name('posts.getPostsByStatus')->middleware('role:admin|editor|reader');//elige y enseña los posts published draft o deleted del user auth
@@ -123,6 +124,7 @@ Route::controller(PostController::class)->middleware([JwtMiddleware::class])->gr
 
 Route::controller(FavoritesController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/favorites', 'getFavoritesForAuthenticatedUser')->name('favorites.getFavoritesForAuthenticatedUser')->middleware('role:admin|editor|reader'); //solo enseña los del usuario verificado
+    Route::get('/favorites/count', 'getFavsCount')->name('favorites.getFavsCount')->middleware('role:admin|editor|reader'); //muestra la cantidad de favs que tiene el user
     Route::get('/favorites/{userId}', 'index')->name('favorites.index')->middleware('role:admin'); // enseña todos los favoritos se puede modificar para que salgan todos del tiron o como esta por user_id
     Route::post('/favorites/store/{postId}', 'store')->name('favorites.store')->middleware('role:admin|editor|reader'); //Crea un nuevo fav
     Route::delete('/favorites/destroy/{postId}', 'destroy')->name('favorites.destroy')->middleware('role:admin|editor|reader'); //Borra un fav marcado hay que pasarle el ID del post para borrarlo, no el id que tiene el favoritos

@@ -267,4 +267,12 @@ class PostController extends Controller
 
         return response()->json($posts);
     }
+
+    public function getCountPost()
+    {
+        $user=Auth::user();
+
+        return $user->posts()->where('status', 'published')->count();
+
+    }
 }

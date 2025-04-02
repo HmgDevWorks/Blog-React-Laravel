@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Categories;
 use App\Http\Middleware\JwtMiddleware;
+use Illuminate\Support\Facades\Auth;
 
 class FavoritesController extends Controller
 {
@@ -42,6 +43,13 @@ class FavoritesController extends Controller
         return response()->json(['error' => 'Usuario no autenticado'], 401);
     }
     return $this->favoritesService->addFavorite($user, $postId);
+    }
+
+    public function getFavsCount()
+    {
+        $user=Auth::user();
+        return $user->favorites()->count();
+
     }
 
     public function destroy(Request $request, $postId): JsonResponse
