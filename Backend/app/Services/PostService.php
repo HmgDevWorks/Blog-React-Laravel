@@ -72,16 +72,19 @@ class PostService
     } 
 
     public function getPostByCategory($cat)
-    {    // 
+    {    
         $post = Categories::findOrFail($cat);
         return Post::findOrFail($post->id);
     }
 
-    public function getPostsByUser($userId)
-    { //function para enseñar los post de cada usuario a traves de su ID
-        return Post::where('user_id', $userId)->latest()->get();
+    public function getPostsByUser($userId)// Función para obtener los posts publicados de un usuario 
+    { 
+        return Post::where('user_id', $userId)
+                   ->where('status', 'published') 
+                   ->latest()
+                   ->get();
     }
-
+    
     public function updatePost($data, $post)
     {
     if ($post) { // Actualizar campos manualmente y guardar el modelo

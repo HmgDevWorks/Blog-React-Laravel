@@ -41,6 +41,16 @@ class ProfileController extends Controller
         return response()->json($this->userService->getUserById($id));
     }
 
+    public function number():JsonResponse // Cantidad de usuarios
+    {
+        return response()->json($this->userService->numberUsers());
+    }
+    public function numberAuth():JsonResponse // Terminar mañana -- solo coger lectores
+    {
+        return response()->json($this->userService->numberUsers());
+    }
+
+
     public function update(Request $request, User $user):JsonResponse // Actualiza un usuario 
     {
         return $this->userService->updateUser($request, $user);
