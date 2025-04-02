@@ -31,7 +31,7 @@ class UserFactory extends Factory
                 $lastName = strtolower($nameParts[1] ?? ''); // Toma el primer apellido (si existe)
                 return $firstName . $lastName . rand(59, 100) . '@example.com';
             },
-            'password_user' => static::$password ??= Hash::make('password'),
+            'password_user' => Hash::make('12345678'),
             'bio' => $this->faker->realText(rand(20,40)),
             'remember_token' => Str::random(10),
             'email_verified_at' => now(), 

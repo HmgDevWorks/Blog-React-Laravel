@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Services\PostService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
@@ -234,5 +235,27 @@ class PostController extends Controller
         $posts = Post::where('user_id', $user->id)->get();
 
         return response()->json(['posts' => $posts]);
+    }
+
+    public function getPostsAuthUser()
+    {
+        $user= Auth::user();
+
+        $posts = Post::where('user_id', $user->id)
+        ->whereIn('status', ['published', 'deleted'])
+        ->withCount('favorites') // Cuenta cuántas veces ha sido marcado como favorito
+        ->get()
+        ->map(function ($post) {
+            return [
+                'id' => $post->id,
+                'title' => $post->title,
+                'created_at' => $post->created_at ? $post->created_at->format('Y-m-d') : null,
+                'status' => $post->status,
+                'views' => $post->views,
+                'favorites_count' => $post->favorites_count,
+            ];
+        });
+
+        return response()->json($posts);
     }
 }
