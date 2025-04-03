@@ -58,4 +58,10 @@ class RoleController extends Controller
     {
         return $this->roleService->destroyRole($role);
     }
+
+    public function showAll(Request $request, User $user):JsonResponse
+    {
+        return $this->roleService->showAllUsers($request,$user);
+    }
+
 }
