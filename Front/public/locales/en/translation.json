@@ -101,31 +101,34 @@
     "deleteBtn": "Delete",
     "chooseCat": "Choose a category"
   },
+
+  
   "errorMsg": {
-    "errorMail1": "Error sending verification email.",
-    "errorMail2": "Verification time exceeded.",
+    "errorMailSend": "Error sending verification email.",
+    "errorMailTime": "Verification time exceeded.",
     "errorMailVerifyDouble": "This email has already been verified.",
-    "errorPass1": "Passwords do not match.",
-    "errorPass2": "Please enter a password different from your current one.",
-    "errorPass3": "Password update time exceeded.",
-    "errorPass4": "Error sending password update email.",
-    "errorPass5": "Error verifying token for password update.",
-    "errorPass6": "Error confirming email for password update.",
-    "errorPass7": "Error resetting password.",
-    "coment": "WE NEED TO CONSIDER MORE CASES THAT MAY CAUSE ERRORS TO EVALUATE THEM ALL."
+    
+    "errorPassNotSame": "Passwords do not match.",
+    "errorPassOldSame": "Please enter a password different from your current one.",
+    "errorPassTime": "Password update time exceeded.",
+    "errorPassSendMail": "Error sending password update email.",
+    "errorPassVerifyToken": "Error verifying token for password update.",
+    "errorPassConfirmMail": "Error confirming email for password update.",
+    "errorUpdatePass": "Error resetting password."
   },
   "infoMsg": {
-    "infoMail1": "If you can't find the email, check your spam folder or request a new one.",
-    "infoMail2": "Your account won't be activated until you verify your email.",
-    "infoMail3": "Enter your email.",
-    "infoPass1": "Enter a secure password with at least 8 characters, one uppercase letter, and one number.",
-    "infoPass2": "Enter the new password",
-    "infoPass3": "Repeat the new password"
+    "infoMailFind": "If you can't find the email, check your spam folder or request a new one.",
+    "infoMailVerify": "Your account won't be activated until you verify your email.",
+    "infoInToMail": "Enter your email.",
+    "infoPassInstruction": "Enter a secure password with at least 8 characters, one uppercase letter, and one number.",
+    "infoInToNewPass": "Enter the new password",
+    "infoPassRepit": "Repeat the new password"
   },
   "successMsg": {
-    "successMail1": "Verification email sent successfully, check your inbox to confirm.",
-    "successMail2": "Email verified successfully. Welcome, Write your first post!",
-    "successPass1": "Update email sent successfully, check your inbox to change your password.",
-    "successPass2": "Password updated successfully"
+    "successSendMail": "Verification email sent successfully, check your inbox to confirm.",
+    "successVerifyMail": "Email verified successfully. Welcome, Write your first post!",
+    "successSendPass": "Update email sent successfully, check your inbox to change your password.",
+    "successUpdatePass": "Password updated successfully"
   }
+
 }

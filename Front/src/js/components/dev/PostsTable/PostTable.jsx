@@ -16,10 +16,11 @@ const formatDate = (dateString) => {
   }).format(date);
 };
 
-export default function PostTable({ posts, currentPage, postsPerPage, onPageChange }) {
+export default function PostTable({ posts, currentPage, postsPerPage, onPageChange, setPosts }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  console.log("QUE COÑO RECIBO?", posts);
   if (!Array.isArray(posts)) {
     return (
       <div className="alert alert-warning">
@@ -27,14 +28,27 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
       </div>
     );
   }
+  if (posts.length == 0) {
+    return (
+      <div className="alert alert-info">
+        No hay posts
+      </div>
+    );
+  }
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  console.log("POSTS", posts);
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   const pageCount = Math.ceil(posts.length / postsPerPage);
 
+  const handleFavToggle = (postId, newFavState) => {
+    setPosts(prevPosts =>
+      prevPosts.map(post =>
+        post.id === postId ? { ...post, isFav: newFavState } : post
+      )
+    );
+  };
   return (
     <div className="overflow-x-auto">
       <table className="posts-table table rounded-box">
@@ -50,6 +64,7 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
         </thead>
         <tbody>
           {currentPosts.map((item, index) => {
+
             const totalIndex = indexOfFirstPost + index + 1;
             return (
               <tr
@@ -58,13 +73,14 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
               >
                 <th>{totalIndex}</th>
                 <td>{item.title}</td>
-                <td>{formatDate(item.created_at)}</td>
+                <td>{item.created_at}</td>
                 {/* <td>{item.content.length > 50 ? item.content.substring(0, 50) + "..." : item.content}</td> */}
                 <td>{item.views}</td>
                 <td>
                   <FavToggle
                     fav={item.isFav}
                     id={item.id}
+                    onToggle={handleFavToggle} //  Se actualiza el estado global en tiempo real
                   />
                 </td>
               </tr>
@@ -83,16 +99,23 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
       </table>
 
       <div className="flex justify-center mt-4 mx-auto">
-        <div className="join">
-          {Array.from({ length: pageCount }, (_, i) => (
-            <button
-              key={i}
-              className={`join-item btn ${currentPage === i + 1 ? 'btn-active' : ''}`}
-              onClick={() => onPageChange(i + 1)}
-            >
-              {i + 1}
-            </button>
-          ))}
+        <div className="join flex justify-center">
+          {pageCount > 1 &&
+            Array.from({ length: pageCount }, (_, i) => (
+              <button
+                key={i}
+                className={`join-item btn ${currentPage === i + 1 ? 'btn-active' : ''}`}
+                onClick={() => {
+                  onPageChange(i + 1);
+                  //  ESTO ES PARA SI QUEREMOS QUE AL CAMBIAR DE PAGINA SE RECARGUEN LOS POSTS ,
+                  //  PARA QUE SE ELIMINEN SI HAS QUITADO EL ME GUSTA 
+                  //  rechargePosts() 
+                }}
+              >
+                {i + 1}
+              </button>
+            ))
+          }
         </div>
       </div>
     </div>

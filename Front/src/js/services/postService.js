@@ -13,6 +13,13 @@ class PostService extends BaseService {
     getPosts() {
         return this.api.get('/show')
     }
+    getPostsPublished(id) {
+        return this.api.get(`/published/${id}`);
+    }
+    getPostsByStatus(data) {
+        console.log("DATA", data);
+        return this.api.get('/status', data);
+    }
     /* User posts */
     getUserPosts(id) {
         return this.api.get(`/user/${id}`)
@@ -21,7 +28,9 @@ class PostService extends BaseService {
     createPost(data) {
         return this.api.post('/store', data)
     }
-
+    // // getPostByTitle(title) {
+    //     return this.api.get(`/search/${title}`)
+    // }
     getLastTenPost() {
         return this.api.get('/news')
     }

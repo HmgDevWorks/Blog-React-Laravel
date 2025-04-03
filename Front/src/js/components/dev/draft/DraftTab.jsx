@@ -3,7 +3,14 @@ import './DraftTab.css';
 import Editor from '../Editor/Editor';
 import { Fragment } from 'react';
 
-export default function DraftTab({ tabs }) {
+export default function DraftTab({ tabs = [] }) {
+  if (!Array.isArray(tabs?.posts)) {
+    return (
+      <div className="alert alert-warning">
+        {tabs?.error || "Error desconocido al cargar los posts"}
+      </div>
+    );
+  }
 
   return (
     <div role="tablist" className="tabs tabs-lifted draft-tabs">

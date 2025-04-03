@@ -5,8 +5,8 @@ import Separador from "../../components/dev/Separador/Separador";
 import ArticleFinder from "../../components/dev/article_finder/ArticleFinder";
 import Authors from "../../components/dev/Authors/authors";
 import Counter from "../../components/dev/Counter/Counter";
-
-import NewsPage from "../NewsPage/NewsPage";
+import NewsComponent from "../../components/dev/NewsComponent/NewsComponent";
+import './HomePage.css'
 
 const HomePage = () => {
   return (
@@ -14,9 +14,11 @@ const HomePage = () => {
       {/* f_size y h_num son opcionales */}
       <Title texto="C-Blog, donde el limite de las ideas, lo pones tú" f_size={43} h_num={1} />
       <Separador />
-      <NewsPage />
-      <Separador />
       <Categorycarousel />
+      <Separador />
+      <div className="newsHomeComponent">
+        <NewsComponent />
+      </div>
       <Separador />
       <ArticleFinder />
       <Separador />

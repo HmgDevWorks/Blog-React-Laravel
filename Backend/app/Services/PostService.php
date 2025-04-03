@@ -6,6 +6,8 @@ use App\Models\Categories;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 class PostService
 {
@@ -39,54 +41,50 @@ class PostService
                 ->first();
          
         if (!$post) {
-            return response()->json([
-                'error' => 'Post no exixte o no está publicado.'
-            ], 404);
+            return response()->json(['message' => 'errorMsg.errorPostNotFoundOrNotPublish'], 404);
         }
         $post->increment('views'); // contador para que cuando alguien entre en el post especificado aumenten las visitas en la tabla de post
         $post->refresh();           //actualiza el campo para mostrarlo correctamente
         return response()->json([
             "post" => $post,
-            "message" => "Visita incrementada en 1"
+            "message" => "errorMsg.errorPostVisited"
         ]);
     }
 
-    public function createPost($data)
-    { // Esta función recoge el post y lo crea
-        if (!$data) {
-            return response()->json(["mensaje" => "Error al crear el post"], 400);
-        }
-        if (empty($data->id_categories)) {
-            return response()->json(["Error" => "La categoría es obligatoria"], 400);
-        }
-        if (empty($data->title)) {
-            return response()->json(["Error" => "El título es necesario"], 400);
-        }
-        if (empty($data->content)) {
-            return response()->json(["Error" => "El contenido del post es obligatorio"], 400);
-        }
-            $post = Post::create([
-                    'id_categories' => $data->id_categories,
-                    'user_id' => $data->user_id,
-                    'title' => $data->title,
-                    'content' => $data->content,
-                    'status' => $data->status ? $data->status : "draft"
-                ]
-            );
-            return response()->json(["mensaje" => "Post creado con exito", 201]);
-        } 
+    public function createPost(Request $request)
+    { 
+        $validatedData = $request->validate([ //valida datos introducids
+            'id_categories' => 'required|integer|exists:categories,id',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'status' => 'nullable|in:published,draft,deleted'
+        ]);
+    
+        $post = Post::create([
+            'id_categories' => $validatedData['id_categories'],
+            'user_id' => auth()->id(), // asigna el usuario autenticado
+            'title' => $validatedData['title'],
+            'content' => $validatedData['content'],
+            'status' => $validatedData['status'] ?? "draft" // por defecto draft si no dice na
+        ]);
+    
+        return response()->json(["message" => "successMsg.successCreatePost"], 201);
+    } 
 
     public function getPostByCategory($cat)
-    {    // 
+    {    
         $post = Categories::findOrFail($cat);
         return Post::findOrFail($post->id);
     }
 
-    public function getPostsByUser($userId)
-    { //function para enseñar los post de cada usuario a traves de su ID
-        return Post::where('user_id', $userId)->latest()->get();
+    public function getPostsByUser($userId)// Función para obtener los posts publicados de un usuario 
+    { 
+        return Post::where('user_id', $userId)
+                   ->where('status', 'published') 
+                   ->latest()
+                   ->get();
     }
-
+    
     public function updatePost($data, $post)
     {
     if ($post) { // Actualizar campos manualmente y guardar el modelo
@@ -96,21 +94,21 @@ class PostService
         $post->content = $data['content'] ?? $post->content;
         $post->status = $data['status'] ?? $post->status;
         $post->save();
-        return response()->json(["mensaje" => "Post actualizado correctamente"], 200);
+        return response()->json(["message" => "successMsg.successUpdatePost"], 200);
     } else {
-        return response()->json(["mensaje" => "Error al actualizar el post"], 400);
+        return response()->json(["message" => "errorMsg.errorUpdatePost"], 400);
         }
     }
 
     public function destroyPost($post) // cambia el post a estado delete
     {
         if (!auth()->user()->hasRole(['admin', 'editor'])) {
-            return response()->json(['message' => 'No tienes el rol adecuado.'], 403);
+            return response()->json(['message' => 'errorMsg.errorInvalidRole'], 403);
         }elseif ($post) {
             $post->update(['status' => 'deleted']);
-            return response()->json(["mensaje" => "Post Cambiado a estado borrado", 200]);
+            return response()->json(["message" => "successMsg.successDeleteSoftPost", 200]);
         } else{
-            return response()->json(["mensaje" => "Error al cambiar el estado borrado", 400]);
+            return response()->json(["message" => "errorMsg.errorDeleteSoftPost", 400]);
         }
     }
 

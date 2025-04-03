@@ -22,9 +22,14 @@ export default function CategoryCarrousel() {
                 addError(data.error);
             });
     }, []);
+
     return (
-        <div className="flex justify-center items-center">
+        <div className=" justify-center items-center">
+            <div className="tituloCategorias">
+                <h2>CATEGORIAS</h2>
+            </div>
             <div className="carousel carousel-vertical rounded-box carousel-Category">
+
                 {categories ? categories.map((category) => (
                     <div
                         key={category.id}

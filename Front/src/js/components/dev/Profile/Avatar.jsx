@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { FaUser, FaEdit } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useAlert } from '../../../bootstrap/contexts/AlertContext';
+import userService from '../../../services/userService';
 
 export default function Avatar({ img, imageUpdate }) {
     const { t } = useTranslation();
@@ -40,27 +41,24 @@ export default function Avatar({ img, imageUpdate }) {
         if (!selectedFile) return;
 
         setLoading(true);
-        try {
-            // const formData = new FormData();
-            // formData.append('file', selectedFile);
-            // formData.append('upload_preset', process.env.VITE_CLOUDINARY_UPLOAD_PRESET);
 
-            // const response = await axios.post(
-            //     `https://api.cloudinary.com/v1_1/${process.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
-            //     formData
-            // );
 
-            // Aquí enviaríamos la URL segura al backend
-            // const imageUrl = response.data.secure_url;
-            imageUpdate({ img_user: selectedFile });
-
+        userService.postUserImg({
+            "img_user": selectedFile
+        }).then(({ data }) => {
+            console.log(data);
             setPreview(null);
             setSelectedFile(null);
-        } catch (err) {
-            addError('Error al subir la imagen. Inténtalo de nuevo.');
-        } finally {
+            addSuccess(data.message);
+        }).catch((error) => {
+            console.log(error);
+            addError(error.response.data.message);
+        }).finally(() => {
             setLoading(false);
-        }
+        });
+
+        // const imageUrl = response.data.secure_url;
+        // imageUpdate({ img_user: selectedFile });
     };
 
     return (

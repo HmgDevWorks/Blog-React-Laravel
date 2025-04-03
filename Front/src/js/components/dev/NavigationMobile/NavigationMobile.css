@@ -18,15 +18,22 @@
     min-height: 70px !important;
 }
 
-.brand {
+
+.brand a {
     color: #846a6a !important;
     font-family: 'Abril Fatface', serif;
     font-weight: 500;
     font-size: 3rem !important;
     height: 50px;
-    align-items: center;
+    align-items: center !important;
     /* justify-content: center; */
-    display: flex;
+    display: flex !important;
+    flex-direction: row !important;
+    width: 300px;
+}
+
+.logoutMobile {
+    color: red !important;
 }
 
 .navbarLogo {

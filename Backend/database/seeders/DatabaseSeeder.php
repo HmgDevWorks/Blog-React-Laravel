@@ -46,8 +46,10 @@ class DatabaseSeeder extends Seeder
             $post->save();
         });
 
-        $users->each(function ($user) use ($posts) {
-            $postsRandom = $posts->random(rand(1, 10));
+        $publishedPosts = $posts->where('status', 'published'); // Filtra solo publicados
+
+        $users->each(function ($user) use ($publishedPosts) {
+            $postsRandom = $publishedPosts->random(min(rand(5, 20), $publishedPosts->count())); //para definir cuantos favoritos tenga cada user en este caso de 5 a 20
             foreach ($postsRandom as $post) {
                 Favorites::factory()->create([
                     'user_id' => $user->id,

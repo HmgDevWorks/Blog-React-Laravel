@@ -21,6 +21,7 @@ use App\Models\User;
 use App\Mail\CustomEmailVerification;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\UploadController;
 
 
 // Route::get('/user', function (Request $request) {
@@ -44,9 +45,12 @@ Route::get('/stats/counter', [PostController::class, 'getStatsForCounter']); //s
 Route::get('/categories/{data}', [CategoriesController::class, 'showCategoriesByName']); //muestra el nombre de las categorias
 Route::get('/posts/news', [PostController::class, 'getTenNewsPost']);
 Route::get('/newsletter/generate', [NewsletterController::class, 'generate']); //ruta para probar que la newsletter se envia y que envia todo bene
+Route::get('/popular-users', [PostController::class, 'searchPopuUser']);
 
 Route::middleware('auth:api')->get('/verify-token', [AuthController::class, 'verifyToken']);
 Route::middleware('auth:api')->post('/refresh-token', [AuthController::class, 'refreshToken']);
+Route::post('/upload', [UploadController::class, 'uploadImage'])->middleware([JwtMiddleware::class])->middleware('role:admin|editor'); //ruta para subir img al post
+Route::post('/profile/upload-avatar', [UploadController::class, 'uploadAvatar'])->middleware([JwtMiddleware::class])->middleware('role:admin|editor'); //ruta para cambiar la imagen de perfil
 
 Route::middleware('auth:api')->get('/verify-token', function (Request $request) {
     $user = $request->user();
@@ -98,22 +102,29 @@ Route::controller(PermissionController::class)->middleware([JwtMiddleware::class
     Route::post('/roles/{role}/permissions/revoke','revokePermissionFromRole')->name('permission.revokePermissionFromRole')->middleware('role:admin');
 });
 
+Route::get('/posts/searchAuthors', [PostController::class, 'searchAuthors']);
+
 Route::controller(PostController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/posts', 'index')->name('posts.index')->middleware('role:admin|editor|reader'); // enseña los 10 últimos
-    Route::get('/posts/{id}','getPublishedPostById')->name('posts.getPublishedPostById')->middleware('role:admin|editor|reader');//enseña los posts published de un user
-    Route::get('/posts/status','getPublishedOrDraftOrDeletedPosts')->name('posts.getPublishedOrDraftOrDeletedPosts')->middleware('role:admin|editor|reader');//elige y enseña los posts published draft o deleted del user auth
-    Route::get('/posts/show', 'show')->middleware('role:admin|editor|reader'); // Enseña todos los posts
+    Route::get('/posts/count', 'getCountPost')->name('posts.getCountPost')->middleware('role:admin|editor|reader');//muestra la cantidad de post published que tiene el user
+    Route::get('/posts/authUser','getPostsAuthUser')->name('posts.getPostsAuthUser')->middleware('role:admin|editor'); //muestra los posts publis y delet del user auth para el crear articulo
+    Route::get('/posts/published/{id}','getPublishedPostById')->name('posts.getPublishedPostById')->middleware('role:admin|editor|reader');//enseña los posts published de un user
+    Route::get('/posts/admin/{id}','getPostsForAdminbyId')->name('posts.getPostsForAdminbyId')->middleware('role:admin');//muestra todos los post de un user a un admin
+    Route::get('/posts/status','getPostsByStatus')->name('posts.getPostsByStatus')->middleware('role:admin|editor|reader');//elige y enseña los posts published draft o deleted del user auth
+    Route::get('/posts/all', 'show')->name('posts.show')->middleware('role:admin|editor|reader'); // Enseña todos los posts (URL modificada)
     Route::get('/posts/show/{post}', 'getPostById')->middleware('role:admin|editor|reader'); // Enseña un post por un id
-    Route::get('/posts/user/{id}', 'postUser')->middleware('role:admin|editor|reader');    //Enseña los post a traves del id del usuario
-    Route::get('/posts/searchPosts', 'searchPosts')->middleware('role:admin|editor|reader');    //Ruta para buscar posts BARRA DE BÚSQUEDA
-    Route::get('/posts/posts-overview/{userId}', 'getUserPostsOverview')->middleware('role:admin|editor|reader');    // Devuelve las estadísticas para el Dashboard
+    Route::get('/posts/user/{id}', 'postUser')->middleware('role:admin|editor|reader');     //Enseña los post a traves del id del usuario
+    Route::get('/posts/searchPosts', 'searchPosts')->middleware('role:admin|editor|reader');      //Ruta para buscar posts BARRA DE BÚSQUEDA 
+    //Route::get('/posts/searchAuthors','searchAuthors')->middleware('role:admin|editor|reader');//ruta para barra de busqueda de autores   
+    Route::get('/posts/posts-overview/{userId}', 'getUserPostsOverview')->middleware('role:admin|editor|reader');      // Devuelve las estadísticas para el Dashboard
     Route::post('/posts/store', 'store')->name('posts.store')->middleware('role:admin|editor'); //Crea un post
     Route::put('/posts/update/{post}', 'update')->name('posts.update')->middleware('role:admin|editor'); //Actualiza Post
-    Route::delete('/posts/destroy/{post}', 'destroy')->name('posts.destroy'); //->middleware('role:admin|editor'); //Borra 
+    Route::delete('/posts/destroy/{post}', 'destroy')->name('posts.destroy')->middleware('role:admin|editor'); //Borra
 });
 
 Route::controller(FavoritesController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/favorites', 'getFavoritesForAuthenticatedUser')->name('favorites.getFavoritesForAuthenticatedUser')->middleware('role:admin|editor|reader'); //solo enseña los del usuario verificado
+    Route::get('/favorites/count', 'getFavsCount')->name('favorites.getFavsCount')->middleware('role:admin|editor|reader'); //muestra la cantidad de favs que tiene el user
     Route::get('/favorites/{userId}', 'index')->name('favorites.index')->middleware('role:admin'); // enseña todos los favoritos se puede modificar para que salgan todos del tiron o como esta por user_id
     Route::post('/favorites/store/{postId}', 'store')->name('favorites.store')->middleware('role:admin|editor|reader'); //Crea un nuevo fav
     Route::delete('/favorites/destroy/{postId}', 'destroy')->name('favorites.destroy')->middleware('role:admin|editor|reader'); //Borra un fav marcado hay que pasarle el ID del post para borrarlo, no el id que tiene el favoritos
