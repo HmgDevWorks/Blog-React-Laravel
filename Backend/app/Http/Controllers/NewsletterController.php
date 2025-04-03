@@ -27,6 +27,6 @@ class NewsletterController extends Controller
             Mail::to($email)->send(new WeeklyNewsletter($data));
         }
 
-        return response()->json(['message' => 'Boletín generado y enviado correctamente']);
+        return response()->json(['message' => 'successMsg.successCreateNewsletter']);
     }
 }

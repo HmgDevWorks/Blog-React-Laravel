@@ -19,8 +19,10 @@ class UserService extends BaseService {
     getUserById(id) {
         return this.api.get(`/users/${id}`)
     }
-
-
+    
+    postUserImg(){
+        return this.api.get(`/profile/upload-avatar`)
+    }
 
     requestPasswordReset(data) {
         return this.api.post(`/password/email`,data);

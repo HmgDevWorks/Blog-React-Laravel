@@ -57,7 +57,7 @@ const NewsComponent = () => {
               id={`slide${item.id}`}
               className={`carousel-item relative w-full  ${index === currentSlide ? 'block' : 'hidden'}`}
             >
-              <Link key={item.id} to={`/detallesBlog/${item.id}`}>
+              <Link key={item.id} to={`/postDetails/${item.id}`}>
                 <PostDetails className="w-full" blog={item} />
               </Link>
               <div className='pb-4'>

@@ -102,11 +102,11 @@ class PostController extends Controller
         }
 
         $posts = Post::where('status', 'published') // Función waparda para la barra de búsqueda que filtra con el request "search"
-        ->where('title', 'like', "%$search%")
-        ->select('id', 'title', 'views', 'user_id','id_categories') 
-        ->with('author:id,name_user') // Cargamos la relación author solo con id y name_user y la de categories para que nos salga tanto el name user como la categoria
-        ->with('categories:id,name')
-        ->get();
+            ->where('title', 'like', "%$search%")
+            ->select('id', 'title', 'views', 'user_id', 'id_categories')
+            ->with('author:id,name_user') // Cargamos la relación author solo con id y name_user y la de categories para que nos salga tanto el name user como la categoria
+            ->with('categories:id,name')
+            ->get();
 
         if ($posts->isEmpty()) {
             //return response()->json(["message" => "No existen posts con '$search' como búsqueda"], 200);
@@ -114,7 +114,7 @@ class PostController extends Controller
 
         }
         return response()->json(['posts' => $posts]);
-    } 
+    }
 
 
     public function searchAuthors(Request $request)
@@ -123,59 +123,61 @@ class PostController extends Controller
 
         if (!$search || strlen($search) < 2) {
             return response()->json(["error" => "errorMsg.errorSearchCharacters"], 400);
-        }        
+        }
 
         $authors = User::whereHas('posts', function ($query) { // Utilizamos la función para buscar autores que hayan publicado algún post
-                $query->where('status', 'published');})
+            $query->where('status', 'published');
+        })
             ->when($search, function ($query) use ($search) {
-                $query->where('name_user', 'LIKE', "%$search%");})
-            ->select('id', 'name_user') 
+                $query->where('name_user', 'LIKE', "%$search%");
+            })
+            ->select('id', 'name_user')
             ->get();
-        
+
         if ($authors->isEmpty()) {
             return response()->json(["message" => "errorMsg.errorFindSearchAuthors"], 200);
 
         }
-                
-            foreach ($authors as $author) {  // Utilizamos la función para calcular las visitas totales de cada autor y la categoria mas usada 
-                $posts = Post::where('user_id', $author->id)
-                    ->where('status', 'published')
-                    ->get();
-        
-                $author->total_visits = $posts->sum('views');  // visitas totales
-    
-                $mostUsedCategoryId = $posts->groupBy('id_categories')
-                ->sortByDesc(fn ($posts) => count($posts))
+
+        foreach ($authors as $author) {  // Utilizamos la función para calcular las visitas totales de cada autor y la categoria mas usada 
+            $posts = Post::where('user_id', $author->id)
+                ->where('status', 'published')
+                ->get();
+
+            $author->total_visits = $posts->sum('views');  // visitas totales
+
+            $mostUsedCategoryId = $posts->groupBy('id_categories')
+                ->sortByDesc(fn($posts) => count($posts))
                 ->keys()
                 ->first();
-            
-                $mostUsedCategoryName = $mostUsedCategoryId  
-                    ? Categories::where('id', $mostUsedCategoryId)->value('name')  
-                    : null;
-                
-                $author->most_used_category = $mostUsedCategoryName;
-            }
-    
+
+            $mostUsedCategoryName = $mostUsedCategoryId
+                ? Categories::where('id', $mostUsedCategoryId)->value('name')
+                : null;
+
+            $author->most_used_category = $mostUsedCategoryName;
+        }
+
         return response()->json($authors);
     }
 
-    
+
     public function searchPopuUser(): JsonResponse
     {
         $popularUsers = User::query() //metodo query para hacer una consulta mas extensa
-        ->leftJoinSub( //para unir una subconsulta
-            Post::where('status', 'published')
-                ->groupBy('user_id')
-                ->select('user_id', DB::raw('SUM(views) as total_views')), // permite obtener el total de visitar por autores
-            'post_views', //alias o nombre para la subconsulta
-            'users.id', //columna de la tabla para la union
-            '=', 
-            'post_views.user_id' //columna creada de la subconsulta para la union
-        )
-        ->orderByDesc('total_views')
-        ->take(10)
-        ->select('users.id', 'users.name_user', 'users.img_user', 'post_views.total_views')
-        ->get();
+            ->leftJoinSub( //para unir una subconsulta
+                Post::where('status', 'published')
+                    ->groupBy('user_id')
+                    ->select('user_id', DB::raw('SUM(views) as total_views')), // permite obtener el total de visitar por autores
+                'post_views', //alias o nombre para la subconsulta
+                'users.id', //columna de la tabla para la union
+                '=',
+                'post_views.user_id' //columna creada de la subconsulta para la union
+            )
+            ->orderByDesc('total_views')
+            ->take(10)
+            ->select('users.id', 'users.name_user', 'users.img_user', 'post_views.total_views')
+            ->get();
 
         return response()->json(['popular_users' => $popularUsers]);
     }
@@ -205,23 +207,23 @@ class PostController extends Controller
         ]);
     }
 
-    public function getPostsByStatus(Request $request):JsonResponse
+    public function getPostsByStatus(Request $request): JsonResponse
     {
         $user = auth()->user();
         if (!$user) {
             return response()->json(["message" => "errorMsg.errorUserNotAuth"], 401);
         }
-    
+
         $status = trim(strtolower($request->input('status')));
-        
+
         $posts = Post::where('user_id', $user->id)
             ->where('status', $status)
             ->get();
-    
+
         if ($posts->isEmpty()) {
             return response()->json(["message" => "errorMsg.errorFindPostStatus"], 404);
         }
-    
+
         return response()->json(['posts' => $posts], 200);
     }
 
@@ -235,7 +237,7 @@ class PostController extends Controller
             return response()->json(["message" => "errorMsg.errorCeroPostPublish"], 200);
         }
 
-        return response()->json(['posts' => $posts]);
+        return response()->json([$posts]);
     }
 
     public function getPostsForAdminbyId($id)
@@ -248,29 +250,29 @@ class PostController extends Controller
 
     public function getPostsAuthUser()
     {
-        $user= Auth::user();
+        $user = Auth::user();
 
         $posts = Post::where('user_id', $user->id)
-        ->whereIn('status', ['published', 'deleted'])
-        ->withCount('favorites') // Cuenta cuántas veces ha sido marcado como favorito
-        ->get()
-        ->map(function ($post) {
-            return [
-                'id' => $post->id,
-                'title' => $post->title,
-                'created_at' => $post->created_at ? $post->created_at->format('Y-m-d') : null,
-                'status' => $post->status,
-                'views' => $post->views,
-                'favorites_count' => $post->favorites_count,
-            ];
-        });
+            ->whereIn('status', ['published', 'deleted'])
+            ->withCount('favorites') // Cuenta cuántas veces ha sido marcado como favorito
+            ->get()
+            ->map(function ($post) {
+                return [
+                    'id' => $post->id,
+                    'title' => $post->title,
+                    'created_at' => $post->created_at ? $post->created_at->format('Y-m-d') : null,
+                    'status' => $post->status,
+                    'views' => $post->views,
+                    'favorites_count' => $post->favorites_count,
+                ];
+            });
 
         return response()->json($posts);
     }
 
     public function getCountPost()
     {
-        $user=Auth::user();
+        $user = Auth::user();
 
         return $user->posts()->where('status', 'published')->count();
 
