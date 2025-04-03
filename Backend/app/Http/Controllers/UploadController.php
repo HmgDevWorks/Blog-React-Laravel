@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+//use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Cloudinary\Cloudinary as CloudinaryCore; 
+
 
 
 class UploadController extends Controller
@@ -22,8 +24,8 @@ class UploadController extends Controller
             'file' => [
                 'required',
                 'file',
-                'mimes:jpg,jpeg,png,gif', // Extensiones permitidas
-                'max:5120', // Tamaño máximo en KB (5MB)
+                'mimes:jpg,jpeg,png,gif',
+                'max:5120',
                 function ($attribute, $value, $fail) {
                     try {
                         list($width, $height) = getimagesize($value);
@@ -36,49 +38,89 @@ class UploadController extends Controller
                 },
             ],
         ]);
-    
+
         try {
-            // Subir a Cloudinary
-            $uploadedFile = Cloudinary::upload($request->file('file')->getRealPath(), [
-                'folder' => 'my_secure_uploads_posts',
-                'transformation' => [
-                    ['width' => 1080, 'height' => 1080, 'crop' => 'limit'] // Redimensionar si es muy grande
+            $cloudinaryUrl = env('CLOUDINARY_URL');
+            $cloudinary = new CloudinaryCore($cloudinaryUrl);
+
+            $uploadResult = $cloudinary->uploadApi()->upload(
+                $request->file('file')->getRealPath(),
+                [
+                    'folder' => 'Posts_Img',
+                    'transformation' => [
+                        ['width' => 1080, 'height' => 1080, 'crop' => 'limit'],
+                    ],
                 ]
-            ]);
-    
+            );
+
             return response()->json([
-                'src' => $uploadedFile->getSecurePath(),
-                'alt' => $uploadedFile->getFileName() ?? 'cloudinary_image',
+                'src' => $uploadResult['secure_url'], // Accede como array
+                'alt' => $uploadResult['public_id'] ?? 'cloudinary_image', // Accede como array
                 'sizes' => [
-                    'width' => $uploadedFile->getWidth(),
-                    'height' => $uploadedFile->getHeight(),
+                    'width' => $uploadResult['width'], // Accede como array
+                    'height' => $uploadResult['height'], // Accede como array
                 ],
             ]);
-    
+
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error al subir la imagen a Cloudinary: ' . $e->getMessage()], 500);
         }
     }
 
+   // public function uploadAvatar(Request $request)
+    // {
+    //     dd(class_exists('\CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary'));
+
+    //     $request->validate([
+    //         'img_user' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Valida la imagen
+    //     ]);
+
+    //     try {
+    //         $uploadedFile = $request->file('img_user');
+    //         $uploadResult = Cloudinary::upload($uploadedFile->getRealPath(), [
+    //             'folder' => 'Avatars_Img', // Carpeta en Cloudinary para avatares
+    //             'transformation' => [
+    //                 'width' => 200,
+    //                 'height' => 200,
+    //                 'crop' => 'fill', // Ajusta la imagen al tamaño manteniendo la proporción y recortando si es necesario
+    //             ],
+    //         ]);
+
+    //         $user = Auth::user(); // Obtiene el usuario autenticado
+    //         $user->img_user = $uploadResult->getSecurePath();
+    //         $user->save();
+
+    //         return response()->json(['img_user' => $user->img_user], 200);
+
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => 'Error al subir el avatar: ' . $e->getMessage()], 500);
+    //     }
+    // }
     public function uploadAvatar(Request $request)
     {
         $request->validate([
-            'img_user' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Valida la imagen
+            'img_user' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         try {
-            $uploadedFile = $request->file('img_user');
-            $uploadResult = Cloudinary::upload($uploadedFile->getRealPath(), [
-                'folder' => 'profile_avatars', // Carpeta en Cloudinary para avatares
-                'transformation' => [
-                    'width' => 200,
-                    'height' => 200,
-                    'crop' => 'fill', // Ajusta la imagen al tamaño manteniendo la proporción y recortando si es necesario
-                ],
-            ]);
+            $cloudinaryUrl = env('CLOUDINARY_URL');
+            $cloudinary = new CloudinaryCore($cloudinaryUrl);
 
-            $user = Auth::user(); // Obtiene el usuario autenticado
-            $user->img_user = $uploadResult->getSecurePath();
+            $uploadResult = $cloudinary->uploadApi()->upload(
+                $request->file('img_user')->getRealPath(),
+                [
+                    'folder' => 'Avatars_Img',
+                    'transformation' => [
+                        'width' => 200,
+                        'height' => 200,
+                        'crop' => 'fill',
+                    ],
+                ]
+            );
+
+            $user = Auth::user();
+            $user->img_user = $uploadResult['secure_url']; // Accede como array
+
             $user->save();
 
             return response()->json(['img_user' => $user->img_user], 200);
