@@ -50,7 +50,6 @@ const CreatePostPage = () => {
   //     });
 
   // }, []);
-
   return (
     <div className="mt-4 mb-4">
       <Box title={t("createPostPage.draft")}>
@@ -60,7 +59,7 @@ const CreatePostPage = () => {
       <Editor />
       <Separador />
       <Box title={t("createPostPage.posts")}>
-        <PostTablePagination filter={"published"} />
+        <PostTablePagination filter={"published"} user_id={loggedUser.id} />
       </Box>
     </div>
   );

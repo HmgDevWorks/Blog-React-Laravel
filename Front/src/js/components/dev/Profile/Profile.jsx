@@ -43,7 +43,7 @@ function Profile() {
                 setEmail(ofuscateEmail(data?.email_user));
             }).catch((error) => {
                 console.log(error);
-                addError(error.response.data.message);
+                addError(t(error.message));
             });
     }, []);
 
@@ -59,7 +59,7 @@ function Profile() {
                 addSuccess(t(data.message));
             }).catch((error) => {
                 console.log(error);
-                addError(error.response.data.message);
+                addError(t(error.message));
             });
     }
 
