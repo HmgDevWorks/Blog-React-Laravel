@@ -5,6 +5,8 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\User;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -35,7 +37,7 @@ class UserFactory extends Factory
             'bio' => $this->faker->realText(rand(20,40)),
             'remember_token' => Str::random(10),
             'email_verified_at' => now(), 
-           // 'img_user' => 'avatars/default.png',
+            'img_user' => null,
             'created_at' => fake()->dateTimeBetween('2024-01-01', 'now')->format('Y-m-d H:i:s'),
         ];
     }

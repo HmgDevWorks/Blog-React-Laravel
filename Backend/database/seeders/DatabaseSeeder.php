@@ -57,5 +57,6 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         });
+        $this->call(AssignProfilePhotosSeeder::class); // Asigna fotos de perfil a los usuarios con mas views
     }
 }
