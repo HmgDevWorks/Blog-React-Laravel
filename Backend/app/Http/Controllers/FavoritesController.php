@@ -40,7 +40,7 @@ class FavoritesController extends Controller
     {
        $user = auth()->user(); // Obtiene el usuario autenticado desde el token
         if (!$user) {
-        return response()->json(['error' => 'Usuario no autenticado'], 401);
+        return response()->json(['message' => 'errorMsg.errorUserNotAuth'], 401);
     }
     return $this->favoritesService->addFavorite($user, $postId);
     }

@@ -46,7 +46,7 @@ class RoleService {
 
         $role = Role::where('name', $request->role)->first(); // buscar el rol por nombre y obtener su ID
         if (!$role) {
-            return response()->json(["ERROR AQUI" => "errorMsg.errorRoleNotExist"], 400);
+            return response()->json(["message" => "errorMsg.errorRoleNotExist"], 400);
         }
 
         $user->syncRoles([$role->id]); //funcion que asigna el rol en la tabla model has roles

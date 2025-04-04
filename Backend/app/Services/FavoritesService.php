@@ -14,14 +14,14 @@ class FavoritesService {
         $post = Post::find($postId);
     
         if (!$post) {
-            return response()->json(['mensaje' => 'Post no encontrado']);
+            return response()->json(['message' => 'errorMsg.errorPostNotFound']);
         }
     
         // Verificar si ya está en favoritos
         $exists = $user->favorites()->where('post_id', $postId)->exists();
     
         if ($exists) {
-            return response()->json(['mensaje' => 'Este post ya está en favoritos']);
+            return response()->json(['message' => 'infoMsg.infoPostDoubleFav']);
         }
     
         // Si no existe, lo añadimos
@@ -30,7 +30,7 @@ class FavoritesService {
             'created_at' => now(),
         ]);
     
-        return response()->json(['mensaje' => 'Post marcado como favorito']);
+        return response()->json(['message' => 'successMsg.successPostFav']);
     }
     
 
@@ -41,9 +41,9 @@ class FavoritesService {
             $post = Post::find($postId); // Encuentra el post
             if ($post) {
                 $user->favorites()->where('post_id', $post->id)->delete();
-                return response()->json(['mensaje' => 'Post eliminado de favoritos']);
+                return response()->json(['message' => 'successMsg.successPostDeleteFav']);
             }
-            return response()->json(['mensaje' => 'Post no encontrado']);
+            return response()->json(['message' => 'errorMsg.errorPostNotFound']);
         }
 
      public function getFavoritesForUser($user)
@@ -58,6 +58,6 @@ class FavoritesService {
             $favorites = $user->favorites()->with('post')->get();//devuelve los favoritos y el post entero
             return response()->json($favorites);
         }
-        return response()->json(['message' => 'Usuario no encontrado'], 404);
+        return response()->json(['message' => 'errorMsg.errorUserNotFound'], 404);
     }
 }

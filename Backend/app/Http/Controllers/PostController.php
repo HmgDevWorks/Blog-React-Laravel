@@ -99,7 +99,7 @@ class PostController extends Controller
         $search = $request->input('search');
 
         if (!$search || strlen($search) < 2) {
-            return response()->json(["error" => "errorMsg.errorSearchCharacters"], 400);
+            return response()->json(["message" => "errorMsg.errorSearchCharacters"], 400);
         }
 
         $posts = Post::where('status', 'published') // Función waparda para la barra de búsqueda que filtra con el request "search"
@@ -123,7 +123,7 @@ class PostController extends Controller
         $search = $request->input('search');
 
         if (!$search || strlen($search) < 2) {
-            return response()->json(["error" => "errorMsg.errorSearchCharacters"], 400);
+            return response()->json(["message" => "errorMsg.errorSearchCharacters"], 400);
         }
 
         $authors = User::whereHas('posts', function ($query) { // Utilizamos la función para buscar autores que hayan publicado algún post
@@ -223,8 +223,7 @@ class PostController extends Controller
 
         if ($posts->isEmpty()) {
             return response()->json([
-
-                'message' => 'No se encontraron posts con el status especificado.'
+                'message' => 'errorMsg.errorFindPostStatusOnly.'
             ], 200);
         }
 
