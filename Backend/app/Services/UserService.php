@@ -21,8 +21,9 @@ class UserService
         return User::all();
     }
 
-    public function getUserById($id)  // Devuelve el post con el ID especificado, o lanza un error 404 si no existe
+    public function getUserById($id)  // Devuelve el usuario con el ID especificado, o lanza un error 404 si no existe
     {   
+
         return User::findOrFail($id);
     }
 
