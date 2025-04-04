@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -179,7 +180,7 @@ class PostController extends Controller
             ->select('users.id', 'users.name_user', 'users.img_user', 'post_views.total_views')
             ->get();
 
-        return response()->json(['popular_users' => $popularUsers]);
+        return response()->json($popularUsers);
     }
 
     public function getUserPostsOverview($userId): JsonResponse // Obtenemos los post ordenados por visitas y su porcentaje, también los posts agrupados por mes y por último obtenemos posts agrupados por mes y sus visitas
@@ -221,7 +222,10 @@ class PostController extends Controller
             ->get();
 
         if ($posts->isEmpty()) {
-            return response()->json(["message" => "errorMsg.errorFindPostStatus"], 404);
+            return response()->json([
+
+                'message' => 'No se encontraron posts con el status especificado.'
+            ], 200);
         }
 
         return response()->json(['posts' => $posts], 200);
@@ -237,7 +241,7 @@ class PostController extends Controller
             return response()->json(["message" => "errorMsg.errorCeroPostPublish"], 200);
         }
 
-        return response()->json([$posts]);
+        return response()->json($posts);
     }
 
     public function getPostsForAdminbyId($id)

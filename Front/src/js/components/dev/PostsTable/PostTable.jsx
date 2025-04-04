@@ -16,11 +16,10 @@ const formatDate = (dateString) => {
   }).format(date);
 };
 
-export default function PostTable({ posts, currentPage, postsPerPage, onPageChange, setPosts }) {
+export default function PostTable({ posts, currentPage, postsPerPage, onPageChange, setPosts, rechargePosts }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  console.log("QUE COÑO RECIBO?", posts);
   if (!Array.isArray(posts)) {
     return (
       <div className="alert alert-warning">
@@ -106,10 +105,7 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
                 key={i}
                 className={`join-item btn ${currentPage === i + 1 ? 'btn-active' : ''}`}
                 onClick={() => {
-                  onPageChange(i + 1);
-                  //  ESTO ES PARA SI QUEREMOS QUE AL CAMBIAR DE PAGINA SE RECARGUEN LOS POSTS ,
-                  //  PARA QUE SE ELIMINEN SI HAS QUITADO EL ME GUSTA 
-                  //  rechargePosts() 
+                  onPageChange(i + 1), rechargePosts()
                 }}
               >
                 {i + 1}

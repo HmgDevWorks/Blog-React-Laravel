@@ -1,0 +1,13 @@
+.popViewsFather {
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    position: absolute;
+    right: 10px;
+    top: 40%;
+}
+
+.primerAutor:hover {
+    cursor: pointer;
+    background-color: var(--saturadoClaro)
+}

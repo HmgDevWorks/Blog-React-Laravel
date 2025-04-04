@@ -28,6 +28,12 @@
   color: var(--grisOscuro); /* Establece el color del texto como grisOscuro */
 }
 
+.role-select {
+  color: var(--grisOscuro); /* Establece el color del texto como blanco */
+  border: none; /* Elimina el borde del botón */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  margin: 5px 0; /* Ajusta el valor según tus necesidades */
+}
 
 .view-posts-button, .delete-button {
   padding: 5px 10px; /* Ajusta el valor según tus necesidades */
