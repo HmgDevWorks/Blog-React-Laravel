@@ -16,7 +16,6 @@ const AuthorPage = () => {
   const [author, setAuthor] = useState({
     name: "Nombre default"
   })
-
   useEffect(() => {
 
     userService.getUserById(authorId)
@@ -39,7 +38,7 @@ const AuthorPage = () => {
   return (
     <div className='author-page'>
       <h1 className='author'>{t("authorPage.title",)} {author.name_user} </h1>
-      {authorPosts && <PostTablePagination filter={"published"} id={authorId} />}
+      {authorPosts && <PostTablePagination filter={"published"} user_id={authorId} />}
     </div>
   );
 };
