@@ -45,7 +45,7 @@ Route::get('/stats/counter', [PostController::class, 'getStatsForCounter']); //s
 Route::get('/categories/{data}', [CategoriesController::class, 'showCategoriesByName']); //muestra el nombre de las categorias
 Route::get('/posts/news', [PostController::class, 'getTenNewsPost']);
 Route::get('/newsletter/generate', [NewsletterController::class, 'generate']); //ruta para probar que la newsletter se envia y que envia todo bene
-Route::get('/popular-users', [PostController::class, 'searchPopuUser']);
+Route::get('/popular-users', [PostController::class, 'searchPopuUser']); //ruta para inicio para que puedan ver los autores mas popus
 
 Route::middleware('auth:api')->get('/verify-token', [AuthController::class, 'verifyToken']);
 Route::middleware('auth:api')->post('/refresh-token', [AuthController::class, 'refreshToken']);
