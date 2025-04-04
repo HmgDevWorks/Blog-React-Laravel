@@ -56,6 +56,7 @@ const AdminPage = () => {
       <h1 className="Titulo_Admin_Page">{t("admin.title")}</h1>
       <div className="admin-users">
         {currentUsers.map(user => (
+          console.log(user), 
           <AdminUserItem
             key={user.id}
             user_id={user.id}

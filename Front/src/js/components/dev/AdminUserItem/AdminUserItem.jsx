@@ -9,8 +9,10 @@ const AdminUserItem = ({ user_id, user, currentRole, onDelete, onRoleChange }) =
 
   const handleRoleChange = (event) => {
     const newRole = event.target.value; // Obtiene el nuevo rol seleccionado
+    console.log(newRole)
     rolService.UpdateRole(user_id, { role: newRole }) // Llama al servicio para cambiar el rol
-      .then(() => {
+      .then(({data}) => {
+        console.log(data);
         onRoleChange(user_id, newRole); // Actualiza el estado en el componente padre
       })
       .catch(error => {
@@ -27,8 +29,9 @@ const AdminUserItem = ({ user_id, user, currentRole, onDelete, onRoleChange }) =
           value={currentRole} // Muestra el rol actual
           onChange={handleRoleChange}
         >
-          <option value="1">{t("administrador")}</option>
-          <option value="2">{t("viewer")}</option>
+          <option value="admin">admin</option>
+          <option value="reader">lector</option>
+          <option value="editor">editor</option>
         </select>
         <button className="view-posts-button" onClick={() => Navigate(`/author/${user_id}`)}>{t("posts")}</button>
         <button className="delete-button" onClick={() => onDelete(user_id)}>{t("admin.delete")}</button>
