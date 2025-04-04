@@ -65,14 +65,15 @@ Route::middleware('auth:api')->get('/verify-token', function (Request $request) 
 });
 
 Route::controller(ProfileController::class)->middleware([JwtMiddleware::class])->group(function () {
-    Route::get('/users/infouser','getInfoUser')->name('users.getInfoUser')->middleware('role:admin|editor|viewer'); //muestra info no sensible del user
+    Route::get('/users/infouser', 'getInfoUser')->name('users.getInfoUser')->middleware('role:admin|editor|viewer'); //muestra info no sensible del user
     //Route::get('/users/infofav','getInfoFavUser')->name('users.getInfoFavUser')->middleware('role:admin|editor'); //muestra los favs que tienen los post de un user editor/admin
-    Route::get('/users/infoviews','getInfoViewUser')->name('users.getInfoViewUser')->middleware('role:admin|editor'); //cantidad de visitas que tienen todos sus posts
-    Route::get('/users/infousercrypt','getInfoUserCrypted')->name('users.getInfoUserCrypted')->middleware('role:admin|editor|viewer'); //muestra toda la info del user pero cryptada
+    Route::get('/users/infoviews', 'getInfoViewUser')->name('users.getInfoViewUser')->middleware('role:admin|editor'); //cantidad de visitas que tienen todos sus posts
+    Route::get('/users/infousercrypt', 'getInfoUserCrypted')->name('users.getInfoUserCrypted')->middleware('role:admin|editor|viewer'); //muestra toda la info del user pero cryptada
     Route::get('/users', 'index')->name('users.index')->middleware('role:admin|editor'); //muestra todos los usuarios
     Route::get('/users/{user}', 'show')->name('users.show')->middleware('role:admin|editor|reader'); //muestra el usuario por el id
     Route::post('/users/store', 'store')->name('users.store')->middleware('role:admin'); //crea un usuario sin registro normal
-    Route::put('/users/update', 'update')->name('users.update')->middleware('role:admin|editor|reader');; //middleware en el servicio
+    Route::put('/users/update', 'update')->name('users.update')->middleware('role:admin|editor|reader');
+    ; //middleware en el servicio
     Route::put('/users/updatePassword', 'getUpdatePassword')->name('users.getUpdatePassword')->middleware('role:admin|editor|reader'); //cambia la contraseña, se necesita "current_password" y "new_password"
     Route::put('/users/changeRole/{user}', 'changeRole')->name('users.changeRole')->middleware('role:admin'); //cambio de roles, solo se puede si eres adminn
     Route::delete('/users/destroy/{user}', 'destroy')->name('users.destroy')->middleware('role:admin'); //eliminar un perfil
@@ -98,19 +99,19 @@ Route::controller(RoleController::class)->middleware([JwtMiddleware::class])->gr
 Route::controller(PermissionController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/permission', 'index')->middleware('role:admin'); //enseña todos los permisos
     Route::post('/permission/create', 'create')->name('permission.create')->middleware('role:admin'); //crea un nuevo permiso
-    Route::post('/permission/{role}/permissions','assignPermissionToRole')->name('permission.assignPermissionToRole')->middleware('role:admin');
-    Route::post('/roles/{role}/permissions/revoke','revokePermissionFromRole')->name('permission.revokePermissionFromRole')->middleware('role:admin');
+    Route::post('/permission/{role}/permissions', 'assignPermissionToRole')->name('permission.assignPermissionToRole')->middleware('role:admin');
+    Route::post('/roles/{role}/permissions/revoke', 'revokePermissionFromRole')->name('permission.revokePermissionFromRole')->middleware('role:admin');
 });
 
 Route::get('/posts/searchAuthors', [PostController::class, 'searchAuthors']);
 
 Route::controller(PostController::class)->middleware([JwtMiddleware::class])->group(function () {
-    Route::get('/posts', 'index')->name('posts.index')->middleware('role:admin|editor|reader'); // enseña los 10 últimos
+    Route::get('/posts/show', 'index')->name('posts.index')->middleware('role:admin|editor|reader'); // enseña los 10 últimos
     Route::get('/posts/count', 'getCountPost')->name('posts.getCountPost')->middleware('role:admin|editor|reader');//muestra la cantidad de post published que tiene el user
-    Route::get('/posts/authUser','getPostsAuthUser')->name('posts.getPostsAuthUser')->middleware('role:admin|editor'); //muestra los posts publis y delet del user auth para el crear articulo
-    Route::get('/posts/published/{id}','getPublishedPostById')->name('posts.getPublishedPostById')->middleware('role:admin|editor|reader');//enseña los posts published de un user
-    Route::get('/posts/admin/{id}','getPostsForAdminbyId')->name('posts.getPostsForAdminbyId')->middleware('role:admin');//muestra todos los post de un user a un admin
-    Route::get('/posts/status','getPostsByStatus')->name('posts.getPostsByStatus')->middleware('role:admin|editor|reader');//elige y enseña los posts published draft o deleted del user auth
+    Route::get('/posts/authUser', 'getPostsAuthUser')->name('posts.getPostsAuthUser')->middleware('role:admin|editor'); //muestra los posts publis y delet del user auth para el crear articulo
+    Route::get('/posts/published/{id}', 'getPublishedPostById')->name('posts.getPublishedPostById')->middleware('role:admin|editor|reader');//enseña los posts published de un user
+    Route::get('/posts/admin/{id}', 'getPostsForAdminbyId')->name('posts.getPostsForAdminbyId')->middleware('role:admin');//muestra todos los post de un user a un admin
+    Route::get('/posts/status', 'getPostsByStatus')->name('posts.getPostsByStatus')->middleware('role:admin|editor|reader');//elige y enseña los posts published draft o deleted del user auth
     Route::get('/posts/all', 'show')->name('posts.show')->middleware('role:admin|editor|reader'); // Enseña todos los posts (URL modificada)
     Route::get('/posts/show/{post}', 'getPostById')->middleware('role:admin|editor|reader'); // Enseña un post por un id
     Route::get('/posts/user/{id}', 'postUser')->middleware('role:admin|editor|reader');     //Enseña los post a traves del id del usuario
