@@ -15,6 +15,10 @@
     --p-color: black;
 }
 
+.text-remember {
+    color: var(--grisOscuro);
+}
+
 * {
     font-family: var(--font);
 }

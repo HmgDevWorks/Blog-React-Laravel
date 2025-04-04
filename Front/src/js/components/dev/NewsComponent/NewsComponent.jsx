@@ -45,9 +45,8 @@ const NewsComponent = () => {
   };
 
   return (
-    // <div className='mb-4 mt-4 novedades-page'>
     <><h1 className='novedades'>{t("news.title")}</h1>
-      <div className="carousel w-full carousel-news  mx-auto relative">
+      <div className={`carousel w-full carousel-news mx-auto relative `}>
         {newsItems && newsItems.length > 0 ? (
           newsItems.map((item, index) => (
 

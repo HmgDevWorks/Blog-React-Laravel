@@ -18,10 +18,9 @@ const AuthorPage = () => {
   })
 
   useEffect(() => {
-    console.log(authorId);
+
     userService.getUserById(authorId)
       .then(response => {
-        console.log(response);
         setAuthor(response.data);
       }).catch(error => {
         console.log(error);
@@ -30,7 +29,6 @@ const AuthorPage = () => {
 
     postService.getUserPosts(authorId)
       .then(response => {
-        console.log(response);
         setAuthorPosts(response.data);
       }).catch(error => {
         console.log(error);
@@ -40,7 +38,7 @@ const AuthorPage = () => {
 
   return (
     <div className='author-page'>
-      <h1 className='author'>{t("authorPage.title", { name: author.name_user })}</h1>
+      <h1 className='author'>{t("authorPage.title",)} {author.name_user} </h1>
       {authorPosts && <PostTablePagination filter={"published"} id={authorId} />}
     </div>
   );

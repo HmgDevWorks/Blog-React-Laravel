@@ -1,7 +1,7 @@
 import BaseService from './baseService';
 
 class UserService extends BaseService {
-    
+
     constructor() {
         super("");
     }
@@ -19,30 +19,32 @@ class UserService extends BaseService {
     getUserById(id) {
         return this.api.get(`/users/${id}`)
     }
-    
-    postUserImg(){
+
+    postUserImg() {
         return this.api.get(`/profile/upload-avatar`)
     }
 
     requestPasswordReset(data) {
-        return this.api.post(`/password/email`,data);
+        return this.api.post(`/password/email`, data);
     }
     verifyResetCode(data) {
-        return this.api.get(``,data);
+        return this.api.get(``, data);
     }
     resetPassword(data) {
-        return this.api.post(`/password/reset`,data);
+        return this.api.post(`/password/reset`, data);
     }
-    updatePassword(data){
+    updatePassword(data) {
         return this.api.put("/users/updatePassword", data)
     }
+    getPopularUsers() {
+        return this.api.get("/popular-users")
+    }
 
 
-
-    getNonConfidentialUserById(id){
+    getNonConfidentialUserById(id) {
         return this.api.get(`/users/non-confidential/${id}`);
     }
-    
+
     editUser(data) {
         console.log("DATA", data);
         return this.api.put(`/users/update`, data);

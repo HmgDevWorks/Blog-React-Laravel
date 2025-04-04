@@ -19,21 +19,22 @@ const CreatePostPage = () => {
   const [dataDraft, setDataDraft] = useState([]);
 
   useEffect(() => {
-    if (!loggedUser) return;
-    const request = postService.getPostsByStatus({
-      id: loggedUser.id,
-      status: "draft"
-    });
-
-    request
-      .then(response => {
-        setDataDraft(response.data);
-      })
-      .catch(error => {
-        addError("Error al obtener los borradores. Intentalo de nuevo mas tarde.");
+    if (loggedUser) {  // Eliminar el punto y coma innecesario
+      const request = postService.getPostsByStatus({
+        status: "draft"
       });
 
-  }, []);
+      request
+        .then(response => {
+          console.log('DATOS:', response);
+          setDataDraft(response.data);  // Guarda los datos de borradores en el estado
+        })
+        .catch(error => {
+          console.error(error);
+          addError("Error al obtener los borradores. Intenta de nuevo más tarde.");
+        });
+    }
+  }, [addError, loggedUser]);  // Asegúrate de que los valores dependientes sean correctos
 
   // useEffect(() => {
   //   if (!loggedUser) return;

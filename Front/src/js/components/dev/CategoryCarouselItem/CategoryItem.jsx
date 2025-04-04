@@ -6,8 +6,7 @@ const images = import.meta.glob('../../../../assets/carouselVertical/*.webp', { 
 
 export default function Category({ id_categorie, title, imageUrl, description }) {
     const [loadedImage, setLoadedImage] = useState(null);
-console.log(  id_categorie
-)
+
     useEffect(() => {
 
         const matchedImage = Object.entries(images).find(([path]) => path.includes(imageUrl));
@@ -19,9 +18,9 @@ console.log(  id_categorie
     return (
         <div className="relative category-Carrousel-container">
             {/* <Link to={`/categories/${title}`} state={{id_categorie}}>               */}
-            <Link to={`/categories/${title}`} state={{title}}>              
+            <Link to={`/categories/${title}`} state={{ title }}>
 
-            <img
+                <img
                     src={loadedImage}
                     alt={title}
                     className="grayscale w-full"

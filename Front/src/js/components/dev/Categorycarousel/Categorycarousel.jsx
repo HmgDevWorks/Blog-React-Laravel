@@ -30,7 +30,7 @@ export default function CategoryCarrousel() {
             </div>
             <div className="carousel carousel-vertical rounded-box carousel-Category">
 
-                {categories ? categories.map((category) => (
+                {categories.length > 0 ? categories.map((category) => (
                     <div
                         key={category.id}
                         className="carousel-item carousel-item-Category cursor-pointer relative"

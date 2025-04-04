@@ -225,7 +225,7 @@ export default function LoginForm() {
                     <div className="mb-4 flex flex-row justify-between">
                         <label className="inline-flex items-center">
                             <input type="checkbox" className="form-checkbox checkbox " onChange={handleRemember} />
-                            <span className="ml-2">{t("login.remember")}</span>
+                            <span className="ml-2 text-remember">{t("login.remember")}</span>
                         </label>
                         <p className='forgot-text'>
                             <button type="button" className="text-right text-blue-500 underline" onClick={() => setForgotPassword(true)}>
