@@ -4,6 +4,8 @@ import Editor from '../Editor/Editor';
 import { Fragment } from 'react';
 
 export default function DraftTab({ tabs = [] }) {
+
+  const  posts = tabs.posts;
   if (!Array.isArray(tabs?.posts)) {
     return (
       <div className="alert alert-warning">
@@ -14,7 +16,7 @@ export default function DraftTab({ tabs = [] }) {
 
   return (
     <div role="tablist" className="tabs tabs-lifted draft-tabs">
-      {tabs.slice(0, 10).map((tab, index) => (
+      {posts.slice(0, 10).map((tab, index) => (
         <Fragment key={index}>
           <input
             type="radio"

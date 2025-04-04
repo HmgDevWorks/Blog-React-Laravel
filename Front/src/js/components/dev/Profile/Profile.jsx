@@ -87,7 +87,7 @@ function Profile() {
     //         setIsEditingEmail((editing) => editing = true);
     //     }
     // };
-
+    console.log(userData);
     const confirmEmailChange = (confirmPassword) => {
         if (isEditingEmail) {
             setUserData({ ...userData, email: provisionalEmail });
@@ -162,7 +162,7 @@ function Profile() {
         //     });
     }
 
-
+   
     return (
         <div className="container mx-auto p-4">
             <div className="card mx-auto">
@@ -180,7 +180,7 @@ function Profile() {
                                 {!data.img && <FaUser className='w-full h-full' />}
                             </div>
                         </div> */}
-                        <Avatar img={data.img_user} imageUpdate={editUser} />
+                        <Avatar img={userData.img_user} imageUpdate={editUser} />
                         {loggedUser.role !== "reader" && (
                             <div className="text-center">
                                 <p className="text-2xl font-bold">{additionalData.posts}</p>
