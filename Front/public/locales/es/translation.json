@@ -148,7 +148,7 @@
     "errorMailVerifyDouble": "Este correo ya ha sido verificado.",
     "errorMailDuplicate": "El correo ya está registrado.",
 
-    "errorPassNotSame": "Las contraseñas no son iguales.",
+    "errorPassNotSame": "Las contraseñas no coinciden.",
     "errorPassOldSame": "Introduzca una contraseña diferente a la que ya tenía.",
     "errorPassTime": "Tiempo para actualizar la contraseña excedido.",
     "errorPassSendMail": "Error al enviar correo de actualización de contraseña.",
