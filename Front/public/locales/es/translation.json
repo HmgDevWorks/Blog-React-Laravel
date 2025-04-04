@@ -102,7 +102,13 @@
     "publishBtn": "Publicar",
     "saveBtn": "Guardar",
     "deleteBtn": "Borrar",
-    "chooseCat": "Elige una categoria" 
+    "sekectCat": "Elige una categoria" ,
+    "placeholder": "Escribe tu post aquí",
+    "file":{
+      "tooSmall":"La imagen debe ser al menos de 300x300 píxeles.",
+      "tooLarge": "El archivo es demasiado grande max 5MB",
+      "notPermited": "El archivo no esta permitido Usa JPG o PNG."
+    }
   },
   "errorMsg":{
     "errorCreateCategory": "Error al crear la categoria.",

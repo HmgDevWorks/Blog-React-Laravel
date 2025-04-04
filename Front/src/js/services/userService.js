@@ -30,6 +30,17 @@ class UserService extends BaseService {
             }
         });
     }
+    postImg(img) {
+        const formData = new FormData();
+        formData.append('file', img);
+
+        return this.api.post(`/upload`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        // Accept: "application/json",
+    }
 
     requestPasswordReset(data) {
         return this.api.post(`/password/email`, data);
