@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
+
 class UserService
 {
     public function getAllUser() // Esta función recoge todos los datos de la tabla User
@@ -188,10 +189,8 @@ class UserService
             'new_password' => 'required|string|min:6', 
         ]);
     
-        if (!Hash::check($request->current_password, $authUser->password_user)) {  // verifica si la contraseña actual es correcta
-            throw ValidationException::withMessages([
-                'current_password' => ['La contraseña actual es incorrecta.'],
-            ]);
+        if (!Hash::check($request->current_password, $authUser->password_user)) {
+            return response()->json(['error' => 'La contraseña actual es incorrecta.'], 422);
         }
     
         $authUser->password_user = Hash::make($request->new_password);
