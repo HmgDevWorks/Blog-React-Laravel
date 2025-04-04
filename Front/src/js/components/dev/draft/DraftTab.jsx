@@ -7,7 +7,7 @@ export default function DraftTab({ tabs = [] }) {
   if (!Array.isArray(tabs?.posts)) {
     return (
       <div className="alert alert-warning">
-        {tabs?.error || "Error desconocido al cargar los posts"}
+        {tabs?.error == 404 || "No se han encontrado Borradores"}
       </div>
     );
   }

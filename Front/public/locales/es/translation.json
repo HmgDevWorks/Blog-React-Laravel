@@ -41,7 +41,7 @@
     "title": "Encuentra el artículo"
   },
   "authorPage": {
-    "title": "Articulos de {name}"
+    "title": "Articulos de "
   },
   "categoryPage": {
     "title": "Articulos de ",
@@ -52,7 +52,7 @@
     "posts": "Mis publicaciones"
   },
   "authors": {
-    "title": "Autores más activos esta semana"
+    "title": "Autores más Famosos"
   },
   "counter": {
     "title": "Contador",
@@ -74,6 +74,9 @@
     "title": "Título",
     "publishedAt": "Fecha de publicación",
     "fav": "Favorito"
+  },
+  "famousAuthor":{
+    "views": "Visitas"
   },
   "profile": {
     "title": "Perfil",

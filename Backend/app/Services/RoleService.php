@@ -58,6 +58,48 @@ class RoleService {
             return response()->json(["message"=>"successMsg.successDeleteRole", 204]);
         return response()->json(["message"=>"errorMsg.errorDeleteRole", 400]);
     }
+
+    public function showAllUsers(Request $request, User $user)
+    {
+        $authUser = auth()->user();
+
+        if ($user->hasRole('admin')) {
+            return response()->json(["message" => "errorMsg.errorChangeAdminRole"], 403);
+        }
+
+        // Obtener la lista de usuarios con su rol y número de posts
+        $users = User::select('id', 'name_user', 'email_user')->get();
+
+        $roles = \DB::table('model_has_roles')
+            ->select('model_id as user_id', 'role_id')
+            ->get()
+            ->keyBy('user_id'); 
+
+        $roleNames = \DB::table('roles')
+            ->select('id', 'name') // Obtenemos ID del rol y su nombre
+            ->get()
+            ->keyBy('id');
+
+        $postsCount = \DB::table('posts')
+            ->select('user_id', \DB::raw('COUNT(id) as num_posts'))
+            ->groupBy('user_id')
+            ->get()
+            ->keyBy('user_id');
+
+        return response()->json([
+            'usuarios' => $users->map(function ($user) use ($roles, $roleNames, $postsCount) {
+                return [
+                    'id' => $user->id,
+                    'nombre' => $user->name_user,
+                    'correo' => $user->email_user,
+                    'rol' => isset($roles[$user->id]) ? ($roleNames[$roles[$user->id]->role_id]->name ?? 'Sin rol') : 'Sin rol',
+                    'numero_post' => $postsCount[$user->id]->num_posts ?? 'Este usuario no tiene post'
+                ];
+            }),
+        ]);
+
+    }
+
 }
 
 ?>
