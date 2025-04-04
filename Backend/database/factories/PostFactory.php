@@ -18,7 +18,15 @@ class PostFactory extends Factory
     public function definition(): array
     {
         $faker = FakerFactory::create('es_ES');
-        $status = $faker->randomElement(['published', 'draft', 'deleted'], [60, 30, 10]);
+        $statusProbability = $faker->randomFloat(null, 0, 1);
+
+            if ($statusProbability < 0.6) { // 60% probabilidad
+                $status = 'published';
+            } elseif ($statusProbability < 0.9) { // 30% probabilidad (0.9 - 0.6)
+                $status = 'draft';
+            } else { // 10% probabilidad (1.0 - 0.9)
+                $status = 'deleted';
+            }
 
         $titles = require database_path('factories\post_titles.php');
         $contents = require database_path('factories\post_content.php');
