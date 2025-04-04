@@ -59,6 +59,11 @@ function Profile() {
         }
     }, []);
 
+    const imageUpdate = (data) => {
+        console.log("Image update", data);
+        setUserData({ ...userData, img_user: data.img_user });
+    };
+
     const editUser = (data) => {
         userService.editUser(data)
             .then(({ data }) => {
@@ -162,7 +167,7 @@ function Profile() {
         //     });
     }
 
-   
+
     return (
         <div className="container mx-auto p-4">
             <div className="card mx-auto">
@@ -180,7 +185,7 @@ function Profile() {
                                 {!data.img && <FaUser className='w-full h-full' />}
                             </div>
                         </div> */}
-                        <Avatar img={userData.img_user} imageUpdate={editUser} />
+                        <Avatar img={userData.img_user} imageUpdate={imageUpdate} />
                         {loggedUser.role !== "reader" && (
                             <div className="text-center">
                                 <p className="text-2xl font-bold">{additionalData.posts}</p>

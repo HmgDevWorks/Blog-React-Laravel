@@ -20,8 +20,15 @@ class UserService extends BaseService {
         return this.api.get(`/users/${id}`)
     }
 
-    postUserImg() {
-        return this.api.get(`/profile/upload-avatar`)
+    postUserImg(img) {
+        const formData = new FormData();
+        formData.append('img_user', img);
+
+        return this.api.post(`/profile/upload-avatar`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        });
     }
 
     requestPasswordReset(data) {
