@@ -13,11 +13,11 @@
 
 <a id="english-section"></a>
 
-## 📝 Overview (English)
+## 📝 Overview
 
 CBlog is a modern and lightweight blogging platform designed to provide a seamless and efficient writing experience. While initially envisioned as an internal company blog, it now functions as a versatile platform suitable for various blogging needs. Built with Vite + React on the frontend and Laravel on the backend, CBlog offers a fast, responsive, and feature-rich environment for publishing your stories. Deployed at [https://cblog.com](https://cblog.com), CBlog is designed to be accessible and easy to use for bloggers of all levels.
 
-## ✨ Key Features (English)
+## ✨ Key Features
 
 *   **Clean and Intuitive Interface**: A distraction-free writing environment that focuses on content creation.
 *   **Fast Performance**: Optimized with Vite and React for a smooth and responsive user experience.
@@ -25,7 +25,7 @@ CBlog is a modern and lightweight blogging platform designed to provide a seamle
 *   **Responsive Design**: CBlog looks and works great on any device, from desktops to mobile phones.
 *   **Likeable Posts**: Users can "like" posts they enjoy.
 
-## 📊 Tech Stack (English)
+## 📊 Tech Stack
 
 CBlog leverages the following technologies:
 
@@ -39,14 +39,14 @@ CBlog leverages the following technologies:
     *   Laravel 11 (PHP 8.4.4)
     *   MySQL
 
-## 🚀 Getting Started (English)
+## 🚀 Getting Started
 
 To get CBlog up and running locally, you'll need to set up both the frontend and backend components separately. Follow the instructions in the respective README files:
 
 *   Frontend: [./front/README.md](./front/README.md)
 *   Backend: [./back/README.md](./back/README.md)
 
-### 📝 Prerequisites (English)
+### 📝 Prerequisites
 
 Before you begin, ensure you have the following installed:
 
@@ -74,11 +74,11 @@ Before you begin, ensure you have the following installed:
 
     *   Follow the instructions in the [Backend README](./back/README.md) to install dependencies, configure environment variables, set up the database, and start the server. The Backend uses Laravel Forge.
 
-## 🤝 Contributing (English)
+## 🤝 Contributing
 
 This project was created as part of a practical training program. While we are not actively seeking contributions at this time, we appreciate your interest and welcome feedback. This project is showcased to recruiters and employers to demonstrate the skills and expertise of the developers involved.
 
-## 👥 Contributors (English)
+## 👥 Contributors
 
 *   [Contributor 1 Name](GitHub Profile URL)
 *   [Contributor 2 Name](GitHub Profile URL)
@@ -88,18 +88,18 @@ This project was created as part of a practical training program. While we are n
 
 *Note: This project was also supported by 7 additional team members during the initial phase of development.*
 
-## 📜 License (English)
+## 📜 License
 
 This project is for demonstration purposes only and is not licensed for commercial use. All rights reserved.
 
-## 📸 Screenshots (English)
+## 📸 Screenshots
 
 [If you have screenshots, add them here using Markdown image syntax:]
 
 Screenshot of CBlog's homepage
 Screenshot of CBlog's writing interface
 
-## 🤔 Support (English)
+## 🤔 Support
 
 If you encounter any issues or have questions about CBlog, please [open an issue on GitHub]([your repository URL]/issues).
 
@@ -107,11 +107,11 @@ If you encounter any issues or have questions about CBlog, please [open an issue
 
 <a id="spanish-section"></a>
 
-## 📝 Descripción General (Español)
+## 📝 Descripción General
 
 CBlog es una plataforma de blogging moderna y ligera, diseñada para proporcionar una experiencia de escritura eficiente y sin interrupciones. Aunque inicialmente se concibió como un blog interno para una empresa, ahora funciona como una plataforma versátil, adecuada para diversas necesidades de blogging. Construido con Vite + React en el frontend y Laravel en el backend, CBlog ofrece un entorno rápido, responsivo y rico en funciones para publicar tus historias. Desplegado en [https://cblog.com](https://cblog.com), CBlog está diseñado para ser accesible y fácil de usar para bloggers de todos los niveles.
 
-## ✨ Características Principales (Español)
+## ✨ Características Principales
 
 *   **Interfaz Limpia e Intuitiva**: Un entorno de escritura sin distracciones que se centra en la creación de contenido.
 *   **Rendimiento Rápido**: Optimizado con Vite y React para una experiencia de usuario fluida y responsiva.
@@ -119,7 +119,7 @@ CBlog es una plataforma de blogging moderna y ligera, diseñada para proporciona
 *   **Diseño Responsivo**: CBlog se ve y funciona de manera excelente en cualquier dispositivo, desde computadoras de escritorio hasta teléfonos móviles.
 *   **Publicaciones "Me Gusta"**: Los usuarios pueden dar "me gusta" a las publicaciones que disfrutan.
 
-## 📊 Stack Tecnológico (Español)
+## 📊 Stack Tecnológico
 
 CBlog utiliza las siguientes tecnologías:
 
@@ -133,14 +133,14 @@ CBlog utiliza las siguientes tecnologías:
     *   Laravel 11 (PHP 8.4.4)
     *   MySQL
 
-## 🚀 Primeros Pasos (Español)
+## 🚀 Primeros Pasos
 
 Para poner CBlog en funcionamiento localmente, deberás configurar los componentes frontend y backend por separado. Sigue las instrucciones en los archivos README respectivos:
 
 *   Frontend: [./front/README.md](./front/README.md)
 *   Backend: [./back/README.md](./back/README.md)
 
-### 📝 Requisitos Previos (Español)
+### 📝 Requisitos Previos
 
 Antes de comenzar, asegúrate de tener instalados los siguientes elementos:
 
@@ -168,11 +168,11 @@ Antes de comenzar, asegúrate de tener instalados los siguientes elementos:
 
     *   Sigue las instrucciones en el [README del Backend](./back/README.md) para instalar las dependencias, configurar las variables de entorno, configurar la base de datos e iniciar el servidor. El Backend usa Laravel Forge.
 
-## 🤝 Contribución (Español)
+## 🤝 Contribución
 
 Este proyecto fue creado como parte de un programa de formación práctica. Aunque no estamos buscando activamente contribuciones en este momento, agradecemos tu interés y damos la bienvenida a tus comentarios. Este proyecto se muestra a reclutadores y empleadores para demostrar las habilidades y la experiencia de los desarrolladores involucrados.
 
-## 👥 Colaboradores (Español)
+## 👥 Colaboradores
 
 *   [Nombre del Colaborador 1](URL del perfil de GitHub)
 *   [Nombre del Colaborador 2](URL del perfil de GitHub)
@@ -182,17 +182,17 @@ Este proyecto fue creado como parte de un programa de formación práctica. Aunq
 
 *Nota: Este proyecto también contó con el apoyo de 7 miembros adicionales del equipo durante la fase inicial de desarrollo.*
 
-## 📜 Licencia (Español)
+## 📜 Licencia
 
 Este proyecto tiene fines de demostración únicamente y no está licenciado para uso comercial. Todos los derechos reservados.
 
-## 📸 Capturas de Pantalla (Español)
+## 📸 Capturas de Pantalla
 
 [If you have screenshots, add them here using Markdown image syntax:]
 
 Captura de pantalla de la página principal de CBlog
 Captura de pantalla del panel de administración de CBlog
 
-## 🤔 Soporte (Español)
+## 🤔 Soporte
 
 Si encuentras algún problema o tienes preguntas sobre CBlog, por favor [abre un issue en GitHub]([URL de tu repositorio]/issues).
