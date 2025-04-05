@@ -25,7 +25,8 @@
     "register": "Registrarse",
     "create": "Crear una cuenta",
     "forgot": "¿Has olvidado tu contraseña?",
-    "verified": "Cuenta verificada, ya puedes iniciar sesión"
+    "verified": "Cuenta verificada, ya puedes iniciar sesión",
+    "sendEmail": "Enviar correo"
   },
   "recover":{
     "title": "Recuperar Contraseña",
@@ -133,7 +134,8 @@
     "errorUpdatePost": "Error al actualizar el post.",
     "errorDeleteSoftPost": "Error al cambiar el estado del post a borrado.",
 
-    "errorCredentals": "Error de al enviar correo de verificación.",
+    "errorCredentals": "Vaya, las credenciales no son correctas.",
+    "CAMBIAR_NOMBRE_A_ESTE": "Error de al enviar correo de verificación.",
     
     "errorUserNotAuth": "Usuario no autenticado.",
     "errorUserNotFound": "Usuario no encontrado.",
@@ -184,6 +186,8 @@
     "infoPassRepit": "Repita la nueva contraseña"
   },
   "successMsg": {
+    "successLogin": "Inicio de sesión exitoso. Estas siendo redirigido a la página de inicio.",
+
     "successCreateCategory": "Categoria creada.",
     "successUpdateCategory": "Categoria actualizada correctamente.",
     "successDeleteCategory": "Categoria eliminada correctamente.",
