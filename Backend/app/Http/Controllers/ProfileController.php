@@ -41,16 +41,6 @@ class ProfileController extends Controller
         return response()->json($this->userService->getUserById($id));
     }
 
-    public function number():JsonResponse // Cantidad de usuarios
-    {
-        return response()->json($this->userService->numberUsers());
-    }
-    public function numberAuth():JsonResponse // Terminar mañana -- solo coger lectores
-    {
-        return response()->json($this->userService->numberUsers());
-    }
-
-
     public function update(Request $request, User $user):JsonResponse // Actualiza un usuario 
     {
         return $this->userService->updateUser($request, $user);
@@ -60,28 +50,6 @@ class ProfileController extends Controller
     {
         return $this->userService->assignRoleUser($request, $user);
     }
-
-    /**
-     * Delete the user's account.
-     */
-    //      POR DEFECTO, CREAMOS UNA NUEVA PARA HACER DESTROY
-    // public function destroy(Request $request): RedirectResponse
-    // {
-    //     $request->validateWithBag('userDeletion', [
-    //         'password' => ['required', 'current_password'],
-    //     ]);
-
-    //     $user = $request->user();
-
-    //     Auth::logout();
-
-    //     $user->delete();
-
-    //     $request->session()->invalidate();
-    //     $request->session()->regenerateToken();
-
-    //     return Redirect::to('/');
-    // }
 
     public function getUser(Request $request)
     {
