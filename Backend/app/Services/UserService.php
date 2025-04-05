@@ -71,16 +71,20 @@ class UserService
         return (response()->json(["message" => "successMsg.successAssignRole"], 200));
     }
 
-    public function deleteUser($user) // Esta función, hace un shoftDelete de un usuario, devuelve mesaje OK o mensaje KO
-    { 
-        if ($user && !$user->hasRole('admin')) {
+    public function deleteAuthUser()
+{
+    if (Auth::check()) {
+        $user = Auth::user();
+        if (!$user->hasRole('admin')) {
             $user->delete();
-            return (response()->json(["message" => "successMsg.successDeleteUser"], 200));
+            return response()->json(["message" => "successMsg.successDeleteUser"], 200);
         } else {
-            return (response()->json(["message" => "errorMsg.errorDeleteUser"], 201));
-
+            return response()->json(["message" => "errorMsg.errorDeleteAdminDelete"], 403); // Código de estado más apropiado para "no autorizado"
         }
+    } else {
+        return response()->json(["message" => "errorMsg.unauthenticated"], 401); // Código de estado para "no autenticado"
     }
+}
 
     public function updateUser(Request $request, User $user): JsonResponse
     {
