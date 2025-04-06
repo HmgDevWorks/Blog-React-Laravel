@@ -40,25 +40,22 @@ npm install
 Iniciar servidor de desarrollo
 npm run dev
 
-text
 **Accede**: [http://localhost:5173](http://localhost:5173) 🌐
 
 ---
 
 ## 📂 Estructura del Proyecto
-src/
-├── js/
-│ ├── bootstrap/ # 🧩 Contextos y hooks
-│ ├── components/dev/ # 🧱 Componentes UI
-│ ├── pages/ # 🖥️ Vistas principales
-│ ├── router/ # 🗺️ Configuración de rutas
-│ └── services/ # 📡 Llamadas API
-public/
-└── locales/ # 🌐 Traducciones
-├── en/ # 🇬🇧 Inglés
+src/     
+├── js/     
+│ ├── bootstrap/ # 🧩 Contextos y hooks     
+│ ├── components/dev/ # 🧱 Componentes UI     
+│ ├── pages/ # 🖥️ Vistas principales     
+│ ├── router/ # 🗺️ Configuración de rutas     
+│ └── services/ # 📡 Llamadas API     
+public/     
+└── locales/ # 🌐 Traducciones     
+├── en/ # 🇬🇧 Inglés     
 └── es/ # 🇪🇸 Español
-
-text
 
 ---
 
@@ -68,8 +65,6 @@ text
 const rememberMe = true; // Opción del usuario
 const storage = rememberMe ? localStorage : sessionStorage;
 storage.setItem('authToken', token);
-
-text
 
 **Protección de Rutas**:
 // router/PrivateRoutes.jsx
@@ -88,8 +83,6 @@ return loggedUser ? <Outlet /> : <Navigate to='/login' />;
 
 export default PrivateRoutes;
 
-text
-
 ---
 
 ## 🌐 Internacionalización
@@ -101,8 +94,6 @@ text
 "login": "Iniciar sesión"
 }
 
-text
-
 ---
 
 ## 🧪 Testing (Recomendaciones)
@@ -112,8 +103,6 @@ npm install --save-dev @testing-library/react vitest
 Ejecutar tests
 npm test
 
-text
-
 **Ejemplo de test**:
 import { render, screen } from '@testing-library/react';
 import Pagination from './components/Pagination';
@@ -122,8 +111,6 @@ test('renderiza 5 botones de paginación', () => {
 render(<Pagination totalPages={5} />);
 expect(screen.getAllByRole('button')).toHaveLength(5);
 });
-
-text
 
 ---
 
@@ -137,8 +124,6 @@ text
 **Variables de entorno sugeridas**:
 VITE_API_URL=https://api.tudominio.com
 VITE_ENV=production
-
-text
 
 ---
 
