@@ -50,8 +50,8 @@ CBlog leverages the following technologies:
 
 To get CBlog up and running locally, you'll need to set up both the frontend and backend components separately. Follow the instructions in the respective README files:
 
-*   Frontend: [./front/README.md](./front/README.md)
-*   Backend: [./back/README.md](./back/README.md)
+*   Frontend: [./front/README.md](./Front/README.md)
+*   Backend: [./back/README.md](./Backend/README.md)
 
 ### 📝 Prerequisites
 
@@ -157,8 +157,8 @@ CBlog utiliza las siguientes tecnologías:
 
 Para poner CBlog en funcionamiento localmente, deberás configurar los componentes frontend y backend por separado. Sigue las instrucciones en los archivos README respectivos:
 
-*   Frontend: [./front/README.md](./front/README.md)
-*   Backend: [./back/README.md](./back/README.md)
+*   Frontend: [./front/README.md](./Front/README.md)
+*   Backend: [./back/README.md](./Backend/README.md)
 
 ### 📝 Requisitos Previos
 
