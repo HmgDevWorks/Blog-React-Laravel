@@ -31,10 +31,10 @@ CBlog leverages the following technologies:
 
 *   Frontend:
 
-    ![Vite]()     
+    ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)     
     ![React](https://img.shields.io/badge/-React-61DAFB?style=flat&logo=react&logoColor=black)     
     ![Tailwind CSS 4](https://img.shields.io/badge/-Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)     
-    ![DaisyUI 5]() 
+    ![DaisyUI](https://img.shields.io/badge/daisyui-5A0EF8?style=for-the-badge&logo=daisyui&logoColor=white)
 
 *   Backend:
   
@@ -138,10 +138,10 @@ CBlog utiliza las siguientes tecnologías:
 
 *   Frontend:
 
-    ![Vite]()     
+    ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)     
     ![React](https://img.shields.io/badge/-React-61DAFB?style=flat&logo=react&logoColor=black)     
     ![Tailwind CSS 4](https://img.shields.io/badge/-Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)     
-    ![DaisyUI 5]() 
+    ![DaisyUI](https://img.shields.io/badge/daisyui-5A0EF8?style=for-the-badge&logo=daisyui&logoColor=white) 
 
 *   Backend:
   
