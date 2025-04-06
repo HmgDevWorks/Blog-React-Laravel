@@ -1,4 +1,4 @@
-# 🌟 CBlog - Your Modern Blogging Platform 🌟
+# <p align="center">🌟 CBlog - Your Modern Blogging Platform 🌟</p>
 
 <p align="center">
   <a href="#english-section" style="text-decoration: none;">
@@ -30,14 +30,21 @@ CBlog is a modern and lightweight blogging platform designed to provide a seamle
 CBlog leverages the following technologies:
 
 *   Frontend:
-    *   Vite
-    *   React
-    *   Tailwind CSS 4
-    *   DaisyUI 5
+
+    ![Vite]()     
+    ![React](https://img.shields.io/badge/-React-61DAFB?style=flat&logo=react&logoColor=black)     
+    ![Tailwind CSS 4](https://img.shields.io/badge/-Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)     
+    ![DaisyUI 5]() 
 
 *   Backend:
-    *   Laravel 11 (PHP 8.4.4)
-    *   MySQL
+  
+    ![Laravel 11 (PHP 8.4.4)](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)     
+    ![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
+ 
+*   Organization
+    
+    ![Discord](https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white)         
+    ![Trello](https://img.shields.io/badge/Trello-0052CC?style=for-the-badge&logo=trello&logoColor=white)
 
 ## 🚀 Getting Started
 
@@ -78,15 +85,21 @@ Before you begin, ensure you have the following installed:
 
 This project was created as part of a practical training program. While we are not actively seeking contributions at this time, we appreciate your interest and welcome feedback. This project is showcased to recruiters and employers to demonstrate the skills and expertise of the developers involved.
 
-## 👥 Contributors
+## 👥 Contributors | 🤝 Team
 
-*   [Contributor 1 Name](GitHub Profile URL)
-*   [Contributor 2 Name](GitHub Profile URL)
-*   [Contributor 3 Name](GitHub Profile URL)
-*   [Contributor 4 Name](GitHub Profile URL)
-*   [Contributor 5 Name](GitHub Profile URL)
+<div align="center" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
 
-*Note: This project was also supported by 7 additional team members during the initial phase of development.*
+[![rbsnkrs13](https://img.shields.io/badge/🚀-rbsnkrs13-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rbsnkrs13)
+[![HmgDevWorks](https://img.shields.io/badge/🌟-HmgDevWorks-purple?style=for-the-badge&logo=github&logoColor=white)](https://github.com/HmgDevWorks)
+[![MarcosMIzquierdoLinares](https://img.shields.io/badge/🔥-MarcosMIzquierdoLinares-orange?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MarcosMIzquierdoLinares)
+[![angel060404](https://img.shields.io/badge/💡-angel060404-green?style=for-the-badge&logo=github&logoColor=white)](https://github.com/angel060404)
+[![JMarotoM](https://img.shields.io/badge/🚀-JMarotoM-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/JMarotoM)
+
+</div>
+
+<div align="center" style="margin-top: 1.5rem;">
+  <img src="https://img.shields.io/badge/✨-7_Colaboradores_Adicionales-8A2BE2?style=for-the-badge&logo=people-group&logoColor=white" alt="Colaboradores adicionales">
+</div>
 
 ## 📜 License
 
@@ -124,14 +137,21 @@ CBlog es una plataforma de blogging moderna y ligera, diseñada para proporciona
 CBlog utiliza las siguientes tecnologías:
 
 *   Frontend:
-    *   Vite
-    *   React
-    *   Tailwind CSS 4
-    *   DaisyUI 5
+
+    ![Vite]()     
+    ![React](https://img.shields.io/badge/-React-61DAFB?style=flat&logo=react&logoColor=black)     
+    ![Tailwind CSS 4](https://img.shields.io/badge/-Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)     
+    ![DaisyUI 5]() 
 
 *   Backend:
-    *   Laravel 11 (PHP 8.4.4)
-    *   MySQL
+  
+    ![Laravel 11 (PHP 8.4.4)](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)     
+    ![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
+ 
+*   Organizacion
+    
+    ![Discord](https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white)         
+    ![Trello](https://img.shields.io/badge/Trello-0052CC?style=for-the-badge&logo=trello&logoColor=white)
 
 ## 🚀 Primeros Pasos
 
@@ -172,15 +192,21 @@ Antes de comenzar, asegúrate de tener instalados los siguientes elementos:
 
 Este proyecto fue creado como parte de un programa de formación práctica. Aunque no estamos buscando activamente contribuciones en este momento, agradecemos tu interés y damos la bienvenida a tus comentarios. Este proyecto se muestra a reclutadores y empleadores para demostrar las habilidades y la experiencia de los desarrolladores involucrados.
 
-## 👥 Colaboradores
+## 👥 Colaboradores | 🤝 Equipo
 
-*   [Nombre del Colaborador 1](URL del perfil de GitHub)
-*   [Nombre del Colaborador 2](URL del perfil de GitHub)
-*   [Nombre del Colaborador 3](URL del perfil de GitHub)
-*   [Nombre del Colaborador 4](URL del perfil de GitHub)
-*   [Nombre del Colaborador 5](URL del perfil de GitHub)
+<div align="center" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
 
-*Nota: Este proyecto también contó con el apoyo de 7 miembros adicionales del equipo durante la fase inicial de desarrollo.*
+[![rbsnkrs13](https://img.shields.io/badge/🚀-rbsnkrs13-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rbsnkrs13)
+[![HmgDevWorks](https://img.shields.io/badge/🌟-HmgDevWorks-purple?style=for-the-badge&logo=github&logoColor=white)](https://github.com/HmgDevWorks)
+[![MarcosMIzquierdoLinares](https://img.shields.io/badge/🔥-MarcosMIzquierdoLinares-orange?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MarcosMIzquierdoLinares)
+[![angel060404](https://img.shields.io/badge/💡-angel060404-green?style=for-the-badge&logo=github&logoColor=white)](https://github.com/angel060404)
+[![JMarotoM](https://img.shields.io/badge/🚀-JMarotoM-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/JMarotoM)
+
+</div>
+
+<div align="center" style="margin-top: 1.5rem;">
+  <img src="https://img.shields.io/badge/✨-7_Colaboradores_Adicionales-8A2BE2?style=for-the-badge&logo=people-group&logoColor=white" alt="Colaboradores adicionales">
+</div>
 
 ## 📜 Licencia
 
