@@ -52,8 +52,10 @@ Route::middleware('auth:api')->post('/refresh-token', [AuthController::class, 'r
 Route::post('/upload', [UploadController::class, 'uploadImage'])->middleware([JwtMiddleware::class])->middleware('role:admin|editor'); //ruta para subir img al post
 Route::post('/profile/upload-avatar', [UploadController::class, 'uploadAvatar'])->middleware([JwtMiddleware::class])->middleware('role:admin|editor'); //ruta para cambiar la imagen de perfil
 
+//Rutas para el admin
 Route::delete('/admin/delete/{id}', [ProfileController::class, 'deleteAdmin'])->middleware([JwtMiddleware::class])->middleware('role:admin'); //ruta para que el admin deletee
 Route::put('/admin/restore/{id}', [ProfileController::class, 'restoreUser'])->middleware([JwtMiddleware::class])->middleware('role:admin'); //ruta para que el admin restaure una cuenta
+Route::delete('/admin/deletePost/{id}', [Postcontroller::class, 'adminDestroyPost'])->middleware([JwtMiddleware::class])->middleware('role:admin'); //ruta para que el admin restaure una cuenta
 
 
 
@@ -127,7 +129,7 @@ Route::controller(PostController::class)->middleware([JwtMiddleware::class])->gr
     Route::get('/posts/posts-overview/{userId}', 'getUserPostsOverview')->middleware('role:admin|editor|reader');      // Devuelve las estadísticas para el Dashboard
     Route::post('/posts/store', 'store')->name('posts.store')->middleware('role:admin|editor'); //Crea un post
     Route::put('/posts/update/{post}', 'update')->name('posts.update')->middleware('role:admin|editor'); //Actualiza Post
-    Route::delete('/posts/destroy/{post}', 'destroy')->name('posts.destroy')->middleware('role:admin|editor'); //Borra
+    Route::delete('/posts/destroy/{id}', 'destroy')->name('posts.destroy')->middleware('role:admin|editor'); //Borra
 });
 
 Route::controller(FavoritesController::class)->middleware([JwtMiddleware::class])->group(function () {

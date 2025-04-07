@@ -66,9 +66,14 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post): JsonResponse
+    public function destroy($id): JsonResponse
     {
-        return $this->postService->destroyPost($post);
+        return $this->postService->destroyPost($id);
+    }
+
+    public function adminDestroyPost($id)
+    {
+        return $this->postService->destroyAnyPostByAdmin($id);
     }
 
     public function postUser($userId): JsonResponse

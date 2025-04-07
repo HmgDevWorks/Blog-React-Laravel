@@ -100,16 +100,28 @@ class PostService
         }
     }
 
-    public function destroyPost($post) // cambia el post a estado delete
+    public function destroyPost($id) // cambia el post a estado delete
     {
-        if (!auth()->user()->hasRole(['admin', 'editor'])) {
-            return response()->json(['message' => 'errorMsg.errorInvalidRole'], 403);
-        }elseif ($post) {
-            $post->update(['status' => 'deleted']);
-            return response()->json(["message" => "successMsg.successDeleteSoftPost", 200]);
-        } else{
-            return response()->json(["message" => "errorMsg.errorDeleteSoftPost", 400]);
+        $post = Post::findOrFail($id);
+        if ($post->user_id !== Auth::id()) {
+            return response()->json(['message' => 'errorMsg.unauthorized'], 403);
         }
+    
+        $post->update(['status' => 'deleted']);
+    
+        return response()->json(["message" => "successMsg.successDeleteOwnSoftPost"], 200);
+    }
+
+    public function destroyAnyPostByAdmin($id)
+    {
+        if (!auth()->user()->hasRole('admin')) { //para que solo lo pueda hacer el admin
+            return response()->json(['message' => 'errorMsg.errorAdminRole'], 403);
+        }
+
+        $post = Post::findOrFail($id);
+        $post->update(['status' => 'deleted']);
+
+        return response()->json(["message" => "successMsg.successDeleteSoftPostByAdmin"], 200);
     }
 
     public function searchBarPosts($search, $perPage)// Buscamos tanto por título como por contenido. esta NO es, la que funciona esta en el controlador directamente hecha, NO FUNSIONA
