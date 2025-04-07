@@ -72,19 +72,57 @@ class UserService
     }
 
     public function deleteAuthUser()
-{
-    if (Auth::check()) {
-        $user = Auth::user();
-        if (!$user->hasRole('admin')) {
-            $user->delete();
-            return response()->json(["message" => "successMsg.successDeleteUser"], 200);
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if (!$user->hasRole('admin')) {
+                $user->delete();
+                return response()->json(["message" => "successMsg.successDeleteUser"], 200);
+            } else {
+                return response()->json(["message" => "errorMsg.errorDeleteAdminDelete"], 403); // Código de estado más apropiado para "no autorizado"
+            }
         } else {
-            return response()->json(["message" => "errorMsg.errorDeleteAdminDelete"], 403); // Código de estado más apropiado para "no autorizado"
+            return response()->json(["message" => "errorMsg.unauthenticated"], 401); // Código de estado para "no autenticado"
         }
-    } else {
-        return response()->json(["message" => "errorMsg.unauthenticated"], 401); // Código de estado para "no autenticado"
     }
-}
+
+    public function deleteAdminUsers($id)
+    {
+        $user = User::withTrashed()->find($id);
+
+        if (!$user) {
+            return response()->json(["message" => "Usuario no encontrado"], 404);
+        }
+
+        if ($user->trashed()) { //si el user ya esta softdeleteado
+            return response()->json(["message" => "El usuario ya estaba eliminado"], 200);
+        }
+
+        if ($user->hasRole('admin')) {
+            return response()->json(["message" => "errorMsg.errorDeleteAdminDelete"], 403);
+        }
+
+        $user->delete();
+
+        return response()->json(["message" => "successMsg.successDeleteUser"], 200);
+        }
+
+    public function restoreUser($id)
+    {
+        $user = User::withTrashed()->find($id);
+
+        if (!$user) {
+            return response()->json(["message" => "Usuario no encontrado"], 404);
+        }
+
+        if (!$user->trashed()) {
+            return response()->json(["message" => "El usuario no estaba eliminado"], 200);
+        }
+
+        $user->restore();
+
+        return response()->json(["message" => "successMsg.successRestoreUser"], 200);
+    }
 
     public function updateUser(Request $request, User $user): JsonResponse
     {

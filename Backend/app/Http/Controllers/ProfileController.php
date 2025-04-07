@@ -62,6 +62,17 @@ class ProfileController extends Controller
         return response()->json($this->userService->deleteAuthUser());
     }
 
+    public function deleteAdmin($id)
+    {
+        //dd($id);
+        return $this->userService->deleteAdminUsers($id);
+    }
+
+    public function restoreUser($id)
+    {
+        return $this->userService->restoreUser($id);
+    }
+
     public function getInfoUser(): JsonResponse
     {
         return $this->userService->getInfoUser();
