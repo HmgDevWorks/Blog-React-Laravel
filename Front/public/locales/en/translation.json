@@ -108,12 +108,12 @@
     "errorCreateCategory": "Error creating the category.",
     "errorUpdateCategory": "Error updating the category.",
     "errorDeleteCategory": "Error deleting the category.",
-    
+
     "errorUploadImgCloudinary": "Error uploading the image to Cloudinary: ",
     "errorUploadAvatarCloudinary": "Error uploading the avatar: ",
-    
+
     "errorCreatePermission": "There was a problem creating the permission.",
-    
+
     "errorSearchCharacters": "The search must have at least 2 characters.",
     "errorFindSearchPosts": "No posts found with those keywords in the search.",
     "errorFindSearchAuthors": "No authors found with those keywords in the search.",
@@ -122,92 +122,99 @@
     "errorFindPostStatusOnly": "No posts found with the specified status.",
     "errorFindPostStatus": "No posts found with that status for this user.",
     "errorCeroPostPublish": "No published posts for this user.",
-    "errorPostNotFoundOrNotPublish": "The post does not exist or is not published.",
-    "errorPostVisited": "Visit incremented by 1.",
+    "errorPostNotFoundOrNotPublish": "The post doesn't exist or is not published.",
+    "errorPostVisited": "Visit increased by 1.",
     "errorUpdatePost": "Error updating the post.",
     "errorDeleteSoftPost": "Error changing the post status to deleted.",
-    
-    "errorCredentals": "Error sending verification email.",
+
+    "errorCredentals": "Oops, the credentials are incorrect.",
+    "CAMBIAR_NOMBRE_A_ESTE": "Error sending verification email.",
     
     "errorUserNotAuth": "User not authenticated.",
     "errorUserNotFound": "User not found.",
+    "errorUserNotDelete": "The user was not deleted.",
     "errorCreateUser": "There was a problem creating the user.",
     "errorNameUserDuplicate": "The username is already registered.",
     "errorDeleteUser": "Error deleting the user.",
     "errorUpdateUser": "Error updating the user.",
     "errorPermissionModifyUser": "You do not have permission to modify this user.",
-    
+
     "errorTokenOrMail": "Invalid token or incorrect email.",
-    
+
     "errorAssignRole": "Error assigning the role.",
     "errorCreateRole": "Error creating the role.",
     "errorChangeRoles": "You do not have permission to change roles.",
-    "errorChangeAdminRole": "The role of an administrator cannot be changed.",
-    "errorChangeRoleUserAdmin": "The administrator role cannot be assigned to a user.",
+    "errorChangeAdminRole": "Cannot change the role of an administrator.",
+    "errorChangeRoleUserAdmin": "Cannot assign the administrator role to a user.",
     "errorRoleNotExist": "The specified role does not exist.",
     "errorDeleteRole": "Error deleting the role.",
     "errorInvalidRole": "You do not have the correct role.",
-    
+
     "errorMailSend": "Error sending verification email.",
     "errorMailTime": "Verification time exceeded.",
     "errorMailVerifyDouble": "This email has already been verified.",
     "errorMailDuplicate": "The email is already registered.",
-    
+
     "errorPassNotSame": "The passwords do not match.",
-    "errorPassOldSame": "Enter a password different from the one you already had.",
-    "errorPassTime": "Time to update the password exceeded.",
+    "errorPassWrong": "The passwords do not match.",
+    "errorPassOldSame": "Please enter a different password than the one you already had.",
+    "errorPassTime": "Time to update the password has expired.",
     "errorPassSendMail": "Error sending password update email.",
     "errorPassVerifyToken": "Error verifying the token to update the password.",
-    "errorPassConfirmMail": "Error confirming the email during password update.",
+    "errorPassConfirmMail": "Error confirming the email for password update.",
     "errorUpdatePass": "Error resetting the password."
   },
   "infoMsg": {
+    "infoImgSmall": "Info: The image must be at least 300x300 pixels.",
+    "infoImgFailMime": "The provided file is not a valid image.",
     "infoUserSuspended": "This user has been suspended.",
     "infoCreateUser": "User created, check your email for verification.",
-    
+
     "infoPostCreate": "Post created successfully.",
     "infoPostDoubleFav": "This post is already in favorites.",
-    
-    "infoMailSend": "Email sent. If you can't find the email, check your spam folder or request a new send.",
+
+    "infoMailSend": "Email sent. If you don't find the email, check the spam folder or request a new send.",
     "infoMailForward": "Verification email resent.",
     "infoMailVerify": "You must verify your email before logging in.",
     "infoInToMail": "Enter your email.",
-    
+
     "infoPassInstruction": "Enter a secure password with at least 8 characters, one uppercase letter, and one number.",
-    "infoInToNewPass": "Enter the new password",
-    "infoPassRepit": "Repeat the new password"
+    "infoInToNewPass": "Enter the new password.",
+    "infoPassRepit": "Repeat the new password."
   },
   "successMsg": {
+    "successLogin": "Login successful. You are being redirected to the homepage.",
+
     "successCreateCategory": "Category created.",
     "successUpdateCategory": "Category updated successfully.",
     "successDeleteCategory": "Category deleted successfully.",
-    
-    "successToken": "Valid token.",
+
+    "successToken": "Token valid.",
     "successTokenUpdate": "Token updated successfully.",
-    
-    "successCreateNewsletter": "Newsletter created and sent successfully.",
-    
+
+    "successCreateNewsletter": "Newsletter generated and sent successfully.",
+
     "successCreatePermission": "Permission created successfully.",
-    "successAssignPermissionRole": "Permissions successfully assigned to the role.",
-    "successRevokePermissionRole": "Role permissions successfully revoked.",
-    
+    "successAssignPermissionRole": "Permissions assigned successfully to the role.",
+    "successRevokePermissionRole": "Role permissions revoked successfully.",
+
     "successRoleOk": "Role created.",
     "successUpdateRole": "Role updated successfully.",
     "successDeleteRole": "Role deleted successfully.",
-    "successAssignRole": "Role successfully assigned.",
-    
+    "successAssignRole": "Role assigned successfully.",
+
     "successCreatePost": "Post created successfully.",
     "successUpdatePost": "Post updated successfully.",
     "successDeleteSoftPost": "Post changed to deleted status.",
     "successPostFav": "Post marked as favorite.",
     "successPostDeleteFav": "Post removed from favorites.",
-    
-    "successDeleteUser": "User successfully deleted.",
-    "successUpdateUser": "User successfully updated.",
-    
+
+    "successDeleteUser": "User deleted successfully.",
+    "successUpdateUser": "User updated successfully.",
+
     "successSendMail": "Verification email sent successfully, check your inbox to confirm.",
-    "successVerifyMail": "Email successfully verified. Welcome, write your first post!",
-    
+    "successVerifyMail": "Email verified successfully. Welcome, write your first post!",
+
     "successSendPass": "Password update email sent successfully, check your inbox to change your password.",
     "successUpdatePass": "Password updated successfully."
   }

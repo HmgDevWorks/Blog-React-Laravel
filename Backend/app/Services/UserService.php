@@ -123,11 +123,11 @@ class UserService
         $user = User::withTrashed()->find($id);
 
         if (!$user) {
-            return response()->json(["message" => "Usuario no encontrado"], 404);
+            return response()->json(["message" => "errorMsg.errorUserNotFound"], 404);
         }
 
         if (!$user->trashed()) {
-            return response()->json(["message" => "El usuario no estaba eliminado"], 200);
+            return response()->json(["message" => "errorMsg.errorUserNotDelete"], 200);
         }
 
         $user->restore();
@@ -243,7 +243,7 @@ class UserService
         ]);
     
         if (!Hash::check($request->current_password, $authUser->password_user)) {
-            return response()->json(['error' => 'La contraseña actual es incorrecta.'], 422);
+            return response()->json(['message' => 'errorMsg.errorPassWrong'], 422);
         }
     
         $authUser->password_user = Hash::make($request->new_password);

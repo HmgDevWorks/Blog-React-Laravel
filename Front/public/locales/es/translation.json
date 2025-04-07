@@ -140,6 +140,7 @@
     
     "errorUserNotAuth": "Usuario no autenticado.",
     "errorUserNotFound": "Usuario no encontrado.",
+    "errorUserNotDelete": "El usuario no estaba eliminado.",
     "errorCreateUser": "Hubo un problema al crear el usuario.",
     "errorNameUserDuplicate": "El nombre de ususario ya esta registrado.",
     "errorDeleteUser": "Error al borrar el usuario.",
@@ -163,6 +164,7 @@
     "errorMailDuplicate": "El correo ya está registrado.",
 
     "errorPassNotSame": "Las contraseñas no coinciden.",
+    "errorPassWrong": "Las contraseñas no coinciden.",
     "errorPassOldSame": "Introduzca una contraseña diferente a la que ya tenía.",
     "errorPassTime": "Tiempo para actualizar la contraseña excedido.",
     "errorPassSendMail": "Error al enviar correo de actualización de contraseña.",
@@ -171,6 +173,8 @@
     "errorUpdatePass": "Erro al restablecer la contraseña."
   },
   "infoMsg": {
+    "infoImgSmall": "info La imagen debe ser de al menos 300x300 píxeles.",
+    "infoImgFailMime": "El archivo proporcionado no es una imagen válida.",
     "infoUserSuspended": "Este usuario ha sido suspendido.",
     "infoCreateUser": "Usuario creado, revise su email para verificar.",
 

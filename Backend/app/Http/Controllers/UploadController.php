@@ -30,10 +30,10 @@ class UploadController extends Controller
                     try {
                         list($width, $height) = getimagesize($value);
                         if ($width < 300 || $height < 300) {
-                            $fail("La imagen debe ser de al menos 300x300 píxeles.");
+                            $fail("infoMsg.infoImgSmall");
                         }
                     } catch (\Exception $e) {
-                        $fail("El archivo proporcionado no es una imagen válida.");
+                        $fail("infoMsg.infoImgFailMime");
                     }
                 },
             ],
