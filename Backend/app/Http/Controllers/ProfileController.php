@@ -41,16 +41,6 @@ class ProfileController extends Controller
         return response()->json($this->userService->getUserById($id));
     }
 
-    public function number():JsonResponse // Cantidad de usuarios
-    {
-        return response()->json($this->userService->numberUsers());
-    }
-    public function numberAuth():JsonResponse // Terminar mañana -- solo coger lectores
-    {
-        return response()->json($this->userService->numberUsers());
-    }
-
-
     public function update(Request $request, User $user):JsonResponse // Actualiza un usuario 
     {
         return $this->userService->updateUser($request, $user);
@@ -61,37 +51,26 @@ class ProfileController extends Controller
         return $this->userService->assignRoleUser($request, $user);
     }
 
-    /**
-     * Delete the user's account.
-     */
-    //      POR DEFECTO, CREAMOS UNA NUEVA PARA HACER DESTROY
-    // public function destroy(Request $request): RedirectResponse
-    // {
-    //     $request->validateWithBag('userDeletion', [
-    //         'password' => ['required', 'current_password'],
-    //     ]);
-
-    //     $user = $request->user();
-
-    //     Auth::logout();
-
-    //     $user->delete();
-
-    //     $request->session()->invalidate();
-    //     $request->session()->regenerateToken();
-
-    //     return Redirect::to('/');
-    // }
-
     public function getUser(Request $request)
     {
         // Retorna la información del usuario autenticado
         return response()->json($request->user());
     }
 
-    public function destroy(User $user):JsonResponse
+    public function destroy():JsonResponse
     {
-        return response()->json($this->userService->deleteUser($user));
+        return response()->json($this->userService->deleteAuthUser());
+    }
+
+    public function deleteAdmin($id)
+    {
+        //dd($id);
+        return $this->userService->deleteAdminUsers($id);
+    }
+
+    public function restoreUser($id)
+    {
+        return $this->userService->restoreUser($id);
     }
 
     public function getInfoUser(): JsonResponse

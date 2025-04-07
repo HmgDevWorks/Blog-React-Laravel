@@ -21,8 +21,8 @@ class RoleService extends BaseService {
         return this.api.get(`show/${id}`)
     }
     /* Update Role */
-    UpdateRole(id, newName) {
-        return this.api.put(`update/${id}`, newName)
+    UpdateRole(user_id, newRole) {
+        return this.api.put(`update/${user_id}`, newRole)
     }
     /* Delete Role */
     deleteRole(id) {

@@ -4,9 +4,9 @@ import './LoginForm.css';
 import userService from '../../../services/userService';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { AuthContext } from '../../../bootstrap/contexts/AuthContext';
-import { ErrorAlert, SuccessAlert } from '../Alerts/Alerts';
 import { useAlert } from '../../../bootstrap/contexts/AlertContext';
 import { useTranslation } from 'react-i18next';
+import AlertContainer from '../AlertContainer/AlertContainer';
 
 export default function LoginForm() {
     // Hooks - Contexts
@@ -35,8 +35,11 @@ export default function LoginForm() {
     const [resetStep, setResetStep] = useState(0);
     const [registrationComplete, setRegistrationComplete] = useState(false);
     // Alerts
-    const [errorMsg, setErrorMsg] = useState('');
-    const [successMsg, setSuccessMsg] = useState('');
+    const [alerts, setAlerts] = useState([]);
+
+    const addAlert = (type, text) => {
+        setAlerts((prev) => [...prev, { id: Date.now() + Math.random(), type, text }]);
+    };
 
     // En tu componente donde usas verified:
     useEffect(() => {
@@ -45,10 +48,16 @@ export default function LoginForm() {
         }
     }, [verified]); // <-- Añade verified como dependencia
 
+    const handleAlertEnd = (removedAlert) => {
+        console.log("Alerta eliminada?");
+        setAlerts((prev) => prev.filter(alert => alert.id !== removedAlert.id));
+    };
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!login && password !== confirmPassword) {
-            setErrorMsg('Las contraseñas no coinciden');
+            addAlert('error', t("errorMsg.errorPassNotSame"));
             return;
         }
 
@@ -69,24 +78,22 @@ export default function LoginForm() {
                     }
                     setJWT(data.authToken);
                     authenticateUser()
-                    setSuccessMsg('Credenciales correctas, serás redirigido en unos segundos.');
+                    addAlert('success', t("successMsg.successLogin"));
                     navigate('/')
                 } else {
                     setRegistrationComplete(true);
-                    setSuccessMsg('Se ha enviado un email de confirmación a tu dirección de correo electrónico.');
+                    addAlert('info', t("successMsg.successSendMail"));
                 }
                 setJWT(data.authToken);
                 authenticateUser()
-                setSuccessMsg('Credenciales correctas, serás redirigido en unos segundos.');
-
-            }).then(() => {
-
                 navigate('/')
+                // }).then(() => {
             })
             .catch(error => {
-                console.log(error);
-                const data = JSON.parse(error.response.data.message);
-                setErrorMsg(data.error);
+                // console.log("AAAAAAAAAA", error);
+                // console.log(error);
+                // const data = JSON.parse(error.response.data.message);
+                addAlert('error', t(error.response.data.message));
             });
     };
     // Nueva función para manejar la recuperación de contraseña
@@ -95,18 +102,19 @@ export default function LoginForm() {
         // if (resetStep === 0) {
         // Enviar solicitud de código de recuperación
         userService.requestPasswordReset({ "email_user": email })
-            .then(() => {
+            .then(({ data }) => {
                 // setResetStep(1);
-                setSuccessMsg('Se ha enviado un correo de recuperación a tu email.');
+                addAlert('success', t(data.message));
+
             })
             .catch(error => {
-                setErrorMsg('Error al enviar el correo de recuperación.');
+                addAlert('error', t(error.response.data.message));
             });
     };
     const handlePasswordReset = async (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
-            setErrorMsg('Las contraseñas no coinciden');
+            addAlert('error', t("errorMsg.errorPassNotSame"));
             return;
         }
 
@@ -116,10 +124,10 @@ export default function LoginForm() {
                 "token": tokenParam,
                 "password": password
             });
-            setSuccessMsg('Contraseña actualizada con éxito. Redirigiendo...');
+            addAlert('success', t("successMsg.successUpdatePass"));
             setTimeout(() => navigate('/logIn'), 3000);
         } catch (error) {
-            setErrorMsg('Error al actualizar la contraseña.');
+            addAlert('error', t("errorMsg.errorUpdatePass"));
         }
     };
     function handleRemember() {
@@ -154,8 +162,7 @@ export default function LoginForm() {
                     <LoginFormInput id="password" label="Nueva contraseña" type="password" placeholder="Nueva contraseña" onChange={(e) => setPassword(e.target.value)} />
                     <LoginFormInput id="confirmPassword" label="Confirmar contraseña" type="password" placeholder="Confirmar contraseña" onChange={(e) => setConfirmPassword(e.target.value)} />
 
-                    {errorMsg && <ErrorAlert msg={errorMsg} />}
-                    {successMsg && <SuccessAlert msg={successMsg} />}
+                    <AlertContainer alerts={alerts} onAlertEnd={() => setAlerts([])} />
 
                     <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline submit-btn">
                         Cambiar contraseña
@@ -175,7 +182,7 @@ export default function LoginForm() {
                 </div>
                 <div className='form-container'>
                     <div className="p-4 bg-white shadow-md rounded-lg login-form">
-                        <SuccessAlert msg={successMsg} />
+                        <AlertContainer alerts={alerts} onAlertEnd={handleAlertEnd} />
                     </div>
                 </div>
             </form>
@@ -192,10 +199,9 @@ export default function LoginForm() {
                 <div className='form-container'>
                     <h2 className="text-xl font-bold mb-4">{t("recover.title")}</h2>
                     <LoginFormInput id="email" label="Email" type="email" placeholder="tu@email.com" onChange={handleEmailChange} />
-                    {errorMsg && <ErrorAlert msg={errorMsg} />}
-                    {successMsg && <SuccessAlert msg={successMsg} />}
+                    <AlertContainer alerts={alerts} onAlertEnd={handleAlertEnd} />
                     <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline submit-btn">
-                        {resetStep === 0 ? "Enviar código" : resetStep === 1 ? "Verificar código" : "Cambiar contraseña"}
+                        {t("login.sendEmail")}
                     </button>
                     <p className='bottom-text'>
                         <button type="button" className="mt-4 text-blue-500 underline" onClick={() => setForgotPassword(false)}>
@@ -234,8 +240,9 @@ export default function LoginForm() {
                         </p>
                     </div>
                 )}
-                {errorMsg && <ErrorAlert msg={errorMsg} />}
-                {successMsg && <SuccessAlert msg={successMsg} />}
+
+                <AlertContainer alerts={alerts} onAlertEnd={handleAlertEnd} />
+
                 <button
                     type="submit"
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline submit-btn">

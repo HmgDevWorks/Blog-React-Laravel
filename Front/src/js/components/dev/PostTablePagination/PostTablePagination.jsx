@@ -4,7 +4,7 @@ import postService from '../../../services/postService';
 import favService from '../../../services/favService';
 import { AuthContext } from '../../../bootstrap/contexts/AuthContext';
 
-export default function PostTablePagination({ filter, id = 0 }) { //, search = ""
+export default function PostTablePagination({ filter, user_id }) { //, search = ""
     const { loggedUser } = useContext(AuthContext);
     const [posts, setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -18,10 +18,12 @@ export default function PostTablePagination({ filter, id = 0 }) { //, search = "
                 postPromise = favService.getUserFavs();
                 break;
             case 'published':
+                postPromise = postService.getPostsByStatus({ "status": 'published' });
+                break;
             case 'draft':
             case 'deleted':
             default:
-                postPromise = postService.getPosts();
+                postPromise = postService.getUserPosts(user_id);
                 break;
         }
 
@@ -44,6 +46,7 @@ export default function PostTablePagination({ filter, id = 0 }) { //, search = "
         // Recargar los posts al cambiar de página
     };
 
+    console.log("user????", user_id);
     return (
         <PostTable
             posts={posts}
@@ -52,7 +55,8 @@ export default function PostTablePagination({ filter, id = 0 }) { //, search = "
             onPageChange={handlePageChange}
             rechargePosts={fetchPosts}
             setPosts={setPosts}
-
+            deleteAbaible={(filter === 'published' && !user_id)}
+            restoreAbaible={(filter === 'deleted' && user_id === loggedUser.id)}
         />
     );
 }

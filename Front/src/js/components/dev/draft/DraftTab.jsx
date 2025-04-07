@@ -1,4 +1,3 @@
-import React from 'react';
 import './DraftTab.css';
 import Editor from '../Editor/Editor';
 import { Fragment } from 'react';
@@ -6,6 +5,7 @@ import { Fragment } from 'react';
 export default function DraftTab({ tabs = [] }) {
 
   const posts = tabs.posts;
+
   if (!Array.isArray(tabs?.posts)) {
     return (
       <div className="alert alert-warning">

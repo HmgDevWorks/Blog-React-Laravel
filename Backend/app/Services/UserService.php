@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
+
 class UserService
 {
     public function getAllUser() // Esta función recoge todos los datos de la tabla User
@@ -21,9 +22,21 @@ class UserService
         return User::all();
     }
 
-    public function getUserById($id)  // Devuelve el post con el ID especificado, o lanza un error 404 si no existe
+    public function getUserById($id)  // Devuelve el usuario con el ID especificado, o lanza un error 404 si no existe. Tambíen devulve Nposts y Nfavs si es admin o editor
     {   
-        return User::findOrFail($id);
+        $user = User::findOrFail($id);
+
+        if ($user->hasRole('admin') || $user->hasRole('editor')) {
+
+            $user->favourites = $user->favorites()->count();
+            $user->posts = $user->posts()->count();
+            unset($user->roles);
+
+            return $user;  
+        }
+        unset($user->roles);        
+        return $user;
+
     }
 
     public function createUser($data)// Devuelve el usuario recién creado, la función create recibe un array y va rellenando la BBDD. 
@@ -69,15 +82,57 @@ class UserService
         return (response()->json(["message" => "successMsg.successAssignRole"], 200));
     }
 
-    public function deleteUser($user) // Esta función, hace un shoftDelete de un usuario, devuelve mesaje OK o mensaje KO
-    { 
-        if ($user && !$user->hasRole('admin')) {
-            $user->delete();
-            return (response()->json(["message" => "successMsg.successDeleteUser"], 200));
+    public function deleteAuthUser()
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if (!$user->hasRole('admin')) {
+                $user->delete();
+                return response()->json(["message" => "successMsg.successDeleteUser"], 200);
+            } else {
+                return response()->json(["message" => "errorMsg.errorDeleteAdminDelete"], 403); // Código de estado más apropiado para "no autorizado"
+            }
         } else {
-            return (response()->json(["message" => "errorMsg.errorDeleteUser"], 201));
-
+            return response()->json(["message" => "errorMsg.unauthenticated"], 401); // Código de estado para "no autenticado"
         }
+    }
+
+    public function deleteAdminUsers($id)
+    {
+        $user = User::withTrashed()->find($id);
+
+        if (!$user) {
+            return response()->json(["message" => "Usuario no encontrado"], 404);
+        }
+
+        if ($user->trashed()) { //si el user ya esta softdeleteado
+            return response()->json(["message" => "El usuario ya estaba eliminado"], 200);
+        }
+
+        if ($user->hasRole('admin')) {
+            return response()->json(["message" => "errorMsg.errorDeleteAdminDelete"], 403);
+        }
+
+        $user->delete();
+
+        return response()->json(["message" => "successMsg.successDeleteUser"], 200);
+        }
+
+    public function restoreUser($id)
+    {
+        $user = User::withTrashed()->find($id);
+
+        if (!$user) {
+            return response()->json(["message" => "Usuario no encontrado"], 404);
+        }
+
+        if (!$user->trashed()) {
+            return response()->json(["message" => "El usuario no estaba eliminado"], 200);
+        }
+
+        $user->restore();
+
+        return response()->json(["message" => "successMsg.successRestoreUser"], 200);
     }
 
     public function updateUser(Request $request, User $user): JsonResponse
@@ -187,10 +242,8 @@ class UserService
             'new_password' => 'required|string|min:6', 
         ]);
     
-        if (!Hash::check($request->current_password, $authUser->password_user)) {  // verifica si la contraseña actual es correcta
-            throw ValidationException::withMessages([
-                'current_password' => ['La contraseña actual es incorrecta.'],
-            ]);
+        if (!Hash::check($request->current_password, $authUser->password_user)) {
+            return response()->json(['error' => 'La contraseña actual es incorrecta.'], 422);
         }
     
         $authUser->password_user = Hash::make($request->new_password);

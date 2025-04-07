@@ -41,8 +41,9 @@ function NavigationMobile() {
               {loggedUser.role === "admin"
                 && (<Link to="/admin" ><li><div className="linksNavMob">{t("nav.admin")}</div></li></Link>)}
               <Link to="/favorite_posts" ><li><div className="linksNavMob">{t("fav")}</div></li></Link>
-              <Link to={`/profile`} ><li><div className="linksNavMob">{t("nav.profile")}</div></li></Link>
+              <Link to={`/author/${loggedUser.id}`}><li><div className="linksNavMob"><p>{t('published')}</p></div></li></Link>
               <Link to='/createPost'><li><div className="linksNavMob">{t("nav.createPost")}</div></li></Link>
+              <Link to={`/profile`} ><li><div className="linksNavMob">{t("nav.profile")}</div></li></Link>
               <Link to="/" onClick={logOut}><li><div className="linksNavMob logoutMobile color-error">{t("nav.logout")}</div></li></Link>
             </>)}
             {!loggedUser && (<Link to="/logIn" ><li><div className="linksNavMob">{t("nav.login")}</div></li></Link>)}

@@ -83,13 +83,15 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail  // Im
     {
         return [];  // Puedes agregar claims personalizados si lo necesitas
     }
-    public function getImgUserAttribute($value)
-    {
-        return $value ? asset('avatars/' . $value) : asset('avatars/default.png');
-    }
+
+    // public function favorites()
+    // {
+    //     return $this->hasMany(Favorites::class); // La relación debería ser con la tabla favorites, no post
+    // }
+
     public function favorites()
     {
-        return $this->hasMany(Favorites::class); // La relación debería ser con la tabla favorites, no post
+        return $this->belongsToMany(Post::class, 'favorites');
     }
 
     public function posts()

@@ -38,35 +38,23 @@ function Profile() {
     useEffect(() => {
         userService.getUserById(loggedUser.id)
             .then(({ data }) => {
-                console.log(data);
                 setUserData(data);
                 setEmail(ofuscateEmail(data?.email_user));
             }).catch((error) => {
-                console.log(error);
-                addError(error.response.data.message);
+                addError(t(error.message));
             });
-        if (loggedUser.role !== "reader") {
-            // TODO get additional data
-            console.log("TODO: get additional data");
-            // userService.getAdditionalData()
-            //     .then(({ data }) => {
-            //         console.log(data);
-            //         setAdditionalData(data);
-            //     }).catch((error) => {
-            //         console.log(error);
-            //         addError(error.response.data.message);
-            //     });
-        }
     }, []);
+
+    const imageUpdate = (data) => {
+        setUserData({ ...userData, img_user: data.img_user });
+    };
 
     const editUser = (data) => {
         userService.editUser(data)
             .then(({ data }) => {
-                console.log(data);
-                addSuccess(data.message);
+                addSuccess(t(data.message));
             }).catch((error) => {
-                console.log(error);
-                addError(error.response.data.message);
+                addError(t(error.message));
             });
     }
 
@@ -75,93 +63,69 @@ function Profile() {
             setUserData({ ...userData, bio: provisionalBio });
             editUser({ "bio": provisionalBio });
             setProvisionalBio((desc) => desc = "");
+            setIsEditingDesc(() => false);
+        } else {
+            setIsEditingDesc(() => true);
         }
-        setIsEditingDesc(() => false);
     };
 
-    // const handleEmailChange = () => {
-    //     if (isEditingEmail) {
-    //         confirmEmailChange()
-    //         // document.getElementById('email-modal').showModal();
-    //     } else {
-    //         setIsEditingEmail((editing) => editing = true);
-    //     }
-    // };
-
-    const confirmEmailChange = (confirmPassword) => {
+    const confirmEmailChange = () => {
         if (isEditingEmail) {
             setUserData({ ...userData, email: provisionalEmail });
             editUser({ "email_user": provisionalEmail });
             setProvisionalEmail((email) => email = "");
         }
-        // userService.checkPassword(confirmPassword)
-        //     .then((passResponse) => {
-        //         console.log(passResponse);
-        //         setUserData({ ...userData, email: provisionalEmail });
-        //         editUser({ "email_user": provisionalEmail });
-        //         setProvisionalEmail((email) => email = "");
-        //     }).catch((error) => {
-        //         console.log(error);
-        //         addError(error.response.data.message);
-        //     });
 
         setIsEditingEmail(() => false);
-        // set
     };
-
-    // const handlePasswordChange = () => {
-    //     if (isEditingPassword) {
-    //         if (newPassword === confirmPassword) {
-    //             document.getElementById('password-modal').showModal();
-    //         } else {
-    //             addError("Las contraseñas no coinciden");
-    //         }
-    //     } else {
-    //         setIsEditingPassword((editing) => editing = true);
-    //     }
-    // };
 
     const confirmPasswordChange = () => {
         if (newPassword !== confirmPassword) {
-            console.log("PASS 1", newPassword);
-            console.log("PASS 2", confirmPassword);
-            addError("Las contraseñas no coinciden");
+            addError(t("errorMsg.errorPassNotSame"));
             return;
         }
         userService.updatePassword({
             "current_password": pass,
             "new_password": newPassword
         }).then(({ data }) => {
-            console.log(data);
             setIsEditingPassword(false);
+            addSuccess(t(data.message));
             setNewPassword("");
             setPass("");
         }).catch((error) => {
-            console.log(error);
-            addError(error.response.data.message);
+            addError(t(error.message));
         });
     };
 
-    const confirmDeleteUser = (confirmPassword) => {
-        console.log("Implementar bien");
-        // TODO Implementar
-        // userService.changePass(confirmPassword)
-        //     .then(({ data }) => {
-        //         console.log(data);
-        //         userService.deleteUser(loggedUser.id)
-        //             .then(({ data }) => {
-        //                 console.log(data);
-        //                 logOut();
-        //             }).catch(error => {
-        //                 console.log(error);
-        //                 addError(error.response.data.message);
-        //             });
-        //     }).catch((error) => {
-        //         console.log(error);
-        //         addError(error.response.data.message);
-        //     });
+    const confirmDeleteUser = () => {
+        userService.deleteUser()
+            .then(({ data }) => {
+                // console.log("Delete DATA", data);
+                logOut();
+            }).catch((error) => {
+                console.log(error);
+                addError(error.response.data.message);
+            });
     }
-
+    // const confirmDeleteUser = (confirmPassword) => {
+    //     console.log("Implementar bien");
+    //     // TODO Implementar
+    //     userService.changePass(confirmPassword)
+    //         .then(({ data }) => {
+    //             console.log(data);
+    //             userService.deleteUser(loggedUser.id)
+    //                 .then(({ data }) => {
+    //                     console.log(data);
+    //                     logOut();
+    //                 }).catch(error => {
+    //                     console.log(error);
+    //                     addError(error.response.data.message);
+    //                 });
+    //         }).catch((error) => {
+    //             console.log(error);
+    //             addError(error.response.data.message);
+    //         });
+    // }
 
     return (
         <div className="container mx-auto p-4">
@@ -174,13 +138,7 @@ function Profile() {
                                 <p className="text-sm">{t("profile.fav")}</p>
                             </div>
                         )}
-                        {/* <div className="avatar">
-                            <div className="w-24 rounded-full">
-                                {data.img && <img src="/path-to-profile-image.jpg" alt="Profile" />}
-                                {!data.img && <FaUser className='w-full h-full' />}
-                            </div>
-                        </div> */}
-                        <Avatar img={data.img_user} imageUpdate={editUser} />
+                        <Avatar img={userData.img_user} imageUpdate={imageUpdate} />
                         {loggedUser.role !== "reader" && (
                             <div className="text-center">
                                 <p className="text-2xl font-bold">{additionalData.posts}</p>
@@ -270,48 +228,32 @@ function Profile() {
                 </div>
             </div>
 
-            {/* <dialog id="email-modal" className="modal modal-bottom sm:modal-middle">
-                <form method="dialog" className="modal-box" onSubmit={(e) => {
-                    e.preventDefault();
-                    confirmEmailChange(e.target.currentPassword.value);
-                }}>
-                    <h3 className="font-bold text-lg">{t("profile.modalEmailTitle")}</h3>
-                    <input type="password" name="currentPassword" placeholder="Ingresa tu contraseña" className="input input-bordered mt-4 w-full" />
-                    <div className="modal-action">
-                        <button type="submit" className="btn btn-primary">{t("profile.confirmBtn")}</button>
-                        <button className="btn" onClick={() => setIsEditingEmail(false)}>{t("profile.cancelBtn")}</button>
-                    </div>
-                </form>
-            </dialog>
-
-            <dialog id="password-modal" className="modal modal-bottom sm:modal-middle">
-                <form method="dialog" className="modal-box" onSubmit={(e) => {
-                    e.preventDefault();
-                    confirmPasswordChange(e.target.currentPassword.value);
-                }}>
-                    <h3 className="font-bold text-lg">{t("profile.modalPassTitle")}</h3>
-                    <input type="password" name="currentPassword" placeholder="Ingresa tu contraseña actual" className="input input-bordered mt-4 w-full" />
-                    <div className="modal-action">
-                        <button type="submit" className="btn btn-primary">{t("profile.confirmBtn")}</button>
-                        <button className="btn" onClick={() => setIsEditingPassword(false)}>{t("profile.cancelBtn")}</button>
-                    </div>
-                </form>
-            </dialog> */}
-
             <dialog id="delete-modal" className="modal modal-bottom sm:modal-middle">
-                <form method="dialog" className="modal-box" onSubmit={(e) => {
-                    e.preventDefault();
-                    confirmDeleteUser(e.target.currentPassword.value);
-                }}>
+                <form method="dialog" className="modal-box"
+                // onSubmit={(e) => {
+                //     e.preventDefault();
+                //     confirmDeleteUser(e.target.currentPassword.value);
+                // }}
+                >
                     <h3 className="font-bold text-lg">{t("profile.modalDeleteTitle")}</h3>
                     <p className="py-4">{t("profile.modalDeleteInfo")}</p>
-                    <div className="form-control">
+                    {/* <div className="form-control">
                         <input type="email" placeholder="Confirma tu correo electrÃ³nico" className="input input-bordered mb-2" />
                         <input type="password" name="currentPassword" placeholder="Ingresa tu contraseÃ±a" className="input input-bordered mb-2" />
-                    </div>
+                    </div> */}
                     <div className="modal-action">
-                        <button className="btn btn-error">{t("profile.delete")}</button>
-                        <button className="btn">{t("profile.cancelBtn")}</button>
+                        <button className="btn btn-error" onClick={confirmDeleteUser}>{t("profile.delete")}</button>
+                        <button
+                            className="btn"
+                            onClick={() => {
+                                const modal = document.getElementById('delete-modal');
+                                if (modal) {
+                                    modal.close();
+                                }
+                            }}
+                        >
+                            {t("profile.cancelBtn")}
+                        </button>
                     </div>
                 </form>
             </dialog>

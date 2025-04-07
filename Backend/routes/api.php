@@ -45,12 +45,19 @@ Route::get('/stats/counter', [PostController::class, 'getStatsForCounter']); //s
 Route::get('/categories/{data}', [CategoriesController::class, 'showCategoriesByName']); //muestra el nombre de las categorias
 Route::get('/posts/news', [PostController::class, 'getTenNewsPost']);
 Route::get('/newsletter/generate', [NewsletterController::class, 'generate']); //ruta para probar que la newsletter se envia y que envia todo bene
-Route::get('/popular-users', [PostController::class, 'searchPopuUser']);
+Route::get('/popular-users', [PostController::class, 'searchPopuUser']); //ruta para inicio para que puedan ver los autores mas popus
 
 Route::middleware('auth:api')->get('/verify-token', [AuthController::class, 'verifyToken']);
 Route::middleware('auth:api')->post('/refresh-token', [AuthController::class, 'refreshToken']);
 Route::post('/upload', [UploadController::class, 'uploadImage'])->middleware([JwtMiddleware::class])->middleware('role:admin|editor'); //ruta para subir img al post
 Route::post('/profile/upload-avatar', [UploadController::class, 'uploadAvatar'])->middleware([JwtMiddleware::class])->middleware('role:admin|editor'); //ruta para cambiar la imagen de perfil
+
+//Rutas para el admin
+Route::delete('/admin/delete/{id}', [ProfileController::class, 'deleteAdmin'])->middleware([JwtMiddleware::class])->middleware('role:admin'); //ruta para que el admin deletee
+Route::put('/admin/restore/{id}', [ProfileController::class, 'restoreUser'])->middleware([JwtMiddleware::class])->middleware('role:admin'); //ruta para que el admin restaure una cuenta
+Route::delete('/admin/deletePost/{id}', [Postcontroller::class, 'adminDestroyPost'])->middleware([JwtMiddleware::class])->middleware('role:admin'); //ruta para que el admin restaure una cuenta
+
+
 
 Route::middleware('auth:api')->get('/verify-token', function (Request $request) {
     $user = $request->user();
@@ -76,7 +83,8 @@ Route::controller(ProfileController::class)->middleware([JwtMiddleware::class])-
     ; //middleware en el servicio
     Route::put('/users/updatePassword', 'getUpdatePassword')->name('users.getUpdatePassword')->middleware('role:admin|editor|reader'); //cambia la contraseña, se necesita "current_password" y "new_password"
     Route::put('/users/changeRole/{user}', 'changeRole')->name('users.changeRole')->middleware('role:admin'); //cambio de roles, solo se puede si eres adminn
-    Route::delete('/users/destroy/{user}', 'destroy')->name('users.destroy')->middleware('role:admin'); //eliminar un perfil
+  //  Route::delete('/users/destroy', 'destroy')->name('users.destroy')->middleware('role:admin|editor|viewer'); //el user elimina su cuenta
+   // Route::delete('/users/delete/{id}', 'deleteAdmin')->name('users.deleteAdmin')->middleware('role:admin'); //elimina un user admin
 });
 
 Route::controller(CategoriesController::class)->middleware([JwtMiddleware::class])->group(function () {
@@ -121,7 +129,7 @@ Route::controller(PostController::class)->middleware([JwtMiddleware::class])->gr
     Route::get('/posts/posts-overview/{userId}', 'getUserPostsOverview')->middleware('role:admin|editor|reader');      // Devuelve las estadísticas para el Dashboard
     Route::post('/posts/store', 'store')->name('posts.store')->middleware('role:admin|editor'); //Crea un post
     Route::put('/posts/update/{post}', 'update')->name('posts.update')->middleware('role:admin|editor'); //Actualiza Post
-    Route::delete('/posts/destroy/{post}', 'destroy')->name('posts.destroy')->middleware('role:admin|editor'); //Borra
+    Route::delete('/posts/destroy/{id}', 'destroy')->name('posts.destroy')->middleware('role:admin|editor'); //Borra
 });
 
 Route::controller(FavoritesController::class)->middleware([JwtMiddleware::class])->group(function () {

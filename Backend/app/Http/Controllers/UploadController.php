@@ -63,7 +63,7 @@ class UploadController extends Controller
             ]);
 
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Error al subir la imagen a Cloudinary: ' . $e->getMessage()], 500);
+            return response()->json(['message' => 'errorMsg.errorUploadImgCloudinary' . $e->getMessage()], 500);
         }
     }
 
@@ -126,7 +126,7 @@ class UploadController extends Controller
             return response()->json(['img_user' => $user->img_user], 200);
 
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Error al subir el avatar: ' . $e->getMessage()], 500);
+            return response()->json(['message' => 'errorMsg.errorUploadAvatarCloudinary' . $e->getMessage()], 500);
         }
     }
 }

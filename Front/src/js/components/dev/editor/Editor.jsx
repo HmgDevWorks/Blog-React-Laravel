@@ -7,18 +7,18 @@ import { useAlert } from "../../../bootstrap/contexts/AlertContext";
 import { ErrorAlert, SuccessAlert } from '../Alerts/Alerts';
 import { useTranslation } from "react-i18next";
 
-import { html, plainText } from '@yoopta/exports';
+import { html } from '@yoopta/exports';
 import YooptaEditor, { createYooptaEditor } from "@yoopta/editor";
 import Paragraph from "@yoopta/paragraph";
 import Blockquote from '@yoopta/blockquote';
 import Accordion from '@yoopta/accordion';
 import Code from '@yoopta/code';
 import Embed from '@yoopta/embed';
-import Image from '@yoopta/image';
-import Link from '@yoopta/link';
-import File from '@yoopta/file';
+import YooptaImage from '@yoopta/image';
+// import Link from '@yoopta/link';
+// import File from '@yoopta/file';
 import Callout from '@yoopta/callout';
-import Video from '@yoopta/video';
+// import Video from '@yoopta/video';
 import { NumberedList, BulletedList, TodoList } from '@yoopta/lists';
 import { HeadingOne, HeadingTwo, HeadingThree } from '@yoopta/headings';
 import Table from '@yoopta/table';
@@ -29,45 +29,22 @@ import Toolbar, { DefaultToolbarRender } from '@yoopta/toolbar';
 import { Bold, Italic, CodeMark, Underline, Strike, Highlight } from '@yoopta/marks';
 
 import "./Editor.css";
-
-// const uploadImageToCloudinary = async (file) => {
-//   try {
-//     // TODO implement security
-//     const formData = new FormData();
-//     formData.append("file", file);
-//     formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
-
-//     const response = await fetch(
-//       `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
-//       { method: "POST", body: formData }
-//     );
-
-//     const data = await response.json();
-//     return {
-//       src: data.secure_url,
-//       alt: data.original_filename || "cloudinary_image",
-//       sizes: { width: data.width, height: data.height },
-//     };
-//   } catch (error) {
-//     console.error("Error uploading image:", error);
-//     throw error;
-//   }
-// };
+import userService from "../../../services/userService";
 
 const uploadImageToCloudinary = async (file) => {
   try {
-    // Validar tipo de archivo
+    // Validaciones
     const validTypes = ["image/jpeg", "image/png", "image/gif"];
     if (!validTypes.includes(file.type)) {
-      throw new Error("Formato no permitido. Usa JPG, PNG o GIF.");
+      addError(t("file.notPermited")); // mostrar el error
+      throw new Error(); // cortar la ejecución
     }
 
-    // Validar tamaño del archivo (5MB)
     if (file.size > 5 * 1024 * 1024) {
-      throw new Error("El archivo es demasiado grande. Máximo 5MB.");
+      addError(t("file.tooLarge")); // mostrar el error
+      throw new Error(); // cortar la ejecución
     }
 
-    // Validar dimensiones de la imagen
     const image = await new Promise((resolve, reject) => {
       const img = new Image();
       img.src = URL.createObjectURL(file);
@@ -76,36 +53,46 @@ const uploadImageToCloudinary = async (file) => {
     });
 
     if (image.width < 300 || image.height < 300) {
-      throw new Error("La imagen debe ser al menos de 300x300 píxeles.");
+      addError(t("file.tooSmall"));
+      throw new Error();
     }
 
-    // Enviar archivo al backend si pasa las validaciones
-    const formData = new FormData();
-    formData.append("file", file);
+    // ✅ Esperar y retornar directamente la respuesta
+    const { data } = await userService.postImg(file);
 
-    const response = await fetch("http://127.0.0.1:8000/api/upload", {
-      method: "POST",
-      body: formData,
-      headers: {
-        Accept: "application/json",
+    return {
+      src: data.src,
+      alt: data.alt || "cloudinary_image",
+      sizes: {
+        width: data.sizes?.width || 300,
+        height: data.sizes?.height || 300,
       },
-    });
+    };
 
-    if (!response.ok) throw new Error("Error al subir la imagen");
-
-    return await response.json();
   } catch (error) {
     console.error("Error:", error.message);
     throw error;
   }
 };
 
-
 const MARKS = [Bold, Italic, CodeMark, Underline, Strike, Highlight];
 
-const plugins = [Paragraph, Blockquote, Accordion, Code, Embed,
-  Image.extend({ options: { onUpload: uploadImageToCloudinary }, }),
-  Link, File, Callout, Video, NumberedList, BulletedList, TodoList, HeadingOne, HeadingTwo, HeadingThree, Table, Divider];
+const plugins = [
+  HeadingOne,
+  HeadingTwo,
+  HeadingThree,
+  Paragraph,
+  YooptaImage.extend({ options: { onUpload: uploadImageToCloudinary }, }),
+  NumberedList,
+  BulletedList,
+  TodoList,
+  Accordion,
+  Blockquote,
+  Code,
+  Embed,
+  Callout,
+  Table,
+  Divider];
 
 const TOOLS = {
   Toolbar: {
@@ -139,7 +126,7 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
   }
 
   const onChange = (value, options) => {
-    setValue(value);
+    setValue(() => value);
   };
 
   const deserializeHTML = useCallback((htmlString) => {
@@ -172,21 +159,19 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
       data = { id_categories: selectedCategory, user_id: userId, title: title, content: serializeHTML(), status: status };
       request = postService.createPost(data);
     } else {
-      console.log("POST", post);
       data = { id_categories: post.id_categories, title: title, content: serializeHTML(), status: status };
       request = postService.editPost(post.id, data);
     }
     if (!selectedCategory) {
-      setErrorMsg('Please select a category before saving.');
+      setErrorMsg(t("editor.selectCat"));
       return;
     }
     request
-      .then(response => {
-        setSuccessMsg(response.data.mensaje);
+      .then(({ data }) => {
+        setSuccessMsg(t(data.message));
       })
       .catch(error => {
-        const data = JSON.parse(error.response.data.message);
-        setErrorMsg(data.error);
+        setErrorMsg(t(error.message));
       });
   };
 
@@ -237,6 +222,7 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
 
   return (
     <>
+      <h1 className="text-center">{t("createPostPage.newPage")}</h1>
       {isEditable && (<div className="editor-title">
         <label htmlFor="post-title">{t("editor.title")}</label>
         <input
@@ -257,7 +243,7 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
             value={selectedCategory || ""}
           >
             <option value="" disabled>
-              {t("editor.chooseCat")}
+              {t("editor.selectCat")}
             </option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
@@ -272,7 +258,7 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
       <div className="editor">
         <YooptaEditor
           editor={editor}
-          placeholder="Type text.."
+          placeholder={t("editor.placeholder")}
           plugins={plugins}
           tools={TOOLS}
           value={value}

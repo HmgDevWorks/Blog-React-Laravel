@@ -25,7 +25,8 @@
     "register": "Registrarse",
     "create": "Crear una cuenta",
     "forgot": "¿Has olvidado tu contraseña?",
-    "verified": "Cuenta verificada, ya puedes iniciar sesión"
+    "verified": "Cuenta verificada, ya puedes iniciar sesión",
+    "sendEmail": "Enviar correo"
   },
   "recover":{
     "title": "Recuperar Contraseña",
@@ -49,7 +50,8 @@
   },
   "createPostPage": {
     "draft": "Borrador",
-    "posts": "Mis publicaciones"
+    "posts": "Mis publicaciones",
+    "newPost": "Nuevo Articulo"
   },
   "authors": {
     "title": "Autores más Famosos"
@@ -66,7 +68,9 @@
   },
   "admin": {
     "title": "Página de administración",
-    "delete": "Eliminar"
+    "delete": "Eliminar",
+    "administrador": "Administrador",
+    "viewer":"Lector"
   },
   "postTable": {
     "title": "Título",
@@ -100,11 +104,21 @@
     "publishBtn": "Publicar",
     "saveBtn": "Guardar",
     "deleteBtn": "Borrar",
-    "chooseCat": "Elige una categoria" 
+    "selectCat": "Elige una categoria" ,
+    "placeholder": "Escribe tu post aquí",
+    "file":{
+      "tooSmall":"La imagen debe ser al menos de 300x300 píxeles.",
+      "tooLarge": "El archivo es demasiado grande max 5MB",
+      "notPermited": "El archivo no esta permitido Usa JPG o PNG."
+    }
   },
-
-
   "errorMsg":{
+    "errorCreateCategory": "Error al crear la categoria.",
+    "errorUpdateCategory": "Error al actualizar la categoria.",
+    "errorDeleteCategory": "Error al eliminar la categoria.",
+
+    "errorUploadImgCloudinary": "Error al subir la imagen a Cloudinary: ",
+    "errorUploadAvatarCloudinary": "Error al subir el avatar: ",
 
     "errorCreatePermission": "Hubo un problema al crear el permiso.",
 
@@ -112,7 +126,8 @@
     "errorFindSearchPosts": "No existen posts con esas palabras clave como búsqueda.",
     "errorFindSearchAuthors": "No existen autores con esas palabras clave como búsqueda.",
     
-    
+    "errorPostNotFound": "Post no encontrado.",
+    "errorFindPostStatusOnly": "No se encontraron posts con el status especificado.",
     "errorFindPostStatus": "No existen posts con ese estado para este usuario.",
     "errorCeroPostPublish": "No existen posts publicados para este usuario.",
     "errorPostNotFoundOrNotPublish": "El post no existe o no está publicado.",
@@ -120,7 +135,8 @@
     "errorUpdatePost": "Error al actualizar el post.",
     "errorDeleteSoftPost": "Error al cambiar el estado del post a borrado.",
 
-    "errorCredentals": "Error de al enviar correo de verificación.",
+    "errorCredentals": "Vaya, las credenciales no son correctas.",
+    "CAMBIAR_NOMBRE_A_ESTE": "Error de al enviar correo de verificación.",
     
     "errorUserNotAuth": "Usuario no autenticado.",
     "errorUserNotFound": "Usuario no encontrado.",
@@ -146,7 +162,7 @@
     "errorMailVerifyDouble": "Este correo ya ha sido verificado.",
     "errorMailDuplicate": "El correo ya está registrado.",
 
-    "errorPassNotSame": "Las contraseñas no son iguales.",
+    "errorPassNotSame": "Las contraseñas no coinciden.",
     "errorPassOldSame": "Introduzca una contraseña diferente a la que ya tenía.",
     "errorPassTime": "Tiempo para actualizar la contraseña excedido.",
     "errorPassSendMail": "Error al enviar correo de actualización de contraseña.",
@@ -159,8 +175,10 @@
     "infoCreateUser": "Usuario creado, revise su email para verificar.",
 
     "infoPostCreate": "Post creado con exito.",
+    "infoPostDoubleFav": "Este post ya está en favoritos.",
 
     "infoMailSend": "Correo enviado. Si no encuentras el correo, revisa la carpeta de spam o solicita un nuevo envío.",
+    "infoMailForward": "Correo de verificación reenviado.",
     "infoMailVerify": "Debes verificar tu email antes de iniciar sesión.",
     "infoInToMail": "Introduzca su correo.",
 
@@ -169,6 +187,15 @@
     "infoPassRepit": "Repita la nueva contraseña"
   },
   "successMsg": {
+    "successLogin": "Inicio de sesión exitoso. Estas siendo redirigido a la página de inicio.",
+
+    "successCreateCategory": "Categoria creada.",
+    "successUpdateCategory": "Categoria actualizada correctamente.",
+    "successDeleteCategory": "Categoria eliminada correctamente.",
+
+    "successToken": "Token válido.",
+    "successTokenUpdate": "Token actualizado correctamente.",
+
     "successCreateNewsletter": "Boletín generado y enviado correctamente.",
 
     "successCreatePermission": "Permiso creado correctamente.",
@@ -183,6 +210,8 @@
     "successCreatePost": "Post creado con éxito.",
     "successUpdatePost": "Post actualizado correctamente.",
     "successDeleteSoftPost": "Post cambiado a estado borrado.",
+    "successPostFav": "Post marcado como favorito.",
+    "successPostDeleteFav": "Post eliminado de favoritos.",
 
     "successDeleteUser": "Usuario eliminado con exito.",
     "successUpdateUser": "Usuario actualizado con exito.",

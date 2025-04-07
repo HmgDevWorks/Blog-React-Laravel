@@ -16,16 +16,16 @@ class EmailVerificationController extends Controller
         $user = User::where('email_user', $request->email_user)->first();
 
         if (!$user) {
-            return response()->json(['message' => 'Usuario no encontrado'], 404);
+            return response()->json(['message' => 'errorMsg.errorUserNotFound'], 404);
         }
 
         if ($user->hasVerifiedEmail()) {
-            return response()->json(['message' => 'El email ya ha sido verificado'], 200);
+            return response()->json(['message' => 'errorMsg.errorMailVerifyDouble'], 200);
         }
 
         Mail::to($user->email_user)->send(new CustomEmailVerification($user));
 
-        return response()->json(['message' => 'Correo de verificación reenviado']);
+        return response()->json(['message' => 'infoMsg.infoMailForward']);
     }
 
     public function verify($id, $hash)

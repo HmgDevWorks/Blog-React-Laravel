@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -18,6 +19,17 @@ class Post extends Model
     protected $appends = ['category_name','isFav','author_name',];
 
     protected $hidden = ['categories', 'author'];  //se utiliza para poder ocultar en el json cosas del campo category
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updated(function ($post) { // elimina todos los registros de la tabla favoritos cuando un post pasa a status deleted
+            if ($post->wasChanged('status') && $post->status === 'deleted') {
+                DB::table('favorites')->where('post_id', $post->id)->delete();
+            }
+        });
+    }
 
     public function getIsFavAttribute()
     {

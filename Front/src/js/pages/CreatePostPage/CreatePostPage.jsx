@@ -9,7 +9,6 @@ import postService from "../../services/postService";
 import { useAlert } from "../../bootstrap/contexts/AlertContext";
 import { AuthContext } from '../../bootstrap/contexts/AuthContext';
 import { useTranslation } from "react-i18next";
-// import Separador from "../../components/dev/separador/Separador";
 
 const CreatePostPage = () => {
   const { t } = useTranslation();
@@ -50,7 +49,6 @@ const CreatePostPage = () => {
   //     });
 
   // }, []);
-
   return (
     <div className="mt-4 mb-4">
       <Box title={t("createPostPage.draft")}>
@@ -58,10 +56,10 @@ const CreatePostPage = () => {
       </Box>
       <Separador />
       <Editor />
-      <Separador />
+      {/* <Separador />
       <Box title={t("createPostPage.posts")}>
-        <PostTablePagination filter={"published"} />
-      </Box>
+        <PostTablePagination filter={"published"} user_id={loggedUser.id} />
+      </Box> */}
     </div>
   );
 };

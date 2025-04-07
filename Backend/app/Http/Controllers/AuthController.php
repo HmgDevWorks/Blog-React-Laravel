@@ -12,7 +12,7 @@ class AuthController extends Controller
         $user = $request->user();
 
         return response()->json([
-            'message' => 'Token válido',
+            'message' => 'successMsg.successToken',
             'user' => [
                 'id' => $user->id,
                 'role' => $user->roles()->first()->name, // Obtiene el primer rol asignado
@@ -25,7 +25,7 @@ class AuthController extends Controller
     {
         return response()->json([
             'token' => Auth::refresh(),
-            'message' => 'Token actualizado correctamente'
+            'message' => 'successMsg.successTokenUpdate'
         ]);
     }
 }

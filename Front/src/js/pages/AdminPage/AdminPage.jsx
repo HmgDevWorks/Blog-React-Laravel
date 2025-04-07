@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AdminUserItem from "../../components/dev/AdminUserItem/AdminUserItem";
 import './AdminPage.css'; // Importa el archivo CSS
 import userService from '../../services/userService';
@@ -14,7 +14,14 @@ const AdminPage = () => {
   useEffect(() => {
     userService.getUsers()
       .then(({ data }) => {
-        setUsers(data);
+        // Ordena los usuarios alfabéticamente por el nombre
+        const sortedUsers = data.sort((a, b) => 
+          a.name_user.localeCompare(b.name_user)
+        );
+        setUsers(sortedUsers);
+      })
+      .catch(error => {
+        console.error('Error al obtener los usuarios:', error);
       });
   }, []);
 
@@ -26,6 +33,12 @@ const AdminPage = () => {
       .catch(error => {
         console.error('Error al eliminar el usuario:', error);
       });
+  };
+
+  const handleRoleChange = (userId, newRole) => {
+    setUsers(users.map(user => 
+      user.id === userId ? { ...user, role: newRole } : user
+    ));
   };
 
   const indexOfLastUser = currentPage * usersPerPage;
@@ -43,11 +56,14 @@ const AdminPage = () => {
       <h1 className="Titulo_Admin_Page">{t("admin.title")}</h1>
       <div className="admin-users">
         {currentUsers.map(user => (
+          console.log(user), 
           <AdminUserItem
             key={user.id}
             user_id={user.id}
             user={`${user.name_user}${user.name_lastName ? ' ' + user.name_lastName : ''}`}
+            currentRole={user.role} // Pasa el rol actual del usuario
             onDelete={handleDelete}
+            onRoleChange={handleRoleChange}
           />
         ))}
       </div>

@@ -43,19 +43,19 @@ export default function Avatar({ img, imageUpdate }) {
         setLoading(true);
 
 
-        userService.postUserImg({
-            "img_user": selectedFile
-        }).then(({ data }) => {
-            console.log(data);
-            setPreview(null);
-            setSelectedFile(null);
-            addSuccess(data.message);
-        }).catch((error) => {
-            console.log(error);
-            addError(error.response.data.message);
-        }).finally(() => {
-            setLoading(false);
-        });
+        userService.postUserImg(selectedFile)
+            .then(({ data }) => {
+                console.log(data);
+                imageUpdate(data);
+                setPreview(null);
+                setSelectedFile(null);
+                addSuccess(data.message);
+            }).catch((error) => {
+                console.log(error);
+                // addError(error.response.data.message);
+            }).finally(() => {
+                setLoading(false);
+            });
 
         // const imageUrl = response.data.secure_url;
         // imageUpdate({ img_user: selectedFile });

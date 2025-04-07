@@ -20,8 +20,26 @@ class UserService extends BaseService {
         return this.api.get(`/users/${id}`)
     }
 
-    postUserImg() {
-        return this.api.get(`/profile/upload-avatar`)
+    postUserImg(img) {
+        const formData = new FormData();
+        formData.append('img_user', img);
+
+        return this.api.post(`/profile/upload-avatar`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+    }
+    postImg(img) {
+        const formData = new FormData();
+        formData.append('file', img);
+
+        return this.api.post(`/upload`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        // Accept: "application/json",
     }
 
     requestPasswordReset(data) {
@@ -52,8 +70,8 @@ class UserService extends BaseService {
     // editUser(id, data) {
     //     return this.api.put(`/users/update/${id}`, data)
     // }
-    deleteUser(id) {
-        return this.api.delete(`/users/destroy/${id}`)
+    deleteUser() {
+        return this.api.delete(`/users/destroy`)
     }
     verifyUser(token) {
         return this.api.get('/verify-token',

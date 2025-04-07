@@ -24,9 +24,9 @@ class CategoriesService
             ]
         );
         if ($category)
-            return response()->json(["mensaje" => "Categoria creada", 201]);
+            return response()->json(["message" => "successMsg.successCreateCategory", 201]);
 
-        return response()->json(["mensaje" => "Error al crear la categoria", 400]);
+        return response()->json(["message" => "errorMsg.errorCreateCategory", 400]);
     }
 
     public function updateCategories($data, $categories) // Esta función recibe los datos del post actualizado, con los cambios indicados por el usuario, 
@@ -37,9 +37,9 @@ class CategoriesService
                 'description' => $data->description ?? $categories->description,
                 'img_url' => '../../../../assets/carouselVertical/' . $data->file . '.webp;' ?? $categories->file
             ]);
-            return response()->json(["mensaje" => "Categoria actualizada correctamente", 200]);
+            return response()->json(["message" => "successMsg.successUpdateCategory", 200]);
         } else {
-            return response()->json(["Error al actualizar la categoria", 400]);
+            return response()->json(["message" => "errorMsg.errorUpdateCategory", 400]);
         }
     }
 
@@ -52,8 +52,8 @@ class CategoriesService
     public function destroyCategories($category)
     { 
         if (Categories::destroy($category->id))
-            return response()->json(["mensaje" => "Categoria eliminada correctamente", 204]);
-        return response()->json(["mensaje" => "Error al eliminar la categoria", 400]);
+            return response()->json(["message" => "successMsg.successDeleteCategory", 204]);
+        return response()->json(["message" => "errorMsg.errorDeleteCategory", 400]);
     }
     // /* Por ahora sin uso
     public function getCategoriestById($id)

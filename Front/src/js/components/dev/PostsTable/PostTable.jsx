@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import FavToggle from "../FavToggle/FavToggle";
 import "./PostTable.css";
 import { useTranslation } from "react-i18next";
+import { FaTrash } from "react-icons/fa";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -16,7 +17,7 @@ const formatDate = (dateString) => {
   }).format(date);
 };
 
-export default function PostTable({ posts, currentPage, postsPerPage, onPageChange, setPosts, rechargePosts }) {
+export default function PostTable({ posts, currentPage, postsPerPage, onPageChange, setPosts, rechargePosts, deleteAbaible }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -59,6 +60,7 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
             {/* <th>Contenido del artículo</th> */}
             <th>{t("counter.views")}</th>
             <th>{t("postTable.fav")}</th>
+            {deleteAbaible && <th>{t("postTable.delete")}</th>}
           </tr>
         </thead>
         <tbody>
@@ -82,6 +84,24 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
                     onToggle={handleFavToggle} //  Se actualiza el estado global en tiempo real
                   />
                 </td>
+                {deleteAbaible && (
+                  <td>
+                    <button
+                      className="btn btn-sm btn-error"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Evita que el evento de clic se propague al padre
+                        postService.deletePost(item.id).then(() => {
+                          setPosts((prevPosts) =>
+                            prevPosts.filter((post) => post.id !== item.id)
+                          );
+                          rechargePosts();
+                        });
+                      }}
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                )}
               </tr>
             );
           })}
