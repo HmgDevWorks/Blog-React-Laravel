@@ -50,7 +50,8 @@
   },
   "createPostPage": {
     "draft": "Borrador",
-    "posts": "Mis publicaciones"
+    "posts": "Mis publicaciones",
+    "newPost": "Nuevo Articulo"
   },
   "authors": {
     "title": "Autores más Famosos"

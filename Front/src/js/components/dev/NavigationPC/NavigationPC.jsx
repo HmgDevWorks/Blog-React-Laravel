@@ -2,7 +2,7 @@ import './NavigationPC.css';
 import LogoPrincipal from '../../../../assets/Logo-principal.png';
 import { useContext } from 'react';
 import { AuthContext } from '../../../bootstrap/contexts/AuthContext';
-import { FaUser, FaStar, FaHome, FaLock, FaPlusSquare, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
+import { FaUser, FaStar, FaHome, FaLock, FaPlusSquare, FaSignInAlt, FaSignOutAlt, FaList } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -50,11 +50,11 @@ const NavigationPC = () => {
                                 </li>
                             </Link>
 
-                            <Link to="/profile">
+                            <Link to={`/author/${loggedUser.id}`}>
                                 <li>
                                     <div className="textoNavbar flex items-center">
-                                        <FaUser className="mr-2" />
-                                        <p>{t('nav.profile')}</p>
+                                        <FaList className="mr-2" />
+                                        <p>{t('published')}</p>
                                     </div>
                                 </li>
                             </Link>
@@ -64,6 +64,15 @@ const NavigationPC = () => {
                                     <div className="textoNavbar flex items-center">
                                         <FaPlusSquare className="mr-2" />
                                         <p>{t('nav.createPost')}</p>
+                                    </div>
+                                </li>
+                            </Link>
+
+                            <Link to="/profile">
+                                <li>
+                                    <div className="textoNavbar flex items-center">
+                                        <FaUser className="mr-2" />
+                                        <p>{t('nav.profile')}</p>
                                     </div>
                                 </li>
                             </Link>

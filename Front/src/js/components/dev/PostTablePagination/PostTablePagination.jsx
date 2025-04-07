@@ -18,6 +18,8 @@ export default function PostTablePagination({ filter, user_id }) { //, search = 
                 postPromise = favService.getUserFavs();
                 break;
             case 'published':
+                postPromise = postService.getPostsByStatus({ "status": 'published' });
+                break;
             case 'draft':
             case 'deleted':
             default:
@@ -44,6 +46,7 @@ export default function PostTablePagination({ filter, user_id }) { //, search = 
         // Recargar los posts al cambiar de página
     };
 
+    console.log("user????", user_id);
     return (
         <PostTable
             posts={posts}
@@ -52,7 +55,8 @@ export default function PostTablePagination({ filter, user_id }) { //, search = 
             onPageChange={handlePageChange}
             rechargePosts={fetchPosts}
             setPosts={setPosts}
-
+            deleteAbaible={(filter === 'published' && !user_id)}
+            restoreAbaible={(filter === 'deleted' && user_id === loggedUser.id)}
         />
     );
 }

@@ -222,6 +222,7 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
 
   return (
     <>
+      <h1 className="text-center">{t("createPostPage.newPage")}</h1>
       {isEditable && (<div className="editor-title">
         <label htmlFor="post-title">{t("editor.title")}</label>
         <input
