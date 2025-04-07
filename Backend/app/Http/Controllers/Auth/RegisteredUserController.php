@@ -53,7 +53,7 @@ public function store(Request $request)
         'name_user' => $request->input('name_user'),
         'email_user' => $request->input('email_user'),
         'password_user' => Hash::make($request->input('password_user')),
-        'img_user' => $imgPath, // Guardar ruta de la imagen en la base de datos
+       // 'img_user' => $imgPath, // Guardar ruta de la imagen en la base de datos
     ]);
 
     if ($user) {
