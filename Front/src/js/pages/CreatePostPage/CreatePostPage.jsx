@@ -50,16 +50,17 @@ const CreatePostPage = () => {
 
   // }, []);
   return (
-    <div className="mt-4 mb-4">
-      <Box title={t("createPostPage.draft")}>
-        <DraftTab tabs={dataDraft} />
-      </Box>
+    <div className="mt-10 mb-4">
       <Separador />
       <Editor />
       {/* <Separador />
       <Box title={t("createPostPage.posts")}>
         <PostTablePagination filter={"published"} user_id={loggedUser.id} />
       </Box> */}
+      <Separador />
+      <Box title={t("createPostPage.draft")}>
+        <DraftTab tabs={dataDraft} />
+      </Box>
     </div>
   );
 };
