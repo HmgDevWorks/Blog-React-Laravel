@@ -22,10 +22,22 @@ class UserService
         return User::all();
     }
 
-    public function getUserById($id)  // Devuelve el usuario con el ID especificado, o lanza un error 404 si no existe
+    public function getUserById($id)  // Devuelve el usuario con el ID especificado, o lanza un error 404 si no existe. Tambíen devulve Nposts y Nfavs si es admin o editor
     {   
+        $user = User::findOrFail($id);
 
-        return User::findOrFail($id);
+        if ($user->hasRole('admin') || $user->hasRole('editor')) {
+
+            $user->favourites = $user->favorites()->count();
+            $user->posts = $user->posts()->count();
+            unset($user->roles);
+
+            return $user;  
+        }
+        unset($user->roles);        
+        return $user;
+
+        //return User::findOrFail($id);
     }
 
     public function createUser($data)// Devuelve el usuario recién creado, la función create recibe un array y va rellenando la BBDD. 
