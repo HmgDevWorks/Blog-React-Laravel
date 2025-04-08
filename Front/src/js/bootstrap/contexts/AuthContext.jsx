@@ -18,7 +18,6 @@ function AuthProviderWrapper(props) {
             userService
                 .verifyUser(JWT)
                 .then(({ data }) => {
-                    console.log(data)
                     setLoggedUser(data.user);
                 })
                 .catch(error => {

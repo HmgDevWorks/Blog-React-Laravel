@@ -20,35 +20,14 @@ const AuthorPage = () => {
   const [author, setAuthor] = useState({
     name: "Nombre default"
   })
-  useEffect(() => {
 
+  useEffect(() => {
     userService.getUserById(authorId)
       .then(response => {
         setAuthor(response.data);
       }).catch(error => {
-        console.log(error);
-        addError(error.mensaje);
+        addError(t(error.message));
       });
-
-    // postService.getUserPosts(authorId)
-    //   .then(response => {
-    //     setAuthorPosts(response.data);
-    //   }).catch(error => {
-    //     console.log(error);
-    //     addError(error.mensaje);
-    //   });
-
-    // if (loggedUser.role === "reader")
-    //   Navigate("/");
-    // else {
-    //   postService.getUserPosts(authorId)
-    //     .then(response => {
-    //       setAuthorPosts(response.data);
-    //     }).catch(error => {
-    //       console.log(error);
-    //       addError(error.mensaje);
-    //     });
-    // }
   }, [authorId]);
 
   return (

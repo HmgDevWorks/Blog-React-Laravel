@@ -181,10 +181,9 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
       editor.setEditorValue([]);
       return;
     }
-    let request = postService.deletePost(post.id);
-    request
-      .then(response => {
-        console.log('Deleted:', response.data);
+    postService.deletePost(post.id)
+      .then(({ data }) => {
+        setSuccessMsg(t(data.message));
       })
       .catch(error => {
         const data = JSON.parse(error.response.data.message);

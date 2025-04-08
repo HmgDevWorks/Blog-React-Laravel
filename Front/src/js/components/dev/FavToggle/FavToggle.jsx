@@ -25,13 +25,11 @@ export default function FavToggle({ fav, id, onToggle, className }) {
     const addFav = () => {
         favService.addFav(id)
             .then(response => {
-                console.log(response);
                 setIsFav(true);
                 addSuccess(response.data.mensaje);
                 onToggle?.(id, true); //  Solo llama a onToggle si existe
             })
             .catch(error => {
-                console.log(error);
                 addError(error.mensaje);
             });
     };
@@ -39,13 +37,11 @@ export default function FavToggle({ fav, id, onToggle, className }) {
     const removeFav = () => {
         favService.removeFav(id)
             .then(response => {
-                console.log(response);
                 setIsFav(false);
                 addSuccess(response.data.original.mensaje);
                 onToggle?.(id, false); //  Solo llama a onToggle si existe
             })
             .catch(error => {
-                console.log(error);
                 addError(error.mensaje);
             });
     };

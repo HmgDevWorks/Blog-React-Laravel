@@ -37,7 +37,6 @@ function Profile() {
     useEffect(() => {
         userService.getUserById(loggedUser.id)
             .then(({ data }) => {
-                console.log("User data", data);
                 setUserData(data);
                 setEmail(ofuscateEmail(data?.email_user));
             }).catch((error) => {
@@ -100,10 +99,8 @@ function Profile() {
     const confirmDeleteUser = () => {
         userService.deleteUser()
             .then(({ data }) => {
-                // console.log("Delete DATA", data);
                 logOut();
             }).catch((error) => {
-                console.log(error);
                 addError(error.response.data.message);
             });
     }

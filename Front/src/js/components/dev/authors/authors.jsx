@@ -30,7 +30,6 @@ const Authors = () => {
       </h3>
       <ul className="list authors-list"> {/* Agregamos la clase authors-list */}
         {popularAuthors?.map((elm, i) => {
-          console.log(elm);
           return <FamousAuthors author={elm} row={i + 1} key={i} />;
         })}
       </ul>
