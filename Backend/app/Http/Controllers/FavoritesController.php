@@ -26,14 +26,14 @@ class FavoritesController extends Controller
         return response()->json($this->favoritesService->getFavoritesByID($userId));
     }
 
-    public function getFavoritesForAuthenticatedUser(Request $request)
+    public function getFavoritesForAuthenticatedUser()
     {
-        $user = $request->user(); // Obtener el usuario autenticado
+      //  $user = $request->user(); // Obtener el usuario autenticado
 
         // Usamos el servicio para obtener los favoritos del usuario
-        $favorites = $this->favoritesService->getFavoritesForUser($user);
+       // $favorites = $this->favoritesService->getFavoritesForUser($user);
 
-        return response()->json($favorites);
+        return $this->favoritesService->getFavoritesForUser();
     }
 
     public function store($postId)

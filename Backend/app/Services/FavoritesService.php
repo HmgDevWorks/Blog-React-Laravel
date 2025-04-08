@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon; 
+use Illuminate\Http\JsonResponse;
+
 
 class FavoritesService {
 
@@ -49,9 +51,15 @@ class FavoritesService {
             return response()->json(['message' => 'errorMsg.errorPostNotFound']);
         }
 
-     public function getFavoritesForUser($user)
+        public function getFavoritesForUser(): JsonResponse
         {
-            return $user->favorites()->with('post')->get()->pluck('post');
+            $user=Auth::user(); // Obtiene el usuario autenticado automáticamente
+            if (!$user) {
+                return response()->json(['message' => 'errorMsg.invalidUserObject'], 400);
+            }
+        
+            $favorites = $user->favorites()->get(); // Obtiene la colección de modelos Post favoritos
+            return response()->json(['favorites' => $favorites], 200);
         }
 
     public function getFavoritesByID($userId)
