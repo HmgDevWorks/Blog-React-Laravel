@@ -25,7 +25,8 @@
     "register": "Register",
     "create": "Create an account",
     "forgot": "Forgot your password?",
-    "verified": "Account verified, you can now log in"
+    "verified": "Account verified, you can now log in",
+    "sendEmail": "Send Email"
   },
   "recover": {
     "title": "Recover Password",
@@ -41,7 +42,9 @@
     "title": "Find the article"
   },
   "authorPage": {
-    "title": "Articles by "
+    "title": "Articles by ",
+    "deletedPosts": "Deleted Articles",
+    "publishedPosts": "Published Articles"
   },
   "categoryPage": {
     "title": "Articles in ",
@@ -49,7 +52,8 @@
   },
   "createPostPage": {
     "draft": "Draft",
-    "posts": "My publications"
+    "posts": "My publications",
+    "newPost": "New Article"
   },
   "authors": {
     "title": "Most Famous Authors "
@@ -68,14 +72,17 @@
     "title": "Admin Page",
     "delete": "Delete",
     "administrador": "Admin",
-    "viewer":"Viewer"
+    "viewer": "Viewer"
   },
   "postTable": {
     "title": "Title",
     "publishedAt": "Publication Date",
-    "fav": "Favorite"
+    "fav": "Favorite",
+    "delete": "Delete",
+    "restore": "Restore",
+    "actions": "Actions"
   },
-  "famousAuthor":{
+  "famousAuthor": {
     "views": "Views"
   },
   "profile": {
@@ -102,7 +109,13 @@
     "publishBtn": "Publish",
     "saveBtn": "Save",
     "deleteBtn": "Delete",
-    "chooseCat": "Choose a category"
+    "selectCat": "Choose a category",
+    "placeholder": "Write your post here",
+    "file": {
+      "tooSmall": "The image must be at least 300x300 pixels.",
+      "tooLarge": "The file is too large, max 5MB",
+      "notPermited": "The file is not allowed. Use JPG or PNG."
+    }
   },
   "errorMsg": {
     "errorCreateCategory": "Error creating the category.",

@@ -3,13 +3,12 @@ import './DraftTab.css';
 import Editor from '../Editor/Editor';
 import { Fragment } from 'react';
 
-export default function DraftTab({ tabs = [] }) {
-
-  const  posts = tabs.posts;
-  if (!Array.isArray(tabs?.posts)) {
+export default function DraftTab({ posts }) {
+  console.log("DraftTab", posts);
+  if (!Array.isArray(posts)) {
     return (
       <div className="alert alert-warning">
-        {tabs?.error == 404 || "No se han encontrado Borradores"}
+        {posts?.error == 404 || "No se han encontrado Borradores"}
       </div>
     );
   }

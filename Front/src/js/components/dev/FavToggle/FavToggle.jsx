@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { FaStar, FaRegStar } from 'react-icons/fa';
 import favService from '../../../services/favService';
 import { useAlert } from '../../../bootstrap/contexts/AlertContext';
-import './FavToggle.css';
+// import './FavToggle.css';
 
 
-export default function FavToggle({ fav, id, onToggle }) {
+export default function FavToggle({ fav, id, onToggle, className }) {
     const { addError, addSuccess } = useAlert();
     const [isFav, setIsFav] = useState(fav);
 
@@ -51,14 +51,14 @@ export default function FavToggle({ fav, id, onToggle }) {
     };
 
     return (
-        <div className="boton-fav">
+        <button className={className}>
             <a onClick={handleToggle} style={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center'
-            }} className='fav-toggle'>
+            }}>
                 {isFav ? <FaStar color="gold" className='fav-star' /> : <FaRegStar color="gold" className='fav-star' />}
             </a>
-        </div>
+        </button>
     );
 }
