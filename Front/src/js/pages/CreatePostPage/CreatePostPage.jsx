@@ -31,7 +31,6 @@ const CreatePostPage = () => {
       });
   }, [loggedUser]);
 
-  console.log("dataDraft", dataDraft);
   return (
     <div className="mt-4 mb-4">
       <Box title={t("createPostPage.draft")}>
