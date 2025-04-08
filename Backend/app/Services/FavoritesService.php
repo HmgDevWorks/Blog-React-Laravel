@@ -8,31 +8,28 @@ use Illuminate\Support\Facades\Auth;
 
 class FavoritesService {
 
-    public function addFavorite(User $user, $postId) // Esta función permite no duplicar los post en la tabla favoritos
+    public function addFavorite($postId) // Esta función permite no duplicar los post en la tabla favoritos
     {
-        // Buscar el post
-        $post = Post::find($postId);
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json(['message' => 'errorMsg.errorUserNotAuth'], 401); // Código de estado para no autenticado
+        }
     
-        if (!$post) {
+        // Verificar si el post existe
+        if (!Post::where('id', $postId)->exists()) {
             return response()->json(['message' => 'errorMsg.errorPostNotFound']);
         }
     
         // Verificar si ya está en favoritos
-        $exists = $user->favorites()->where('post_id', $postId)->exists();
-    
-        if ($exists) {
+        if ($user->favorites()->where('post_id', $postId)->exists()) {
             return response()->json(['message' => 'infoMsg.infoPostDoubleFav']);
         }
     
         // Si no existe, lo añadimos
-        $user->favorites()->create([
-            'post_id' => $post->id,
-            'created_at' => now(),
-        ]);
+        $user->favorites()->attach($postId); // Usar attach para relaciones Many-to-Many
     
         return response()->json(['message' => 'successMsg.successPostFav']);
     }
-    
 
 
 

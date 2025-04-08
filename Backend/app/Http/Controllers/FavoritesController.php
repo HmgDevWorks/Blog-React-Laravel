@@ -36,13 +36,9 @@ class FavoritesController extends Controller
         return response()->json($favorites);
     }
 
-    public function store(Request $request, $postId): JsonResponse
+    public function store($postId)
     {
-       $user = auth()->user(); // Obtiene el usuario autenticado desde el token
-        if (!$user) {
-        return response()->json(['message' => 'errorMsg.errorUserNotAuth'], 401);
-    }
-    return $this->favoritesService->addFavorite($user, $postId);
+        return $this->favoritesService->addFavorite($postId);
     }
 
     public function getFavsCount()
