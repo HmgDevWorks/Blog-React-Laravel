@@ -21,9 +21,6 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  console.log("restoreAbaible", restoreAbaible)
-  console.log("deleteAbaible", deleteAbaible)
-
   if (!Array.isArray(posts)) {
     return (
       <div className="alert alert-warning">
