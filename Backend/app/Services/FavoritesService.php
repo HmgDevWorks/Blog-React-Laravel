@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon; 
 
 class FavoritesService {
 
@@ -12,21 +13,26 @@ class FavoritesService {
     {
         $user = Auth::user();
         if (!$user) {
-            return response()->json(['message' => 'errorMsg.errorUserNotAuth'], 401); // Código de estado para no autenticado
+            return response()->json(['message' => 'errorMsg.errorUserNotAuth'], 401); 
         }
-    
-        // Verificar si el post existe
-        if (!Post::where('id', $postId)->exists()) {
+
+        $post = Post::find($postId);
+        if (!$post) {
             return response()->json(['message' => 'errorMsg.errorPostNotFound']);
         }
+
+        if ($post->status === 'draw' || $post->status === 'deleted') {
+            return response()->json(['message' => 'errorMsg.errorPostStatusInvalid'], 400);
+        }
     
-        // Verificar si ya está en favoritos
-        if ($user->favorites()->where('post_id', $postId)->exists()) {
+        if ($user->favorites()->where('post_id', $postId)->exists()) { //si ya esta en favoritos te devuelve error
             return response()->json(['message' => 'infoMsg.infoPostDoubleFav']);
         }
     
-        // Si no existe, lo añadimos
-        $user->favorites()->attach($postId); // Usar attach para relaciones Many-to-Many
+        $user->favorites()->attach($postId, [
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
     
         return response()->json(['message' => 'successMsg.successPostFav']);
     }
