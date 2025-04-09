@@ -59,7 +59,7 @@ class FavoritesService {
             }
         
             $favorites = $user->favorites()->get(); // Obtiene la colección de modelos Post favoritos
-            return response()->json(['favorites' => $favorites], 200);
+            return response()->json([$favorites], 200);
         }
 
     public function getFavoritesByID($userId)
