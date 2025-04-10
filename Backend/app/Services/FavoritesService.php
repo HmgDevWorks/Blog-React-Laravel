@@ -53,15 +53,15 @@ class FavoritesService
     }
 
     public function getFavoritesForUser(): JsonResponse
-    {
-        $user = Auth::user(); // Obtiene el usuario autenticado automáticamente
-        if (!$user) {
-            return response()->json(['message' => 'errorMsg.invalidUserObject'], 400);
+        {
+            $user=Auth::user(); // Obtiene el usuario autenticado automáticamente
+            if (!$user) {
+                return response()->json(['message' => 'errorMsg.invalidUserObject'], 400);
+            }
+        
+            $favorites = $user->favorites()->get(); // Obtiene la colección de modelos Post favoritos
+            return response()->json([$favorites], 200);
         }
-
-        $favorites = $user->favorites()->get(); // Obtiene la colección de modelos Post favoritos
-        return response()->json($favorites, 200);
-    }
 
     public function getFavoritesByID($userId)
     {
