@@ -72,7 +72,8 @@
     "title": "Página de administración",
     "delete": "Eliminar",
     "administrador": "Administrador",
-    "viewer":"Lector"
+    "viewer":"Lector",
+    "Users": "Usuarios"
   },
   "postTable": {
     "title": "Título",

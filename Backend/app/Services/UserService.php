@@ -17,9 +17,9 @@ use Illuminate\Validation\ValidationException;
 
 class UserService
 {
-    public function getAllUser() // Esta función recoge todos los datos de la tabla User
+    public function getAllUser() // Esta función recoge todos los datos de la tabla User, incluyendo eliminados
     { 
-        return User::all();
+        return User::withTrashed()->get(); // Incluye usuarios eliminados (soft-deleted)
     }
 
     public function getUserById($id)  // Devuelve el usuario con el ID especificado, o lanza un error 404 si no existe. Tambíen devulve Nposts y Nfavs si es admin o editor

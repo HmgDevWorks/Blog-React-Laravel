@@ -83,7 +83,7 @@ Route::controller(ProfileController::class)->middleware([JwtMiddleware::class])-
     ; //middleware en el servicio
     Route::put('/users/updatePassword', 'getUpdatePassword')->name('users.getUpdatePassword')->middleware('role:admin|editor|reader'); //cambia la contraseña, se necesita "current_password" y "new_password"
     Route::put('/users/changeRole/{user}', 'changeRole')->name('users.changeRole')->middleware('role:admin'); //cambio de roles, solo se puede si eres adminn
-  //  Route::delete('/users/destroy', 'destroy')->name('users.destroy')->middleware('role:admin|editor|viewer'); //el user elimina su cuenta
+    //Route::delete('/users/destroy', 'destroy')->name('users.destroy')->middleware('role:admin|editor|viewer'); //el user elimina su cuenta
    // Route::delete('/users/delete/{id}', 'deleteAdmin')->name('users.deleteAdmin')->middleware('role:admin'); //elimina un user admin
 });
 

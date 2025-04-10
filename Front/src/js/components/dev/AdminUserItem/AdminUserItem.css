@@ -27,7 +27,12 @@
   margin: 0 20px; /* Ajusta el valor según tus necesidades */
   color: var(--grisOscuro); /* Establece el color del texto como grisOscuro */
 }
-
+.buttons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
 .role-select {
   color: var(--grisOscuro); /* Establece el color del texto como blanco */
   border: none; /* Elimina el borde del botón */
@@ -35,7 +40,7 @@
   margin: 5px 0; /* Ajusta el valor según tus necesidades */
 }
 
-.view-posts-button, .delete-button {
+.view-posts-button, .delete-button, .restore-button {
   padding: 5px 10px; /* Ajusta el valor según tus necesidades */
   margin-top: 5px; /* Ajusta el valor según tus necesidades */
 }
@@ -43,6 +48,13 @@
 .delete-button {
   background-color: red; /* Establece el fondo del botón como rojo */
   color: white; /* Establece el color del texto como blanco */
+  border: none; /* Elimina el borde del botón */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+
+.restore-button {
+  background-color: lightgreen; /* Establece el fondo del botón como rojo */
+  color: var(--grisOscuro); /* Establece el color del texto como blanco */
   border: none; /* Elimina el borde del botón */
   cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
 }
