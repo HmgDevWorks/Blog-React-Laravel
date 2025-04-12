@@ -13,6 +13,7 @@ import DashboardPage from "../pages/DashboardPage/DashboardPage";
 import PrivateRoutes from "./PrivateRoutes";
 import VerifyEmail from "../pages/VerifyEmail/VerifyEmail";
 import NewsComponent from "../components/dev/NewsComponent/NewsComponent";
+import Cookies from "../pages/Cookies/Cookies";
 
 
 const AppRoutes = () => {
@@ -35,6 +36,8 @@ const AppRoutes = () => {
         <Route path={"/categories/:category_name"} element={<CategoryPage />} />
         {/* <Route path={"/editarBlog/:blog_id"} element={<h1>editar</h1>} /> */}
       </Route>
+
+      <Route path="/cookies" element={<Cookies />} />
 
       <Route path={"*"} element={<h1>Esta pagina no existe :(</h1>} />
     </Routes>
