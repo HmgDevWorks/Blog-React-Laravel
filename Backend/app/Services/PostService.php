@@ -104,24 +104,24 @@ class PostService
     {
         $post = Post::findOrFail($id);
         if ($post->user_id !== Auth::id()) {
-            return response()->json(['message' => 'errorMsg.unauthorized'], 403);
+            return response()->json(['message' => 'errorMsg.errorUnauthorized'], 403);
         }
     
         $post->update(['status' => 'deleted']);
     
-        return response()->json(["message" => "successMsg.successDeleteOwnSoftPost"], 200);
+        return response()->json(["message" => "successMsg.successDeleteSoftPost"], 200);
     }
 
     public function destroyAnyPostByAdmin($id)
     {
         if (!auth()->user()->hasRole('admin')) { //para que solo lo pueda hacer el admin
-            return response()->json(['message' => 'errorMsg.errorAdminRole'], 403);
+            return response()->json(['message' => 'errorMsg.errorInvalidRole'], 403);
         }
 
         $post = Post::findOrFail($id);
         $post->update(['status' => 'deleted']);
 
-        return response()->json(["message" => "successMsg.successDeleteSoftPostByAdmin"], 200);
+        return response()->json(["message" => "successMsg.successDeleteSoftPost"], 200);
     }
 
     public function restorePost($id)
@@ -129,7 +129,7 @@ class PostService
         $user=Auth::user();
         $post=Post::findOrFail($id);
         if ($post->user_id !== $user->id) {
-            return response()->json(["message" => "errorMsg.unauthorized"], 403);
+            return response()->json(["message" => "errorMsg.errorUnauthorized"], 403);
         }
         
         $post->update(['status' => 'published']);

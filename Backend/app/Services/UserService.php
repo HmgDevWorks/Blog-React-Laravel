@@ -102,11 +102,11 @@ class UserService
         $user = User::withTrashed()->find($id);
 
         if (!$user) {
-            return response()->json(["message" => "Usuario no encontrado"], 404);
+            return response()->json(["message" => "errorMsg.errorUserNotFound"], 404);
         }
 
         if ($user->trashed()) { //si el user ya esta softdeleteado
-            return response()->json(["message" => "El usuario ya estaba eliminado"], 200);
+            return response()->json(["message" => "errorMsg.errorUserAlreadyDelete"], 200);
         }
 
         if ($user->hasRole('admin')) {

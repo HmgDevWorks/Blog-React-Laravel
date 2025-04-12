@@ -142,11 +142,13 @@
     "errorDeleteSoftPost": "Error al cambiar el estado del post a borrado.",
 
     "errorCredentals": "Vaya, las credenciales no son correctas.",
-    "CAMBIAR_NOMBRE_A_ESTE": "Error de al enviar correo de verificación.",
-    
+    "errorUnauthorized": "No tienes permiso para realizar esta acción.",
+
     "errorUserNotAuth": "Usuario no autenticado.",
     "errorUserNotFound": "Usuario no encontrado.",
     "errorUserNotDelete": "El usuario no estaba eliminado.",
+    "errorUserAlreadyDelete": "El usuario ya estaba eliminado.",
+
     "errorCreateUser": "Hubo un problema al crear el usuario.",
     "errorNameUserDuplicate": "El nombre de ususario ya esta registrado.",
     "errorDeleteUser": "Error al borrar el usuario.",
@@ -164,7 +166,7 @@
     "errorDeleteRole": "Error al eliminar el rol.",
     "errorInvalidRole": "No tienes el rol adecuado.",
 
-    "errorMailSend": "Error de al enviar correo de verificación.",
+    "errorMailSend": "Error al enviar correo de verificación.",
     "errorMailTime": "Tiempo de verificación excedido.",
     "errorMailVerifyDouble": "Este correo ya ha sido verificado.",
     "errorMailDuplicate": "El correo ya está registrado.",
@@ -222,6 +224,7 @@
     "successDeleteSoftPost": "Post cambiado a estado borrado.",
     "successPostFav": "Post marcado como favorito.",
     "successPostDeleteFav": "Post eliminado de favoritos.",
+    "successRestorePost": "Post recuperado con éxito.",
 
     "successDeleteUser": "Usuario eliminado con exito.",
     "successUpdateUser": "Usuario actualizado con exito.",
