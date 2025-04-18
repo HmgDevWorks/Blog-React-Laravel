@@ -5,8 +5,9 @@ import Category from '../CategoryCarouselItem/CategoryItem';
 import Loader from '../Loader/Loader';
 import { useAlert } from "../../../bootstrap/contexts/AlertContext";
 import { useTranslation } from 'react-i18next';
+import { memo } from 'react';
 
-export default function CategoryCarrousel() {
+const CategoryCarrousel = () => {
     const { t } = useTranslation();
     const { addError, addSuccess } = useAlert();
 
@@ -48,3 +49,4 @@ export default function CategoryCarrousel() {
         </div>
     );
 }
+export default memo(CategoryCarrousel)

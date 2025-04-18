@@ -1,0 +1,36 @@
+.finder-box {
+
+    border-radius: 8px 8px 0px 0px;
+
+}
+
+.finder-box-rounded {
+    border-radius: 8px;
+}
+
+.finder-box-rounded,
+.finder-box {
+    display: flex;
+    background-color: var(--grisClaro);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.finder-select {
+    background-color: var(--grisOscuro);
+    color: var(--grisClaro);
+    font-family: "Special Elite", serif;
+    padding: 0.75rem 1rem;
+    border: none;
+    min-width: 180px;
+}
+
+.finder-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    font-size: 1rem;
+    color: var(--grisOscuro);
+    font-family: "Special Elite", serif;
+    background-color: #fff;
+}

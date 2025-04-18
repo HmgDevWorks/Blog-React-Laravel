@@ -18,7 +18,7 @@ export default function PostTablePagination({ filter, user_id }) { //, search = 
                 postPromise = favService.getUserFavs();
                 break;
             case 'published':
-                postPromise = postService.getPostsByStatus({ "status": 'published' });
+                postPromise = postService.getPostsByStatus(user_id, { "status": 'published' });
                 break;
             case 'draft':
             case 'deleted':
@@ -32,13 +32,15 @@ export default function PostTablePagination({ filter, user_id }) { //, search = 
                 setPosts(data);
             })
             .catch(error => {
+                setPosts([]);
                 console.error("Error fetching posts:", error);
+                // Manejo de error: limpiar posts en caso de error
             });
     };
 
     useEffect(() => {
         fetchPosts();
-    }, [filter, loggedUser]); // Se ejecuta solo cuando cambian estos valores
+    }, [filter, loggedUser, user_id]); // Se ejecuta solo cuando cambian estos valores
 
 
     const handlePageChange = (pageNumber) => {
@@ -46,7 +48,6 @@ export default function PostTablePagination({ filter, user_id }) { //, search = 
         // Recargar los posts al cambiar de página
     };
 
-    console.log("user????", user_id);
     return (
         <PostTable
             posts={posts}

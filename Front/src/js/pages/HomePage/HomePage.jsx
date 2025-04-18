@@ -11,9 +11,10 @@ import { useInView } from "react-intersection-observer";
 import { useInView as useInView2 } from 'react-intersection-observer'
 
 const HomePage = () => {
+
   const { ref, inView } = useInView({
     triggerOnce: false,
-    threshold: 0.3,
+    threshold: 0.2,
   });
   const { ref: ref2, inView: inView2 } = useInView2({ // Usa useInView2 para ref2
     triggerOnce: false,
@@ -27,16 +28,14 @@ const HomePage = () => {
     <div className="flex flex-col items-center">
       {/* f_size y h_num son opcionales */}
       <Title texto="C-Blog, donde el limite de las ideas, lo pones tú" f_size={43} h_num={1} />
-      <Separador />
-
-      <Categorycarousel />
+      {/* <Separador /> */}
+      <ArticleFinder />
       <Separador />
       <div ref={ref} className={`newsHomeComponent ${animationClasses}`}>
         <NewsComponent />
       </div>
-
       <Separador />
-      <ArticleFinder />
+      <Categorycarousel />
       <Separador />
       <div ref={ref2} className={`autoresCompleto ${animationClasses2}`} >
         <Authors />

@@ -1,10 +1,11 @@
+import { memo } from "react";
 import statService from "../../../services/statService";
 import Stats from "../Stats/Stats";
 import "./Counter.css";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function Counter() {
+const Counter = () => {
   const { t } = useTranslation();
   const [stats, setStats] = useState([]);
 
@@ -26,3 +27,4 @@ export default function Counter() {
     </div>
   );
 }
+export default memo(Counter)

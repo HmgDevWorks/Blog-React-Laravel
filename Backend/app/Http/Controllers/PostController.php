@@ -87,21 +87,21 @@ class PostController extends Controller
     //     $search = $request->input('search');
     //     $perPage = $request->input('perPage', 10);
     //     if ($search) {
-    //         $posts = $this->postService->searchBarPosts($search, $perPage,$page);
+    //         $posts = $this->postService->searchBarPosts($search, $perPage, $page);
     //         if ($posts->isEmpty()) {
     //             return response()->json(["mensaje" => "No existen posts con '$search' como busqueda", 200]);
     //         } else {
     //             return response()->json([
     //                 'current_page' => $page,
-    //                 'posts' =>$posts
-    //         ]);
+    //                 'posts' => $posts
+    //             ]);
     //         }
     //     }
     // }
 
     public function searchPosts(Request $request) //controlador para la barra de busqueda
     {
-        $search = $request->input('search');
+        $search = $request->input('title');
 
         if (!$search || strlen($search) < 2) {
             return response()->json(["message" => "errorMsg.errorSearchCharacters"], 400);
@@ -125,7 +125,7 @@ class PostController extends Controller
 
     public function searchAuthors(Request $request)
     {
-        $search = $request->input('search');
+        $search = $request->input('name');
 
         if (!$search || strlen($search) < 2) {
             return response()->json(["message" => "errorMsg.errorSearchCharacters"], 400);
@@ -213,7 +213,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function getPostsByStatus(Request $request): JsonResponse
+    public function getPostsByStatus(Request $request, $userId): JsonResponse
     {
         $user = auth()->user();
         if (!$user) {
@@ -222,8 +222,8 @@ class PostController extends Controller
 
         $status = trim(strtolower($request->input('status')));
 
-        $posts = Post::where('user_id', $user->id)
-            ->where('status', $status)
+        $posts = Post::where('user_id', $userId)
+            ->where('status', 'published')
             ->get();
 
         if ($posts->isEmpty()) {
@@ -232,7 +232,7 @@ class PostController extends Controller
             ], 200);
         }
 
-        return response()->json(['posts' => $posts], 200);
+        return response()->json($posts, 200);
     }
 
     public function getPublishedPostById($id)

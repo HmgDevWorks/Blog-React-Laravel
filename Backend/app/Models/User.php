@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Models;
 
@@ -68,7 +68,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail  // Im
     {
         return $this->getKey();  // Usamos el ID del usuario como identificador único
     }
-    
+
     public function getAuthPassword()
     {
         return $this->password_user;
@@ -104,10 +104,10 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail  // Im
         return $this->hasMany(PasswordResetToken::class, 'email', 'email_user');
     }
 
-     public function getEmailForVerification()
-     {
-         return $this->email_user;
-     }
+    public function getEmailForVerification()
+    {
+        return $this->email_user;
+    }
     // public function getAuthIdentifierName()
     // {
     //     return 'email_user';

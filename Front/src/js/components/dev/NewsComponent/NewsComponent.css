@@ -38,7 +38,7 @@
 .botones-novedades {
     position: absolute !important;
     width: 100%;
-    padding-left: 5px;
+    padding: 5px;
 }
 
 .carousel-item-news {

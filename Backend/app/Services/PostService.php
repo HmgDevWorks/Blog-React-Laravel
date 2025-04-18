@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class PostService
 {
     public function getAllPost()// Esta función recoge todos los datos de la tabla Post
-    { 
+    {
         return Post::where('status', 'published')->get();
     }
 
@@ -27,19 +27,19 @@ class PostService
     public function getLastTenPopularPosts()
     {
         return Post::where('status', 'published') // Solo los publicados
-        ->orderBy('created_at', 'desc') // Ordena por fecha (últimos 50)
-        ->take(50)
-        ->orderBy('views', 'desc') // Luego, ordena por vistas
-        ->take(10) // Se queda solo con los 10 más vistos
-        ->get();
+            ->orderBy('created_at', 'desc') // Ordena por fecha (últimos 50)
+            ->take(50)
+            ->orderBy('views', 'desc') // Luego, ordena por vistas
+            ->take(10) // Se queda solo con los 10 más vistos
+            ->get();
     }
 
     public function getPostById($id) // Devuelve el post con el ID especificado, o lanza un error 404 si no existe
-    {    
+    {
         $post = Post::where('id', $id)
-                ->where('status', 'published')  
-                ->first();
-         
+            ->where('status', 'published')
+            ->first();
+
         if (!$post) {
             return response()->json(['message' => 'errorMsg.errorPostNotFoundOrNotPublish'], 404);
         }
@@ -52,14 +52,14 @@ class PostService
     }
 
     public function createPost(Request $request)
-    { 
+    {
         $validatedData = $request->validate([ //valida datos introducids
             'id_categories' => 'required|integer|exists:categories,id',
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'status' => 'nullable|in:published,draft,deleted'
         ]);
-    
+
         $post = Post::create([
             'id_categories' => $validatedData['id_categories'],
             'user_id' => auth()->id(), // asigna el usuario autenticado
@@ -67,48 +67,48 @@ class PostService
             'content' => $validatedData['content'],
             'status' => $validatedData['status'] ?? "draft" // por defecto draft si no dice na
         ]);
-    
+
         return response()->json(["message" => "successMsg.successCreatePost"], 201);
-    } 
+    }
 
     public function getPostByCategory($cat)
-    {    
+    {
         $post = Categories::findOrFail($cat);
         return Post::findOrFail($post->id);
     }
 
     public function getPostsByUser($userId)// Función para obtener los posts publicados de un usuario 
-    { 
+    {
         return Post::where('user_id', $userId)
-                   ->where('status', 'published') 
-                   ->latest()
-                   ->get();
+            ->where('status', 'published')
+            ->latest()
+            ->get();
     }
-    
+
     public function updatePost($data, $post)
     {
-    if ($post) { // Actualizar campos manualmente y guardar el modelo
-        $post->id_categories = $data['id_categories'] ?? $post->id_categories;
-        $post->user_id = $data['user_id'] ?? $post->user_id;
-        $post->title = $data['title'] ?? $post->title;
-        $post->content = $data['content'] ?? $post->content;
-        $post->status = $data['status'] ?? $post->status;
-        $post->save();
-        return response()->json(["message" => "successMsg.successUpdatePost"], 200);
-    } else {
-        return response()->json(["message" => "errorMsg.errorUpdatePost"], 400);
+        if ($post) { // Actualizar campos manualmente y guardar el modelo
+            $post->id_categories = $data['id_categories'] ?? $post->id_categories;
+            $post->user_id = $data['user_id'] ?? $post->user_id;
+            $post->title = $data['title'] ?? $post->title;
+            $post->content = $data['content'] ?? $post->content;
+            $post->status = $data['status'] ?? $post->status;
+            $post->save();
+            return response()->json(["message" => "successMsg.successUpdatePost"], 200);
+        } else {
+            return response()->json(["message" => "errorMsg.errorUpdatePost"], 400);
         }
     }
 
     public function destroyPost($id) // cambia el post a estado delete
     {
         $post = Post::findOrFail($id);
-        if ($post->user_id !== Auth::id()) {
+        if ($post->user_id !== Auth::id() && !auth()->user()->hasRole('admin')) {
             return response()->json(['message' => 'errorMsg.unauthorized'], 403);
         }
-    
+
         $post->update(['status' => 'deleted']);
-    
+
         return response()->json(["message" => "successMsg.successDeleteOwnSoftPost"], 200);
     }
 
@@ -125,7 +125,7 @@ class PostService
     }
 
     public function searchBarPosts($search, $perPage)// Buscamos tanto por título como por contenido. esta NO es, la que funciona esta en el controlador directamente hecha, NO FUNSIONA
-    { 
+    {
         return Post::where('title', 'like', '%' . $search . '%')
             ->orWhere('content', 'like', '%' . $search . '%')
             ->latest()->paginate($perPage);
@@ -144,7 +144,7 @@ class PostService
     }
 
     public function getPostsByUserGroupedByMonth($userId) // En esta función obtenemos la cantidad de post mensuales hechos por el user 
-    {  
+    {
         return Post::where('user_id', $userId)
             ->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as total_posts, ? as user_id', [$userId]) // Selecciona año, mes, total_posts y agrega el user_id
             ->groupBy('year', 'month')
@@ -154,7 +154,7 @@ class PostService
     }
 
     public function getPostsByUserGroupedByMonthByViews($userId) // En esta función obtenemos la cantidad de post mensuales y sus visitas totales no por cada post
-    { 
+    {
         return Post::where('user_id', $userId)
             ->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as total_posts, SUM(views) as total_views, ? as user_id', [$userId]) // Selecciona año, mes, total_posts, total_views y agrega el user_id
             ->groupBy('year', 'month')
@@ -165,12 +165,12 @@ class PostService
 
     public function getCountPost()
     {
-        return Post::where('status','published')->count();  
+        return Post::where('status', 'published')->count();
     }
 
     public function getViewsPost()
     {
-        return Post::where('status','published')->sum('views');  
+        return Post::where('status', 'published')->sum('views');
     }
 
     public function getCountUsers()

@@ -41,7 +41,6 @@ const PostDetailsPage = () => {
         ?
         <>
           <PostDetails blog={blog} />
-          <FavToggle fav={blog.isFav} id={blog.id} />
         </>
         :
         <Loader />}

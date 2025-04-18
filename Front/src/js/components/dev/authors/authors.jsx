@@ -3,6 +3,7 @@ import "./Authors.css";
 import { useTranslation } from 'react-i18next';
 import FamousAuthors from '../FamousAuthors/FamousAuthors';
 import userService from '../../../services/userService';
+import { memo } from 'react';
 
 const Authors = () => {
   const { t } = useTranslation();
@@ -30,7 +31,8 @@ const Authors = () => {
       </h3>
       <ul className="list authors-list"> {/* Agregamos la clase authors-list */}
         {popularAuthors?.map((elm, i) => {
-          console.log(elm);
+          let x = 0
+          console.log("me estoy reenderizando", x++);
           return <FamousAuthors author={elm} row={i + 1} key={i} />;
         })}
       </ul>
@@ -38,4 +40,4 @@ const Authors = () => {
   );
 };
 
-export default Authors;
+export default memo(Authors);

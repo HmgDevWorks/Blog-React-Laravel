@@ -5,7 +5,7 @@
   "fav": "Favoritos",
   "draft": "Borradores",
   "published": "Mis publicaciones",
-  "nav" : {
+  "nav": {
     "home": "Inicio",
     "admin": "Administrador",
     "profile": "Perfil",
@@ -13,7 +13,7 @@
     "login": "Iniciar Sesión",
     "logout": "Cerrar sesión"
   },
-  "login":{
+  "login": {
     "name": "Nombre",
     "lastname": "Apellido",
     "pass": "Cosntraseña",
@@ -28,7 +28,7 @@
     "verified": "Cuenta verificada, ya puedes iniciar sesión",
     "sendEmail": "Enviar correo"
   },
-  "recover":{
+  "recover": {
     "title": "Recuperar Contraseña",
     "back": "Volver al inicio de sesión"
   },
@@ -39,7 +39,14 @@
     "sports": "Deportes"
   },
   "postFinder": {
-    "title": "Encuentra el artículo"
+    "title": "Busca en nuestros posts",
+    "selectSearch": "Buscar por...",
+    "byAuthor": "Autor",
+    "byTitle": "Título",
+    "placeholder": "Escribe para buscar...",
+    "views": "Visitas",
+    "feature": "Destacado en:",
+    "category": "Categoria"
   },
   "authorPage": {
     "title": "Articulos de "
@@ -51,7 +58,12 @@
   "createPostPage": {
     "draft": "Borrador",
     "posts": "Mis publicaciones",
-    "newPost": "Nuevo Articulo"
+    "newPost": "Nuevo Articulo",
+
+    "newPage": "Crea un nuevo Post"
+  },
+  "PostDetails": {
+    "Delete": "Borrar Post"
   },
   "authors": {
     "title": "Autores más Famosos"
@@ -70,14 +82,14 @@
     "title": "Página de administración",
     "delete": "Eliminar",
     "administrador": "Administrador",
-    "viewer":"Lector"
+    "viewer": "Lector"
   },
   "postTable": {
     "title": "Título",
     "publishedAt": "Fecha de publicación",
     "fav": "Favorito"
   },
-  "famousAuthor":{
+  "famousAuthor": {
     "views": "Visitas"
   },
   "profile": {
@@ -104,15 +116,15 @@
     "publishBtn": "Publicar",
     "saveBtn": "Guardar",
     "deleteBtn": "Borrar",
-    "selectCat": "Elige una categoria" ,
+    "chooseCat": "Elige una categoria",
     "placeholder": "Escribe tu post aquí",
-    "file":{
-      "tooSmall":"La imagen debe ser al menos de 300x300 píxeles.",
+    "file": {
+      "tooSmall": "La imagen debe ser al menos de 300x300 píxeles.",
       "tooLarge": "El archivo es demasiado grande max 5MB",
       "notPermited": "El archivo no esta permitido Usa JPG o PNG."
     }
   },
-  "errorMsg":{
+  "errorMsg": {
     "errorCreateCategory": "Error al crear la categoria.",
     "errorUpdateCategory": "Error al actualizar la categoria.",
     "errorDeleteCategory": "Error al eliminar la categoria.",
@@ -125,7 +137,7 @@
     "errorSearchCharacters": "La búsqueda debe tener al menos 2 caracteres.",
     "errorFindSearchPosts": "No existen posts con esas palabras clave como búsqueda.",
     "errorFindSearchAuthors": "No existen autores con esas palabras clave como búsqueda.",
-    
+
     "errorPostNotFound": "Post no encontrado.",
     "errorFindPostStatusOnly": "No se encontraron posts con el status especificado.",
     "errorFindPostStatus": "No existen posts con ese estado para este usuario.",
@@ -137,7 +149,7 @@
 
     "errorCredentals": "Vaya, las credenciales no son correctas.",
     "CAMBIAR_NOMBRE_A_ESTE": "Error de al enviar correo de verificación.",
-    
+
     "errorUserNotAuth": "Usuario no autenticado.",
     "errorUserNotFound": "Usuario no encontrado.",
     "errorCreateUser": "Hubo un problema al crear el usuario.",

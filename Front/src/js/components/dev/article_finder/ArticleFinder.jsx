@@ -1,73 +1,92 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './ArticleFinder.css';
 import { useTranslation } from 'react-i18next';
+import postService from '../../../services/postService';
+import { useNavigate } from 'react-router-dom';
+import useResize from '../../../bootstrap/hooks/useResize';
+import FinderControls from '../FinderControls/FinderControls.jsx';
+import ResultItem from '../ResultItem/ResultItem.jsx';
 
 const ArticleFinder = () => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
+    const isMobile = useResize();
+
     const [selectedButton, setselectedButton] = useState('');
     const [inputValue, setInputValue] = useState('');
-    const [results, setResults] = useState([]); // Estado para los resultados de la búsqueda (sin acabar)
+    const [results, setResults] = useState([]);
+    const [error, setError] = useState(null);
 
-    const handleCardClick = (card) => { //Button click
-        setselectedButton(card);
-        console.log(`Buscando "${inputValue}" en "${card}"`);
-    };
-    const handleSearchChange = (e) => { //Input changes
-        const query = e.target.value;
-        setInputValue(query);
+    useEffect(() => {
+        const fetchResults = () => {
+            if (inputValue.length === 0 || !selectedButton) {
+                setResults([]);
+                setError(null);
+                return;
+            }
 
-        if (selectedButton) {
-            console.log(`Buscando "${query}" en "${selectedButton}"`);
+            const service =
+                selectedButton === 'Autor'
+                    ? postService.getAuthorPost(inputValue)
+                    : postService.getPostByTitle(inputValue);
 
-        }
-    };
+            service
+                .then((response) => {
+                    const data = selectedButton === 'Autor' ? response.data : response.data.posts || [];
+                    setResults(data);
+                    setError(null);
+                })
+                .catch((err) => {
+                    console.error(err);
+                    setResults([]);
+                    setError(t('errorMsg.errorSearchCharacters'));
+                });
+        };
+
+        const debounce = setTimeout(fetchResults, 200);
+        return () => clearTimeout(debounce);
+    }, [inputValue, selectedButton, t]);
+
     return (
-        <div className="container">
-            <div className="bg-gray-200 p-4 rounded text-center">
-                <h2 className="titleArticleFinder">{t("postFinder.title")}</h2>
-            </div>
+        <div className="finder-wrapper">
+            <h2 className="titleArticleFinder">{t('postFinder.title')}</h2>
 
-            <div className='text-center mt-10'>
-                <label id="buscador_lab" className="input input-bigger">
-                    <svg className="h-[1em] opacity-60 icon-color" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.3-4.3"></path>
-                        </g>
-                    </svg>
-                    <input
-                        type="search"
-                        className="input-field"
-                        required placeholder="Buscar..."
-                        //value={inputValue}
-                        id="input_busc"
-                        onChange={handleSearchChange}
-                    />
-                </label>
-            </div>
+            <FinderControls
+                selectedButton={selectedButton}
+                setselectedButton={setselectedButton}
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                t={t}
+                results={results}
+            />
 
-            <div className="flex flex-wrap justify-around mt-10">
-                <button
-                    className={`categorybutton ${selectedButton === 'Autor' ? 'categorybutton-selected' : ''}`}
-                    onClick={() => handleCardClick('Autor')}
-                >Autor</button>
+            {error && <p className="finder-error">{error}</p>}
 
-                <button
-                    className={`categorybutton ${selectedButton === 'Título' ? 'categorybutton-selected' : ''}`}
-                    onClick={() => handleCardClick('Título')}
-                >Título</button>
-
-                <button
-                    className={`categorybutton ${selectedButton === 'FechaPublicacion' ? 'categorybutton-selected' : ''}`}
-                    onClick={() => handleCardClick('FechaPublicacion')}
-                >Fecha de publicación</button>
-            </div>
-
-            <div className="mt-4">
-                {results.map((result, index) => (<div key={index}>{result}</div>))}
+            <div className="finder-results max-h-[20rem] overflow-y-auto scrollbar-thin scrollbar-thumb-[color:var(--saturadoClaro)] scrollbar-track-transparent">
+                {results.length > 0 ? (
+                    results.map((result, idx) => (
+                        <ResultItem
+                            key={idx}
+                            result={result}
+                            idx={idx}
+                            selectedButton={selectedButton}
+                            navigate={navigate}
+                            isMobile={isMobile}
+                            t={t}
+                        />
+                    ))
+                ) : (
+                    inputValue.length >= 2 && (
+                        <p className="finder-empty">
+                            {selectedButton === 'Autor'
+                                ? t('errorMsg.errorFindSearchAuthors')
+                                : t('errorMsg.errorFindSearchPosts')}
+                        </p>
+                    )
+                )}
             </div>
         </div>
     );
 };
 
-export default ArticleFinder; 
+export default ArticleFinder;

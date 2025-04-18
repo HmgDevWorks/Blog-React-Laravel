@@ -1,0 +1,27 @@
+.finder-result-item,
+.finder-result-item2 {
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    font-family: "Special Elite", serif;
+    font-size: small;
+}
+
+.finder-result-item {
+    background-color: var(--grisClaro);
+    color: var(--grisOscuro);
+}
+
+.finder-result-item2 {
+    background-color: var(--saturadoOscuro);
+    color: var(--grisClaro);
+}
+
+.finder-result-item:hover {
+    background-color: var(--saturadoClaro);
+    transition: background-color 0.5s ease;
+}
+
+.finder-result-item2:hover {
+    background-color: var(--saturadoClaro);
+    transition: background-color 0.5s ease;
+}

@@ -5,6 +5,7 @@ import FavToggle from "../FavToggle/FavToggle";
 import "./PostTable.css";
 import { useTranslation } from "react-i18next";
 import { FaTrash } from "react-icons/fa";
+import Loader from "../Loader/Loader";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -13,7 +14,7 @@ const formatDate = (dateString) => {
     month: 'long',
     day: 'numeric',
     hour: '2-digit',
-    minute: '2-digit'
+    minute: '2-digit',
   }).format(date);
 };
 
@@ -21,20 +22,27 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <Loader />
+    );
+  }
+
   if (!Array.isArray(posts)) {
     return (
-      <div className="alert alert-warning">
+      <div className="alert alert-warning mt-4">
         {posts?.error || "Error desconocido al cargar los posts"}
       </div>
     );
   }
-  if (posts.length == 0) {
-    return (
-      <div className="alert alert-info">
-        No hay posts
-      </div>
-    );
-  }
+
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -50,7 +58,8 @@ export default function PostTable({ posts, currentPage, postsPerPage, onPageChan
     );
   };
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto
+    mt-4">
       <table className="posts-table table rounded-box">
         <thead>
           <tr>

@@ -29,7 +29,6 @@ export default function LoginForm() {
     const emailParam = searchParams.get("email");
     const verified = searchParams.get("verified");
     const isPasswordResetMode = !!(tokenParam && emailParam);
-    //http://localhost:5173/login?token=5NAolLsAqhPKlZtErtVYgYlVx3gK28qcYKwlhwM1CU4rgdng9xALrzLqSBs8?email=hector.m.g@hotmail.com
     // States
     const [login, setLogin] = useState(true);
     const [resetStep, setResetStep] = useState(0);

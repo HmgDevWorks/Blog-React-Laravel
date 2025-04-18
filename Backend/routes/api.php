@@ -57,7 +57,8 @@ Route::delete('/admin/delete/{id}', [ProfileController::class, 'deleteAdmin'])->
 Route::put('/admin/restore/{id}', [ProfileController::class, 'restoreUser'])->middleware([JwtMiddleware::class])->middleware('role:admin'); //ruta para que el admin restaure una cuenta
 Route::delete('/admin/deletePost/{id}', [Postcontroller::class, 'adminDestroyPost'])->middleware([JwtMiddleware::class])->middleware('role:admin'); //ruta para que el admin restaure una cuenta
 
-
+Route::get('/posts/searchPosts', [PostController::class, 'searchPosts']);
+Route::get('/posts/searchAuthors', [PostController::class, 'searchAuthors']);
 
 Route::middleware('auth:api')->get('/verify-token', function (Request $request) {
     $user = $request->user();
@@ -83,8 +84,8 @@ Route::controller(ProfileController::class)->middleware([JwtMiddleware::class])-
     ; //middleware en el servicio
     Route::put('/users/updatePassword', 'getUpdatePassword')->name('users.getUpdatePassword')->middleware('role:admin|editor|reader'); //cambia la contraseña, se necesita "current_password" y "new_password"
     Route::put('/users/changeRole/{user}', 'changeRole')->name('users.changeRole')->middleware('role:admin'); //cambio de roles, solo se puede si eres adminn
-  //  Route::delete('/users/destroy', 'destroy')->name('users.destroy')->middleware('role:admin|editor|viewer'); //el user elimina su cuenta
-   // Route::delete('/users/delete/{id}', 'deleteAdmin')->name('users.deleteAdmin')->middleware('role:admin'); //elimina un user admin
+    //  Route::delete('/users/destroy', 'destroy')->name('users.destroy')->middleware('role:admin|editor|viewer'); //el user elimina su cuenta
+    // Route::delete('/users/delete/{id}', 'deleteAdmin')->name('users.deleteAdmin')->middleware('role:admin'); //elimina un user admin
 });
 
 Route::controller(CategoriesController::class)->middleware([JwtMiddleware::class])->group(function () {
@@ -112,7 +113,7 @@ Route::controller(PermissionController::class)->middleware([JwtMiddleware::class
     Route::post('/roles/{role}/permissions/revoke', 'revokePermissionFromRole')->name('permission.revokePermissionFromRole')->middleware('role:admin');
 });
 
-Route::get('/posts/searchAuthors', [PostController::class, 'searchAuthors']);
+
 
 Route::controller(PostController::class)->middleware([JwtMiddleware::class])->group(function () {
     Route::get('/posts/show', 'index')->name('posts.index')->middleware('role:admin|editor|reader'); // enseña los 10 últimos
@@ -120,11 +121,10 @@ Route::controller(PostController::class)->middleware([JwtMiddleware::class])->gr
     Route::get('/posts/authUser', 'getPostsAuthUser')->name('posts.getPostsAuthUser')->middleware('role:admin|editor'); //muestra los posts publis y delet del user auth para el crear articulo
     Route::get('/posts/published/{id}', 'getPublishedPostById')->name('posts.getPublishedPostById')->middleware('role:admin|editor|reader');//enseña los posts published de un user
     Route::get('/posts/admin/{id}', 'getPostsForAdminbyId')->name('posts.getPostsForAdminbyId')->middleware('role:admin');//muestra todos los post de un user a un admin
-    Route::get('/posts/status', 'getPostsByStatus')->name('posts.getPostsByStatus')->middleware('role:admin|editor|reader');//elige y enseña los posts published draft o deleted del user auth
+    Route::get('/posts/status/{id}', 'getPostsByStatus')->name('posts.getPostsByStatus')->middleware('role:admin|editor|reader');//elige y enseña los posts published draft o deleted del user auth
     Route::get('/posts/all', 'show')->name('posts.show')->middleware('role:admin|editor|reader'); // Enseña todos los posts (URL modificada)
     Route::get('/posts/show/{post}', 'getPostById')->middleware('role:admin|editor|reader'); // Enseña un post por un id
     Route::get('/posts/user/{id}', 'postUser')->middleware('role:admin|editor|reader');     //Enseña los post a traves del id del usuario
-    Route::get('/posts/searchPosts', 'searchPosts')->middleware('role:admin|editor|reader');      //Ruta para buscar posts BARRA DE BÚSQUEDA 
     //Route::get('/posts/searchAuthors','searchAuthors')->middleware('role:admin|editor|reader');//ruta para barra de busqueda de autores   
     Route::get('/posts/posts-overview/{userId}', 'getUserPostsOverview')->middleware('role:admin|editor|reader');      // Devuelve las estadísticas para el Dashboard
     Route::post('/posts/store', 'store')->name('posts.store')->middleware('role:admin|editor'); //Crea un post
