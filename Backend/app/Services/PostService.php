@@ -103,25 +103,37 @@ class PostService
     public function destroyPost($id) // cambia el post a estado delete
     {
         $post = Post::findOrFail($id);
-        if ($post->user_id !== Auth::id() && !auth()->user()->hasRole('admin')) {
-            return response()->json(['message' => 'errorMsg.unauthorized'], 403);
+        if ($post->user_id !== Auth::id()) {
+            return response()->json(['message' => 'errorMsg.errorUnauthorized'], 403);
         }
 
         $post->update(['status' => 'deleted']);
 
-        return response()->json(["message" => "successMsg.successDeleteOwnSoftPost"], 200);
+        return response()->json(["message" => "successMsg.successDeleteSoftPost"], 200);
     }
 
     public function destroyAnyPostByAdmin($id)
     {
         if (!auth()->user()->hasRole('admin')) { //para que solo lo pueda hacer el admin
-            return response()->json(['message' => 'errorMsg.errorAdminRole'], 403);
+            return response()->json(['message' => 'errorMsg.errorInvalidRole'], 403);
         }
 
         $post = Post::findOrFail($id);
         $post->update(['status' => 'deleted']);
 
-        return response()->json(["message" => "successMsg.successDeleteSoftPostByAdmin"], 200);
+        return response()->json(["message" => "successMsg.successDeleteSoftPost"], 200);
+    }
+
+    public function restorePost($id)
+    {
+        $user = Auth::user();
+        $post = Post::findOrFail($id);
+        if ($post->user_id !== $user->id) {
+            return response()->json(["message" => "errorMsg.errorUnauthorized"], 403);
+        }
+
+        $post->update(['status' => 'published']);
+        return response()->json(["message" => "successMsg.successRestorePost"], 200);
     }
 
     public function searchBarPosts($search, $perPage)// Buscamos tanto por título como por contenido. esta NO es, la que funciona esta en el controlador directamente hecha, NO FUNSIONA

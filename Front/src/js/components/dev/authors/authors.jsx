@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import "./Authors.css";
 import { useTranslation } from 'react-i18next';
 import FamousAuthors from '../FamousAuthors/FamousAuthors';
@@ -31,8 +31,6 @@ const Authors = () => {
       </h3>
       <ul className="list authors-list"> {/* Agregamos la clase authors-list */}
         {popularAuthors?.map((elm, i) => {
-          let x = 0
-          console.log("me estoy reenderizando", x++);
           return <FamousAuthors author={elm} row={i + 1} key={i} />;
         })}
       </ul>

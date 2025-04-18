@@ -25,7 +25,8 @@
     "register": "Register",
     "create": "Create an account",
     "forgot": "Forgot your password?",
-    "verified": "Account verified, you can now log in"
+    "verified": "Account verified, you can now log in",
+    "sendEmail": "Send Email"
   },
   "recover": {
     "title": "Recover Password",
@@ -48,7 +49,9 @@
     "category": "Category"
   },
   "authorPage": {
-    "title": "Articles by "
+    "title": "Articles by ",
+    "deletedPosts": "Deleted Articles",
+    "publishedPosts": "Published Articles"
   },
   "categoryPage": {
     "title": "Articles in ",
@@ -80,12 +83,16 @@
     "title": "Admin Page",
     "delete": "Delete",
     "administrador": "Admin",
-    "viewer": "Viewer"
+    "viewer": "Viewer",
+    "Users": "Users"
   },
   "postTable": {
     "title": "Title",
     "publishedAt": "Publication Date",
-    "fav": "Favorite"
+    "fav": "Favorite",
+    "delete": "Delete",
+    "restore": "Restore",
+    "actions": "Actions"
   },
   "famousAuthor": {
     "views": "Views"
@@ -116,25 +123,91 @@
     "deleteBtn": "Delete",
     "chooseCat": "Choose a category",
     "placeholder": "Write your post here",
+
     "file": {
       "tooSmall": "The image must be at least 300x300 pixels.",
-      "tooLarge": "The file is too large, max 5MB.",
+      "tooLarge": "The file is too large, max 5MB",
       "notPermited": "The file is not allowed. Use JPG or PNG."
     }
+  },
+  "cookies": {
+    "title": "Cookie Policy",
+    "firstText": "At C-Blog, we use cookies to enhance your experience on our website. This policy explains what cookies are, how we use them, and what options you have to manage them.",
+    "pointOne": "1. What are cookies?",
+    "textOne": "Cookies are small text files that are stored on your device (computer, tablet, mobile phone, etc.) when you visit a website. Cookies allow the website to remember your activity and preferences over time, making navigation easier and improving the user experience.",
+    "pointTwo": "2. What types of cookies do we use?",
+    "pointTwoA": "Necessary cookies:",
+    "textTwoA": "These are essential for the website to function and cannot be disabled in our systems. These cookies are generally set as a result of actions you take, such as setting your privacy preferences or filling out forms.",
+    "pointTwob": "Performance cookies:",
+    "textTwob": "These allow us to count visits and traffic sources to measure and improve the performance of our website. All information collected by these cookies is aggregated and therefore anonymous.",
+    "pointTwoc": "Functional cookies:",
+    "textTwoc": "These cookies allow the website to provide enhanced and personalized features. They may be set by us or by third parties whose services we have added to our pages.",
+    "pointTwoD": "Advertising cookies:",
+    "textTwoD": "These are used to deliver relevant advertisements based on your interests. They can also be used to limit the number of times you see an ad and to measure the effectiveness of an advertising campaign.",
+    "pointThree": "3. Why do we use cookies?",
+    "textThreeA": "Improve the functionality and usability of the website.",
+    "textThreeB": "Analyze the performance of the site and understand how users interact with it.",
+    "textThreeC": "Personalize the user experience by providing more relevant content and ads.",
+    "textThreeD": "Collect statistical information about users' browsing behavior.",
+    "pointFour": "4. How can you manage cookies?",
+    "textFourA": "You can configure your browser to reject cookies or to alert you when they are being used. However, please note that some site features may not work properly if you disable cookies.",
+    "textFourB": "For more information on how to disable or control cookies, please visit the help section of your browser or refer to the documentation of the major browsers.",
+    "pointFive": "5. Third-party cookies",
+    "textFive": "In some sections of our website, we may also use third-party services that place cookies on your device. These include web analytics providers, social networks, and advertising service providers. These cookies are subject to their own privacy and cookie policies.",
+    "pointSix": "6. Consent for the use of cookies",
+    "textSix": "By using our website, you consent to the use of cookies as described in this policy. If you do not agree with the use of cookies, you can adjust your browser settings to reject them or stop using our website.",
+    "pointSeven": "7. Changes to the cookie policy",
+    "textSeven": "We reserve the right to update this cookie policy at any time. Any changes will be posted on this page, and the date of the last update will be modified at the top of this document.",
+    "pointEight": "8. Contact",
+    "textEight": "If you have any questions or concerns about our cookie policy, please feel free to contact us at:",
+    "mail": "info@cblog.es"
+  },
+  "policy": {
+    "title": "Privacy Policy",
+    "firstText": "At C-Blog, the privacy of our users is a priority. This Privacy Policy describes how we collect, use, and protect your personal information when accessing and using our blog.",
+    "pointOne": "1. Information We Collect",
+    "textOne": "We may collect the following information when you interact with our site:",
+    "textOneA": "Name and email address when you subscribe to the newsletter or leave a comment.",
+    "textOneB": "Technical information such as IP address, browser type, operating system, and visited pages, automatically collected through cookies and similar technologies.",
+    "textOneC": "Any other data you voluntarily choose to share with us via forms or emails.",
+    "pointTwo": "2. Purpose of Data Processing",
+    "textTwo": "The information we collect is used to:",
+    "textTwoA": "Manage blog subscriptions and send newsletters.",
+    "textTwoB": "Respond to user inquiries or comments.",
+    "textTwoC": "Analyze site traffic and usage to improve performance.",
+    "textTwoD": "Comply with legal obligations where applicable.",
+    "pointThree": "3. Use of Cookies",
+    "textThreeA": "This site uses cookies to enhance browsing experience, personalize content, and analyze traffic. For more information, please see our Cookie Policy.",
+    "textThreeB": "You can configure your browser to reject or delete cookies, although this may affect the site’s functionality.",
+    "pointFour": "4. Data Sharing",
+    "textFour": "We do not sell, rent, or share your personal data with third parties, except in the following cases:",
+    "textFourA": "With service providers who help us operate the website (e.g., email marketing platforms), under confidentiality agreements.",
+    "textFourB": "When required by law or by a competent authority.",
+    "pointFive": "5. User Rights",
+    "textFive": "You have the right to access, rectify, or delete your personal data, as well as to object to or request the restriction of its processing. To exercise these rights, you can contact us at: ",
+    "pointSix": "6. Information Security",
+    "textSix": "We are committed to protecting your personal data through appropriate security measures to prevent unauthorized access, disclosure, or destruction of information.",
+    "pointSeven": "7. Links to Third-Party Sites",
+    "textSeven": "Our blog may contain links to other websites. We are not responsible for the privacy practices of those sites. We recommend that you read their respective policies.",
+    "pointEight": "8. Changes to This Policy",
+    "textEight": "We reserve the right to update this Privacy Policy at any time. Any changes will be posted on this page with the date of the last update.",
+    "pointNine": "9. Contact",
+    "textNine": "If you have questions or concerns about this policy, please contact us at: ",
+    "mail": "info@cblog.com"
   },
   "errorMsg": {
     "errorCreateCategory": "Error creating the category.",
     "errorUpdateCategory": "Error updating the category.",
     "errorDeleteCategory": "Error deleting the category.",
 
-    "errorUploadImgCloudinary": "Error uploading the image to Cloudinary: ",
-    "errorUploadAvatarCloudinary": "Error uploading the avatar: ",
+    "errorUploadImgCloudinary": "Error uploading image to Cloudinary: ",
+    "errorUploadAvatarCloudinary": "Error uploading avatar: ",
 
     "errorCreatePermission": "There was a problem creating the permission.",
 
     "errorSearchCharacters": "The search must have at least 2 characters.",
-    "errorFindSearchPosts": "No posts found with those keywords in the search.",
-    "errorFindSearchAuthors": "No authors found with those keywords in the search.",
+    "errorFindSearchPosts": "No posts found with those keywords as search.",
+    "errorFindSearchAuthors": "No authors found with those keywords as search.",
 
     "errorPostNotFound": "Post not found.",
     "errorFindPostStatusOnly": "No posts found with the specified status.",
@@ -145,48 +218,55 @@
     "errorUpdatePost": "Error updating the post.",
     "errorDeleteSoftPost": "Error changing the post status to deleted.",
 
-    "errorCredentals": "Error sending verification email.",
+    "errorCredentals": "Oops, the credentials are incorrect.",
+    "errorUnauthorized": "You don't have permission to perform this action.",
 
     "errorUserNotAuth": "User not authenticated.",
     "errorUserNotFound": "User not found.",
+    "errorUserNotDelete": "The user was not deleted.",
+    "errorUserAlreadyDelete": "The user was already deleted.",
+
     "errorCreateUser": "There was a problem creating the user.",
     "errorNameUserDuplicate": "The username is already registered.",
     "errorDeleteUser": "Error deleting the user.",
     "errorUpdateUser": "Error updating the user.",
-    "errorPermissionModifyUser": "You do not have permission to modify this user.",
+    "errorPermissionModifyUser": "You don't have permission to modify this user.",
 
     "errorTokenOrMail": "Invalid token or incorrect email.",
 
     "errorAssignRole": "Error assigning the role.",
     "errorCreateRole": "Error creating the role.",
-    "errorChangeRoles": "You do not have permission to change roles.",
-    "errorChangeAdminRole": "The role of an administrator cannot be changed.",
-    "errorChangeRoleUserAdmin": "The administrator role cannot be assigned to a user.",
+    "errorChangeRoles": "You don't have permission to change roles.",
+    "errorChangeAdminRole": "You cannot change the role of an administrator.",
+    "errorChangeRoleUserAdmin": "You cannot assign the administrator role to a user.",
     "errorRoleNotExist": "The specified role does not exist.",
     "errorDeleteRole": "Error deleting the role.",
-    "errorInvalidRole": "You do not have the correct role.",
+    "errorInvalidRole": "You don't have the correct role.",
 
     "errorMailSend": "Error sending verification email.",
     "errorMailTime": "Verification time exceeded.",
     "errorMailVerifyDouble": "This email has already been verified.",
     "errorMailDuplicate": "The email is already registered.",
 
-    "errorPassNotSame": "The passwords do not match.",
-    "errorPassOldSame": "Enter a password different from the one you already had.",
-    "errorPassTime": "Time to update the password exceeded.",
+    "errorPassNotSame": "Passwords do not match.",
+    "errorPassWrong": "Passwords do not match.",
+    "errorPassOldSame": "Please enter a different password from the one you already had.",
+    "errorPassTime": "Time to update the password has expired.",
     "errorPassSendMail": "Error sending password update email.",
     "errorPassVerifyToken": "Error verifying the token to update the password.",
-    "errorPassConfirmMail": "Error confirming the email during password update.",
+    "errorPassConfirmMail": "Error confirming the email in password update.",
     "errorUpdatePass": "Error resetting the password."
   },
   "infoMsg": {
+    "infoImgSmall": "Info: The image must be at least 300x300 pixels.",
+    "infoImgFailMime": "The provided file is not a valid image.",
     "infoUserSuspended": "This user has been suspended.",
-    "infoCreateUser": "User created, check your email for verification.",
+    "infoCreateUser": "User created, check your email to verify.",
 
     "infoPostCreate": "Post created successfully.",
     "infoPostDoubleFav": "This post is already in favorites.",
 
-    "infoMailSend": "Email sent. If you can't find the email, check your spam folder or request a new send.",
+    "infoMailSend": "Email sent. If you don't find the email, check your spam folder or request a new resend.",
     "infoMailForward": "Verification email resent.",
     "infoMailVerify": "You must verify your email before logging in.",
     "infoInToMail": "Enter your email.",
@@ -196,6 +276,8 @@
     "infoPassRepit": "Repeat the new password"
   },
   "successMsg": {
+    "successLogin": "Login successful. You are being redirected to the homepage.",
+
     "successCreateCategory": "Category created.",
     "successUpdateCategory": "Category updated successfully.",
     "successDeleteCategory": "Category deleted successfully.",
@@ -203,11 +285,11 @@
     "successToken": "Valid token.",
     "successTokenUpdate": "Token updated successfully.",
 
-    "successCreateNewsletter": "Newsletter created and sent successfully.",
+    "successCreateNewsletter": "Newsletter generated and sent successfully.",
 
     "successCreatePermission": "Permission created successfully.",
     "successAssignPermissionRole": "Permissions successfully assigned to the role.",
-    "successRevokePermissionRole": "Role permissions successfully revoked.",
+    "successRevokePermissionRole": "Permissions revoked from the role successfully.",
 
     "successRoleOk": "Role created.",
     "successUpdateRole": "Role updated successfully.",
@@ -219,14 +301,15 @@
     "successDeleteSoftPost": "Post changed to deleted status.",
     "successPostFav": "Post marked as favorite.",
     "successPostDeleteFav": "Post removed from favorites.",
+    "successRestorePost": "Post restored successfully.",
 
     "successDeleteUser": "User successfully deleted.",
-    "successUpdateUser": "User successfully updated.",
+    "successUpdateUser": "User updated successfully.",
 
-    "successSendMail": "Verification email sent successfully, check your inbox to confirm.",
+    "successSendMail": "Verification email successfully sent, check your inbox to confirm.",
     "successVerifyMail": "Email successfully verified. Welcome, write your first post!",
 
-    "successSendPass": "Password update email sent successfully, check your inbox to change your password.",
-    "successUpdatePass": "Password updated successfully."
+    "successSendPass": "Password update email successfully sent, check your inbox to change your password.",
+    "successUpdatePass": "Password updated successfully"
   }
 }

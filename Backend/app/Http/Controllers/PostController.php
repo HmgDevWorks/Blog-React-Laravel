@@ -76,6 +76,11 @@ class PostController extends Controller
         return $this->postService->destroyAnyPostByAdmin($id);
     }
 
+    public function restorePost($id): JsonResponse
+    {
+        return $this->postService->restorePost($id);
+    }
+
     public function postUser($userId): JsonResponse
     {
         return response()->json($this->postService->getPostsByUser($userId)); //Route::get('/posts/user/{id}', [PostController::class, 'getPostsByUser']);
@@ -117,7 +122,6 @@ class PostController extends Controller
         if ($posts->isEmpty()) {
             //return response()->json(["message" => "No existen posts con '$search' como búsqueda"], 200);
             return response()->json(["message" => "errorMsg.errorFindSearchPosts"], 200);
-
         }
         return response()->json(['posts' => $posts]);
     }
@@ -142,7 +146,6 @@ class PostController extends Controller
 
         if ($authors->isEmpty()) {
             return response()->json(["message" => "errorMsg.errorFindSearchAuthors"], 200);
-
         }
 
         foreach ($authors as $author) {  // Utilizamos la función para calcular las visitas totales de cada autor y la categoria mas usada 
@@ -283,6 +286,5 @@ class PostController extends Controller
         $user = Auth::user();
 
         return $user->posts()->where('status', 'published')->count();
-
     }
 }

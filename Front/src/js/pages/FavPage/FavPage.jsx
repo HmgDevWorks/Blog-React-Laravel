@@ -5,19 +5,6 @@ import { useTranslation } from 'react-i18next';
 
 const FavPage = () => {
   const { t } = useTranslation();
-  // const { addError, addSuccess } = useAlert();
-  // const [favPosts, setFavPosts] = useState([]);
-
-  // useEffect(() => {
-  //   favService.getUserFavs()
-  //     .then(response => {
-  //       console.log(response);
-  //       setFavPosts(response.data);
-  //     }).catch(error => {
-  //       addError(error.mensaje);
-  //       console.log(error);
-  //     });
-  // }, []);
 
   return (
     <div className="mt-4 mb-4 favourites-page">

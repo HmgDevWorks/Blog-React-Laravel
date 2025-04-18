@@ -17,9 +17,9 @@ use Illuminate\Validation\ValidationException;
 
 class UserService
 {
-    public function getAllUser() // Esta función recoge todos los datos de la tabla User
+    public function getAllUser() // Esta función recoge todos los datos de la tabla User, incluyendo eliminados
     { 
-        return User::all();
+        return User::withTrashed()->get(); // Incluye usuarios eliminados (soft-deleted)
     }
 
     public function getUserById($id)  // Devuelve el usuario con el ID especificado, o lanza un error 404 si no existe. Tambíen devulve Nposts y Nfavs si es admin o editor
@@ -102,11 +102,11 @@ class UserService
         $user = User::withTrashed()->find($id);
 
         if (!$user) {
-            return response()->json(["message" => "Usuario no encontrado"], 404);
+            return response()->json(["message" => "errorMsg.errorUserNotFound"], 404);
         }
 
         if ($user->trashed()) { //si el user ya esta softdeleteado
-            return response()->json(["message" => "El usuario ya estaba eliminado"], 200);
+            return response()->json(["message" => "errorMsg.errorUserAlreadyDelete"], 200);
         }
 
         if ($user->hasRole('admin')) {
@@ -123,11 +123,11 @@ class UserService
         $user = User::withTrashed()->find($id);
 
         if (!$user) {
-            return response()->json(["message" => "Usuario no encontrado"], 404);
+            return response()->json(["message" => "errorMsg.errorUserNotFound"], 404);
         }
 
         if (!$user->trashed()) {
-            return response()->json(["message" => "El usuario no estaba eliminado"], 200);
+            return response()->json(["message" => "errorMsg.errorUserNotDelete"], 200);
         }
 
         $user->restore();
@@ -243,7 +243,7 @@ class UserService
         ]);
     
         if (!Hash::check($request->current_password, $authUser->password_user)) {
-            return response()->json(['error' => 'La contraseña actual es incorrecta.'], 422);
+            return response()->json(['message' => 'errorMsg.errorPassWrong'], 422);
         }
     
         $authUser->password_user = Hash::make($request->new_password);

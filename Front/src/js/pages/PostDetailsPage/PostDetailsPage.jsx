@@ -22,9 +22,7 @@ const PostDetailsPage = () => {
         setBlog(data.post);
       })
       .catch(error => {
-        console.log("ERROR", error);
-        const data = JSON.parse(error.response.data.message);
-        addError(data.error);
+        addError(t(error.message));
       });
   }
 

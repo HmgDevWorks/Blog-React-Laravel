@@ -20,44 +20,25 @@ const AuthorPage = () => {
   const [author, setAuthor] = useState({
     name: "Nombre default"
   })
-  useEffect(() => {
 
+  useEffect(() => {
     userService.getUserById(authorId)
       .then(response => {
         setAuthor(response.data);
       }).catch(error => {
-        console.log(error);
-        addError(error.mensaje);
+        addError(t(error.message));
       });
-
-    // postService.getUserPosts(authorId)
-    //   .then(response => {
-    //     setAuthorPosts(response.data);
-    //   }).catch(error => {
-    //     console.log(error);
-    //     addError(error.mensaje);
-    //   });
-
-    // if (loggedUser.role === "reader")
-    //   Navigate("/");
-    // else {
-    //   postService.getUserPosts(authorId)
-    //     .then(response => {
-    //       setAuthorPosts(response.data);
-    //     }).catch(error => {
-    //       console.log(error);
-    //       addError(error.mensaje);
-    //     });
-    // }
   }, [authorId]);
 
   return (
-    <div className='author-page divide-y-4'>
-      <h1 className='author'>{t("authorPage.title",)} {author.name_user} </h1>
+    <div className='author-page divide-y-4 divide-transparent'>
+      <h1 className='author mb-8'>{t("authorPage.title",)} {author.name_user} </h1>
+      <h2 className="text-center">{t("authorPage.publishedPosts")}</h2>
       <PostTablePagination filter={"published"} user_id={authorId} />
-      {(loggedUser.id === authorId) &&
+      {(loggedUser.id == authorId) &&
         (<>
           <Separador />
+          <h2 className="text-center">{t("authorPage.deletedPosts")}</h2>
           <PostTablePagination filter={"deleted"} user_id={authorId} />
         </>)
       }

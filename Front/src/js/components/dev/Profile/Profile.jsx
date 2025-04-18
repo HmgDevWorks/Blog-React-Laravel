@@ -10,7 +10,6 @@ function Profile() {
     const { loggedUser, logOut } = useContext(AuthContext);
     const { t } = useTranslation();
     const [userData, setUserData] = useState({ userName: "", lastName: "", bio: "", email: "" });
-    const [additionalData, setAdditionalData] = useState({ likes: 0, posts: 0 });
     const [isEditingDesc, setIsEditingDesc] = useState(false);
     const [isEditingEmail, setIsEditingEmail] = useState(false);
     const [isEditingPassword, setIsEditingPassword] = useState(false);
@@ -100,32 +99,11 @@ function Profile() {
     const confirmDeleteUser = () => {
         userService.deleteUser()
             .then(({ data }) => {
-                // console.log("Delete DATA", data);
                 logOut();
             }).catch((error) => {
-                console.log(error);
                 addError(error.response.data.message);
             });
     }
-    // const confirmDeleteUser = (confirmPassword) => {
-    //     console.log("Implementar bien");
-    //     // TODO Implementar
-    //     userService.changePass(confirmPassword)
-    //         .then(({ data }) => {
-    //             console.log(data);
-    //             userService.deleteUser(loggedUser.id)
-    //                 .then(({ data }) => {
-    //                     console.log(data);
-    //                     logOut();
-    //                 }).catch(error => {
-    //                     console.log(error);
-    //                     addError(error.response.data.message);
-    //                 });
-    //         }).catch((error) => {
-    //             console.log(error);
-    //             addError(error.response.data.message);
-    //         });
-    // }
 
     return (
         <div className="container mx-auto p-4">
@@ -134,14 +112,14 @@ function Profile() {
                     <div className="flex flex-row gap-8 sm:flex-row justify-between items-center max-w-sm">
                         {loggedUser.role !== "reader" && (
                             <div className="text-center">
-                                <p className="text-2xl font-bold">{additionalData.likes}</p>
+                                <p className="text-2xl font-bold">{userData.favourites}</p>
                                 <p className="text-sm">{t("profile.fav")}</p>
                             </div>
                         )}
                         <Avatar img={userData.img_user} imageUpdate={imageUpdate} />
                         {loggedUser.role !== "reader" && (
                             <div className="text-center">
-                                <p className="text-2xl font-bold">{additionalData.posts}</p>
+                                <p className="text-2xl font-bold">{userData.posts}</p>
                                 <p className="text-sm">{t("profile.posts")}</p>
                             </div>
                         )}
@@ -229,18 +207,10 @@ function Profile() {
             </div>
 
             <dialog id="delete-modal" className="modal modal-bottom sm:modal-middle">
-                <form method="dialog" className="modal-box"
-                // onSubmit={(e) => {
-                //     e.preventDefault();
-                //     confirmDeleteUser(e.target.currentPassword.value);
-                // }}
-                >
+                <form method="dialog" className="modal-box">
                     <h3 className="font-bold text-lg">{t("profile.modalDeleteTitle")}</h3>
                     <p className="py-4">{t("profile.modalDeleteInfo")}</p>
-                    {/* <div className="form-control">
-                        <input type="email" placeholder="Confirma tu correo electrÃ³nico" className="input input-bordered mb-2" />
-                        <input type="password" name="currentPassword" placeholder="Ingresa tu contraseÃ±a" className="input input-bordered mb-2" />
-                    </div> */}
+
                     <div className="modal-action">
                         <button className="btn btn-error" onClick={confirmDeleteUser}>{t("profile.delete")}</button>
                         <button

@@ -45,14 +45,12 @@ export default function Avatar({ img, imageUpdate }) {
 
         userService.postUserImg(selectedFile)
             .then(({ data }) => {
-                console.log(data);
                 imageUpdate(data);
                 setPreview(null);
                 setSelectedFile(null);
                 addSuccess(data.message);
             }).catch((error) => {
-                console.log(error);
-                // addError(error.response.data.message);
+                addError(t(error.message));
             }).finally(() => {
                 setLoading(false);
             });

@@ -84,7 +84,7 @@ Route::controller(ProfileController::class)->middleware([JwtMiddleware::class])-
     ; //middleware en el servicio
     Route::put('/users/updatePassword', 'getUpdatePassword')->name('users.getUpdatePassword')->middleware('role:admin|editor|reader'); //cambia la contraseña, se necesita "current_password" y "new_password"
     Route::put('/users/changeRole/{user}', 'changeRole')->name('users.changeRole')->middleware('role:admin'); //cambio de roles, solo se puede si eres adminn
-    //  Route::delete('/users/destroy', 'destroy')->name('users.destroy')->middleware('role:admin|editor|viewer'); //el user elimina su cuenta
+    //Route::delete('/users/destroy', 'destroy')->name('users.destroy')->middleware('role:admin|editor|viewer'); //el user elimina su cuenta
     // Route::delete('/users/delete/{id}', 'deleteAdmin')->name('users.deleteAdmin')->middleware('role:admin'); //elimina un user admin
 });
 
@@ -130,6 +130,7 @@ Route::controller(PostController::class)->middleware([JwtMiddleware::class])->gr
     Route::post('/posts/store', 'store')->name('posts.store')->middleware('role:admin|editor'); //Crea un post
     Route::put('/posts/update/{post}', 'update')->name('posts.update')->middleware('role:admin|editor'); //Actualiza Post
     Route::delete('/posts/destroy/{id}', 'destroy')->name('posts.destroy')->middleware('role:admin|editor'); //Borra
+    Route::put('/posts/restore/{id}', 'restorePost')->name('posts.restorePost')->middleware('role:admin|editor'); //Restaura un post
 });
 
 Route::controller(FavoritesController::class)->middleware([JwtMiddleware::class])->group(function () {

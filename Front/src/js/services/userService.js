@@ -10,7 +10,6 @@ class UserService extends BaseService {
         return this.api.get('/users')
     }
     createUser(data) {
-        console.log(data)
         return this.api.post('/register', data)
     }
     getOneUser(data) {
@@ -64,14 +63,17 @@ class UserService extends BaseService {
     }
 
     editUser(data) {
-        console.log("DATA", data);
         return this.api.put(`/users/update`, data);
     }
-    // editUser(id, data) {
-    //     return this.api.put(`/users/update/${id}`, data)
+
+    // deleteUser() {
+    //     return this.api.delete(`/users/destroy`)
     // }
-    deleteUser() {
-        return this.api.delete(`/users/destroy`)
+    deleteUser(id) {
+        return this.api.delete(`/admin/delete/${id}`);
+    }
+    restoreUser(id) {
+        return this.api.put(`/admin/restore/${id}`);
     }
     verifyUser(token) {
         return this.api.get('/verify-token',

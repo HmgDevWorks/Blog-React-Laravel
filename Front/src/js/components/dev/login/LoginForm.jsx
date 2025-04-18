@@ -89,10 +89,7 @@ export default function LoginForm() {
                 // }).then(() => {
             })
             .catch(error => {
-                // console.log("AAAAAAAAAA", error);
-                // console.log(error);
-                // const data = JSON.parse(error.response.data.message);
-                addAlert('error', t(error.response.data.message));
+                addAlert('error', t(error.message));
             });
     };
     // Nueva función para manejar la recuperación de contraseña
@@ -107,7 +104,7 @@ export default function LoginForm() {
 
             })
             .catch(error => {
-                addAlert('error', t(error.response.data.message));
+                addAlert('error', t(error.message));
             });
     };
     const handlePasswordReset = async (e) => {

@@ -181,10 +181,9 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
       editor.setEditorValue([]);
       return;
     }
-    let request = postService.deletePost(post.id);
-    request
-      .then(response => {
-        console.log('Deleted:', response.data);
+    postService.deletePost(post.id)
+      .then(({ data }) => {
+        setSuccessMsg(t(data.message));
       })
       .catch(error => {
         const data = JSON.parse(error.response.data.message);
@@ -222,42 +221,37 @@ export default function Editor({ isEditable = true, post = null, maxLenght = nul
 
   return (
     <>
-
-      {isEditable && (<>
-        <h1 className="text-center font-extrabold text-4xl mb-7" style={{ color: "var(--saturadoOscuro)", fontFamily: "'Abril Fatface', serif, cursive" }}>{t("createPostPage.newPage")}</h1>
-        <div className="editor-title">
-          <label htmlFor="post-title">{t("editor.title")}</label>
-          <input
-            type="text"
-            id="post-title"
-            defaultValue={title}
-            onChange={(e) => changeTitle(e)}
-          />
-        </div></>)
-      }
-      {
-        isEditable && (<div className="categorie-dropdown">
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">{t("editor.category")}</span>
-            </div>
-            <select
-              className="select select-bordered"
-              onChange={handleCategoryChange}
-              value={selectedCategory || ""}
-            >
-              <option value="" disabled>
-                {t("editor.chooseCat")}
+      {isEditable && (<div className="editor-title">
+        <label htmlFor="post-title">{t("editor.title")}</label>
+        <input
+          type="text"
+          id="post-title"
+          defaultValue={title}
+          onChange={(e) => changeTitle(e)}
+        />
+      </div>)}
+      {isEditable && (<div className="categorie-dropdown">
+        <label className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">{t("editor.category")}</span>
+          </div>
+          <select
+            className="select select-bordered"
+            onChange={handleCategoryChange}
+            value={selectedCategory || ""}
+          >
+            <option value="" disabled>
+              {t("editor.selectCat")}
+            </option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
               </option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        )
+            ))}
+          </select>
+        </label>
+      </div>
+      )
       }
       {errorMsg && <ErrorAlert msg={errorMsg} />}
       {successMsg && <SuccessAlert msg={successMsg} />}
